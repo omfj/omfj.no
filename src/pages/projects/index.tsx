@@ -24,7 +24,7 @@ const Projects = (): JSX.Element => {
           />
           <ProjectBox
             title="echo Webkom"
-            link="https://github.com/echo-webkom/echo-web-frontend/"
+            link="https://github.com/echo-webkom/"
             desc="I am also apart of the webkom-team at UiB. Here I help with maintaing the website for echo, the student association for informatics at UiB. Here I have learned a lot of javascript from people who are smarter than me."
           />
           <ProjectBox

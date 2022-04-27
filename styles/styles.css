@@ -23,7 +23,15 @@ body {
   );
 }
 
-.social-media-image:hover {
+.social-media-image-props {
   transition: ease-out 0.3s;
+}
+
+.social-media-image:hover {
   scale: 1.1;
+}
+
+.hover-pointer:hover {
+  overflow: hidden;
+  cursor: pointer;
 }

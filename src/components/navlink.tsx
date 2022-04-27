@@ -29,7 +29,7 @@ const NavButton = ({ text, icon, link }: ButtonProps): JSX.Element => {
       href={link}
     >
       <Icon as={icon} mr="1.5" fontSize="sm" />
-      <Text>{text}</Text>
+      <Text fontSize="md">{text}</Text>
     </Link>
   );
 };

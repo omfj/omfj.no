@@ -21,8 +21,14 @@ const SocialMediaImg = ({
 }: Props): JSX.Element => {
   return (
     <NextLink href={href} passHref>
-      <Link className="social-media-image">
-        <Image src={source} height={height} width={width} alt={alt} />
+      <Link className="social-media-image" p="10">
+        <Image
+          className="social-media-image-props"
+          src={source}
+          height={height}
+          width={width}
+          alt={alt}
+        />
       </Link>
     </NextLink>
   );

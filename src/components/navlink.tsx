@@ -1,7 +1,6 @@
-import { Box, Flex, Icon, Link } from "@chakra-ui/react";
+import { Flex, Box, Icon, Text, Link, Center } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
-import { BiHome } from "react-icons/bi";
 
 interface Props {
   text: string;
@@ -18,30 +17,30 @@ interface ButtonProps {
 const NavButton = ({ text, icon, link }: ButtonProps): JSX.Element => {
   const router = useRouter();
   const active: boolean = router.asPath === link;
+
   return (
-    <Box
-      borderRadius="0.5rem"
+    <Link
+      display="flex"
       alignItems="center"
       bg="transparent"
-      _hover={{ backgroundColor: "gray" }}
+      p="2"
       textDecor={active ? "underline" : "none"}
+      _hover={{ textDecor: "underline" }}
+      href={link}
     >
-      <Icon as={icon} mr="2" />
-      <Link>{text}</Link>
-    </Box>
+      <Icon as={icon} mr="1.5" fontSize="sm" />
+      <Text>{text}</Text>
+    </Link>
   );
 };
 
 const NavLink = ({ text, link, icon }: Props): JSX.Element => {
-  const router = useRouter();
-  const active: boolean = router.asPath === link;
-
   return (
-    <Flex alignItems="center" m="2" p="2">
+    <Center mx="3">
       <NextLink href={link} passHref>
         <NavButton link={link} text={text} icon={icon} />
       </NextLink>
-    </Flex>
+    </Center>
   );
 };
 

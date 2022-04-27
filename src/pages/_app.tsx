@@ -2,6 +2,7 @@ import type { AppProps } from "next/app";
 import NextNProgress from "nextjs-progressbar";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import Layout from "../components/layout";
+import "../../styles/styles.css";
 
 const colors = {
   dark: {
@@ -11,6 +12,9 @@ const colors = {
   light: {
     900: "#FFF",
     100: "#000",
+  },
+  omfj: {
+    bg: "#141b29",
   },
 };
 

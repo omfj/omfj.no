@@ -7,14 +7,12 @@ import { AiFillPhone } from "react-icons/ai";
 
 const Navbar = (): JSX.Element => {
   return (
-    <>
-      <Flex direction={["column", "row"]}>
-        <NavLink icon={ImHome} text="home" link="/" />
-        <NavLink icon={FiPackage} text="projects" link="/projects/" />
-        <NavLink icon={BiGitBranch} text="git" link="https://git.omfj.no/" />
-        <NavLink icon={AiFillPhone} text="contact" link="/contact/" />
-      </Flex>
-    </>
+    <Flex direction={["column", "row"]}>
+      <NavLink icon={ImHome} text="home" link="/" />
+      <NavLink icon={FiPackage} text="projects" link="/projects/" />
+      <NavLink icon={BiGitBranch} text="git" link="https://github.com/omfj/" />
+      <NavLink icon={AiFillPhone} text="contact" link="/contact/" />
+    </Flex>
   );
 };
 

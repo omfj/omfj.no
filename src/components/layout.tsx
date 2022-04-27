@@ -1,4 +1,5 @@
 import { Box, Center } from "@chakra-ui/react";
+import Footer from "./footer";
 import Header from "./header";
 
 interface Props {
@@ -7,9 +8,16 @@ interface Props {
 
 const Layout = ({ children }: Props): JSX.Element => {
   return (
-    <Box bg="black" minH="100vh" color="white">
+    <Box
+      bg="omfj.bg"
+      minH="100vh"
+      color="white"
+      pos="relative"
+      overflow="hidden"
+    >
       <Header />
       {children}
+      <Footer />
     </Box>
   );
 };

@@ -1,32 +1,36 @@
-import { Center, Flex, Box, Icon, Text, Spacer } from "@chakra-ui/react";
+import { Center, Flex, Box, Text, Spacer } from "@chakra-ui/react";
 import { FaGit, FaGithubSquare, FaLinkedin } from "react-icons/fa";
-import { AiFillHeart } from "react-icons/ai";
 import IconLink from "./icon-link";
 
 const Footer = (): JSX.Element => {
   return (
-    <Center
-      flexDir={["column", "row"]}
-      pos="absolute"
-      bottom="0"
-      alignItems="center"
+    <Box
+      borderTop={["none", "2px solid white"]}
       w="100%"
-      py="5"
-      px="10"
-      borderTop="2px solid white"
-      bg="omfj.acc"
+      bottom="0"
+      pos="absolute"
     >
-      <Text textAlign="center" my={[5, 0]}>
-        Made with ❤️ by Ole Magnus
-      </Text>
+      <Center
+        flexDir={["column", "row"]}
+        alignItems="center"
+        maxW="1000px"
+        m="auto"
+        py="5"
+        px="5"
+        bg="omfj.acc"
+      >
+        <Text textAlign="center" my={[5, 0]}>
+          Made with ❤️ by Ole Magnus
+        </Text>
 
-      <Spacer />
+        <Spacer />
 
-      <Flex alignItems="center">
-        <IconLink icon={FaGithubSquare} link="https://github.com/omfj/" />
-        <IconLink icon={FaLinkedin} link="https://linkedin.com/in/omfj/" />
-      </Flex>
-    </Center>
+        <Flex alignItems="center">
+          <IconLink icon={FaGithubSquare} link="https://github.com/omfj/" />
+          <IconLink icon={FaLinkedin} link="https://linkedin.com/in/omfj/" />
+        </Flex>
+      </Center>
+    </Box>
   );
 };
 

@@ -56,7 +56,7 @@ const Omfjno = (): JSX.Element => {
         </Box>
         <Box my="5" textAlign="center">
           <Text>The source code is on Github: </Text>
-          <NextLink href="https://github.com/omfj/omfj.no/">
+          <NextLink href="https://github.com/omfj/omfj.no/" passHref>
             <Link color="blue.400">Source Code</Link>
           </NextLink>
         </Box>

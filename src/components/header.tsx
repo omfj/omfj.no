@@ -13,7 +13,7 @@ const Header = (): JSX.Element => {
         borderBottom="2px solid white"
         direction={["column", null, "row"]}
       >
-        <Text fontSize="1.75rem">omfj.no</Text>
+        <Text fontSize={["2.25rem", "1.75rem"]}>omfj.no</Text>
         <Spacer />
         <Navbar />
       </Flex>

@@ -28,7 +28,7 @@ const NavButton = ({ text, icon, link }: ButtonProps): JSX.Element => {
       _hover={{ textDecor: "underline" }}
       href={link}
     >
-      <Icon as={icon} mr="1.5" fontSize="sm" />
+      <Icon as={icon} mr="1.5" fontSize={["2xl", "sm"]} />
       <Text fontSize="md" display={["none", "block"]}>
         {text}
       </Text>
@@ -38,7 +38,7 @@ const NavButton = ({ text, icon, link }: ButtonProps): JSX.Element => {
 
 const NavLink = ({ text, link, icon }: Props): JSX.Element => {
   return (
-    <Center mx="3">
+    <Center mx="3" mt={["2", "0"]}>
       <NextLink href={link} passHref>
         <NavButton link={link} text={text} icon={icon} />
       </NextLink>

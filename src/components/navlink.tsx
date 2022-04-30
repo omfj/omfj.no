@@ -28,7 +28,7 @@ const NavButton = ({ text, icon, link }: ButtonProps): JSX.Element => {
       _hover={{ textDecor: "underline" }}
       href={link}
     >
-      <Icon as={icon} mr="1.5" fontSize={["2xl", "sm"]} />
+      <Icon as={icon} mr={["0", "1.5"]} fontSize={["xl", "sm"]} />
       <Text fontSize="md" display={["none", "block"]}>
         {text}
       </Text>

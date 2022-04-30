@@ -4,12 +4,7 @@ import IconLink from "./icon-link";
 
 const Footer = (): JSX.Element => {
   return (
-    <Box
-      borderTop={["none", "2px solid white"]}
-      w="100%"
-      bottom="0"
-      pos="absolute"
-    >
+    <Box borderTop={["none", "2px solid white"]} w="100%">
       <Center
         flexDir={["column", "row"]}
         alignItems="center"

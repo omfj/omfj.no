@@ -16,9 +16,11 @@ const categoryDecoder = record({
 
 // Decodes author
 const authorDecoder = record({
+    _id: string,
     name: string,
     slug: string,
     bio: string,
+    imageUrl: union(string, nil),
 })
 
 // Decodes post
@@ -28,6 +30,7 @@ const postDecoder = record({
     title: string,
     description: string,
     body: string,
+    //image: union(string, nil),
 })
 
 // Decodes projects
@@ -37,6 +40,8 @@ const projectDecoder = record({
     title: string,
     description: string,
     body: string,
+    image: union(string, nil),
+    categories: union(array(categoryDecoder), nil),
 });
 
 // Decodes slug

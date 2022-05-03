@@ -7,13 +7,14 @@ const ProjectAPI = {
     getProjects: async (): Promise<Array<Project> | ErrorMessage> => {
         try {
             const query = `
-                *[_type == "project"] {
+                *[_type == "project"] | order(title) {
+                    _id,
+                    "slug": slug.current,
                     title,
                     body,
-                    "slug": slug.current,
                     description,
-                    categories,
-                    _id,
+                    "image": image.asset -> url,
+                    "categories": categories[],
                 }`;
 
             const result = await SanityAPI.fetch(query);
@@ -43,12 +44,13 @@ const ProjectAPI = {
         try {
             const query = `
                 *[_type == "project" && slug.current == "${slug}"] {
+                    _id,
+                    "slug": slug.current,
                     title,
                     body,
-                    "slug": slug.current,
                     description,
-                    categories,
-                    _id,
+                    "image": image.asset -> url,
+                    "categories": categories[],
                 }`;
 
             const result = await SanityAPI.fetch(query);

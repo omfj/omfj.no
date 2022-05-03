@@ -7,6 +7,8 @@ import { ProjectAPI } from "../../sanity/project";
 import { isErrorMessage, Project } from "../../sanity/types";
 import Main from "../../components/main";
 import SEO from "../../components/SEO";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 interface Props {
   project: Project;
@@ -25,9 +27,14 @@ const ProjectPage = ({ project }: Props): JSX.Element => {
       {!router.isFallback && (
         <>
           <SEO title={"project - " + project.title} />
-          <Main>
-            <Text fontSize="xl">{project.title}</Text>
-            <Text>{project.body}</Text>
+          <Main w="100%">
+            <Center fontSize="2xl">{project.title}</Center>
+            <Box m="5" w="100%">
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                {project.body}
+              </ReactMarkdown>
+            </Box>
+            {project.categories && <Text>Det er katogrier og!</Text>}
           </Main>
         </>
       )}

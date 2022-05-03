@@ -1,4 +1,4 @@
-import { Box, Center, Flex } from "@chakra-ui/react";
+import { Spacer, Flex } from "@chakra-ui/react";
 import Footer from "./footer";
 import Header from "./header";
 
@@ -11,6 +11,7 @@ const Layout = ({ children }: Props): JSX.Element => {
     <Flex bg="omfj.bg" minH="100vh" color="white" direction="column">
       <Header />
       {children}
+      <Spacer />
       <Footer />
     </Flex>
   );

@@ -24,7 +24,7 @@ const ProjectBox = ({ title, desc, link }: Props): JSX.Element => {
         {desc}
       </Text>
       <Box border="2px solid white" w="fit-content" p="1">
-        <NextLink href={link} passHref>
+        <NextLink href={"projects/" + link} passHref>
           <Link p="3">Learn more</Link>
         </NextLink>
       </Box>

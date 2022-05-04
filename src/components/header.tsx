@@ -1,4 +1,5 @@
 import Navbar from "./navbar";
+import NextLink from "next/link";
 import { Flex, Box, Spacer, Text } from "@chakra-ui/react";
 
 const Header = (): JSX.Element => {
@@ -13,7 +14,11 @@ const Header = (): JSX.Element => {
         borderBottom="2px solid white"
         direction={["column", null, "row"]}
       >
-        <Text fontSize={["2.25rem", "1.75rem"]}>omfj.no</Text>
+        <NextLink href="/" passHref>
+          <Text className="hover-pointer" fontSize={["2.25rem", "1.75rem"]}>
+            omfj.no
+          </Text>
+        </NextLink>
         <Spacer />
         <Navbar />
       </Flex>

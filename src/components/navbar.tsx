@@ -1,6 +1,6 @@
 import { Flex } from "@chakra-ui/react";
 import NavLink from "./navlink";
-import { ImHome } from "react-icons/im";
+// import { ImHome } from "react-icons/im";
 import { FiPackage } from "react-icons/fi";
 import { BiGitBranch } from "react-icons/bi";
 import { AiFillPhone } from "react-icons/ai";

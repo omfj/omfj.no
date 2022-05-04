@@ -6,7 +6,7 @@ const Header = (): JSX.Element => {
   return (
     <Box>
       <Flex
-        alignItems="baseline"
+        alignItems="center"
         p="5"
         m="auto"
         mt="5"

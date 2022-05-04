@@ -1,16 +1,23 @@
-# Personal website
+# omfj.no - My personal website
 
-My personal website rewritten for the third time. This time using NextJS and Chakra UI.
+My personal website. It uses NextJS with ChakraUI as component library, and Sanity for CMS. It is also hosted on Vercel.
 
-## Developing on the server
+This is something I do for fun, and to have something to play around with. Bugs are expected. Feel free to contribute if you find any bugs.
 
-### Download all dependencies
+## Developing
+
+Download all dependencies
+
 ```bash
 yarn
 ```
 
-### Start the server on port 3000
+By default the website is hosted on <a href="http://localhost:300">localhost:3000</a>.
+
 ```bash
 yarn dev
 ```
 
+## Other
+
+<a href="https://github.com/omfj/omfj.no-cms">Link to CMS repo</a>

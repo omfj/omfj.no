@@ -41,7 +41,7 @@ const projectDecoder = record({
     description: string,
     body: string,
     image: union(string, nil),
-    categories: union(array(categoryDecoder), nil),
+    //categories: union(array(categoryDecoder), nil),
 });
 
 // Decodes slug

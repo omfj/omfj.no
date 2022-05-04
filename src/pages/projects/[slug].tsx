@@ -1,5 +1,5 @@
 import { ParsedUrlQuery } from "querystring";
-import { Center, Text, Spinner, Box } from "@chakra-ui/react";
+import { Center, Text, Spinner, Box, styled } from "@chakra-ui/react";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import React from "react";
@@ -9,6 +9,7 @@ import Main from "../../components/main";
 import SEO from "../../components/SEO";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import style from "../../../styles/markdown-styles.module.css";
 
 interface Props {
   project: Project;
@@ -30,11 +31,13 @@ const ProjectPage = ({ project }: Props): JSX.Element => {
           <Main w="100%">
             <Center fontSize="2xl">{project.title}</Center>
             <Box m="5" w="100%">
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                className={style.reactmarkdown}
+              >
                 {project.body}
               </ReactMarkdown>
             </Box>
-            {project.categories && <Text>Det er katogrier og!</Text>}
           </Main>
         </>
       )}

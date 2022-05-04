@@ -1,0 +1,7 @@
+.reactmarkdown p:not(:first-child) {
+  margin-top: 10px;
+}
+
+.reactmarkdown a {
+  color: #0077aa;
+}

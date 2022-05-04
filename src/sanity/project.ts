@@ -9,6 +9,7 @@ const ProjectAPI = {
             const query = `
                 *[_type == "project"] | order(title) {
                     _id,
+                    _updatedAt,
                     "slug": slug.current,
                     title,
                     body,
@@ -45,6 +46,7 @@ const ProjectAPI = {
             const query = `
                 *[_type == "project" && slug.current == "${slug}"] {
                     _id,
+                    _updatedAt,
                     "slug": slug.current,
                     title,
                     body,

@@ -5,6 +5,7 @@ import ProjectBox from "../../components/project-box";
 import { ProjectAPI } from "../../sanity/project";
 import { GetStaticProps } from "next";
 import { isErrorMessage, Project } from "../../sanity/types";
+import { zuluTimeToHuman } from "../../lib/date-functions";
 
 interface Props {
   projects: Array<Project>;
@@ -26,6 +27,7 @@ const ProjectsOverview = ({ projects }: Props): JSX.Element => {
                 title={project.title}
                 desc={project.description}
                 link={project.slug}
+                lastUpdate={zuluTimeToHuman(project._updatedAt)}
               />
             );
           })}

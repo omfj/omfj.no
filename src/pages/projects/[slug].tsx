@@ -1,5 +1,5 @@
 import { ParsedUrlQuery } from "querystring";
-import { Center, Text, Spinner, Box, styled } from "@chakra-ui/react";
+import { Center, Text, Spinner, Box, styled, VStack } from "@chakra-ui/react";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import React from "react";
@@ -11,6 +11,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import style from "../../../styles/markdown-styles.module.css";
 import Construction from "../../components/construction";
+import { zuluTimeToHuman } from "../../lib/date-functions";
 
 interface Props {
   project: Project;
@@ -32,15 +33,18 @@ const ProjectPage = ({ project }: Props): JSX.Element => {
           <Main>
             {project.body ? (
               <>
-                <Center fontSize="2xl">{project.title}</Center>
-                <Box mt="5">
+                <VStack mt="5" spacing="8">
+                  <Center fontSize="2xl">{project.title}</Center>
                   <ReactMarkdown
                     remarkPlugins={[remarkGfm]}
                     className={style.reactmarkdown}
                   >
                     {project.body}
                   </ReactMarkdown>
-                </Box>
+                  <Text fontWeight="extrabold">
+                    Last Updated: {zuluTimeToHuman(project._updatedAt)}
+                  </Text>
+                </VStack>
               </>
             ) : (
               <Construction title={project.title} />

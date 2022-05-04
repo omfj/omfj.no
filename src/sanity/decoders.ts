@@ -36,6 +36,7 @@ const postDecoder = record({
 // Decodes projects
 const projectDecoder = record({
     _id: string,
+    _updatedAt: string,
     slug: string,
     title: string,
     description: string,

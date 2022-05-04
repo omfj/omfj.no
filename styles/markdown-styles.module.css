@@ -10,3 +10,7 @@
 .reactmarkdown a {
   color: #0077aa;
 }
+
+.reactmarkdown a:hover {
+  text-decoration: underline;
+}

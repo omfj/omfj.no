@@ -18,7 +18,7 @@ const ProjectsOverview = ({ projects }: Props): JSX.Element => {
         <Text textAlign="center" fontSize="3xl">
           Projects
         </Text>
-        <Box px="3" py="5">
+        <Box px={["0", "3"]} py="5">
           {projects.map((project: Project) => {
             return (
               <ProjectBox

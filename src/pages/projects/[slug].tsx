@@ -10,6 +10,7 @@ import SEO from "../../components/SEO";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import style from "../../../styles/markdown-styles.module.css";
+import Construction from "../../components/construction";
 
 interface Props {
   project: Project;
@@ -28,16 +29,22 @@ const ProjectPage = ({ project }: Props): JSX.Element => {
       {!router.isFallback && (
         <>
           <SEO title={"project - " + project.title} />
-          <Main w="100%">
-            <Center fontSize="2xl">{project.title}</Center>
-            <Box m="5" w="100%">
-              <ReactMarkdown
-                remarkPlugins={[remarkGfm]}
-                className={style.reactmarkdown}
-              >
-                {project.body}
-              </ReactMarkdown>
-            </Box>
+          <Main>
+            {project.body ? (
+              <>
+                <Center fontSize="2xl">{project.title}</Center>
+                <Box mt="5">
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    className={style.reactmarkdown}
+                  >
+                    {project.body}
+                  </ReactMarkdown>
+                </Box>
+              </>
+            ) : (
+              <Construction title={project.title} />
+            )}
           </Main>
         </>
       )}

@@ -1,5 +1,10 @@
+.reactmarkdown {
+  overflow: wrap;
+  margin: 1;
+}
+
 .reactmarkdown p:not(:first-child) {
-  margin-top: 10px;
+  margin-top: 18px;
 }
 
 .reactmarkdown a {

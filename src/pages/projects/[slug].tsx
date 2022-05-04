@@ -1,5 +1,5 @@
 import { ParsedUrlQuery } from "querystring";
-import { Center, Text, Spinner, Box, styled, VStack } from "@chakra-ui/react";
+import { Center, Text, Spinner, VStack } from "@chakra-ui/react";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import React from "react";

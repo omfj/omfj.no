@@ -1,8 +1,6 @@
 import NextLink from "next/link";
 import Image from "next/image";
-import { Box, Link } from "@chakra-ui/react";
-import { cursorTo } from "readline";
-import { transform } from "framer-motion";
+import { Link } from "@chakra-ui/react";
 
 interface Props {
   source: any;

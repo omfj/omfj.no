@@ -1,4 +1,4 @@
-import { Box, HStack, Link, Text, VStack } from "@chakra-ui/react";
+import { Box, Link, Text, VStack } from "@chakra-ui/react";
 import NextLink from "next/link";
 
 interface Props {

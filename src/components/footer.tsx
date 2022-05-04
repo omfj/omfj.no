@@ -1,5 +1,5 @@
 import { Center, Flex, Box, Text, Spacer } from "@chakra-ui/react";
-import { FaGit, FaGithubSquare, FaLinkedin } from "react-icons/fa";
+import { FaGithubSquare, FaLinkedin } from "react-icons/fa";
 import IconLink from "./icon-link";
 
 const Footer = (): JSX.Element => {

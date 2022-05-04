@@ -6,7 +6,7 @@ const Header = (): JSX.Element => {
   return (
     <Box>
       <Flex
-        alignItems="center"
+        alignItems="baseline"
         p="5"
         m="auto"
         mt="5"
@@ -15,7 +15,7 @@ const Header = (): JSX.Element => {
         direction={["column", null, "row"]}
       >
         <NextLink href="/" passHref>
-          <Text className="hover-pointer" fontSize={["2.25rem", "1.75rem"]}>
+          <Text className="hover-pointer" fontSize={["2.25rem", "2rem"]}>
             omfj.no
           </Text>
         </NextLink>

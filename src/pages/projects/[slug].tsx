@@ -1,10 +1,10 @@
 import { ParsedUrlQuery } from "querystring";
-import { Center, Text, Spinner, VStack } from "@chakra-ui/react";
+import { Center, Text, Spinner, VStack, Flex } from "@chakra-ui/react";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import React from "react";
 import { ProjectAPI } from "../../sanity/project";
-import { isErrorMessage, Project } from "../../sanity/types";
+import { Category, isErrorMessage, Project } from "../../sanity/types";
 import Main from "../../components/main";
 import SEO from "../../components/SEO";
 import ReactMarkdown from "react-markdown";
@@ -44,6 +44,22 @@ const ProjectPage = ({ project }: Props): JSX.Element => {
                   <Text fontWeight="extrabold">
                     Last Updated: {zuluTimeToHuman(project._updatedAt)}
                   </Text>
+                  <Flex>
+                    {project.categories.map((category: Category) => (
+                      <Text
+                        key={category._id}
+                        bg={category.color + "33"}
+                        py="1"
+                        px="3"
+                        mx="1"
+                        fontSize="0.85rem"
+                        borderRadius="20"
+                        w="fit-content"
+                      >
+                        {category.title}
+                      </Text>
+                    ))}
+                  </Flex>
                 </VStack>
               </>
             ) : (

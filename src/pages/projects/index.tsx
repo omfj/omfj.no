@@ -27,6 +27,7 @@ const ProjectsOverview = ({ projects }: Props): JSX.Element => {
                 title={project.title}
                 desc={project.description}
                 link={project.slug}
+                categories={project.categories}
                 lastUpdate={zuluTimeToHuman(project._updatedAt)}
               />
             );

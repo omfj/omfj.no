@@ -15,7 +15,7 @@ const ProjectAPI = {
                     body,
                     description,
                     "image": image.asset -> url,
-                    "categories": categories[],
+                    categories[]->{_id, title, color, description},
                 }`;
 
             const result = await SanityAPI.fetch(query);
@@ -52,7 +52,7 @@ const ProjectAPI = {
                     body,
                     description,
                     "image": image.asset -> url,
-                    "categories": categories[],
+                    categories[]->{_id, title, color, description},
                 }`;
 
             const result = await SanityAPI.fetch(query);

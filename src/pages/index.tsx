@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Main from "../components/main";
 import SEO from "../components/SEO";
+import t from "../static/english.json";
 import { Text, Center } from "@chakra-ui/react";
 
 const Home: NextPage = () => {
@@ -15,11 +16,10 @@ const Home: NextPage = () => {
             textDecor="underline"
             fontSize="3xl"
           >
-            Hello, WWW!
+            {t.home.title}
           </Text>
           <Text textAlign="center" fontSize="lg" my="5">
-            My name is Ole Magnus. I am a student at the University of Bergen
-            studying computer security.
+            {t.home.text}
           </Text>
         </Center>
       </Main>

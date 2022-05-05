@@ -1,6 +1,7 @@
 import Main from "../../components/main";
 import SEO from "../../components/SEO";
-import { Center, Grid, Spacer, Text } from "@chakra-ui/react";
+import t from "../../static/english.json";
+import { Center, Spacer, Text } from "@chakra-ui/react";
 import SocialMediaImg from "../../components/social-media-img";
 import * as GithubImage from "../../../public/images/github.png";
 import * as LinkedinImage from "../../../public/images/linkedin.png";
@@ -13,10 +14,10 @@ const Contact = (): JSX.Element => {
       <SEO title="contact" />
       <Main>
         <Text textAlign="center" fontSize="3xl">
-          Contact
+          {t.contact.title}
         </Text>
         <Text textAlign="center" fontSize={["md", "lg"]}>
-          Feel free to contact me if you have any inquiries.
+          {t.contact.text}
         </Text>
         <Center maxW="400px" m="auto" my="10">
           <SocialMediaImg

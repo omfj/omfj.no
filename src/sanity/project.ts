@@ -20,6 +20,10 @@ const ProjectAPI = {
 
             const result = await SanityAPI.fetch(query);
 
+            if (result.length === 0) {
+                return { message: "404" }
+            }
+
             return array(projectDecoder)(result);
         } catch (error) {
             console.log(error);
@@ -37,7 +41,7 @@ const ProjectAPI = {
 
             return array(slugDecoder)(result).map((nestedSlug) => nestedSlug.slug);
         } catch (error) {
-            console.log(error); // eslint-disable-line
+            console.log(error);
             return [];
         }
     },
@@ -58,7 +62,7 @@ const ProjectAPI = {
             const result = await SanityAPI.fetch(query);
 
             if (result.length === 0) {
-                return { message: "Could not find project" }
+                return { message: "404" }
             }
 
             return array(projectDecoder)(result)[0];

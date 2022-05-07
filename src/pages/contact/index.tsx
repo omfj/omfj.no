@@ -3,8 +3,8 @@ import SEO from "../../components/SEO";
 import t from "../../static/english.json";
 import { Center, Spacer, Text } from "@chakra-ui/react";
 import SocialMediaImg from "../../components/social-media-img";
-import * as GithubImage from "../../../public/images/github.png";
-import * as LinkedinImage from "../../../public/images/linkedin.png";
+import GithubImage from "../../../public/images/github.png";
+import LinkedinImage from "../../../public/images/linkedin.png";
 
 const Contact = (): JSX.Element => {
   const size = 125;

@@ -19,7 +19,7 @@ const CategoryAPI = {
             return array(categoryDecoder)(result);
         } catch (error) {
             console.log(error);
-            return { message: "Failed to get categories. " }
+            return { message: "Failed to get categories." }
         }
     },
 };

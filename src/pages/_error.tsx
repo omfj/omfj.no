@@ -10,14 +10,14 @@ interface ErrorComponentProps {
 const Error = ({ statusCode }: ErrorComponentProps): JSX.Element => {
   return (
     <Main>
-      <SEO title={"Error " + statusCode} />
+      <SEO title={statusCode + " Error"} />
       <Box>
         <Text textAlign="center" fontWeight="extrabold" fontSize="2rem">
           {statusCode
             ? "An error occurred on server"
             : "An error occurred on client"}
         </Text>
-        <Text textAlign="center" fontSize="2rem">
+        <Text textAlign="center" fontSize="10rem">
           {statusCode}
         </Text>
       </Box>

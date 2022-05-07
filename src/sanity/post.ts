@@ -35,7 +35,7 @@ const PostAPI = {
 
             return array(slugDecoder)(result).map((nestedSlug) => nestedSlug.slug);
         } catch (error) {
-            console.log(error); // eslint-disable-line
+            console.log(error);
             return [];
         }
     },

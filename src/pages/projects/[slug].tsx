@@ -1,5 +1,5 @@
 import { ParsedUrlQuery } from "querystring";
-import { Center, Text, Spinner, VStack, Flex } from "@chakra-ui/react";
+import { Center, Text, VStack, Flex } from "@chakra-ui/react";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import React from "react";
@@ -22,57 +22,48 @@ const ProjectPage = ({ project }: Props): JSX.Element => {
 
   return (
     <>
-      {router.isFallback && (
-        <Center>
-          <Spinner />
-        </Center>
-      )}
-      {!router.isFallback && (
-        <>
-          <SEO title={"project - " + project.title} />
-          <Main>
-            {project.body ? (
-              <>
-                <VStack mt="5" spacing="8">
-                  <Center fontSize="2xl">{project.title}</Center>
-                  <ReactMarkdown
-                    remarkPlugins={[remarkGfm]}
-                    className={style.reactmarkdown}
+      <SEO title={"project - " + project.title} />
+      <Main>
+        {project.body ? (
+          <>
+            <VStack mt="5" spacing="8">
+              <Center fontSize="2xl">{project.title}</Center>
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                className={style.reactmarkdown}
+              >
+                {project.body}
+              </ReactMarkdown>
+              <Text fontWeight="extrabold">
+                Last Updated: {zuluTimeToHuman(project._updatedAt)}
+              </Text>
+              <Flex>
+                {project.categories.map((category: Category) => (
+                  <Text
+                    key={category._id}
+                    bg={category.color + "33"}
+                    py="1"
+                    px="3"
+                    mx="1"
+                    fontSize="0.85rem"
+                    borderRadius="20"
+                    w="fit-content"
                   >
-                    {project.body}
-                  </ReactMarkdown>
-                  <Text fontWeight="extrabold">
-                    Last Updated: {zuluTimeToHuman(project._updatedAt)}
+                    {category.title}
                   </Text>
-                  <Flex>
-                    {project.categories.map((category: Category) => (
-                      <Text
-                        key={category._id}
-                        bg={category.color + "33"}
-                        py="1"
-                        px="3"
-                        mx="1"
-                        fontSize="0.85rem"
-                        borderRadius="20"
-                        w="fit-content"
-                      >
-                        {category.title}
-                      </Text>
-                    ))}
-                  </Flex>
-                </VStack>
-              </>
-            ) : (
-              <Construction title={project.title} />
-            )}
-          </Main>
-        </>
-      )}
+                ))}
+              </Flex>
+            </VStack>
+          </>
+        ) : (
+          <Construction title={project.title} />
+        )}
+      </Main>
     </>
   );
 };
 
-const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
   const paths = await ProjectAPI.getPaths();
   return {
     paths: paths.map((slug: string) => ({
@@ -80,7 +71,7 @@ const getStaticPaths: GetStaticPaths = async () => {
         slug,
       },
     })),
-    fallback: true,
+    fallback: false,
   };
 };
 
@@ -88,7 +79,7 @@ interface Params extends ParsedUrlQuery {
   slug: string;
 }
 
-const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps = async (context) => {
   const { slug } = context.params as Params;
   const project = await ProjectAPI.getProjectBySlug(slug);
 
@@ -111,4 +102,3 @@ const getStaticProps: GetStaticProps = async (context) => {
 };
 
 export default ProjectPage;
-export { getStaticProps, getStaticPaths };

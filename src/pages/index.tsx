@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import Main from "../components/main";
-import SEO from "../components/seo";
+import SEO from "../components/SEO";
 import t from "../static/english.json";
 import { Text, Center } from "@chakra-ui/react";
 

@@ -1,7 +1,7 @@
 import { Box, Text } from "@chakra-ui/react";
 import { NextPageContext } from "next";
 import Main from "../components/main";
-import SEO from "../components/seo";
+import SEO from "../components/SEO";
 
 interface ErrorComponentProps {
   statusCode?: number;

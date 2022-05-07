@@ -1,5 +1,5 @@
 import Main from "../../components/main";
-import SEO from "../../components/seo";
+import SEO from "../../components/SEO";
 import { Box, Text } from "@chakra-ui/react";
 import ProjectBox from "../../components/project-box";
 import { ProjectAPI } from "../../sanity/project";

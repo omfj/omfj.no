@@ -6,7 +6,7 @@ import React from "react";
 import { ProjectAPI } from "../../sanity/project";
 import { Category, isErrorMessage, Project } from "../../sanity/types";
 import Main from "../../components/main";
-import SEO from "../../components/SEO";
+import SEO from "../../components/seo";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import style from "../../../styles/markdown-styles.module.css";

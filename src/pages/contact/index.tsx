@@ -1,5 +1,5 @@
 import Main from "../../components/main";
-import SEO from "../../components/SEO";
+import SEO from "../../components/seo";
 import t from "../../static/english.json";
 import { Center, Spacer, Text } from "@chakra-ui/react";
 import SocialMediaImg from "../../components/social-media-img";

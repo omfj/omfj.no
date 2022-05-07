@@ -10,13 +10,6 @@ const SEO = ({ title, desc }: Props): JSX.Element => {
     <Head>
       <title>{title}</title>
       <meta name="description" content={desc ? desc : "omfj.no"} />
-      <meta
-        name="keywords"
-        content="omfj, ole magnus, ole magnus fon johnsen, olem"
-      />
-      <meta name="author" content="Ole Magnus Johnsen <ole.magnus@me.com>" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta name="apple-mobile-web-app-capable" content="yes" />
     </Head>
   );
 };

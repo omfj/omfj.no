@@ -15,7 +15,14 @@ const ProjectAPI = {
                     body,
                     description,
                     "image": image.asset -> url,
-                    categories[]->{_id, title, color, description},
+                    categories[] -> {
+                        _id,
+                        title,
+                        "slug": slug.current,
+                        emoji,
+                        color,
+                        description
+                    },
                 }`;
 
             const result = await SanityAPI.fetch(query);
@@ -56,7 +63,14 @@ const ProjectAPI = {
                     body,
                     description,
                     "image": image.asset -> url,
-                    categories[]->{_id, title, color, description},
+                    categories[] -> {
+                        _id,
+                        title,
+                        "slug": slug.current,
+                        emoji,
+                        color,
+                        description
+                    },
                 }`;
 
             const result = await SanityAPI.fetch(query);

@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import Main from "../components/main";
 import SEO from "../components/SEO";
 import t from "../static/english.json";
-import { Text, Center } from "@chakra-ui/react";
+import { Text, Center, Heading } from "@chakra-ui/react";
 
 const Home: NextPage = () => {
   return (
@@ -10,14 +10,9 @@ const Home: NextPage = () => {
       <SEO title="Ole Magnus" />
       <Main>
         <Center flexDirection="column" maxW="400px" m="auto">
-          <Text
-            textAlign="center"
-            fontWeight="extrabold"
-            textDecor="underline"
-            fontSize="3xl"
-          >
+          <Heading fontWeight="extrabold" textDecor="underline">
             {t.home.title}
-          </Text>
+          </Heading>
           <Text textAlign="center" fontSize="lg" my="5">
             {t.home.text}
           </Text>

@@ -1,22 +1,16 @@
-import { Box, Flex, Link, Text, VStack } from "@chakra-ui/react";
+import { Box, Flex, Link, LinkOverlay, Text, VStack } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { Category } from "../sanity/types";
+import CategoryTag from "./category-tag";
 
 interface Props {
   title: string;
   desc: string;
   link: string;
   categories: Array<Category>;
-  lastUpdate: string;
 }
 
-const ProjectBox = ({
-  title,
-  desc,
-  link,
-  categories,
-  lastUpdate,
-}: Props): JSX.Element => {
+const ProjectBox = ({ title, desc, link, categories }: Props): JSX.Element => {
   return (
     <Box my="3" mb="8">
       <Text
@@ -33,18 +27,13 @@ const ProjectBox = ({
         <Text>{desc}</Text>
         <Flex>
           {categories.map((category: Category) => (
-            <Text
+            <CategoryTag
               key={category._id}
-              bg={category.color + "33"}
-              py="1"
-              px="3"
-              mx="1"
-              fontSize="0.85rem"
-              borderRadius="20"
-              w="fit-content"
-            >
-              {category.title}
-            </Text>
+              slug={category.slug}
+              color={category.color ?? "transparent"}
+              emoji={category.emoji ?? ""}
+              title={category.title}
+            />
           ))}
         </Flex>
       </VStack>

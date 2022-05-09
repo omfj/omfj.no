@@ -1,7 +1,8 @@
 import Main from "../../components/main";
 import SEO from "../../components/SEO";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Heading, Text } from "@chakra-ui/react";
 import ProjectBox from "../../components/project-box";
+import t from "../../static/english.json";
 import { ProjectAPI } from "../../sanity/project";
 import { GetStaticProps } from "next";
 import { isErrorMessage, Project } from "../../sanity/types";
@@ -16,9 +17,9 @@ const ProjectsOverview = ({ projects }: Props): JSX.Element => {
     <>
       <SEO title="projects" />
       <Main>
-        <Text textAlign="center" fontSize="3xl">
-          Projects
-        </Text>
+        <Heading textAlign="center" fontSize="3xl">
+          {t.projects.title}
+        </Heading>
         <Box px={["0", "3"]} py="5">
           {projects.map((project: Project) => {
             return (
@@ -28,7 +29,7 @@ const ProjectsOverview = ({ projects }: Props): JSX.Element => {
                 desc={project.description}
                 link={project.slug}
                 categories={project.categories}
-                lastUpdate={zuluTimeToHuman(project._updatedAt)}
+                // lastUpdate={zuluTimeToHuman(project._updatedAt)}
               />
             );
           })}

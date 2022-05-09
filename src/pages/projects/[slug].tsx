@@ -1,5 +1,5 @@
 import { ParsedUrlQuery } from "querystring";
-import { Center, Text, VStack, Flex } from "@chakra-ui/react";
+import { Center, Text, VStack, Flex, Heading } from "@chakra-ui/react";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import React from "react";
@@ -12,6 +12,7 @@ import remarkGfm from "remark-gfm";
 import style from "../../../styles/markdown-styles.module.css";
 import Construction from "../../components/construction";
 import { zuluTimeToHuman } from "../../lib/date-functions";
+import CategoryTag from "../../components/category-tag";
 
 interface Props {
   project: Project;
@@ -27,7 +28,7 @@ const ProjectPage = ({ project }: Props): JSX.Element => {
         {project.body ? (
           <>
             <VStack mt="5" spacing="8">
-              <Center fontSize="2xl">{project.title}</Center>
+              <Heading textAlign="center">{project.title}</Heading>
               <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
                 className={style.reactmarkdown}
@@ -39,18 +40,13 @@ const ProjectPage = ({ project }: Props): JSX.Element => {
               </Text>
               <Flex>
                 {project.categories.map((category: Category) => (
-                  <Text
+                  <CategoryTag
                     key={category._id}
-                    bg={category.color + "33"}
-                    py="1"
-                    px="3"
-                    mx="1"
-                    fontSize="0.85rem"
-                    borderRadius="20"
-                    w="fit-content"
-                  >
-                    {category.title}
-                  </Text>
+                    slug={category.slug}
+                    color={category.color ?? "transparent"}
+                    emoji={category.emoji ?? ""}
+                    title={category.title}
+                  />
                 ))}
               </Flex>
             </VStack>

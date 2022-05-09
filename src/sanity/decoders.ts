@@ -9,8 +9,10 @@ import {
 // Decodes categories
 const categoryDecoder = record({
     _id: string,
+    slug: string,
     title: string,
-    color: string,
+    emoji: union(string, nil),
+    color: union(string, nil),
     description: union(string, nil),
 });
 
@@ -50,10 +52,20 @@ const slugDecoder = record({
     slug: string,
 })
 
+// Projects related to category
+const projectByCategoryDecoder = record({
+    title: string,
+    description: union(string, nil),
+    emoji: string,
+    color: string,
+    projects: array(projectDecoder),
+})
+
 export {
     projectDecoder,
     categoryDecoder,
     authorDecoder,
     postDecoder,
     slugDecoder,
+    projectByCategoryDecoder,
 };

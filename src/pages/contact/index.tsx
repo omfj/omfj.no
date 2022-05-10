@@ -6,44 +6,29 @@ import SocialMediaImg from "../../components/social-media-img";
 import GithubImage from "../../../public/images/github.png";
 import LinkedinImage from "../../../public/images/linkedin.png";
 
-const Contact = (): JSX.Element => {
-  const size = 125;
-
-  return (
-    <>
-      <SEO title="contact" />
-      <Main>
-        <Heading textAlign="center">{t.contact.title}</Heading>
-        <Text textAlign="center" fontSize={["md", "lg"]}>
-          {t.contact.text}
-        </Text>
-        <Center maxW="400px" m="auto" my="10">
-          <SocialMediaImg
-            source={GithubImage}
-            height={size}
-            width={size}
-            href="https://github.com/omfj"
-            alt="Github logo with link to my github."
-          />
-          <Spacer />
-          {/* <SocialMediaImg
-										source={InstaImage}
-										height={100}
-										width={100}
-										href="https://instagram.com/lordolem"
-										alt="Instagram logo with link to my instagram"
-								/> */}
-          <SocialMediaImg
-            source={LinkedinImage}
-            height={size}
-            width={size}
-            href="https://linkedin.com/in/omfj"
-            alt="Linkedin logo with link to my linkedin"
-          />
-        </Center>
-      </Main>
-    </>
-  );
-};
+const Contact = (): JSX.Element => (
+  <>
+    <SEO title="contact" />
+    <Main>
+      <Heading textAlign="center">{t.contact.title}</Heading>
+      <Text textAlign="center" fontSize={["md", "lg"]}>
+        {t.contact.text}
+      </Text>
+      <Center maxW="400px" m="auto" my="10">
+        <SocialMediaImg
+          source={GithubImage}
+          href="https://github.com/omfj"
+          alt="Github logo with link to my github."
+        />
+        <Spacer />
+        <SocialMediaImg
+          source={LinkedinImage}
+          href="https://linkedin.com/in/omfj"
+          alt="Linkedin logo with link to my linkedin"
+        />
+      </Center>
+    </Main>
+  </>
+);
 
 export default Contact;

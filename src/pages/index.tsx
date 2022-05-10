@@ -10,7 +10,11 @@ const Home: NextPage = () => {
       <SEO title="Ole Magnus" />
       <Main>
         <Center flexDirection="column" maxW="400px" m="auto">
-          <Heading fontWeight="extrabold" textDecor="underline">
+          <Heading
+            textAlign="center"
+            fontWeight="extrabold"
+            textDecor="underline"
+          >
             {t.home.title}
           </Heading>
           <Text textAlign="center" fontSize="lg" my="5">

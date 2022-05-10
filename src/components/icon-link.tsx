@@ -9,7 +9,7 @@ interface Props {
 const IconLink = ({ icon, link }: Props) => {
   return (
     <NextLink href={link} passHref>
-      <Icon className="hover-pointer" fontSize="3xl" mx="2" as={icon} />
+      <Icon as={icon} fontSize="3xl" mx="2" _hover={{ cursor: "pointer" }} />
     </NextLink>
   );
 };

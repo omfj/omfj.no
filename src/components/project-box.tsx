@@ -1,4 +1,4 @@
-import { Box, Flex, Link, LinkOverlay, Text, VStack } from "@chakra-ui/react";
+import { Box, Flex, Text, VStack } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { Category } from "../sanity/types";
 import CategoryTag from "./category-tag";
@@ -12,7 +12,7 @@ interface Props {
 
 const ProjectBox = ({ title, desc, link, categories }: Props): JSX.Element => {
   return (
-    <Box my="3" mb="8">
+    <Box my="4">
       <Text
         fontWeight="bold"
         fontSize="lg"
@@ -25,7 +25,7 @@ const ProjectBox = ({ title, desc, link, categories }: Props): JSX.Element => {
       </Text>
       <VStack align="left" borderLeft="2px solid white" py="4" px="3">
         <Text>{desc}</Text>
-        <Flex>
+        <Flex flexWrap="wrap">
           {categories.map((category: Category) => (
             <CategoryTag
               key={category._id}
@@ -37,11 +37,17 @@ const ProjectBox = ({ title, desc, link, categories }: Props): JSX.Element => {
           ))}
         </Flex>
       </VStack>
-      <Box border="2px solid white" w="fit-content" p="2">
-        <NextLink href={"/projects/" + link} passHref>
-          <Link p="3">Learn more</Link>
-        </NextLink>
-      </Box>
+      <NextLink href={"/projects/" + link} passHref>
+        <Box
+          border="2px solid white"
+          w="fit-content"
+          px="3"
+          py="2"
+          _hover={{ cursor: "pointer" }}
+        >
+          Learn more
+        </Box>
+      </NextLink>
     </Box>
   );
 };

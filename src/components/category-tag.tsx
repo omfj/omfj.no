@@ -14,8 +14,8 @@ const CategoryTag = ({ slug, color, emoji, title }: Props) => {
       <Text
         bg={color + "33"}
         py="1"
-        px="3"
-        mx="1"
+        px="2"
+        m="1"
         fontSize="0.85rem"
         borderRadius="20"
         w="fit-content"
@@ -23,7 +23,7 @@ const CategoryTag = ({ slug, color, emoji, title }: Props) => {
           cursor: "pointer",
         }}
       >
-        {emoji} {title}
+        {emoji + " " + title}
       </Text>
     </NextLink>
   );

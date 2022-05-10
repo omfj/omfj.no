@@ -16,8 +16,18 @@ const CategoryPage = ({ category }: Props): JSX.Element => (
   <>
     <SEO title={"category - " + category.title} />
     <Main>
-      <Heading textAlign="center">{category.title}</Heading>
-      <Text>{category.description}</Text>
+      <Heading
+        textAlign="center"
+        m="auto"
+        w="fit-content"
+        p="3"
+        bgColor={category.color + "33"}
+      >
+        {"category - " + category.title}
+      </Heading>
+      <Text p="3" mt="3">
+        {category.description}
+      </Text>
       {category.projects.map((project: Project) => (
         <ProjectBox
           key={project._id}

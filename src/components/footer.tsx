@@ -4,15 +4,15 @@ import IconLink from "./icon-link";
 
 const Footer = (): JSX.Element => {
   return (
-    <Box borderTop={["none", "2px solid white"]} w="100%">
+    <Box bg="#080808" w="100%">
       <Center
+        bg="inherit"
         flexDir={["column", "row"]}
         alignItems="center"
         maxW="1000px"
         m="auto"
         py="5"
         px="5"
-        bg="omfj.acc"
       >
         <Text textAlign="center" my={[5, 0]}>
           Made with ❤️ by Ole Magnus

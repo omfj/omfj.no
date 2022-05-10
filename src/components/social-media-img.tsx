@@ -1,33 +1,19 @@
 import NextLink from "next/link";
 import Image from "next/image";
-import { Link } from "@chakra-ui/react";
+import { Box, Link } from "@chakra-ui/react";
 
 interface Props {
   source: any;
-  height: number;
-  width: number;
   href: string;
   alt: string;
 }
 
-const SocialMediaImg = ({
-  source,
-  height,
-  width,
-  href,
-  alt,
-}: Props): JSX.Element => {
+const SocialMediaImg = ({ source, href, alt }: Props): JSX.Element => {
   return (
     <NextLink href={href} passHref>
-      <Link className="social-media-image" p="10">
-        <Image
-          className="social-media-image-props"
-          src={source}
-          height={height}
-          width={width}
-          alt={alt}
-        />
-      </Link>
+      <Box w="125px" h="125px" _hover={{ cursor: "pointer" }}>
+        <Image src={source} alt={alt} />
+      </Box>
     </NextLink>
   );
 };

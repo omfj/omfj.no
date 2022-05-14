@@ -1,10 +1,14 @@
 import { ParsedUrlQuery } from "querystring";
-import { Center, Text, VStack, Flex, Heading } from "@chakra-ui/react";
+import { Text, VStack, Flex, Heading, Box, Center } from "@chakra-ui/react";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { useRouter } from "next/router";
 import React from "react";
 import { ProjectAPI } from "../../sanity/project";
-import { Category, isErrorMessage, Project } from "../../sanity/types";
+import {
+  Category,
+  isErrorMessage,
+  Project,
+  ExternalLink,
+} from "../../sanity/types";
 import Main from "../../components/main";
 import SEO from "../../components/SEO";
 import ReactMarkdown from "react-markdown";
@@ -13,51 +17,63 @@ import style from "../../../styles/markdown-styles.module.css";
 import Construction from "../../components/construction";
 import { zuluTimeToHuman } from "../../lib/date-functions";
 import CategoryTag from "../../components/category-tag";
+import ExternalLinkButton from "../../components/external-link";
 
 interface Props {
   project: Project;
 }
 
-const ProjectPage = ({ project }: Props): JSX.Element => {
-  const router = useRouter();
-
-  return (
-    <>
-      <SEO title={"project - " + project.title} />
-      <Main>
-        {project.body ? (
-          <>
-            <VStack mt="5" spacing="8">
-              <Heading textAlign="center">{project.title}</Heading>
+const ProjectPage = ({ project }: Props): JSX.Element => (
+  <>
+    <SEO title={"project - " + project.title} />
+    <Main>
+      {project.body ? (
+        <>
+          <VStack mt="5" spacing="8">
+            <Heading textAlign="center">{project.title}</Heading>
+            <Box maxW="600px">
               <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
                 className={style.reactmarkdown}
               >
                 {project.body}
               </ReactMarkdown>
-              <Text fontWeight="extrabold">
-                Last Updated: {zuluTimeToHuman(project._updatedAt)}
-              </Text>
-              <Flex>
-                {project.categories.map((category: Category) => (
-                  <CategoryTag
-                    key={category._id}
-                    slug={category.slug}
-                    color={category.color ?? "transparent"}
-                    emoji={category.emoji ?? ""}
-                    title={category.title}
-                  />
-                ))}
+            </Box>
+            <Center>
+              <Flex gap={5} w="100%">
+                {project.externalLinks
+                  ? project.externalLinks.map((externalLink: ExternalLink) => (
+                      <ExternalLinkButton
+                        key={externalLink._key}
+                        title={externalLink.title}
+                        link={externalLink.link}
+                      />
+                    ))
+                  : ""}
               </Flex>
-            </VStack>
-          </>
-        ) : (
-          <Construction title={project.title} />
-        )}
-      </Main>
-    </>
-  );
-};
+            </Center>
+            <Text fontWeight="extrabold">
+              Last Updated: {zuluTimeToHuman(project._updatedAt)}
+            </Text>
+            <Flex>
+              {project.categories.map((category: Category) => (
+                <CategoryTag
+                  key={category._id}
+                  slug={category.slug}
+                  color={category.color ?? "transparent"}
+                  emoji={category.emoji ?? ""}
+                  title={category.title}
+                />
+              ))}
+            </Flex>
+          </VStack>
+        </>
+      ) : (
+        <Construction title={project.title} />
+      )}
+    </Main>
+  </>
+);
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = await ProjectAPI.getPaths();

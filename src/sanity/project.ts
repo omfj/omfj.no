@@ -23,6 +23,11 @@ const ProjectAPI = {
                         color,
                         description
                     },
+                    externalLinks[] {
+                        _key,
+                        title,
+                        link
+                    },
                 }`;
 
             const result = await SanityAPI.fetch(query);
@@ -71,6 +76,11 @@ const ProjectAPI = {
                         color,
                         description
                     },
+                    externalLinks[] {
+                        _key,
+                        title,
+                        link
+                    },
                 }`;
 
             const result = await SanityAPI.fetch(query);
@@ -82,7 +92,7 @@ const ProjectAPI = {
             return array(projectDecoder)(result)[0];
         } catch (error) {
             console.log(error);
-            return { message: "Failed to get project." }
+            return { message: "Failed to get project by slug." }
         }
     },
 };

@@ -3,12 +3,17 @@
   margin: 1;
 }
 
+.reactmarkdown a,
+.reactmarkdown p {
+  font-size: 16px;
+}
+
 .reactmarkdown p:not(:first-child) {
   margin-top: 18px;
 }
 
 .reactmarkdown a {
-  color: #0077aa;
+  color: #1298d1;
 }
 
 .reactmarkdown a:hover {

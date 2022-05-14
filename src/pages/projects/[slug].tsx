@@ -56,15 +56,17 @@ const ProjectPage = ({ project }: Props): JSX.Element => (
               Last Updated: {zuluTimeToHuman(project._updatedAt)}
             </Text>
             <Flex>
-              {project.categories.map((category: Category) => (
-                <CategoryTag
-                  key={category._id}
-                  slug={category.slug}
-                  color={category.color ?? "transparent"}
-                  emoji={category.emoji ?? ""}
-                  title={category.title}
-                />
-              ))}
+              {project.categories
+                ? project.categories.map((category: Category) => (
+                    <CategoryTag
+                      key={category._id}
+                      slug={category.slug}
+                      color={category.color ?? "transparent"}
+                      emoji={category.emoji ?? ""}
+                      title={category.title}
+                    />
+                  ))
+                : ""}
             </Flex>
           </VStack>
         </>

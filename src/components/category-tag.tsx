@@ -11,20 +11,22 @@ interface Props {
 const CategoryTag = ({ slug, color, emoji, title }: Props) => {
   return (
     <NextLink href={"/category/" + slug} passHref>
-      <Text
-        bg={color + "33"}
-        py="1"
-        px="2"
-        m="1"
-        fontSize="0.85rem"
-        borderRadius="20"
-        w="fit-content"
-        _hover={{
-          cursor: "pointer",
-        }}
-      >
-        {emoji + " " + title}
-      </Text>
+      <a>
+        <Text
+          bg={color + "33"}
+          py="1"
+          px="2"
+          m="1"
+          fontSize="0.85rem"
+          borderRadius="20"
+          w="fit-content"
+          _hover={{
+            cursor: "pointer",
+          }}
+        >
+          {emoji + " " + title}
+        </Text>
+      </a>
     </NextLink>
   );
 };

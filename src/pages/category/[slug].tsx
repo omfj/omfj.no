@@ -28,15 +28,17 @@ const CategoryPage = ({ category }: Props): JSX.Element => (
       <Text p="3" mt="3">
         {category.description}
       </Text>
-      {category.projects.map((project: Project) => (
-        <ProjectBox
-          key={project._id}
-          title={project.title}
-          desc={project.description}
-          link={project.slug}
-          categories={project.categories}
-        />
-      ))}
+      {category.projects
+        ? category.projects.map((project: Project) => (
+            <ProjectBox
+              key={project._id}
+              title={project.title}
+              desc={project.description}
+              link={project.slug}
+              categories={project.categories}
+            />
+          ))
+        : ""}
     </Main>
   </>
 );

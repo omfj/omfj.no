@@ -3,7 +3,11 @@ import { Text, Heading } from "@chakra-ui/react";
 import { GetStaticPaths, GetStaticProps } from "next";
 import React from "react";
 import { CategoryAPI } from "../../sanity/category";
-import { isErrorMessage, Project, ProjectByCategory } from "../../sanity/types";
+import {
+  isErrorMessage,
+  ProjectByCategory,
+  ProjectOverview,
+} from "../../sanity/types";
 import Main from "../../components/main";
 import SEO from "../../components/SEO";
 import ProjectBox from "../../components/project-box";
@@ -28,17 +32,15 @@ const CategoryPage = ({ category }: Props): JSX.Element => (
       <Text p="3" mt="3">
         {category.description}
       </Text>
-      {category.projects
-        ? category.projects.map((project: Project) => (
-            <ProjectBox
-              key={project._id}
-              title={project.title}
-              desc={project.description}
-              link={project.slug}
-              categories={project.categories}
-            />
-          ))
-        : ""}
+      {category.projects.map((project: ProjectOverview) => (
+        <ProjectBox
+          key={project._id}
+          title={project.title}
+          desc={project.description}
+          link={project.slug}
+          categories={project.categories}
+        />
+      ))}
     </Main>
   </>
 );

@@ -1,5 +1,5 @@
 import NextLink from "next/link";
-import { Text } from "@chakra-ui/react";
+import { Text, Box } from "@chakra-ui/react";
 
 interface Props {
   slug: string;
@@ -16,12 +16,14 @@ const CategoryTag = ({ slug, color, emoji, title }: Props) => {
           bg={color + "33"}
           py="1"
           px="2"
-          m="1"
+          m="0.5"
           fontSize="0.85rem"
           borderRadius="20"
+          border="2px solid transparent"
           w="fit-content"
           _hover={{
             cursor: "pointer",
+            borderColor: "cyan.500",
           }}
         >
           {emoji + " " + title}

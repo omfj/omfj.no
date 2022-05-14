@@ -52,7 +52,16 @@ const projectDecoder = record({
     image: union(string, nil),
     categories: array(categoryDecoder),
     externalLinks: union(array(externalLinkDecoder), nil),
-});
+})
+
+// Decodes overview of projects
+const projectOverviewDecoder = record({
+    _id: string,
+    title: string,
+    description: string,
+    slug: string,
+    categories: array(categoryDecoder),
+})
 
 // Decodes slug
 const slugDecoder = record({
@@ -65,11 +74,12 @@ const projectByCategoryDecoder = record({
     description: union(string, nil),
     emoji: string,
     color: string,
-    projects: union(array(projectDecoder), nil),
+    projects: array(projectOverviewDecoder),
 })
 
 export {
     projectDecoder,
+    projectOverviewDecoder,
     categoryDecoder,
     authorDecoder,
     postDecoder,

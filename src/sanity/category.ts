@@ -42,15 +42,16 @@ const CategoryAPI = {
         try {
             const query = `
             *[_type == "category" && slug.current == "${slug}"] {
-                title, description, emoji, color,
+                title,
+                description,
+                emoji,
+                color,
                 "projects": *[_type == "project" && references(^._id)] {
                     _id,
-                    _updatedAt,
                     "slug": slug.current,
                     title,
                     body,
                     description,
-                    "image": image.asset -> url,
                     categories[] -> {
                         _id,
                         title,

@@ -37,17 +37,21 @@ const ProjectBox = ({ title, desc, link, categories }: Props): JSX.Element => {
           ))}
         </Flex>
       </VStack>
-      <NextLink href={"/projects/" + link} passHref>
-        <Box
-          border="2px solid white"
-          w="fit-content"
-          px="3"
-          py="2"
-          _hover={{ cursor: "pointer" }}
-        >
-          Learn more
-        </Box>
-      </NextLink>
+      <Box w="fit-content" _hover={{ bg: "#161616" }}>
+        <NextLink href={"/projects/" + link} passHref>
+          <a>
+            <Box
+              border="2px solid white"
+              w="fit-content"
+              px="3"
+              py="2"
+              _hover={{ cursor: "pointer" }}
+            >
+              <Text>Learn More</Text>
+            </Box>
+          </a>
+        </NextLink>
+      </Box>
     </Box>
   );
 };

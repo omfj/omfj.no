@@ -1,7 +1,7 @@
 import { array } from 'typescript-json-decoder';
 import { SanityAPI } from './api';
-import { projectDecoder, slugDecoder } from './decoders';
-import { ErrorMessage, Project } from './types';
+import { projectDecoder, projectOverviewDecoder, slugDecoder } from './decoders';
+import { ErrorMessage, Project, ProjectOverview } from './types';
 
 const ProjectAPI = {
     getProjects: async (): Promise<Array<Project> | ErrorMessage> => {
@@ -55,6 +55,34 @@ const ProjectAPI = {
         } catch (error) {
             console.log(error);
             return [];
+        }
+    },
+    getProjectOverview: async (): Promise<Array<ProjectOverview> | ErrorMessage> => {
+        try {
+            const query = `
+                *[_type == "project"] | order(title) {
+                    _id,
+                    "slug": slug.current,
+                    title,
+                    body,
+                    description,
+                    categories[] -> {
+                        _id,
+                        title,
+                        "slug": slug.current,
+                        emoji,
+                        color,
+                        description
+                    },
+                }
+            `;
+
+            const result = await SanityAPI.fetch(query);
+
+            return array(projectOverviewDecoder)(result)
+        } catch (error) {
+            console.log(error);
+            return { message: "Failed to get projects overview" };
         }
     },
     getProjectBySlug: async (slug: string): Promise<Project | ErrorMessage> => {

@@ -5,10 +5,10 @@ import ProjectBox from "../../components/project-box";
 import t from "../../static/english.json";
 import { ProjectAPI } from "../../sanity/project";
 import { GetStaticProps } from "next";
-import { isErrorMessage, Project } from "../../sanity/types";
+import { isErrorMessage, ProjectOverview } from "../../sanity/types";
 
 interface Props {
-  projects: Array<Project>;
+  projects: Array<ProjectOverview>;
 }
 
 const ProjectsOverview = ({ projects }: Props): JSX.Element => {
@@ -20,7 +20,7 @@ const ProjectsOverview = ({ projects }: Props): JSX.Element => {
           {t.projects.title}
         </Heading>
         <Box px={["0", "3"]} py="5">
-          {projects.map((project: Project) => {
+          {projects.map((project: ProjectOverview) => {
             return (
               <ProjectBox
                 key={project._id}
@@ -38,7 +38,7 @@ const ProjectsOverview = ({ projects }: Props): JSX.Element => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const projects = await ProjectAPI.getProjects();
+  const projects = await ProjectAPI.getProjectOverview();
 
   if (isErrorMessage(projects)) throw new Error(projects.message);
 

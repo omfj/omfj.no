@@ -9,10 +9,10 @@ import {
 // Decodes categories
 const categoryDecoder = record({
     _id: string,
-    slug: string,
-    title: string,
-    emoji: union(string, nil),
     color: union(string, nil),
+    emoji: union(string, nil),
+    title: string,
+    slug: string,
     description: union(string, nil),
 });
 
@@ -49,7 +49,6 @@ const projectDecoder = record({
     title: string,
     description: string,
     body: union(string, nil),
-    image: union(string, nil),
     categories: array(categoryDecoder),
     externalLinks: union(array(externalLinkDecoder), nil),
 })

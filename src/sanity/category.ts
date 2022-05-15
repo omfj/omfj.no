@@ -9,10 +9,10 @@ const CategoryAPI = {
             const query = `
                 *[_type == "category"] {
                     _id,
-                    title,
-                    "emoji": emoji.native,
-                    description,
                     "color": color.hex,
+                    emoji,
+                    title,
+                    description,
                 }`;
 
             const result = await SanityAPI.fetch(query);
@@ -45,7 +45,7 @@ const CategoryAPI = {
                 title,
                 description,
                 emoji,
-                color,
+                "color": color.hex,
                 "projects": *[_type == "project" && references(^._id)] {
                     _id,
                     "slug": slug.current,
@@ -57,7 +57,7 @@ const CategoryAPI = {
                         title,
                         "slug": slug.current,
                         emoji,
-                        color,
+                        "color": color.hex,
                         description
                     },
                 }

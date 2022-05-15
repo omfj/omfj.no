@@ -20,7 +20,7 @@ const ProjectAPI = {
                         title,
                         "slug": slug.current,
                         emoji,
-                        color,
+                        "color",
                         description
                     },
                     externalLinks[] {
@@ -71,7 +71,7 @@ const ProjectAPI = {
                         title,
                         "slug": slug.current,
                         emoji,
-                        color,
+                        "color": color.hex,
                         description
                     },
                 }
@@ -95,14 +95,13 @@ const ProjectAPI = {
                     title,
                     body,
                     description,
-                    "image": image.asset -> url,
                     categories[] -> {
                         _id,
+                        "color": color.hex,
+                        emoji,
                         title,
                         "slug": slug.current,
-                        emoji,
-                        color,
-                        description
+                        description,
                     },
                     externalLinks[] {
                         _key,

@@ -39,23 +39,21 @@ const ProjectPage = ({ project }: Props): JSX.Element => (
                 {project.body}
               </ReactMarkdown>
             </Box>
-            <Center>
-              <Flex gap={5} w="100%">
-                {project.externalLinks
-                  ? project.externalLinks.map((externalLink: ExternalLink) => (
-                      <ExternalLinkButton
-                        key={externalLink._key}
-                        title={externalLink.title}
-                        link={externalLink.link}
-                      />
-                    ))
-                  : ""}
-              </Flex>
+            <Center gap={5} w="100%" flexWrap="wrap" m="auto">
+              {project.externalLinks
+                ? project.externalLinks.map((externalLink: ExternalLink) => (
+                    <ExternalLinkButton
+                      key={externalLink._key}
+                      title={externalLink.title}
+                      link={externalLink.link}
+                    />
+                  ))
+                : ""}
             </Center>
             <Text fontWeight="extrabold">
               Last Updated: {zuluTimeToHuman(project._updatedAt)}
             </Text>
-            <Flex>
+            <Center flexWrap="wrap" mt="2">
               {project.categories
                 ? project.categories.map((category: Category) => (
                     <CategoryTag
@@ -67,7 +65,7 @@ const ProjectPage = ({ project }: Props): JSX.Element => (
                     />
                   ))
                 : ""}
-            </Flex>
+            </Center>
           </VStack>
         </>
       ) : (

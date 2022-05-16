@@ -20,17 +20,15 @@ const ProjectsOverview = ({ projects }: Props): JSX.Element => {
           {t.projects.title}
         </Heading>
         <Box px={["0", "3"]} py="5">
-          {projects.map((project: ProjectOverview) => {
-            return (
-              <ProjectBox
-                key={project._id}
-                title={project.title}
-                desc={project.description}
-                link={project.slug}
-                categories={project.categories}
-              />
-            );
-          })}
+          {projects.map((project: ProjectOverview) => (
+            <ProjectBox
+              key={project._id}
+              title={project.title}
+              desc={project.description}
+              link={project.slug}
+              categories={project.categories}
+            />
+          ))}
         </Box>
       </Main>
     </>

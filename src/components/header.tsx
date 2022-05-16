@@ -12,16 +12,17 @@ const Header = (): JSX.Element => {
         mt="5"
         maxW="1000px"
         boxShadow="inset 0 -2px 0 #333"
-        direction={["column", null, "row"]}
       >
         <NextLink href="/" passHref>
-          <Text
-            fontWeight="extrabold"
-            fontSize={["2.25rem", "2rem"]}
-            _hover={{ cursor: "pointer" }}
-          >
-            omfj.no
-          </Text>
+          <a>
+            <Text
+              fontWeight="extrabold"
+              fontSize={["2.25rem", "2rem"]}
+              _hover={{ cursor: "pointer" }}
+            >
+              omfj.no
+            </Text>
+          </a>
         </NextLink>
         <Spacer />
         <Navbar />

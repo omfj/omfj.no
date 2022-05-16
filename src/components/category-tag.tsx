@@ -23,7 +23,7 @@ const CategoryTag = ({ slug, color, emoji, title }: Props) => {
           w="fit-content"
           _hover={{
             cursor: "pointer",
-            borderColor: "cyan.500",
+            borderColor: "#1cc1fcaa",
           }}
         >
           {emoji + " " + title}

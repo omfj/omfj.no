@@ -15,28 +15,30 @@ const NavLink = ({ text, link, icon }: Props): JSX.Element => {
   return (
     <Center mt={["2", "0"]}>
       <NextLink href={link} passHref>
-        <Box
-          display="flex"
-          bg="transparent"
-          borderBottom="2px solid transparent"
-          p="3"
-          borderColor={active ? "white" : "transparent"}
-          _hover={{ cursor: "pointer" }}
-        >
-          <Flex
-            className="child"
-            alignItems="center"
-            w="fit-content"
-            borderRadius="0.25rem"
-            p="1.5"
-            _hover={{ bg: "#333" }}
+        <a>
+          <Box
+            display="flex"
+            bg="transparent"
+            borderBottom="2px solid transparent"
+            p="3"
+            borderColor={active ? "white" : "transparent"}
+            _hover={{ cursor: "pointer" }}
           >
-            <Icon as={icon} mr={["0", "1.5"]} fontSize={["xl", "sm"]} />
-            <Text fontSize="md" display={["none", "block"]}>
-              {text}
-            </Text>
-          </Flex>
-        </Box>
+            <Flex
+              className="child"
+              alignItems="center"
+              w="fit-content"
+              borderRadius="0.25rem"
+              p="1.5"
+              _hover={{ bg: "#333" }}
+            >
+              <Icon as={icon} mr={["0", "1.5"]} fontSize={["xl", "sm"]} />
+              <Text fontSize="md" display={["none", "block"]}>
+                {text}
+              </Text>
+            </Flex>
+          </Box>
+        </a>
       </NextLink>
     </Center>
   );

@@ -12,7 +12,13 @@ const SocialMediaImg = ({ source, href, alt }: Props): JSX.Element => {
   return (
     <NextLink href={href} passHref>
       <a>
-        <Box w="125px" h="125px" _hover={{ cursor: "pointer" }}>
+        <Box
+          w="125px"
+          h="125px"
+          m="auto"
+          transition="0.5s"
+          _hover={{ cursor: "pointer", transform: "scale(1.1)" }}
+        >
           <Image src={source} alt={alt} />
         </Box>
       </a>

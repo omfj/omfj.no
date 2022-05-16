@@ -1,5 +1,6 @@
 import {
   Flex,
+  Text,
   Box,
   Drawer,
   DrawerContent,
@@ -8,6 +9,7 @@ import {
   DrawerOverlay,
   useDisclosure,
   Link,
+  DrawerFooter,
 } from "@chakra-ui/react";
 import NavLink from "./navlink";
 import NextLink from "next/link";
@@ -35,7 +37,9 @@ const NavDrawer = (): JSX.Element => {
 
   return (
     <>
-      <GiHamburgerMenu color="white" size={30} onClick={onOpen} />
+      <Box _hover={{ cursor: "pointer" }}>
+        <GiHamburgerMenu color="white" size={30} onClick={onOpen} />
+      </Box>
       <Drawer isOpen={isOpen} onClose={onClose} size="xs">
         <DrawerOverlay />
         <DrawerContent bg="black" borderLeft="2px solid white">
@@ -45,6 +49,11 @@ const NavDrawer = (): JSX.Element => {
             <NavDrawerLink title="git" link="https://github.com/omfj/" />
             <NavDrawerLink title="contact" link="/contact/" />
           </DrawerBody>
+          <DrawerFooter>
+            <Text textAlign="left" mr="auto">
+              Feedback is always appreciated
+            </Text>
+          </DrawerFooter>
         </DrawerContent>
       </Drawer>
     </>

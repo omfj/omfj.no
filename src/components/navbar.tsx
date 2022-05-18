@@ -43,14 +43,14 @@ const NavDrawer = (): JSX.Element => {
       <Drawer isOpen={isOpen} onClose={onClose} size="xs">
         <DrawerOverlay />
         <DrawerContent bg="black" borderLeft="2px solid white">
-          <DrawerCloseButton />
+          <DrawerCloseButton style={{ color: "white" }} />
           <DrawerBody py="14" onClick={onClose}>
             <NavDrawerLink title="projects" link="/projects/" />
             <NavDrawerLink title="git" link="https://github.com/omfj/" />
             <NavDrawerLink title="contact" link="/contact/" />
           </DrawerBody>
           <DrawerFooter>
-            <Text textAlign="left" mr="auto">
+            <Text textAlign="left" mr="auto" color="white">
               Feedback is always appreciated
             </Text>
           </DrawerFooter>

@@ -25,7 +25,7 @@ const ProjectBox = ({ title, desc, link, categories }: Props): JSX.Element => {
       </Text>
       <VStack align="left" borderLeft="2px solid white" py="4" px="3">
         <Text>{desc}</Text>
-        <Flex flexWrap="wrap">
+        <Flex flexWrap="wrap" gap="2">
           {categories.map((category: Category) => (
             <CategoryTag
               key={category._id}

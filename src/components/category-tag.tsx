@@ -16,9 +16,8 @@ const CategoryTag = ({ slug, color, emoji, title }: Props) => {
           bg={color + "33"}
           py="1"
           px="2"
-          m="0.5"
           fontSize="0.85rem"
-          borderRadius="20"
+          borderRadius="10"
           border="2px solid transparent"
           w="fit-content"
           _hover={{

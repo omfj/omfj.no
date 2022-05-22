@@ -52,7 +52,7 @@ const ProjectPage = ({ project }: Props): JSX.Element => (
             <p className="font-extrabold text-center">
               Last Updated: {zuluTimeToHuman(project._updatedAt)}
             </p>
-            <div className="flex-wrap mt-2 flex justify-center">
+            <div className="flex-wrap mt-2 flex justify-center gap-5">
               {project.categories &&
                 project.categories.map((category: Category) => (
                   <CategoryTag

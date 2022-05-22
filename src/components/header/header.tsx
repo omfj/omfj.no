@@ -49,7 +49,7 @@ const Header = (): JSX.Element => {
         <div
           className={
             !open
-              ? `fixed overflow-hidden top-0 left-0 h-full w-full p-10 bg-[#070707] md:hidden`
+              ? `fixed z-50 overflow-hidden top-0 right-0 bottom-0 left-0 h-full w-full object-fill p-10 bg-[#070707] md:hidden`
               : "hidden"
           }
         >

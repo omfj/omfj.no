@@ -1,5 +1,4 @@
 import { ParsedUrlQuery } from "querystring";
-import { Text, VStack, Flex, Heading, Box, Center } from "@chakra-ui/react";
 import { GetStaticPaths, GetStaticProps } from "next";
 import React from "react";
 import { ProjectAPI } from "../../sanity/project";
@@ -18,6 +17,7 @@ import Construction from "../../components/construction";
 import { zuluTimeToHuman } from "../../lib/date-functions";
 import CategoryTag from "../../components/category-tag";
 import ExternalLinkButton from "../../components/external-link";
+import Heading from "../../components/heading";
 
 interface Props {
   project: Project;
@@ -29,17 +29,17 @@ const ProjectPage = ({ project }: Props): JSX.Element => (
     <Main>
       {project.body ? (
         <>
-          <VStack mt="5" spacing="8">
-            <Heading textAlign="center">{project.title}</Heading>
-            <Box maxW="600px">
+          <div className="flex flex-col mt-5 gap-8">
+            <Heading>{project.title}</Heading>
+            <div className="max-w-xl m-auto">
               <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
                 className={style.reactmarkdown}
               >
                 {project.body}
               </ReactMarkdown>
-            </Box>
-            <Center gap={5} w="100%" flexWrap="wrap" m="auto">
+            </div>
+            <div className="flex w-full justify-center gap-5 flex-wrap m-auto">
               {project.externalLinks &&
                 project.externalLinks.map((externalLink: ExternalLink) => (
                   <ExternalLinkButton
@@ -48,23 +48,25 @@ const ProjectPage = ({ project }: Props): JSX.Element => (
                     link={externalLink.link}
                   />
                 ))}
-            </Center>
-            <Text fontWeight="extrabold">
+            </div>
+            <p className="font-extrabold text-center">
               Last Updated: {zuluTimeToHuman(project._updatedAt)}
-            </Text>
-            <Center flexWrap="wrap" mt="2">
+            </p>
+            <div className="flex-wrap mt-2 flex justify-center">
               {project.categories &&
                 project.categories.map((category: Category) => (
                   <CategoryTag
                     key={category._id}
                     slug={category.slug}
-                    color={category.color ?? "transparent"}
                     emoji={category.emoji ?? ""}
                     title={category.title}
+                    style={{
+                      backgroundColor: category.color + "22" ?? "transparent",
+                    }}
                   />
                 ))}
-            </Center>
-          </VStack>
+            </div>
+          </div>
         </>
       ) : (
         <Construction title={project.title} />

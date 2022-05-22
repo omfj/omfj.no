@@ -1,5 +1,6 @@
 import NextLink from "next/link";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 interface Props {
   source: any;
@@ -11,9 +12,13 @@ const SocialMediaImg = ({ source, href, alt }: Props): JSX.Element => {
   return (
     <NextLink href={href} passHref>
       <a>
-        <div className="w-[125px] h-[125px] m-auto transition-all hover:curosr-pointer hover:scale-110">
+        <motion.div
+          whileHover={{ scale: 1.1 }}
+          transition={{ duration: 0.2, ease: "easeInOut" }}
+          className="w-[125px] h-[125px] m-auto initial hover:curosr-pointer"
+        >
           <Image src={source} alt={alt} />
-        </div>
+        </motion.div>
       </a>
     </NextLink>
   );

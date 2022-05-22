@@ -1,4 +1,4 @@
-import Footer from "./footer";
+// import Footer from "./footer";
 import Header from "./header/header";
 
 interface Props {
@@ -7,7 +7,7 @@ interface Props {
 
 const Layout = ({ children }: Props): JSX.Element => {
   return (
-    <div className="max-h-screen bg-[#070707]">
+    <div className="w-full bg-[#070707]">
       <Header />
       {children}
       {/* <Footer /> */}

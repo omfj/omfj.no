@@ -19,7 +19,7 @@ const NavLinkDesktop = ({ text, to, icon }: Props): JSX.Element => {
             active ? "border-b-white" : "border-transparent"
           } hover:cursor-pointer`}
         >
-          <p className="flex flex-row gap-2 items-center min-w-fit my-2 rounded py-1 px-2 hover:bg-[#333]">
+          <p className="flex flex-row gap-2 text-lg items-center min-w-fit my-2 rounded py-1 px-2 hover:bg-[#333]">
             {icon} {text}
           </p>
         </div>
@@ -39,7 +39,7 @@ const NavLinkMobile = ({ text, to }: Props): JSX.Element => {
           className={`flex ${active ? "underline" : ""} hover:cursor-pointer`}
         >
           <div className="child items-center min-w-fit rounded-md p-2">
-            <p className="text-3xl">{text}</p>
+            <p className="text-3xl hover:underline">{text}</p>
           </div>
         </div>
       </a>

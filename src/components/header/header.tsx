@@ -15,11 +15,9 @@ const Header = () => {
   };
 
   useEffect(() => {
-    if (open) {
-      document.body.style.position = "fixed";
-    } else {
-      document.body.style.position = "static";
-    }
+    open
+      ? (document.body.style.position = "static")
+      : (document.body.style.position = "fixed");
   }, [open]);
 
   return (

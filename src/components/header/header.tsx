@@ -16,8 +16,8 @@ const Header = () => {
 
   useEffect(() => {
     open
-      ? (document.body.style.position = "static")
-      : (document.body.style.position = "fixed");
+      ? (document.body.style.position = "fixed")
+      : (document.body.style.position = "static");
   }, [open]);
 
   return (

@@ -1,4 +1,4 @@
-import { Box, Flex, Text, VStack } from "@chakra-ui/react";
+import { motion } from "framer-motion";
 import NextLink from "next/link";
 import { Category } from "../sanity/types";
 import CategoryTag from "./category-tag";
@@ -10,50 +10,43 @@ interface Props {
   categories: Array<Category>;
 }
 
-const ProjectBox = ({ title, desc, link, categories }: Props): JSX.Element => {
-  return (
-    <Box my="4">
-      <Text
-        fontWeight="bold"
-        fontSize="lg"
-        py="2"
-        px="4"
-        w="fit-content"
-        borderBottom="2px solid white"
-      >
-        {title}
-      </Text>
-      <VStack align="left" borderLeft="2px solid white" py="4" px="3">
-        <Text>{desc}</Text>
-        <Flex flexWrap="wrap" gap="2">
-          {categories.map((category: Category) => (
-            <CategoryTag
-              key={category._id}
-              slug={category.slug}
-              color={category.color ?? "transparent"}
-              emoji={category.emoji ?? ""}
-              title={category.title}
-            />
-          ))}
-        </Flex>
-      </VStack>
-      <Box w="fit-content" _hover={{ bg: "#161616" }}>
-        <NextLink href={"/projects/" + link} passHref>
+const ProjectBox = ({ title, desc, link, categories }: Props): JSX.Element => (
+  <motion.div
+    className="my-4 flex flex-col"
+    initial={{ opacity: 0 }}
+    whileInView={{ opacity: 1 }}
+    transition={{ duration: 0.5 }}
+    viewport={{ once: true }}
+  >
+    <p className="font-bold text-lg py-2 px-4 w-fit border-b-2 border-white">
+      {title}
+    </p>
+    <div className="float-left border-l-2 border-white py-4 px-3">
+      <p>{desc}</p>
+      <div className="flex-wrap flex gap-2">
+        {categories.map((category: Category) => (
+          <CategoryTag
+            key={category._id}
+            slug={category.slug}
+            emoji={category.emoji ?? ""}
+            title={category.title}
+            style={{
+              backgroundColor: category.color + "22" ?? "transparent",
+            }}
+          />
+        ))}
+      </div>
+    </div>
+    <div>
+      <NextLink href={"/projects/" + link} passHref>
+        <div className="border-2 h-fit w-fit p-2 hover:cursor-pointer hover:bg-neutral-800">
           <a>
-            <Box
-              border="2px solid white"
-              w="fit-content"
-              px="3"
-              py="2"
-              _hover={{ cursor: "pointer" }}
-            >
-              <Text>Learn More</Text>
-            </Box>
+            <p>Learn More</p>
           </a>
-        </NextLink>
-      </Box>
-    </Box>
-  );
-};
+        </div>
+      </NextLink>
+    </div>
+  </motion.div>
+);
 
 export default ProjectBox;

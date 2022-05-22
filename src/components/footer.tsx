@@ -1,31 +1,16 @@
-import { Center, Flex, Box, Text, Spacer } from "@chakra-ui/react";
 import { FaGithubSquare, FaLinkedin } from "react-icons/fa";
 import IconLink from "./icon-link";
 
 const Footer = (): JSX.Element => {
   return (
-    <Box bg="#080808" w="100%">
-      <Center
-        bg="inherit"
-        flexDir={["column", "row"]}
-        alignItems="center"
-        maxW="1000px"
-        m="auto"
-        py="5"
-        px="5"
-      >
-        <Text textAlign="center" my={[5, 0]}>
-          Made with ❤️ by Ole Magnus
-        </Text>
+    <div className="w-full">
+      <p className="text-center">Made with ❤️ by Ole Magnus</p>
 
-        <Spacer />
-
-        <Flex alignItems="center">
-          <IconLink icon={FaGithubSquare} link="https://github.com/omfj/" />
-          <IconLink icon={FaLinkedin} link="https://linkedin.com/in/omfj/" />
-        </Flex>
-      </Center>
-    </Box>
+      <div className="items-center">
+        <IconLink icon={FaGithubSquare} link="https://github.com/omfj/" />
+        <IconLink icon={FaLinkedin} link="https://linkedin.com/in/omfj/" />
+      </div>
+    </div>
   );
 };
 

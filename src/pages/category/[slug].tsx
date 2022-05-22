@@ -1,5 +1,4 @@
 import { ParsedUrlQuery } from "querystring";
-import { Text, Heading } from "@chakra-ui/react";
 import { GetStaticPaths, GetStaticProps } from "next";
 import React from "react";
 import { CategoryAPI } from "../../sanity/category";
@@ -11,6 +10,7 @@ import {
 import Main from "../../components/main";
 import SEO from "../../components/SEO";
 import ProjectBox from "../../components/project-box";
+import Heading from "../../components/heading";
 
 interface Props {
   category: ProjectByCategory;
@@ -20,18 +20,10 @@ const CategoryPage = ({ category }: Props): JSX.Element => (
   <>
     <SEO title={"category - " + category.title} />
     <Main>
-      <Heading
-        textAlign="center"
-        m="auto"
-        w="fit-content"
-        p="3"
-        bgColor={category.color + "33"}
-      >
+      <Heading style={{ backgroundColor: category.color + 33 }}>
         {"category - " + category.title}
       </Heading>
-      <Text p="3" mt="3">
-        {category.description}
-      </Text>
+      <p className="p-3 mt-3">{category.description}</p>
       {category.projects.map((project: ProjectOverview) => (
         <ProjectBox
           key={project._id}

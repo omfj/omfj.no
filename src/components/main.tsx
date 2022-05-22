@@ -1,16 +1,12 @@
-import { Box, BoxProps } from "@chakra-ui/react";
+interface Props {
+  children: React.ReactNode;
+}
 
-const Main = (props: BoxProps): JSX.Element => {
+const Main = ({ children }: Props): JSX.Element => {
   return (
-    <Box
-      m="auto"
-      overflow="hidden"
-      maxW="1000px"
-      w="100%"
-      my="10"
-      px="5"
-      {...props}
-    />
+    <div className="m-auto overflow-hidden max-w-[1000px] w-[100%] my-10 px-5">
+      {children}
+    </div>
   );
 };
 

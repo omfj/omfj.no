@@ -1,4 +1,3 @@
-import { Icon } from "@chakra-ui/react";
 import NextLink from "next/link";
 
 interface Props {
@@ -9,9 +8,7 @@ interface Props {
 const IconLink = ({ icon, link }: Props) => {
   return (
     <NextLink href={link} passHref>
-      <a>
-        <Icon as={icon} fontSize="3xl" mx="2" _hover={{ cursor: "pointer" }} />
-      </a>
+      <a>{icon}</a>
     </NextLink>
   );
 };

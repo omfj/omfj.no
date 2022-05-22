@@ -1,6 +1,5 @@
-import { Spacer, Flex } from "@chakra-ui/react";
 import Footer from "./footer";
-import Header from "./header";
+import Header from "./header/header";
 
 interface Props {
   children: React.ReactNode;
@@ -8,12 +7,11 @@ interface Props {
 
 const Layout = ({ children }: Props): JSX.Element => {
   return (
-    <Flex bg="omfj.bg" minH="100vh" color="white" direction="column">
+    <div className="max-h-screen bg-[#070707]">
       <Header />
       {children}
-      <Spacer />
-      <Footer />
-    </Flex>
+      {/* <Footer /> */}
+    </div>
   );
 };
 

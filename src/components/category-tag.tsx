@@ -1,35 +1,24 @@
 import NextLink from "next/link";
-import { Text, Box } from "@chakra-ui/react";
+import { CSSProperties } from "react";
 
 interface Props {
   slug: string;
-  color: string;
   emoji: string;
   title: string;
+  style?: CSSProperties;
 }
 
-const CategoryTag = ({ slug, color, emoji, title }: Props) => {
-  return (
-    <NextLink href={"/category/" + slug} passHref>
-      <a>
-        <Text
-          bg={color + "33"}
-          py="1"
-          px="2"
-          fontSize="0.85rem"
-          borderRadius="10"
-          border="2px solid transparent"
-          w="fit-content"
-          _hover={{
-            cursor: "pointer",
-            borderColor: "#1cc1fcaa",
-          }}
-        >
-          {emoji + " " + title}
-        </Text>
-      </a>
-    </NextLink>
-  );
-};
+const CategoryTag = ({ slug, emoji, title, style }: Props) => (
+  <NextLink href={"/category/" + slug} passHref>
+    <a>
+      <div
+        className="mt-2 py-1 transition-colors items-center px-2 text-md rounded border-2 border-transparent w-fit hover:cursor-pointer hover:border-cyan-200"
+        style={{ ...style }}
+      >
+        <p>{emoji + " " + title}</p>
+      </div>
+    </a>
+  </NextLink>
+);
 
 export default CategoryTag;

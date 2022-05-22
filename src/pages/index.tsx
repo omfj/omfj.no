@@ -1,26 +1,16 @@
 import type { NextPage } from "next";
+import Heading from "../components/heading";
 import Main from "../components/main";
 import SEO from "../components/SEO";
 import t from "../static/english.json";
-import { Text, Center, Heading } from "@chakra-ui/react";
 
 const Home: NextPage = () => {
   return (
     <>
       <SEO title="Ole Magnus" />
       <Main>
-        <Center flexDirection="column" maxW="400px" m="auto">
-          <Heading
-            textAlign="center"
-            fontWeight="extrabold"
-            textDecor="underline"
-          >
-            {t.home.title}
-          </Heading>
-          <Text textAlign="center" fontSize="lg" my="5">
-            {t.home.text}
-          </Text>
-        </Center>
+        <Heading>{t.home.title}</Heading>
+        <p className="text-center text-lg my-10">{t.home.text}</p>
       </Main>
     </>
   );

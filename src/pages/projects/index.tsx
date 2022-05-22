@@ -1,11 +1,11 @@
 import Main from "../../components/main";
 import SEO from "../../components/SEO";
-import { Box, Heading, Text } from "@chakra-ui/react";
 import ProjectBox from "../../components/project-box";
 import t from "../../static/english.json";
 import { ProjectAPI } from "../../sanity/project";
 import { GetStaticProps } from "next";
 import { isErrorMessage, ProjectOverview } from "../../sanity/types";
+import Heading from "../../components/heading";
 
 interface Props {
   projects: Array<ProjectOverview>;
@@ -16,10 +16,8 @@ const ProjectsOverview = ({ projects }: Props): JSX.Element => {
     <>
       <SEO title="projects" />
       <Main>
-        <Heading textAlign="center" fontSize="3xl">
-          {t.projects.title}
-        </Heading>
-        <Box px={["0", "3"]} py="5">
+        <Heading>{t.projects.title}</Heading>
+        <div className="px-0 py-5 md:px-3">
           {projects.map((project: ProjectOverview) => (
             <ProjectBox
               key={project._id}
@@ -29,7 +27,7 @@ const ProjectsOverview = ({ projects }: Props): JSX.Element => {
               categories={project.categories}
             />
           ))}
-        </Box>
+        </div>
       </Main>
     </>
   );

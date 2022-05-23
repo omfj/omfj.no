@@ -14,7 +14,10 @@ const Contact = (): JSX.Element => (
         <p>Feel free to contact me if you have any inquiries.</p>
         <p>
           You can try one of the socials below or send an email to{" "}
-          <a className="text-cyan-600" href="mailto:hei@omfj.no">
+          <a
+            className="text-cyan-600 hover:underline"
+            href="mailto:hei@omfj.no"
+          >
             hei@omfj.no
           </a>
           .

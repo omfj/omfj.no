@@ -16,15 +16,19 @@ const Home: NextPage = () => {
           initial={{ opacity: 0 }}
           className="text-center"
         >
-          <p className="text-lg my-10">
+          <p className="my-10 text-lg">
             My name is Ole Magnus. I am a student at the University of Bergen
             studying computer security.
           </p>
-          <p>
+          <p className="text-lg">
             You can reach me at:{" "}
-            <a className="text-cyan-600" href="mailto:hei@omfj.no">
+            <a
+              className="text-cyan-600 text-lg hover:underline"
+              href="mailto:hei@omfj.no"
+            >
               hei@omfj.no
             </a>
+            .
           </p>
         </motion.div>
       </Main>

@@ -18,8 +18,6 @@ const HeaderLogo = () => {
     <NextLink href="/" passHref>
       <a>
         <motion.p
-          // whileHover={{ scale: 1.05 }}
-
           animate={divAnimationControls}
           onHoverStart={() => {
             if (!isAnimationPlaying) {

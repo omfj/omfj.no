@@ -1,13 +1,5 @@
 {
-    "home": {
-        "title": "Hello, WWW!",
-        "text": "My name is Ole Magnus. I am a student at the University of Bergen studying computer security."
-    },
     "projects": {
         "title": "Projects"
-    },
-    "contact": {
-        "title": "Contact",
-        "text": "Feel free to contact me if you have any inquiries."
     }
 }

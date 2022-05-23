@@ -12,7 +12,7 @@ const CategoryTag = ({ slug, emoji, title, style }: Props) => (
   <NextLink href={"/category/" + slug} passHref>
     <a>
       <div
-        className="mt-2 py-1 transition-colors items-center px-2 text-md rounded border-2 border-transparent w-fit hover:cursor-pointer hover:border-cyan-200"
+        className="mt-2 py-1 transition-colors items-center px-2 text-md rounded border border-transparent w-fit hover:cursor-pointer hover:border-cyan-400"
         style={{ ...style }}
       >
         <p>{emoji + " " + title}</p>

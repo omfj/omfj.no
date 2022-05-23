@@ -12,7 +12,6 @@ import Main from "../../components/main";
 import SEO from "../../components/SEO";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import style from "../../../styles/markdown-styles.module.css";
 import Construction from "../../components/construction";
 import { zuluTimeToHuman } from "../../lib/date-functions";
 import CategoryTag from "../../components/category-tag";
@@ -34,7 +33,7 @@ const ProjectPage = ({ project }: Props): JSX.Element => (
             <div className="max-w-xl m-auto">
               <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
-                className={style.reactmarkdown}
+                className="react-markdown"
               >
                 {project.body}
               </ReactMarkdown>

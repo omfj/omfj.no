@@ -14,16 +14,18 @@ const Home: NextPage = () => {
           animate={{ opacity: 1 }}
           transition={{ ease: "easeOut", duration: 1.5 }}
           initial={{ opacity: 0 }}
-          className="text-center"
+          className="text-center max-w-lg m-auto px-2"
         >
-          <p className="my-10 text-lg">
-            My name is Ole Magnus. I am a student at the University of Bergen
-            studying computer security.
+          <p className="my-10 text-2xl font-extralight">
+            My name is <span className="font-bold">Ole Magnus</span>. I am a
+            student at the{" "}
+            <span className="font-bold">University of Bergen</span> studying
+            computer security.
           </p>
-          <p className="text-lg">
+          <p className="text-xl">
             You can reach me at:{" "}
             <a
-              className="text-cyan-600 text-lg hover:underline"
+              className="text-cyan-600 text-lg font-extrabold hover:underline"
               href="mailto:hei@omfj.no"
             >
               hei@omfj.no

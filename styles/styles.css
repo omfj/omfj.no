@@ -2,23 +2,45 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  font-family: monospace;
-  font-size: large;
-  box-sizing: border-box;
-}
+@layer base {
+  * {
+    @apply box-border;
+  }
 
-html,
-body {
-  padding: 0;
-  margin: 0;
-  color: white;
+  html,
+  body {
+    @apply p-0;
+    @apply m-0;
+    @apply font-sans;
+    @apply font-extralight;
+    @apply text-slate-50;
+  }
+
+  .construction {
+    @apply rounded-lg;
+    @apply border-2;
+    @apply border-black;
+    @apply p-2;
+    @apply text-center;
+  }
+
+  .react-markdown {
+    @apply flex;
+    @apply tracking-wider;
+    @apply flex-col;
+    @apply gap-5;
+    @apply text-xl;
+  }
+
+  .react-markdown a {
+    @apply text-blue-500;
+    @apply underline;
+    @apply hover:text-cyan-200;
+    @apply transition-colors;
+  }
 }
 
 .construction {
-  border-radius: 0.5rem;
-  border: 2px solid black;
-  padding: 0.5rem;
   background: repeating-linear-gradient(
     45deg,
     yellow,

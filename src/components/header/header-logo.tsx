@@ -29,7 +29,7 @@ const HeaderLogo = () => {
             divAnimationControls.start(divAnimationVariants.init);
             setIsAnimationPlaying(false);
           }}
-          className="text-extrabold text-4xl py-3 hover:cursor-pointer"
+          className="text-5xl font-bold font-mono py-3 hover:cursor-pointer"
         >
           omfj.no
         </motion.p>

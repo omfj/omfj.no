@@ -1,7 +1,11 @@
 import HeaderLogo from "./header-logo";
-import { AiFillPhone, AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
+import {
+  AiFillGithub,
+  AiFillPhone,
+  AiOutlineClose,
+  AiOutlineMenu,
+} from "react-icons/ai";
 import { NavLinkDesktop, NavLinkMobile } from "./navlinks";
-import { BiGitBranch } from "react-icons/bi";
 import { FiPackage } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
@@ -21,7 +25,7 @@ const Header = () => {
   }, [open]);
 
   return (
-    <div>
+    <div className="m-auto max-w-7xl">
       <nav className="px-4 md:px-10 md:flex md:justify-between transition-transform">
         <div className="flex justify-between items-center p-4">
           <HeaderLogo />
@@ -42,14 +46,13 @@ const Header = () => {
             to="/projects/"
           />
           <NavLinkDesktop
-            icon={<BiGitBranch />}
-            text="git"
-            to="https://github.com/omfj/"
-          />
-          <NavLinkDesktop
             icon={<AiFillPhone />}
             text="contact"
             to="/contact/"
+          />
+          <NavLinkDesktop
+            icon={<AiFillGithub size={30} />}
+            to="https://github.com/omfj/"
           />
         </div>
         <div
@@ -68,8 +71,8 @@ const Header = () => {
             <div className="mt-5" onClick={() => isOpen(!open)}>
               <NavLinkMobile text="home" to="/" />
               <NavLinkMobile text="projects" to="/projects/" />
-              <NavLinkMobile text="git" to="https://github.com/omfj/" />
-              <NavLinkMobile icon={AiFillPhone} text="contact" to="/contact/" />
+              <NavLinkMobile text="contact" to="/contact/" />
+              <NavLinkMobile text="github" to="https://github.com/omfj/" />
             </div>
           </motion.div>
         </div>

@@ -1,4 +1,5 @@
 import NextLink from "next/link";
+import { motion } from "framer-motion";
 
 interface Props {
   title: string;
@@ -8,9 +9,13 @@ interface Props {
 const ExternalLink = ({ title, link }: Props): JSX.Element => (
   <NextLink href={link} passHref>
     <a>
-      <div className="rounded bg-gray-900 p-2 hover:cursor-pointer hover:bg-gray-800">
-        <p>{title}</p>
-      </div>
+      <motion.div
+        initial={{ scale: 1 }}
+        whileHover={{ scale: 1.1 }}
+        className="rounded-md text-xl border border-slate-50 p-2 hover:cursor-pointer"
+      >
+        <p className="px-2 font-normal">{title}</p>
+      </motion.div>
     </a>
   </NextLink>
 );

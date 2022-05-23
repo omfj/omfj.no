@@ -26,7 +26,7 @@ const Home: NextPage = () => {
             You can reach me at:{" "}
             <a
               className="text-cyan-600 text-lg font-extrabold hover:underline"
-              href="mailto:hei@omfj.no"
+              href="mailto:hei@omfj.no?body=Hei%20Ole%20Magnus!"
             >
               hei@omfj.no
             </a>

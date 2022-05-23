@@ -16,7 +16,7 @@ const Contact = (): JSX.Element => (
           You can try one of the socials below or send an email to{" "}
           <a
             className="text-cyan-600 hover:underline"
-            href="mailto:hei@omfj.no"
+            href="mailto:hei@omfj.no?body=Hei%20Ole%20Magnus!"
           >
             hei@omfj.no
           </a>

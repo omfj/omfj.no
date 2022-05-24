@@ -6,7 +6,7 @@ interface Props {
 }
 
 const ColorModeBtn = ({ isMobile }: Props) => {
-  const [color, setColor] = useState("light");
+  const [color, setColor] = useState("dark");
   const iconSize = isMobile ? 40 : 30;
 
   useEffect(() => {

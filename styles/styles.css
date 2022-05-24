@@ -13,8 +13,8 @@
     @apply m-0;
     @apply font-sans;
     @apply font-extralight;
-    @apply dark:text-slate-50;
     @apply text-stone-900;
+    @apply dark:text-slate-50;
   }
 
   .construction {
@@ -23,6 +23,8 @@
     @apply border-black;
     @apply p-2;
     @apply text-center;
+    @apply w-fit;
+    @apply m-auto;
   }
 
   .react-markdown {

@@ -17,7 +17,7 @@ const ColorModeBtn = ({ isMobile }: Props) => {
 
   return (
     <div
-      className={`w-fit dark:text-gray-400 ${
+      className={`w-fit transition-colors dark:text-gray-400 ${
         isMobile
           ? "text-neutral-900 dark:text-slate-50 p-2"
           : "text-neutral-500"

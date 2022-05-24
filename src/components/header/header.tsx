@@ -34,7 +34,7 @@ const Header = () => {
             {!open && (
               <AiOutlineMenu
                 className="hover:cursor-pointer"
-                size={40}
+                size={35}
                 onClick={() => isOpen(!open)}
               />
             )}
@@ -66,10 +66,10 @@ const Header = () => {
         >
           <motion.div animate={open ? "open" : "closed"} variants={variants}>
             <div className="flex justify-between border-b border-neutral-500 dark:border-neutral-400">
+              <ColorModeBtn isMobile />
               <div className="p-2 hover:cursor-pointer w-fit">
                 <AiOutlineClose size={40} onClick={() => isOpen(!open)} />
               </div>
-              <ColorModeBtn isMobile />
             </div>
 
             <div className="mt-5" onClick={() => isOpen(!open)}>

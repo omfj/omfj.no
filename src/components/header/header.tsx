@@ -9,6 +9,7 @@ import { NavLinkDesktop, NavLinkMobile } from "./navlinks";
 import { FiPackage } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import ColorModeBtn from "../color-mode-btn";
 
 const Header = () => {
   const [open, isOpen] = useState(false);
@@ -50,6 +51,7 @@ const Header = () => {
             text="contact"
             to="/contact/"
           />
+          <ColorModeBtn />
           <NavLinkDesktop
             icon={<AiFillGithub size={30} />}
             to="https://github.com/omfj/"
@@ -58,16 +60,18 @@ const Header = () => {
         <div
           className={
             open
-              ? `fixed block z-50 top-0 right-0 bottom-0 left-0 h-full w-full p-14 bg-[#070707] md:hidden`
+              ? `fixed block z-50 top-0 right-0 bottom-0 left-0 h-full w-full p-14 bg-slate-50 dark:bg-[#070707] md:hidden`
               : "hidden"
           }
         >
           <motion.div animate={open ? "open" : "closed"} variants={variants}>
-            <AiOutlineClose
-              className="hover:cursor-pointer"
-              size={40}
-              onClick={() => isOpen(!open)}
-            />
+            <div className="flex justify-between border-b border-neutral-500 dark:border-neutral-400">
+              <div className="p-2 hover:cursor-pointer w-fit">
+                <AiOutlineClose size={40} onClick={() => isOpen(!open)} />
+              </div>
+              <ColorModeBtn isMobile />
+            </div>
+
             <div className="mt-5" onClick={() => isOpen(!open)}>
               <NavLinkMobile text="home" to="/" />
               <NavLinkMobile text="projects" to="/projects/" />

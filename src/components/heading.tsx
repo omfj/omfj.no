@@ -6,7 +6,10 @@ interface Props {
 }
 
 const Heading = ({ style, children }: Props) => (
-  <h1 className={"font-bold text-center text-5xl p-2"} style={{ ...style }}>
+  <h1
+    className={"font-bold text-center text-3xl md:text-4xl p-2"}
+    style={{ ...style }}
+  >
     {children}
   </h1>
 );

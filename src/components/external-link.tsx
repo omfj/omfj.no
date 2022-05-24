@@ -12,7 +12,7 @@ const ExternalLink = ({ title, link }: Props): JSX.Element => (
       <motion.div
         initial={{ scale: 1 }}
         whileHover={{ scale: 1.1 }}
-        className="rounded-md text-xl border border-slate-50 p-2 hover:cursor-pointer"
+        className="rounded-md text-xl border border-black dark:border-slate-50 p-2 hover:cursor-pointer"
       >
         <p className="px-2 font-normal">{title}</p>
       </motion.div>

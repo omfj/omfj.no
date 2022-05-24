@@ -20,7 +20,7 @@ const NavLinkDesktop = ({ text, to, icon }: Props): JSX.Element => {
           } hover:cursor-pointer`}
         >
           <p
-            className={`flex flex-row gap-2 text-2xl items-center min-w-fit my-2 rounded py-1 px-2 text-gray-400 transition-colors hover:text-slate-50 ${
+            className={`flex flex-row gap-2 text-2xl items-center min-w-fit my-2 rounded py-1 px-2 transition-colors dark:text-gray-400 text-neutral-500 hover:text-neutral-900 dark:hover:text-slate-50 ${
               active && "text-slate-50"
             } `}
           >

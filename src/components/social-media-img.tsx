@@ -15,7 +15,7 @@ const SocialMediaImg = ({ source, href, alt }: Props): JSX.Element => {
         <motion.div
           whileHover={{ scale: 1.1 }}
           transition={{ duration: 0.2, ease: "easeInOut" }}
-          className="w-[125px] h-[125px] m-auto initial hover:curosr-pointer"
+          className="w-[125px] h-[125px] m-auto initial invert dark:invert-0 hover:curosr-pointer"
         >
           <Image src={source} alt={alt} />
         </motion.div>

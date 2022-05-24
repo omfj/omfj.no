@@ -13,7 +13,8 @@
     @apply m-0;
     @apply font-sans;
     @apply font-extralight;
-    @apply text-slate-50;
+    @apply dark:text-slate-50;
+    @apply text-stone-900;
   }
 
   .construction {

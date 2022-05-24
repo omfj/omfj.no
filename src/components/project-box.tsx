@@ -18,10 +18,10 @@ const ProjectBox = ({ title, desc, link, categories }: Props): JSX.Element => (
     transition={{ duration: 0.5 }}
     viewport={{ once: true }}
   >
-    <p className="font-bold text-2xl py-2 px-4 w-fit border-b-2 border-slate-50">
+    <p className="font-bold text-2xl py-2 px-4 w-fit border-b-2 dark:border-slate-50">
       {title}
     </p>
-    <div className="float-left text-xl border-l-2 border-slate-50 py-4 px-3">
+    <div className="float-left text-xl border-l-2 dark:border-slate-50 py-4 px-3">
       <p>{desc}</p>
       <div className="flex-wrap flex gap-2 my-2">
         {categories.map((category: Category) => (
@@ -39,7 +39,7 @@ const ProjectBox = ({ title, desc, link, categories }: Props): JSX.Element => (
     </div>
     <div>
       <NextLink href={"/projects/" + link} passHref>
-        <div className="text-xl border-2 h-fit w-fit p-3 hover:cursor-pointer transition-colors hover:bg-neutral-800">
+        <div className="text-xl border-2 h-fit w-fit p-3 hover:cursor-pointer transition-colors hover:bg-neutral-200 dark:hover:bg-neutral-800">
           <a>
             <p>Learn More</p>
           </a>

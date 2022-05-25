@@ -18,7 +18,7 @@ const Contact = (): JSX.Element => (
             className="text-cyan-600 hover:underline"
             href="mailto:hei@omfj.no?body=Hei%20Ole%20Magnus!"
           >
-            hei@omfj.no
+            <b>hei@omfj.no</b>
           </a>
           .
         </p>

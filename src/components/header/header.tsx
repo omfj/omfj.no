@@ -9,7 +9,7 @@ import { NavLinkDesktop, NavLinkMobile } from "./navlinks";
 import { FiPackage } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import ColorModeBtn from "../color-mode-btn";
+import ColorModeBtn from "./color-mode-btn";
 
 const Header = () => {
   const [open, isOpen] = useState(false);
@@ -26,15 +26,15 @@ const Header = () => {
   }, [open]);
 
   return (
-    <div className="m-auto max-w-7xl">
-      <nav className="px-4 md:px-10 md:flex md:justify-between transition-transform">
+    <div>
+      <nav className="px-4 m-auto max-w-7xl md:px-10 md:flex md:justify-between transition-transform">
         <div className="flex justify-between items-center p-4">
           <HeaderLogo />
-          <div className="md:hidden pt-2">
+          <div>
             {!open && (
               <AiOutlineMenu
-                className="hover:cursor-pointer"
-                size={35}
+                className="md:hidden pt-2 hover:cursor-pointer"
+                size={45}
                 onClick={() => isOpen(!open)}
               />
             )}
@@ -67,7 +67,7 @@ const Header = () => {
               : "hidden"
           }
         >
-          <div className="flex justify-between border-b border-neutral-500 dark:border-neutral-400">
+          <div className="flex justify-between border-b pb-3 border-neutral-500 dark:border-neutral-400">
             <ColorModeBtn isMobile />
             <div className="p-2 hover:cursor-pointer w-fit">
               <AiOutlineClose size={40} onClick={() => isOpen(!open)} />

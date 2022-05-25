@@ -17,18 +17,16 @@ const Home: NextPage = () => {
           className="text-center max-w-lg m-auto px-2"
         >
           <p className="my-10 text-2xl font-extralight">
-            My name is <span className="font-bold">Ole Magnus</span>. I am a
-            student at the{" "}
-            <span className="font-bold">University of Bergen</span> studying
-            computer security.
+            My name is <b>Ole Magnus</b>. I am a student at the{" "}
+            <b>University of Bergen</b> studying computer security.
           </p>
           <p className="text-xl">
             You can reach me at:{" "}
             <a
-              className="text-cyan-600 text-lg font-extrabold hover:underline"
+              className="text-cyan-600 text-lg hover:underline"
               href="mailto:hei@omfj.no?body=Hei%20Ole%20Magnus!"
             >
-              hei@omfj.no
+              <b>hei@omfj.no</b>
             </a>
             .
           </p>

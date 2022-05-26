@@ -19,6 +19,7 @@
 .DS_Store
 .vscode/
 *.pem
+yarn.lock
 
 # debug
 npm-debug.log*

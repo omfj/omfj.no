@@ -5,7 +5,7 @@ import {
   AiOutlineClose,
   AiOutlineMenu,
 } from "react-icons/ai";
-import { NavLinkDesktop, NavLinkMobile } from "./navlinks";
+import { NavLinkDesktop, NavLinkMobile, IconLink } from "./navlinks";
 import { FiPackage } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
@@ -52,7 +52,7 @@ const Header = () => {
             to="/contact/"
           />
           <ColorModeBtn />
-          <NavLinkDesktop
+          <IconLink
             icon={<AiFillGithub size={30} />}
             to="https://github.com/omfj/"
           />
@@ -69,6 +69,11 @@ const Header = () => {
         >
           <div className="flex justify-between border-b pb-3 border-neutral-500 dark:border-neutral-400">
             <ColorModeBtn isMobile />
+            <IconLink
+              icon={<AiFillGithub size={40} />}
+              to="https://github.com/omfj"
+              isMobile
+            />
             <div className="p-2 hover:cursor-pointer w-fit">
               <AiOutlineClose size={40} onClick={() => isOpen(!open)} />
             </div>
@@ -88,12 +93,6 @@ const Header = () => {
                 open={open}
                 text="contact"
                 to="/contact/"
-              />
-              <NavLinkMobile
-                isOpen={isOpen}
-                open={open}
-                text="github"
-                to="https://github.com/omfj/"
               />
             </div>
           </motion.div>

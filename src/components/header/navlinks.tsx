@@ -74,4 +74,26 @@ const NavLinkMobile = ({
   );
 };
 
-export { NavLinkDesktop, NavLinkMobile };
+interface IconLinkProps {
+  to: string;
+  icon: any;
+  isMobile?: boolean;
+}
+
+const IconLink = ({ to, icon, isMobile }: IconLinkProps) => (
+  <NextLink href={to} passHref>
+    <a>
+      <div
+        className={`w-fit transition-colors dark:text-gray-400 ${
+          isMobile
+            ? "text-neutral-900 dark:text-slate-50 p-2"
+            : "text-neutral-500"
+        } hover:text-neutral-900 dark:hover:text-slate-50 hover:cursor-pointer`}
+      >
+        {icon}
+      </div>
+    </a>
+  </NextLink>
+);
+
+export { NavLinkDesktop, NavLinkMobile, IconLink };

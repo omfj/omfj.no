@@ -20,9 +20,10 @@ const Header = () => {
   };
 
   useEffect(() => {
-    open
-      ? (document.body.style.position = "fixed")
-      : (document.body.style.position = "static");
+    document.body.classList.toggle("overflow-hidden", open);
+    // open
+    //   ? (document.body.style.position = "fixed")
+    //   : (document.body.style.position = "static");
   }, [open]);
 
   return (
@@ -57,13 +58,16 @@ const Header = () => {
             to="https://github.com/omfj/"
           />
         </div>
+
+        {/* Navigation drawer modal */}
+
         <motion.div
           exit={{ opacity: 0 }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           className={
             open
-              ? `fixed block z-50 top-0 right-0 bottom-0 left-0 h-full w-full p-14 bg-slate-50 dark:bg-[#070707] md:hidden`
+              ? `fixed z-50 top-0 right-0 bottom-0 m-0 left-0 h-screen w-full p-10 bg-slate-50 dark:bg-[#070707]`
               : "hidden"
           }
         >

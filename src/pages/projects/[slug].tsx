@@ -1,5 +1,5 @@
 import { ParsedUrlQuery } from "querystring";
-import { GetStaticPaths, GetStaticProps } from "next";
+import { GetStaticProps } from "next";
 import React from "react";
 import { ProjectAPI } from "../../sanity/project";
 import {
@@ -23,58 +23,59 @@ interface Props {
 }
 
 const ProjectPage = ({ project }: Props): JSX.Element => (
-  <>
-    <SEO title={"project - " + project.title} />
-    <Main>
-      {project.body ? (
-        <>
-          <div className="flex flex-col mt-5 gap-8">
-            <Heading>{project.title}</Heading>
-            <div className="max-w-xl m-auto">
-              <ReactMarkdown
-                remarkPlugins={[remarkGfm]}
-                className="react-markdown"
-              >
-                {project.body}
-              </ReactMarkdown>
-            </div>
-            <div className="flex w-full justify-center gap-5 flex-wrap m-auto">
-              {project.externalLinks &&
-                project.externalLinks.map((externalLink: ExternalLink) => (
-                  <ExternalLinkButton
-                    key={externalLink._key}
-                    title={externalLink.title}
-                    link={externalLink.link}
-                  />
-                ))}
-            </div>
-            <p className="font-extrabold text-center">
-              Last Updated: {zuluTimeToHuman(project._updatedAt)}
-            </p>
-            <div className="flex-wrap mt-2 flex justify-center gap-5">
-              {project.categories &&
-                project.categories.map((category: Category) => (
-                  <CategoryTag
-                    key={category._id}
-                    slug={category.slug}
-                    emoji={category.emoji ?? ""}
-                    title={category.title}
-                    style={{
-                      backgroundColor: category.color + "22" ?? "transparent",
-                    }}
-                  />
-                ))}
-            </div>
+  <Main>
+    {project.body ? (
+      <>
+        <SEO
+          title={"project - " + project.title}
+          author={`${project.author.name} <${project.author.email}>`}
+        />
+        <div className="flex flex-col mt-5 gap-8">
+          <Heading>{project.title}</Heading>
+          <div className="max-w-xl m-auto">
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              className="react-markdown"
+            >
+              {project.body}
+            </ReactMarkdown>
           </div>
-        </>
-      ) : (
-        <Construction title={project.title} />
-      )}
-    </Main>
-  </>
+          <div className="flex w-full justify-center gap-5 flex-wrap m-auto">
+            {project.externalLinks &&
+              project.externalLinks.map((externalLink: ExternalLink) => (
+                <ExternalLinkButton
+                  key={externalLink._key}
+                  title={externalLink.title}
+                  link={externalLink.link}
+                />
+              ))}
+          </div>
+          <p className="font-extrabold text-center">
+            Last Updated: {zuluTimeToHuman(project._updatedAt)}
+          </p>
+          <div className="flex-wrap mt-2 flex justify-center gap-5">
+            {project.categories &&
+              project.categories.map((category: Category) => (
+                <CategoryTag
+                  key={category._id}
+                  slug={category.slug}
+                  emoji={category.emoji ?? ""}
+                  title={category.title}
+                  style={{
+                    backgroundColor: category.color + "22" ?? "transparent",
+                  }}
+                />
+              ))}
+          </div>
+        </div>
+      </>
+    ) : (
+      <Construction title={project.title} />
+    )}
+  </Main>
 );
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths = async () => {
   const paths = await ProjectAPI.getPaths();
   return {
     paths: paths.map((slug: string) => ({
@@ -103,12 +104,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
     throw new Error(project.message);
   }
 
-  const props: Props = {
-    project,
-  };
-
   return {
-    props,
+    props: {
+      project,
+    },
   };
 };
 

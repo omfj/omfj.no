@@ -28,8 +28,8 @@ const authorDecoder = record({
     _id: string,
     name: string,
     slug: string,
-    bio: string,
-    imageUrl: union(string, nil),
+    email: string,
+    imageUrl: string,
 })
 
 // Decodes post
@@ -48,6 +48,7 @@ const projectDecoder = record({
     slug: string,
     title: string,
     description: string,
+    author: authorDecoder,
     body: union(string, nil),
     categories: array(categoryDecoder),
     externalLinks: union(array(externalLinkDecoder), nil),

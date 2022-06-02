@@ -2,14 +2,19 @@ import Head from "next/head";
 
 interface Props {
   title: string;
+  author?: string;
   desc?: string;
 }
 
-const SEO = ({ title, desc }: Props): JSX.Element => {
+const SEO = ({ title, author, desc }: Props): JSX.Element => {
   return (
     <Head>
       <title>{title}</title>
-      <meta name="description" content={desc ? desc : "omfj.no"} />
+      <meta
+        name="author"
+        content={author ?? "Ole Magnus Fon Johnsen <hei@omfj.no>"}
+      />
+      <meta name="description" content={desc ?? "omfj.no"} />
     </Head>
   );
 };

@@ -14,7 +14,8 @@ const Error = (): JSX.Element => {
           <Heading>The page does not exist.</Heading>
           <NextLink href="/" passHref>
             <a>
-              <div className="relative w-[200px] h-[200px] overflow-hidden">
+              <p className="text-3xl">Error 404</p>
+              <div className="relative w-[200px] h-[200px] overflow-hidden m-auto">
                 <Image
                   src={Emoji}
                   alt="Emoji thinking"
@@ -24,7 +25,6 @@ const Error = (): JSX.Element => {
               </div>
             </a>
           </NextLink>
-          <p className="text-3xl">Error 404</p>
         </div>
       </Main>
     </>

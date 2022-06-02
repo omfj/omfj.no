@@ -95,6 +95,13 @@ const ProjectAPI = {
                     title,
                     body,
                     description,
+                    "author": author -> {
+                        _id,
+                        name,
+                        email,
+                        "slug": slug.current,
+                        "imageUrl": image.asset -> url
+                    },
                     categories[] -> {
                         _id,
                         "color": color.hex,

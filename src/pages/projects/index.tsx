@@ -16,17 +16,28 @@ const ProjectsOverview = ({ projects }: Props): JSX.Element => {
     <>
       <SEO title="projects" />
       <Main>
-        <Heading>{t.projects.title}</Heading>
         <div className="px-0 py-5 md:px-3">
-          {projects.map((project: ProjectOverview) => (
-            <ProjectBox
-              key={project._id}
-              title={project.title}
-              desc={project.description}
-              link={project.slug}
-              categories={project.categories}
-            />
-          ))}
+          {projects.length > 0 ? (
+            <>
+              <Heading>{t.projects.title}</Heading>
+              {projects.map((project: ProjectOverview) => (
+                <ProjectBox
+                  key={project._id}
+                  title={project.title}
+                  desc={project.description}
+                  link={project.slug}
+                  categories={project.categories}
+                />
+              ))}
+            </>
+          ) : (
+            <div className="flex flex-col gap-10 text-center">
+              <h1 className="font-bold text-4xl">
+                Something wrong has happened!
+              </h1>
+              <p className="text-2xl">Cannot load projects</p>
+            </div>
+          )}
         </div>
       </Main>
     </>

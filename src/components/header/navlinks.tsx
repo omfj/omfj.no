@@ -60,7 +60,7 @@ const NavLinkMobile = ({
       <a
         className={`${
           active && "underline"
-        } w-fit flex text-5xl items-center min-w-fit rounded-md p-2 hover:underline  hover:cursor-pointer`}
+        } w-fit flex text-6xl items-center min-w-fit rounded-md p-2 hover:underline  hover:cursor-pointer`}
         onClick={() => void isOpen(!open)}
       >
         {text}

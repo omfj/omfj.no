@@ -67,7 +67,7 @@ const Header = () => {
           animate={{ opacity: 1 }}
           className={
             open
-              ? `md:hidden fixed z-50 top-0 right-0 bottom-0 m-0 left-0 h-screen w-full py-10 px-5 bg-slate-50 dark:bg-[#070707]`
+              ? `md:hidden fixed z-50 top-0 right-0 bottom-0 m-0 left-0 h-screen w-full py-4 px-5 bg-slate-50 dark:bg-[#151515]`
               : "hidden"
           }
         >

@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 @layer base {
+  @font-face {
+    font-family: "Comfortaa";
+    src: url("../public/fonts/Comfortaa/Comfortaa-VariableFont_wght.ttf");
+  }
+
   * {
     @apply box-border;
   }

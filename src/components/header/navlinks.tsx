@@ -57,18 +57,13 @@ const NavLinkMobile = ({
 
   return (
     <NextLink href={to} passHref>
-      <a className="w-fit flex" onClick={() => void isOpen(!open)}>
-        <div className="hover:cursor-pointer">
-          <div className="items-center min-w-fit rounded-md p-2">
-            <p
-              className={`text-5xl hover:underline ${
-                active ? "underline" : ""
-              }`}
-            >
-              {text}
-            </p>
-          </div>
-        </div>
+      <a
+        className={`${
+          active && "underline"
+        } w-fit flex text-5xl items-center min-w-fit rounded-md p-2 hover:underline  hover:cursor-pointer`}
+        onClick={() => void isOpen(!open)}
+      >
+        {text}
       </a>
     </NextLink>
   );

@@ -67,7 +67,7 @@ const Header = () => {
           animate={{ opacity: 1 }}
           className={
             open
-              ? `fixed z-50 top-0 right-0 bottom-0 m-0 left-0 h-screen w-full p-10 bg-slate-50 dark:bg-[#070707]`
+              ? `md:hidden fixed z-50 top-0 right-0 bottom-0 m-0 left-0 h-screen w-full py-10 px-5 bg-slate-50 dark:bg-[#070707]`
               : "hidden"
           }
         >
@@ -83,22 +83,24 @@ const Header = () => {
             </div>
           </div>
 
-          <motion.div animate={open ? "open" : "closed"} variants={variants}>
-            <div className="mt-5">
-              <NavLinkMobile isOpen={isOpen} open={open} text="home" to="/" />
-              <NavLinkMobile
-                isOpen={isOpen}
-                open={open}
-                text="projects"
-                to="/projects/"
-              />
-              <NavLinkMobile
-                isOpen={isOpen}
-                open={open}
-                text="contact"
-                to="/contact/"
-              />
-            </div>
+          <motion.div
+            className="mt-5 items-end flex flex-col"
+            animate={open ? "open" : "closed"}
+            variants={variants}
+          >
+            <NavLinkMobile isOpen={isOpen} open={open} text="home" to="/" />
+            <NavLinkMobile
+              isOpen={isOpen}
+              open={open}
+              text="projects"
+              to="/projects/"
+            />
+            <NavLinkMobile
+              isOpen={isOpen}
+              open={open}
+              text="contact"
+              to="/contact/"
+            />
           </motion.div>
         </motion.div>
       </nav>

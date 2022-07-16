@@ -21,9 +21,6 @@ const Header = () => {
 
   useEffect(() => {
     document.body.classList.toggle("overflow-hidden", open);
-    // open
-    //   ? (document.body.style.position = "fixed")
-    //   : (document.body.style.position = "static");
   }, [open]);
 
   return (

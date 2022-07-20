@@ -46,7 +46,7 @@ const ProjectPage = ({ project }: Props): JSX.Element => (
                 <ExternalLinkButton
                   key={externalLink._key}
                   title={externalLink.title}
-                  to={externalLink.link}
+                  link={externalLink.link}
                 />
               ))}
           </div>

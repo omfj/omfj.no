@@ -1,5 +1,12 @@
 import { decodeType } from "typescript-json-decoder";
-import { categoryDecoder, postDecoder, projectDecoder, projectByCategoryDecoder, externalLinkDecoder, projectOverviewDecoder } from "./decoders";
+import {
+  categoryDecoder,
+  postDecoder,
+  projectDecoder,
+  projectByCategoryDecoder,
+  externalLinkDecoder,
+  projectOverviewDecoder,
+} from "./decoders";
 
 type Project = decodeType<typeof projectDecoder>;
 type Category = decodeType<typeof categoryDecoder>;
@@ -9,13 +16,20 @@ type ProjectOverview = decodeType<typeof projectOverviewDecoder>;
 type ExternalLink = decodeType<typeof externalLinkDecoder>;
 
 interface ErrorMessage {
-    message: string;
+  message: string;
 }
 
 const isErrorMessage = (object: any): object is ErrorMessage => {
-    return 'message' in object;
+  return "message" in object;
 };
 
-
-export type { ErrorMessage, Project, Category, Post, ProjectByCategory, ProjectOverview, ExternalLink }
-export { isErrorMessage }
+export type {
+  ErrorMessage,
+  Project,
+  Category,
+  Post,
+  ProjectByCategory,
+  ProjectOverview,
+  ExternalLink,
+};
+export { isErrorMessage };

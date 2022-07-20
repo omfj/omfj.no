@@ -1,10 +1,10 @@
 import { format, parseISO } from "date-fns";
 
 const zuluTimeToHuman = (fromDate: string) => {
-    const date = parseISO(fromDate);
-    const formattedTime = format(date, "MM-dd");
+  const date = parseISO(fromDate);
+  const formattedTime = format(date, "MM-dd");
 
-    return formattedTime;
-}
+  return formattedTime;
+};
 
-export { zuluTimeToHuman }
+export { zuluTimeToHuman };

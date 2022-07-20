@@ -18,7 +18,7 @@ const Home: NextPage = () => {
         >
           <p className="my-10 text-2xl font-extralight">
             My name is <b>Ole Magnus</b>. I am a student at the{" "}
-            <b>University of Bergen</b> studying computer security.
+            <b>University of Bergen</b> studying computer technology.
           </p>
           <p className="text-xl">
             You can reach me at:{" "}

@@ -11,7 +11,7 @@ const ProjectAPI = {
   getProjects: async (): Promise<Array<Project> | ErrorMessage> => {
     try {
       const query = `
-                *[_type == "project"] | order(title) {
+                *[_type == "project"] {
                     _id,
                     _updatedAt,
                     "slug": slug.current,
@@ -66,8 +66,9 @@ const ProjectAPI = {
   > => {
     try {
       const query = `
-                *[_type == "project"] | order(_updatedAt) {
+                *[_type == "project"] | order(_updatedAt desc) {
                     _id,
+                    _updatedAt,
                     "slug": slug.current,
                     title,
                     body,

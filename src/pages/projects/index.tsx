@@ -6,7 +6,7 @@ import { ProjectAPI } from "../../sanity/project";
 import { GetStaticProps } from "next";
 import { isErrorMessage, ProjectOverview } from "../../sanity/types";
 import Heading from "../../components/heading";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 interface Props {
   projects: Array<ProjectOverview>;

@@ -66,8 +66,9 @@ const ProjectAPI = {
   > => {
     try {
       const query = `
-                *[_type == "project"] | order(_updatedAt desc) {
+                *[_type == "project"] {
                     _id,
+                    _createdAt,
                     _updatedAt,
                     "slug": slug.current,
                     title,

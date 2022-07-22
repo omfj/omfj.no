@@ -13,7 +13,7 @@ import SEO from "../../components/SEO";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import Construction from "../../components/construction";
-import { zuluTimeToHuman } from "../../lib/date-functions";
+import { zuluTimeToHuman } from "../../utils/date-functions";
 import CategoryTag from "../../components/category-tag";
 import ExternalLinkButton from "../../components/external-link";
 import Heading from "../../components/heading";

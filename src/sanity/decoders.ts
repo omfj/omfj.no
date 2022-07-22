@@ -51,6 +51,8 @@ const projectDecoder = record({
 // Decodes overview of projects
 const projectOverviewDecoder = record({
   _id: string,
+  _createdAt: string,
+  _updatedAt: string,
   title: string,
   description: string,
   slug: string,

@@ -13,8 +13,8 @@ interface Props {
 const ProjectBox = ({ title, desc, link, categories }: Props): JSX.Element => (
   <motion.div
     className="my-10 max-w-xl m-auto flex flex-col"
-    initial={{ opacity: 0 }}
-    whileInView={{ opacity: 1 }}
+    initial={{ opacity: 0, y: 100 }}
+    whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
     viewport={{ once: true }}
   >

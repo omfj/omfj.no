@@ -49,11 +49,11 @@ export const getStaticProps: GetStaticProps = async () => {
 
   if (isErrorMessage(projects)) throw new Error(projects.message);
 
-  const props: Props = {
-    projects,
+  return {
+    props: {
+      projects,
+    },
   };
-
-  return { props };
 };
 
 export default ProjectsOverview;

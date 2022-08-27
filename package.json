@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@sanity/client": "3.3.3",
+    "@sanity/client": "3.3.5",
     "date-fns": "2.29.2",
     "framer-motion": "7.2.0",
     "next": "12.2.5",

@@ -12,7 +12,7 @@ interface Props {
 
 const ProjectBox = ({ title, desc, link, categories }: Props): JSX.Element => (
   <motion.div
-    className="my-10 max-w-xl m-auto flex flex-col"
+    className="my-10 max-w-3xl m-auto flex flex-col"
     initial={{ opacity: 0, y: 100 }}
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
@@ -22,7 +22,7 @@ const ProjectBox = ({ title, desc, link, categories }: Props): JSX.Element => (
       {title}
     </p>
     <div className="float-left text-xl border-l-2 dark:border-slate-50 py-4 px-3">
-      <p>{desc}</p>
+      <p className="py-2">{desc}</p>
       <div className="flex-wrap flex gap-2 my-2">
         {categories.map((category: Category) => (
           <CategoryTag
@@ -30,9 +30,7 @@ const ProjectBox = ({ title, desc, link, categories }: Props): JSX.Element => (
             slug={category.slug}
             emoji={category.emoji ?? ""}
             title={category.title}
-            style={{
-              backgroundColor: category.color + "22" ?? "transparent",
-            }}
+            color={category.color ?? ""}
           />
         ))}
       </div>
@@ -41,7 +39,7 @@ const ProjectBox = ({ title, desc, link, categories }: Props): JSX.Element => (
       <NextLink href={"/projects/" + link} passHref>
         <div className="text-xl border-2 h-fit w-fit p-3 hover:cursor-pointer transition-colors hover:bg-neutral-200 dark:hover:bg-neutral-800">
           <a>
-            <p>Learn More</p>
+            <p>Read more</p>
           </a>
         </div>
       </NextLink>

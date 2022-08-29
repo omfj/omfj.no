@@ -8,13 +8,18 @@
     src: url("../public/fonts/Comfortaa/Comfortaa-VariableFont_wght.ttf");
   }
 
+  @font-face {
+    font-family: "JetBrainsMono";
+    src: url("../public/fonts/JetBrainsMono/JetBrainsMono-Regular.ttf");
+  }
+
   * {
     @apply box-border;
   }
 
   html,
   body {
-    @apply p-0 m-0 font-sans font-extralight text-stone-900 dark:text-slate-50;
+    @apply p-0 m-0 font-mono text-stone-900 dark:text-slate-50;
   }
 
   .construction {

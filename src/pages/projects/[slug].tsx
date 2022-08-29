@@ -30,9 +30,9 @@ const ProjectPage = ({ project }: Props): JSX.Element => (
           title={"project - " + project.title}
           author={`${project.author.name} <${project.author.email}>`}
         />
-        <div className="flex flex-col mt-5 gap-8">
+        <div className="flex flex-col mt-5 mb-10 gap-8">
           <Heading>{project.title}</Heading>
-          <div className="max-w-xl m-auto">
+          <div className="max-w-2xl m-auto">
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               className="react-markdown"
@@ -61,9 +61,7 @@ const ProjectPage = ({ project }: Props): JSX.Element => (
                   slug={category.slug}
                   emoji={category.emoji ?? ""}
                   title={category.title}
-                  style={{
-                    backgroundColor: category.color + "22" ?? "transparent",
-                  }}
+                  color={category.color ?? ""}
                 />
               ))}
           </div>

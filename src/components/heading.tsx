@@ -1,15 +1,10 @@
-import { CSSProperties } from "react";
-
 interface Props {
   children: React.ReactNode;
-  style?: CSSProperties;
+  className?: string;
 }
 
-const Heading = ({ style, children }: Props) => (
-  <h1
-    className={"font-bold text-center text-3xl md:text-4xl p-2"}
-    style={{ ...style }}
-  >
+const Heading = ({ children, className }: Props) => (
+  <h1 className={`font-bold text-center text-3xl md:text-4xl p-2 ${className}`}>
     {children}
   </h1>
 );

@@ -1,12 +1,6 @@
 import HeaderLogo from "./header-logo";
-import {
-  AiFillGithub,
-  AiFillPhone,
-  AiOutlineClose,
-  AiOutlineMenu,
-} from "react-icons/ai";
-import { NavLinkDesktop, NavLinkMobile, IconLink } from "./navlinks";
-import { FiPackage } from "react-icons/fi";
+import { AiFillGithub, AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
+import { NavLinkMobile, IconLink, NavLinkDesktop } from "./navlinks";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import ColorModeBtn from "./color-mode-btn";
@@ -21,9 +15,6 @@ const Header = () => {
 
   useEffect(() => {
     document.body.classList.toggle("overflow-hidden", open);
-    // open
-    //   ? (document.body.style.position = "fixed")
-    //   : (document.body.style.position = "static");
   }, [open]);
 
   return (
@@ -42,16 +33,8 @@ const Header = () => {
           </div>
         </div>
         <div className="hidden md:flex items-center gap-5">
-          <NavLinkDesktop
-            icon={<FiPackage />}
-            text="projects"
-            to="/projects/"
-          />
-          <NavLinkDesktop
-            icon={<AiFillPhone />}
-            text="contact"
-            to="/contact/"
-          />
+          <NavLinkDesktop text="projects" to="/projects/" />
+          <NavLinkDesktop text="contact" to="/contact/" />
           <ColorModeBtn />
           <IconLink
             icon={<AiFillGithub size={30} />}

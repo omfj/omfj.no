@@ -1,26 +1,23 @@
-import NextLink from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
 interface Props {
-  source: any;
-  href: string;
+  src: any;
+  to: string;
   alt: string;
 }
 
-const SocialMediaImg = ({ source, href, alt }: Props): JSX.Element => {
+const SocialMediaImg = ({ src, to, alt }: Props): JSX.Element => {
   return (
-    <NextLink href={href} passHref>
-      <a>
-        <motion.div
-          whileHover={{ scale: 1.1 }}
-          transition={{ duration: 0.2, ease: "easeInOut" }}
-          className="w-[125px] h-[125px] m-auto initial invert dark:invert-0 hover:curosr-pointer"
-        >
-          <Image src={source} alt={alt} />
-        </motion.div>
-      </a>
-    </NextLink>
+    <a href={to} target="_blank" rel="noreferrer">
+      <motion.div
+        className={
+          "w-[125px] h-[125px] m-auto initial invert bg-[#222] hover:curosr-pointer"
+        }
+      >
+        <Image src={src} alt={alt} />
+      </motion.div>
+    </a>
   );
 };
 

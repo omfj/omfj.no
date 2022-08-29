@@ -8,6 +8,7 @@ module.exports = {
     fontFamily: {
       comfortaa: ["Comfortaa"],
       sans: ["ui-sans-serif", "system-ui"],
+      mono: ["JetBrainsMono", "monospace"],
     },
     extend: {},
   },

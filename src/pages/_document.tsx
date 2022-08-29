@@ -11,6 +11,12 @@ const Document = () => {
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta name="theme-color" content="#ffffff" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta
+          name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent"
+        />
+
         <link
           rel="apple-touch-icon"
           sizes="180x180"

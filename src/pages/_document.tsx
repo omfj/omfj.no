@@ -1,6 +1,12 @@
 import { Html, Head, Main, NextScript } from "next/document";
+import { useEffect, useState } from "react";
 
 const Document = () => {
+  const [darkMode, setDarkMode] = useState<boolean | undefined>(undefined);
+  useEffect(() => {
+    setDarkMode(document.documentElement.classList.contains("dark"));
+  });
+
   return (
     <Html>
       <Head>
@@ -10,12 +16,8 @@ const Document = () => {
         />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="msapplication-TileColor" content="#ffffff" />
-        <meta name="theme-color" content="#ffffff" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta
-          name="apple-mobile-web-app-status-bar-style"
-          content="black-translucent"
-        />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
         <link
           rel="apple-touch-icon"

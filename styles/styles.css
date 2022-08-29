@@ -19,7 +19,7 @@
 
   html,
   body {
-    @apply p-0 m-0 font-mono text-stone-900 dark:text-slate-50;
+    @apply p-0 m-0 font-mono bg-[#eee] dark:bg-[#222] text-stone-900 dark:text-slate-50;
   }
 
   .construction {

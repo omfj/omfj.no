@@ -20,9 +20,9 @@ const posts = (await Astro.glob("./blog/*.{md,mdx}")).sort(
           posts.map((post) => (
             <ProjectOverview
               title={post.frontmatter.title}
-              pubDate={post.frontmatter.pubDate}
               description={post.frontmatter.description}
               to={post.url}
+              tags={post.frontmatter.tags}
             />
           ))
         }

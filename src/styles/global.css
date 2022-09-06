@@ -5,7 +5,7 @@
 @layer base {
   html,
   body {
-    @apply bg-[#1e1e1e] text-white font-sans;
+    @apply bg-[#1e1e1e] text-white font-sans text-lg;
   }
 
   main {

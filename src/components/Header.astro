@@ -1,5 +1,5 @@
 ---
-import HeaderIconLink from "./HeaderIconLink.astro";
+import { motion } from "framer-motion";
 import Spacer from "./Spacer.astro";
 import { Icon } from "astro-icon";
 import HeaderLink from "./HeaderLink.astro";
@@ -12,25 +12,34 @@ const navItems = [
 ---
 
 <div id="header" class="flex flex-col mb-10">
-  <header class="bg-[#333] flex flex-row py-8 px-10">
-    <h2 class="font-bold text-[#eee] text-4xl">omfj.no</h2>
+  <header
+    class="bg-[#333] flex flex-row py-5 px-5 md:px-14 items-center transition-all duration-300"
+  >
+    <h2 class="font-bold text-[#eee] text-3xl">omfj.no</h2>
     <Spacer />
-    <nav class="flex flex-row items-center gap-2">
+    <nav class="flex flex-row items-center gap-5">
       <div class="hidden md:flex flex-row gap-3">
         {
           navItems.map(({ title, to }) => (
-            <HeaderLink href={to}>{title}</HeaderLink>
+            <div class="text-[#ddd] hover:text-white px-3 py-2 text-xl transition-colors duration-200 hover:bg-[#2d2d2d]">
+              <HeaderLink to={to}>{title}</HeaderLink>
+            </div>
           ))
         }
       </div>
 
-      <button class="modal-toggle md:hidden w-8 h-8 hover:cursor-pointer">
+      <button class="modal-toggle md:hidden h-9 w-9 hover:cursor-pointer">
         <Icon class="text-[#ddd]" name="mdi:menu" />
       </button>
-      <HeaderIconLink href="https://github.com/omfj" name="mdi:github" />
+      <a
+        class="h-8 w-8 text-[#ddd] hover:text-white"
+        href="https://github.com/omfj"
+      >
+        <Icon name="mdi:github" />
+      </a>
     </nav>
   </header>
-  <div class="flex flex-row w-full h-2">
+  <div class="flex flex-row w-full h-1">
     <div class="bg-[#007ACC] w-1/2"></div>
     <div class="bg-[#ffff73] w-1/2"></div>
   </div>
@@ -38,7 +47,7 @@ const navItems = [
 
 <div
   id="modal"
-  class="hidden fixed z-50 top-0 right-0 bottom-0 m-0 left-0 h-screen w-full py-4 px-5 bg-slate-50 dark:bg-[#151515]"
+  class="hidden fixed z-50 top-0 right-0 bottom-0 m-0 left-0 h-screen w-full py-4 px-5 bg-slate-50 dark:bg-[#1e1e1e]"
 >
   <div
     class="flex flex-row items-center justify-between border-b pb-3 border-neutral-500 mb-10"
@@ -56,9 +65,9 @@ const navItems = [
     <div class="flex flex-col gap-10 text-center">
       {
         navItems.map(({ title, to }) => (
-          <a class="text-4xl hover:underline" href={to}>
-            {title}
-          </a>
+          <div class="text-4xl hover:underline">
+            <HeaderLink to={to}>{title}</HeaderLink>
+          </div>
         ))
       }
     </div>

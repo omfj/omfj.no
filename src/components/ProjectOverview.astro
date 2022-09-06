@@ -11,21 +11,29 @@ export interface Props {
 const { title, tags, description, to } = Astro.props;
 ---
 
-<div class="flex flex-col">
-  <p class="font-bold text-2xl py-2 px-4 w-fit border-b-2">
-    {title}
-  </p>
-  <div class="float-left text-xl border-l-2 pt-2 px-3">
-    <p class="py-2">{description}</p>
+<motion.div
+  client:visible
+  initial={{ opacity: 0, y: 100 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.5 }}
+  viewport={{ once: true }}
+>
+  <div class="flex flex-col">
+    <p class="font-bold text-2xl py-2 px-4 w-fit border-b-2">
+      {title}
+    </p>
+    <div class="float-left text-xl border-l-2 pt-2 px-3">
+      <p class="py-2">{description}</p>
+    </div>
+    <div class="flex flex-row pb-4 px-3 gap-2 border-l-2 border-white">
+      {
+        tags.map((tag: string) => (
+          <p class="text-sm py-1 px-2 bg-[#444] rounded-md">#{tag}</p>
+        ))
+      }
+    </div>
+    <a class="border-white border-2 w-fit px-3 py-1" href={to}>
+      <p>Read more</p>
+    </a>
   </div>
-  <div class="flex flex-row pb-4 px-3 gap-2 border-l-2 border-white">
-    {
-      tags.map((tag: string) => (
-        <p class="text-sm py-1 px-2 bg-[#444] rounded-md">#{tag}</p>
-      ))
-    }
-  </div>
-  <a class="border-white border-2 w-fit px-3 py-1" href={to}>
-    <p>Read more</p>
-  </a>
-</div>
+</motion.div>

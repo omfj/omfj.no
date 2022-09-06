@@ -1,0 +1,56 @@
+---
+import ContactCard from "../components/ContactCard.astro";
+import Heading from "../components/Heading.astro";
+import PageLayout from "../layouts/PageLayout.astro";
+
+const title = "Contact";
+const description = "Best ways to get in touch with me.";
+---
+
+<PageLayout title={title} description={description}>
+  <main>
+    <div class="content">
+      <Heading title={title} subtitle={description} />
+      <div class="flex flex-col mx-auto gap-5 mb-5">
+        <ContactCard
+          icon="mdi:github"
+          platform="Github"
+          username="@omfj"
+          to="https://github.com/omfj"
+        />
+        <ContactCard
+          icon="mdi:linkedin"
+          platform="LinkedIn"
+          username="omfj"
+          to="https://linkedin.com/in/omfj"
+        />
+        <ContactCard
+          icon="file-icons:keybase"
+          platform="Keybase"
+          username="@omfj"
+          to="https://keybase.io/omfj"
+        />
+        <ContactCard
+          icon="mdi:twitter"
+          platform="Twitter"
+          username="@omfj_"
+          to="https://twitter.com/omfj_"
+        />
+      </div>
+      <div class="flex flex-col text-center">
+        <p class="text-center text-lg">
+          My PGP key ID:{" "}
+        </p>
+        <a
+          class="text-blue-400 visited:text-purple-400 underline"
+          target="_blank"
+          rel="noopener noreferrer"
+          href="/pgp-key.asc"
+          download="omfj-pgp-key.asc"
+        >
+          CA2C 0707 5170 9E32 343F 6D58 A20C 4384 0D84 1F41
+        </a>
+      </div>
+    </div>
+  </main>
+</PageLayout>

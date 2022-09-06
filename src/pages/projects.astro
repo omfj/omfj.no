@@ -1,0 +1,35 @@
+---
+import Heading from "../components/Heading.astro";
+import ProjectOverview from "../components/ProjectOverview.astro";
+import PageLayout from "../layouts/PageLayout.astro";
+
+const posts = (await Astro.glob("./project/*.{md,mdx}")).sort(
+  (a, b) =>
+    new Date(b.frontmatter.pubDate).valueOf() -
+    new Date(a.frontmatter.pubDate).valueOf()
+);
+---
+
+<PageLayout title="Projects" description="Some of my projects I have worked on">
+  <main>
+    <div class="content">
+      <Heading
+        title="Projects"
+        subtitle="Some of the projects I have worked on. Most of them are personal projects"
+      />
+
+      <div class="flex flex-col gap-10">
+        {
+          posts.map((post) => (
+            <ProjectOverview
+              title={post.frontmatter.title}
+              tags={post.frontmatter.tags}
+              description={post.frontmatter.description}
+              to={post.url}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </main>
+</PageLayout>

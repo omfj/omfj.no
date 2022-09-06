@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  p {
+    @apply py-2;
+  }
+
+  li {
+    @apply list-disc ml-5;
+  }
+}

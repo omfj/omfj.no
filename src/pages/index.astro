@@ -1,0 +1,24 @@
+---
+import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
+import PageLayout from "../layouts/PageLayout.astro";
+---
+
+<PageLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+  <main>
+    <div class="content max-w-[500px] text-center flex flex-col gap-5">
+      <h1 class="text-3xl font-bold">‍🚀 Hello, WWW!</h1>
+      <p>
+        My name is <b>Ole Magnus</b>. I am a student at the <b
+          >University of Bergen</b
+        >
+        studying computer technology.
+      </p>
+      <p>
+        You can reach me at: <a
+          class="text-blue-500 visited:text-purple-700 hover:underline"
+          href="mailto:hei@omfj.no">hei@omfj.no</a
+        >.
+      </p>
+    </div>
+  </main>
+</PageLayout>

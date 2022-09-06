@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body {
+    @apply bg-[#1e1e1e] text-white font-sans;
+  }
+
+  main {
+    @apply mx-auto px-4;
+  }
+
+  .content {
+    @apply px-2 py-8 mx-auto max-w-[700px];
+  }
+}

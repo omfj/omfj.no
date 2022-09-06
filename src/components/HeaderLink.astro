@@ -1,0 +1,21 @@
+---
+export interface Props {
+  href: string;
+}
+
+const { href } = Astro.props;
+const isActive = href === Astro.url.pathname;
+---
+
+<a
+  href={href}
+  class:list={[
+    "text-[#ddd] hover:text-white",
+    "px-3 py-2",
+    "text-md font-medium",
+    "transition-colors duration-200 hover:bg-[#2d2d2d]",
+    isActive ? "underline text-black dark:text-white" : "",
+  ]}
+>
+  <slot />
+</a>

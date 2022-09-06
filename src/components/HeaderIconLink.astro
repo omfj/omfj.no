@@ -1,0 +1,17 @@
+---
+import { Icon } from "astro-icon";
+
+export interface Props {
+  href: string;
+  name: string;
+}
+
+const { href, name } = Astro.props;
+---
+
+<a
+  class:list={["items-center, h-7 w-7", "text-[#ddd]", "hover:text-white"]}
+  href={href}
+>
+  <Icon name={name} />
+</a>

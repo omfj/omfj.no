@@ -1,0 +1,24 @@
+---
+export interface Props {
+  icon: string;
+  platform: string;
+  username: string;
+  to: string;
+}
+
+import { Icon } from "astro-icon";
+
+const { icon, platform, username, to } = Astro.props;
+---
+
+<a
+  class="transition-colors bg-[#007ACC] hover:bg-blue-500 hover:text-black rounded-md text-xl px-3 py-2"
+  href={to}
+  target="_blank"
+  rel="noreferrer"
+>
+  <div class="flex flex-row gap-3 items-center w-fit m-auto">
+    <Icon class="w-8 h-8" name={icon} />
+    {platform} as {username}
+  </div>
+</a>

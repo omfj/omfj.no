@@ -1,0 +1,35 @@
+---
+import "../styles/markdown.css";
+import PageLayout from "./PageLayout.astro";
+
+export interface Props {
+  content: {
+    title: string;
+    description: string;
+    pubDate?: string;
+    updatedDate?: string;
+  };
+}
+
+const {
+  content: { title, description, pubDate, updatedDate },
+} = Astro.props;
+---
+
+<PageLayout title={title} description={description}>
+  <main>
+    <div class="content">
+      <h1 class="text-3xl">{title}</h1>
+      {pubDate && <time>{pubDate}</time>}
+      {
+        updatedDate && (
+          <div>
+            Last updated on <time>{updatedDate}</time>
+          </div>
+        )
+      }
+      <hr class="my-3" />
+      <slot />
+    </div>
+  </main>
+</PageLayout>

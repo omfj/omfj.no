@@ -13,30 +13,45 @@ const navItems = [
 
 <div id="header" class="flex flex-col mb-10">
   <header
-    class="bg-[#333] flex flex-row py-3 px-5 md:px-14 items-center transition-all duration-300"
+    class="bg-[#333] flex flex-row py-4 md:py-2 px-5 md:px-14 items-center transition-all duration-300"
   >
-    <h2 class="font-bold text-[#eee] text-3xl">omfj.no</h2>
+    <h2 class="font-bold text-[#eee] text-2xl">omfj.no</h2>
     <Spacer />
     <nav class="flex flex-row items-center gap-5">
       <div class="hidden md:flex flex-row gap-3">
         {
-          navItems.map(({ title, to }) => (
-            <div class="text-[#ddd] hover:text-white px-3 py-2 text-xl transition-colors duration-200 hover:bg-[#2d2d2d]">
-              <HeaderLink to={to}>{title}</HeaderLink>
-            </div>
-          ))
+          navItems.map(({ title, to }) => {
+            const isActive = to === Astro.request.url;
+
+            return (
+              <a
+                href={to}
+                class:list={[
+                  "text-white hover:text-[#aaa]",
+                  isActive && "text-white",
+                  "font-medium px-2 py-1 text-sm",
+                  "transition-colors duration-200",
+                ]}
+              >
+                {title}
+              </a>
+            );
+          })
         }
       </div>
 
-      <button class="modal-toggle md:hidden h-9 w-9 hover:cursor-pointer">
-        <Icon class="text-[#ddd]" name="mdi:menu" />
-      </button>
-      <a
-        class="h-8 w-8 text-[#ddd] hover:text-white"
-        href="https://github.com/omfj"
+      <button
+        class="modal-toggle md:hidden h-7 w-7 hover:cursor-pointer transition-colors duration-200"
       >
-        <Icon name="mdi:github" />
-      </a>
+        <Icon class="text-white hover:text-[#aaa]" name="mdi:menu" />
+      </button>
+      <button
+        class="h-6 w-6 text-white hover:text-[#aaa] transition-colors duration-200"
+      >
+        <a href="https://github.com/omfj">
+          <Icon name="mdi:github" />
+        </a>
+      </button>
     </nav>
   </header>
   <div class="flex flex-row w-full h-1">

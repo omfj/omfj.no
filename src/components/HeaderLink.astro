@@ -7,6 +7,6 @@ const { to } = Astro.props;
 const isActive = to === Astro.url.pathname;
 ---
 
-<a href={to} class={isActive ? "underline text-black dark:text-white" : null}>
+<a href={to} class={isActive ? "underline" : null}>
   <slot />
 </a>

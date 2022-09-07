@@ -15,7 +15,7 @@
     "@astrojs/sitemap": "1.0.0",
     "astro": "1.1.3",
     "astro-icon": "0.7.3",
-    "framer-motion": "7.2.1"
+    "framer-motion": "7.3.2"
   },
   "devDependencies": {
     "@astrojs/preact": "1.0.2",

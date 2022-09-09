@@ -18,7 +18,7 @@
     "framer-motion": "7.2.1"
   },
   "devDependencies": {
-    "@astrojs/preact": "1.0.2",
+    "@astrojs/preact": "1.1.0",
     "@astrojs/react": "1.1.1",
     "@astrojs/tailwind": "1.0.0",
     "@types/react": "18.0.18",

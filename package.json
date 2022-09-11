@@ -21,7 +21,7 @@
     "@astrojs/preact": "1.1.0",
     "@astrojs/react": "1.1.2",
     "@astrojs/tailwind": "1.0.0",
-    "@types/react": "18.0.18",
+    "@types/react": "18.0.19",
     "preact": "10.10.6",
     "react": "18.2.0",
     "react-dom": "18.2.0"

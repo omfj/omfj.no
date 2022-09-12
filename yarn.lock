@@ -3275,10 +3275,10 @@ preact-render-to-string@^5.2.0:
   dependencies:
     pretty-format "^3.8.0"
 
-preact@10.10.6:
-  version "10.10.6"
-  resolved "https://registry.npmjs.org/preact/-/preact-10.10.6.tgz"
-  integrity sha512-w0mCL5vICUAZrh1DuHEdOWBjxdO62lvcO++jbzr8UhhYcTbFkpegLH9XX+7MadjTl/y0feoqwQ/zAnzkc/EGog==
+preact@10.11.0:
+  version "10.11.0"
+  resolved "https://registry.npmjs.org/preact/-/preact-10.11.0.tgz"
+  integrity sha512-Fk6+vB2kb6mSJfDgODq0YDhMfl0HNtK5+Uc9QqECO4nlyPAQwCI+BKyWO//idA7ikV7o+0Fm6LQmNuQi1wXI1w==
 
 preferred-pm@^3.0.3:
   version "3.0.3"

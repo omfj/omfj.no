@@ -141,10 +141,10 @@
     sitemap "^7.1.1"
     zod "^3.17.3"
 
-"@astrojs/tailwind@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/@astrojs/tailwind/-/tailwind-1.0.0.tgz"
-  integrity sha512-hEpvKBJKCStaxRZt3ENDacQlzUTOvW1D7dfIUyTf7jMUK4O+y8Q7gdTjERf1HBEi/YXrYNX1zhAElwp6lvW5oQ==
+"@astrojs/tailwind@1.0.1":
+  version "1.0.1"
+  resolved "https://registry.npmjs.org/@astrojs/tailwind/-/tailwind-1.0.1.tgz"
+  integrity sha512-ZVytcmam/krEkg3xfW+2ItMz/XKWCg86Zj9lZsUOybEi3mcQZt++CRGyX1zqUAHrjXY9p/hhMeSWtwVX3GnIyA==
   dependencies:
     "@proload/core" "^0.3.2"
     autoprefixer "^10.4.7"

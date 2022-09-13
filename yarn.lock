@@ -905,10 +905,10 @@ astro-icon@0.7.3:
     resolve-pkg "^2.0.0"
     svgo "^2.8.0"
 
-astro@1.2.1:
-  version "1.2.1"
-  resolved "https://registry.npmjs.org/astro/-/astro-1.2.1.tgz"
-  integrity sha512-bNWrYALx2o15QPfF0QKUI6UXZa6FQgprH4hQI742VHl4FGSizCPb1CVejyrIt4pKDvGcM2LUW/J2A5yZ8eIU1A==
+astro@1.2.3:
+  version "1.2.3"
+  resolved "https://registry.npmjs.org/astro/-/astro-1.2.3.tgz"
+  integrity sha512-iNZcvnaS+Hw4g/rkk4bzlnonjsws066wPkfmnQ+WUqGoH81a4GbFj93YT6zoum5kHg4Kw713abHAf3e/2mpjmg==
   dependencies:
     "@astrojs/compiler" "^0.24.0"
     "@astrojs/language-server" "^0.23.0"

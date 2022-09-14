@@ -5,11 +5,19 @@
 @layer base {
   html,
   body {
-    @apply bg-[#1e1e1e] text-white font-sans text-lg;
+    @apply bg-[#191919] text-[#ddd] font-sans text-lg md:text-base;
+  }
+
+  h1 {
+    @apply text-2xl font-bold text-white;
+  }
+
+  a {
+    @apply text-blue-300 hover:underline;
   }
 
   main {
-    @apply mx-auto px-4;
+    @apply mx-auto px-4 pt-5 md:pt-10 transition-all duration-200;
   }
 
   .content {

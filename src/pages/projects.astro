@@ -18,12 +18,11 @@ const posts = (await Astro.glob("./project/*.{md,mdx}")).sort(
         subtitle="Some of the projects I have worked on. Most of them are personal projects. More on my Github."
       />
 
-      <div class="flex flex-col gap-10">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
         {
           posts.map((post) => (
             <ProjectOverview
               title={post.frontmatter.title}
-              tags={post.frontmatter.tags}
               description={post.frontmatter.description}
               to={post.url}
             />

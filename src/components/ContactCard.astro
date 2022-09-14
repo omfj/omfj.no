@@ -12,13 +12,13 @@ const { icon, platform, username, to } = Astro.props;
 ---
 
 <a
-  class="transition-colors bg-[#007ACC] hover:bg-blue-500 rounded-md text-xl px-3 py-2"
+  class="transition-colors border border-neutral-500 text-[#ddd] rounded-md p-3 hover:bg-[#444]"
   href={to}
   target="_blank"
   rel="noreferrer"
 >
   <div class="flex flex-row gap-3 items-center w-fit m-auto">
-    <Icon class="w-8 h-8" name={icon} />
+    <Icon class="w-6 h-6" name={icon} />
     {platform} as {username}
   </div>
 </a>

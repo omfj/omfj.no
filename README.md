@@ -25,5 +25,5 @@ yarn dev
 
 Now just open the repo in your favorite code editor... vscode?
 
-By default the website is served on (localhost:3000)[http://localhost:3000].
+By default the website is served on [localhost:3000](http://localhost:3000).
 

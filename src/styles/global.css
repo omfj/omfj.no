@@ -17,7 +17,7 @@
   }
 
   main {
-    @apply mx-auto px-4 pt-5 md:pt-10 transition-all duration-200;
+    @apply mx-auto px-4;
   }
 
   .content {

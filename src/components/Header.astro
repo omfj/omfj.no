@@ -23,7 +23,7 @@ const navItems = [
   <header
     class="flex flex-col border-b border-neutral-500 transition-all duration-200"
   >
-    <div class="flex flex-row px-5 md:px-10 py-3">
+    <div class="flex flex-row px-5 md:px-10 py-2 justify-between items-center">
       <button
         class="h-8 w-8 text-white hover:text-white transition-colors duration-200"
       >
@@ -32,7 +32,9 @@ const navItems = [
         </a>
       </button>
 
-      <Spacer />
+      <a class="hover:no-underline" href="/">
+        <p class="font-bold text-2xl text-white">omfj.no</p>
+      </a>
 
       <button
         class="dropdown-toggle h-8 w-8 hover:cursor-pointer text-white transition-colors duration-200"

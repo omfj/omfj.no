@@ -23,4 +23,12 @@
   .content {
     @apply px-2 py-8 mx-auto max-w-[700px];
   }
+
+  p {
+    @apply py-2;
+  }
+
+  li {
+    @apply list-disc ml-5;
+  }
 }

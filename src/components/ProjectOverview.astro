@@ -17,8 +17,8 @@ const { title, description, to } = Astro.props;
   transition={{ duration: 0.5 }}
   viewport={{ once: true }}
 >
-  <div class="flex flex-col px-2 border border-neutral-500 p-2">
-    <h1 class="border-b-neutral-500 border-b w-fit">{title}</h1>
+  <div class="flex flex-col px-2 border border-neutral-500 p-2 rounded">
+    <h1 class="border-b-neutral-500 border-b w-fit text-lg">{title}</h1>
     <p>{description}</p>
     <a href={to} class="mt-2 w-fit">Read more</a>
   </div>

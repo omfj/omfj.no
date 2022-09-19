@@ -6,19 +6,26 @@
 </div>
 
 <style>
+  :root {
+    --top: 0px;
+    --middle: 8px;
+    --bottom: 16px;
+    --width: 28px;
+  }
+
   #menu {
-    height: 24px;
-    width: 30px;
+    height: var(--bottom);
+    width: var(--width);
     position: relative;
     opacity: 1;
     -webkit-transform: rotate(0deg);
     -moz-transform: rotate(0deg);
     -o-transform: rotate(0deg);
     transform: rotate(0deg);
-    -webkit-transition: 0.5s ease-in-out;
-    -moz-transition: 0.5s ease-in-out;
-    -o-transition: 0.5s ease-in-out;
-    transition: 0.5s ease-in-out;
+    -webkit-transition: 0.3s ease-in-out;
+    -moz-transition: 0.3s ease-in-out;
+    -o-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
     cursor: pointer;
   }
 
@@ -40,21 +47,21 @@
   }
 
   #menu span:nth-child(1) {
-    top: 0px;
+    top: var(--top);
   }
 
   #menu span:nth-child(2),
   #menu span:nth-child(3) {
-    top: 10px;
+    top: var(--middle);
   }
 
   #menu span:nth-child(4) {
-    top: 20px;
+    top: var(--bottom);
   }
 
   #menu.open span:nth-child(1) {
     opacity: 0;
-    top: 10px;
+    top: var(--middle);
   }
 
   #menu.open span:nth-child(2) {
@@ -73,7 +80,7 @@
 
   #menu.open span:nth-child(4) {
     opacity: 0;
-    top: 10px;
+    top: var(--middle);
   }
 </style>
 

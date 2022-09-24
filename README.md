@@ -1,29 +1,18 @@
 # omfj.no
 
-My personal website made with [Astro](https://astro.build)!
+My personal website
 
-## Developing
+## Develop
 
-Clone the repository, and enter it.
-
-```bash
+```sh
 git clone git@github.com:omfj/omfj.no
 cd omfj.no
 ```
 
-Download dependencies.
-
-```
+```sh
 yarn
 ```
 
-Start a local server.
-
-```
+```sh
 yarn dev
 ```
-
-Now just open the repo in your favorite code editor... vscode?
-
-By default the website is served on [localhost:3000](http://localhost:3000).
-

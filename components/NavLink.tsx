@@ -13,7 +13,11 @@ const NavLink = ({ title, to }: Props) => {
 
   return (
     <NextLink className="hover:underline" href={to} passHref>
-      <Link fontWeight="semibold" textDecor={isActive ? "underline" : "none"}>
+      <Link
+        fontSize="lg"
+        fontWeight="semibold"
+        textDecor={isActive ? "underline" : "none"}
+      >
         {title}
       </Link>
     </NextLink>

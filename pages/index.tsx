@@ -4,7 +4,7 @@ import PageLayout from "@/components/PageLayout";
 const HomePage = () => {
   return (
     <PageLayout title="omfj.no" description="My personal website">
-      <Flex as="main" direction="column" maxW="2xl" mx="auto" gap="3" px="3">
+      <Flex as="main" direction="column" maxW="2xl" mx="auto" gap="3" px="5">
         <Heading>Hello, WWW 👋🏻</Heading>
 
         <Text>

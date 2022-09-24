@@ -1,7 +1,6 @@
 import { IconButton, useColorMode, useColorModeValue } from "@chakra-ui/react";
 import Head from "next/head";
 import { BsMoonStarsFill, BsSun } from "react-icons/bs";
-import { mode } from "@chakra-ui/theme-tools";
 
 const ColorModeButton = () => {
   const { toggleColorMode } = useColorMode();
@@ -16,10 +15,11 @@ const ColorModeButton = () => {
       </Head>
       <IconButton
         variant="ghost"
-        p="2"
+        p="1.5"
         aria-label="Toggle color mode"
         onClick={toggleColorMode}
         as={icon}
+        cursor="pointer"
       />
     </>
   );

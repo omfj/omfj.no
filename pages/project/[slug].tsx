@@ -21,7 +21,7 @@ const ProjectPage = ({ data, content }: Props) => {
 
   return (
     <PageLayout title={data.title} description={data.description}>
-      <Flex as="main" direction="column" maxW="2xl" mx="auto" gap="3" px="3">
+      <Flex as="main" direction="column" maxW="2xl" mx="auto" gap="3" px="5">
         <Heading>{data.title}</Heading>
         <Text>Last updated: {new Date(data.date).toLocaleDateString()}</Text>
         {data.tags && (

@@ -35,10 +35,11 @@ const MobileNav = ({ routes }: Props) => {
       <IconButton
         display={["block", "block", "none"]}
         variant="ghost"
-        p="2"
+        p="1.5"
         aria-label="Open sidebar menu"
         onClick={onOpen}
         as={AiOutlineMenu}
+        cursor="pointer"
       />
 
       <Drawer isOpen={isOpen} placement="right" onClose={onClose}>

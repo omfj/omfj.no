@@ -15,12 +15,24 @@ a {
   box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
+.markdown {
+  margin: 0 1rem;
+}
+
+.markdown li {
+  margin-left: 1.5rem;
+}
+
+.markdown p {
+  font-family: monospace;
+  font-size: 16px;
+  margin: 0.5rem 0;
+}
+
+.markdown a {
+  color: #0070f3;
+}
+
+.markdown a:hover {
+  text-decoration: underline;
 }

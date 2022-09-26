@@ -1,6 +1,10 @@
+<div align="center">
+
 # omfj.no
 
 My personal website
+
+</div>
 
 ## Develop
 

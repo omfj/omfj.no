@@ -28,7 +28,7 @@ const MobileNav = ({ routes }: Props) => {
   const bgDrawer = useColorModeValue("bg.light", "bg.dark");
   const bgHover = useColorModeValue("hover.light", "hover.dark");
 
-  const btnRef = useRef();
+  let btnRef = useRef().current;
 
   return (
     <>
@@ -40,9 +40,15 @@ const MobileNav = ({ routes }: Props) => {
         onClick={onOpen}
         as={AiOutlineMenu}
         cursor="pointer"
+        ref={btnRef}
       />
 
-      <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
+      <Drawer
+        isOpen={isOpen}
+        placement="right"
+        onClose={onClose}
+        finalFocusRef={btnRef}
+      >
         <DrawerOverlay backdropFilter="auto" backdropBlur="sm" />
         <DrawerContent bg={bgDrawer}>
           <DrawerHeader>
@@ -59,7 +65,7 @@ const MobileNav = ({ routes }: Props) => {
             </Flex>
           </DrawerHeader>
           <DrawerBody p="0">
-            <Flex direction="column" gap="1">
+            <Flex direction="column">
               {routes.map((route) => (
                 <NextLink href={route.path} passHref key={route.title}>
                   <Link p="2" px="5" _hover={{ bg: bgHover }} fontSize="3xl">

@@ -3,16 +3,19 @@ import Head from "next/head";
 import { BsMoonStarsFill, BsSun } from "react-icons/bs";
 
 const ColorModeButton = () => {
-  const { toggleColorMode } = useColorMode();
+  const { colorMode, toggleColorMode } = useColorMode();
 
   const icon = useColorModeValue(BsMoonStarsFill, BsSun);
-  const themeColor = useColorModeValue("bg.light", "bg.dark");
 
   return (
     <>
       <Head>
-        <meta name="theme-color" content={themeColor} />
+        <meta
+          name="theme-color"
+          content={colorMode == "light" ? "#eee" : "#222"}
+        />
       </Head>
+
       <IconButton
         variant="ghost"
         p="2.5"

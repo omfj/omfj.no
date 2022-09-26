@@ -1,5 +1,6 @@
 import { IconButton, useColorMode, useColorModeValue } from "@chakra-ui/react";
 import Head from "next/head";
+import { useState } from "react";
 import { BsMoonStarsFill, BsSun } from "react-icons/bs";
 
 const ColorModeButton = () => {
@@ -12,7 +13,7 @@ const ColorModeButton = () => {
       <Head>
         <meta
           name="theme-color"
-          content={colorMode == "light" ? "#eee" : "#222"}
+          content={colorMode == "light" ? "#fdf6e3" : "#222"}
         />
       </Head>
 

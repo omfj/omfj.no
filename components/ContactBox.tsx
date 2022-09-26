@@ -9,8 +9,6 @@ interface Props {
 }
 
 const ContactBox = ({ name, to, username, icon }: Props) => {
-  const bgHover = useColorModeValue("hover.light", "hover.dark");
-
   return (
     <NextLink href={to} passHref>
       <LinkBox
@@ -19,7 +17,8 @@ const ContactBox = ({ name, to, username, icon }: Props) => {
         borderColor="#666"
         p="2"
         transition="0.2s ease-in-out"
-        _hover={{ cursor: "pointer", bg: bgHover }}
+        backdropFilter="auto"
+        _hover={{ cursor: "pointer", backdropContrast: "0.9" }}
       >
         <Flex alignItems="center" w="fit-content" mx="auto" gap="2">
           {icon && <Icon as={icon} w="7" h="7" />}

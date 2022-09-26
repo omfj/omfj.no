@@ -7,7 +7,7 @@ const theme = extendTheme({
   initialColorMode: "system",
   colors: {
     bg: {
-      light: "#eee",
+      light: "#fdf6e3",
       dark: "#222",
     },
     hover: {

@@ -18,8 +18,6 @@ interface Props {
 }
 
 const ProjectsPage = ({ data }: Props) => {
-  const bgHover = useColorModeValue("hover.light", "hover.dark");
-
   return (
     <PageLayout title="Projects" description="Some of my projects">
       <Flex as="main" direction="column" maxW="2xl" mx="auto" gap="3" px="5">
@@ -35,7 +33,8 @@ const ProjectsPage = ({ data }: Props) => {
                 p="3"
                 borderRadius="lg"
                 transition="0.2s ease-in-out"
-                _hover={{ cursor: "pointer", bg: bgHover }}
+                backdropFilter="auto"
+                _hover={{ cursor: "pointer", backdropContrast: "0.9" }}
               >
                 <Text fontWeight="semibold" fontSize="2xl">
                   {item.title}

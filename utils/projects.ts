@@ -3,7 +3,7 @@ import path from "path";
 import matter from "gray-matter";
 
 const ROOT = process.cwd();
-const PROJECTS_DIR = path.join(ROOT, "/public/static", "projects");
+const PROJECTS_DIR = path.join(ROOT, "public", "static", "projects");
 
 export interface StaticMeta {
   title: string;

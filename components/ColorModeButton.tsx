@@ -15,7 +15,7 @@ const ColorModeButton = () => {
       </Head>
       <IconButton
         variant="ghost"
-        p="1.5"
+        p="2.5"
         aria-label="Toggle color mode"
         onClick={toggleColorMode}
         as={icon}

@@ -1,36 +1,40 @@
 import { Flex, Heading, Text } from "@chakra-ui/react";
 import PageLayout from "@/components/PageLayout";
+import path from "path";
+import fs from "fs";
+import Markdown from "react-markdown";
+import matter from "gray-matter";
 
-const HomePage = () => {
+interface Props {
+  title: string;
+  content: string;
+}
+
+const HomePage = ({ title, content }: Props) => {
   return (
     <PageLayout title="omfj.no" description="My personal website">
       <Flex as="main" direction="column" maxW="2xl" mx="auto" gap="3" px="5">
-        <Heading>Hello, WWW 👋🏻</Heading>
-
-        <Text>
-          My name is Ole Magnus. Currently I am studying Computer Technology at
-          the University of Bergen. I am interested in web development, and I
-          have a passion for learning new things.
-        </Text>
-
-        <Text>
-          I am also a member of echo Webkom at the University of Bergen. Here I
-          help develop and maintain the website of echo.
-        </Text>
-
-        <Text>
-          When I am not at the computer I enjoy playing video games. I also do
-          Tennis during the summer and downhill skiing during the winter.
-        </Text>
-
-        <Text>
-          Wanna read about some of my projects? Check out my projects page.
-        </Text>
-
-        <Text>Wanna get in touch? Check out my contact page.</Text>
+        <Heading>{title}</Heading>
+        <Markdown className="markdown">{content}</Markdown>
       </Flex>
     </PageLayout>
   );
+};
+
+const ROOT = process.cwd();
+const STATIC_PATH = path.join(ROOT, "public", "static");
+
+export const getStaticProps = () => {
+  const filePath = path.join(STATIC_PATH, "index.md");
+  const fileContents = fs.readFileSync(filePath, "utf-8");
+  const { data, content } = matter(fileContents);
+
+  return {
+    props: {
+      title: data.title,
+      content,
+    },
+  };
 };
 
 export default HomePage;

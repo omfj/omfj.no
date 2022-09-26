@@ -1,4 +1,10 @@
-import { Flex, Heading, Text, useColorModeValue } from "@chakra-ui/react";
+import {
+  Divider,
+  Flex,
+  Heading,
+  Text,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import PageLayout from "@/components/PageLayout";
 import { getProjectsData, StaticMeta } from "@/utils/projects";
 import NextLink from "next/link";
@@ -16,17 +22,17 @@ const ProjectsPage = ({ data }: Props) => {
 
   return (
     <PageLayout title="Projects" description="Some of my projects">
-      <Flex as="main" direction="column" maxW="2xl" mx="auto" gap="3" px="3">
+      <Flex as="main" direction="column" maxW="2xl" mx="auto" gap="3" px="5">
         <Heading>Projects</Heading>
         <Text>Some of my projects</Text>
+        <Divider />
         <Flex direction="column" gap="5">
           {data.map((item) => (
             <NextLink key={item.title} href={`/project/${item.slug}`}>
               <Flex
                 direction="column"
                 gap="3"
-                px="2"
-                py="3"
+                p="3"
                 borderRadius="lg"
                 transition="0.2s ease-in-out"
                 _hover={{ cursor: "pointer", bg: bgHover }}

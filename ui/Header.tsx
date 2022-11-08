@@ -30,7 +30,7 @@ const Header = () => {
       {!isMenuOpen && (
         <header
           id="desktop-header"
-          className="mb-5 flex flex-row items-center py-4 px-5 md:px-10"
+          className="mb-10 flex flex-row items-center py-4 px-5 md:px-10"
         >
           <h1 className="text-4xl md:text-5xl">omfj.no</h1>
           <div className="flex flex-grow" />

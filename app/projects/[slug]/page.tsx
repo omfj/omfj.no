@@ -3,6 +3,14 @@ import Heading from '@/ui/Heading';
 import Main from '@/ui/Main';
 import ProjectAPI from '@/lib/projects';
 
+export async function generateStaticParams() {
+  const slugs = await ProjectAPI.getProjectSlugs();
+
+  return slugs.map((slug) => ({
+    slug,
+  }));
+}
+
 interface PageProps {
   params?: any;
 }

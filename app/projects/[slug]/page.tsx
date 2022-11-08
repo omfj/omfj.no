@@ -4,11 +4,11 @@ import Main from '@/ui/Main';
 import ProjectAPI from '@/lib/projects';
 
 interface PageProps {
-  params: { slug: string };
+  params?: any;
 }
 
 export default async function Page({ params }: PageProps) {
-  const project = await ProjectAPI.getProjectBySlug(params.slug);
+  const project = await ProjectAPI.getProjectBySlug(params?.slug);
 
   return (
     <Main>

@@ -14,7 +14,7 @@ export function getContactInfo(): Array<Contact> {
   return [
     {
       title: 'Email',
-      name: 'hei@omfj.no',
+      name: 'me@omfj.no',
       url: 'mailto:hei@omfj.no',
       icon: MdMail,
     },

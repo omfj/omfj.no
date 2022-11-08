@@ -10,23 +10,27 @@ const Page = async () => {
     <Main>
       <Heading>Projects</Heading>
       <ul className="mt-10 flex flex-col gap-8">
-        {projects.map((project) => (
-          <li key={project._id} className="flex flex-col gap-2">
-            <div className="border-b border-b-white">
-              <h2 className="text-2xl">{project.title}</h2>
-              <p className="mb-2">
-                Last updated: {project._updatedAt.toLocaleDateString()}
-              </p>
-            </div>
-            <p className="mb-2 text-faded">{project.description}</p>
-            <Link
-              className="hover:underline"
-              href={`/projects/${project.slug}`}
-            >
-              Read more
-            </Link>
-          </li>
-        ))}
+        {projects.length > 0 ? (
+          projects.map((project) => (
+            <li key={project._id} className="flex flex-col gap-2">
+              <div className="border-b border-b-white">
+                <h2 className="text-2xl">{project.title}</h2>
+                <p className="mb-2">
+                  Last updated: {project._updatedAt.toLocaleDateString()}
+                </p>
+              </div>
+              <p className="mb-2 text-faded">{project.description}</p>
+              <Link
+                className="hover:underline"
+                href={`/projects/${project.slug}`}
+              >
+                Read more
+              </Link>
+            </li>
+          ))
+        ) : (
+          <p className="text-center text-2xl">No projects found.</p>
+        )}
       </ul>
     </Main>
   );

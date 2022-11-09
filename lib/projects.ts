@@ -64,9 +64,7 @@ const ProjectAPI = {
 
     const resp = await SanityAPI.fetch(query);
 
-    const projectOverview = array(projectOverviewDecoder)(resp);
-
-    return projectOverview;
+    return array(projectOverviewDecoder)(resp);
   },
   getProjectSlugs: async (): Promise<Array<string>> => {
     const query = `
@@ -79,9 +77,7 @@ const ProjectAPI = {
 
     const projectSlugs = array(projectSlugDecoder)(resp);
 
-    const slugs = projectSlugs.map((project) => project.slug);
-
-    return slugs;
+    return projectSlugs.map((project) => project.slug);
   },
   getProjectBySlug: async (slug: string): Promise<Project> => {
     const query = `
@@ -120,9 +116,7 @@ const ProjectAPI = {
 
     const resp = await SanityAPI.fetch(query);
 
-    const project = projectDecoder(resp[0]);
-
-    return project;
+    return projectDecoder(resp[0]);
   },
 };
 

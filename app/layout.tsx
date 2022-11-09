@@ -1,5 +1,6 @@
 import Footer from '@/ui/Footer';
 import Header from '@/ui/Header';
+import ProgressBar from '@/ui/ProgressBar';
 import '@/styles/globals.css';
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
@@ -11,6 +12,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body className="min-w-screen flex min-h-screen flex-col">
+        <ProgressBar />
         <Header />
         {children}
         <div className="flex-grow" />

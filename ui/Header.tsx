@@ -71,9 +71,12 @@ const Header = () => {
           <hr />
           <ul className="flex flex-col gap-5">
             {routes.map((route) => (
-              <li key={route.path} className="ml-auto text-5xl">
+              <li
+                key={route.path}
+                className="ml-auto mr-0 text-5xl transition-all duration-150 hover:mr-2"
+              >
                 <Link
-                  className="text-faded transition-colors duration-200 hover:text-secondary"
+                  className="transition-colors duration-200 hover:text-secondary"
                   href={route.path}
                   onClick={() => setIsMenuOpen((prev) => !prev)}
                 >

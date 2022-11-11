@@ -1,11 +1,11 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 interface Props {
   children: ReactNode;
 }
 
 const Heading = ({ children }: Props) => (
-  <h1 className="text-4xl font-bold mb-3">{children}</h1>
+  <h1 className="mb-3 text-4xl font-bold">{children}</h1>
 );
 
 export default Heading;

@@ -6,7 +6,9 @@ import {
   string,
 } from 'typescript-json-decoder';
 import { authorDecoder } from './author';
+import { categoryDecoder } from './category';
 import SanityAPI from './sanity';
+import { slugDecoder } from './utils';
 
 const projectOverviewDecoder = record({
   _id: string,
@@ -14,6 +16,7 @@ const projectOverviewDecoder = record({
   slug: string,
   title: string,
   description: string,
+  categories: array(categoryDecoder),
 });
 
 type ProjectOverview = decodeType<typeof projectOverviewDecoder>;
@@ -26,15 +29,7 @@ const projectDecoder = record({
   description: string,
   body: string,
   author: authorDecoder,
-  categories: array(
-    record({
-      _id: string,
-      color: string,
-      emoji: string,
-      slug: string,
-      title: string,
-    }),
-  ),
+  categories: array(categoryDecoder),
   externalLinks: array(
     record({
       _key: string,
@@ -46,80 +41,131 @@ const projectDecoder = record({
 
 type Project = decodeType<typeof projectDecoder>;
 
-const projectSlugDecoder = record({
+const projectMetaDataDecoder = record({
+  _id: string,
+  _updatedAt: date,
   slug: string,
+  title: string,
+  description: string,
+  author: authorDecoder,
 });
 
-const ProjectAPI = {
-  getProjectsOverview: async (): Promise<Array<ProjectOverview>> => {
+type ProjectMetaData = decodeType<typeof projectMetaDataDecoder>;
+
+interface PageProps {
+  params?: any;
+}
+
+interface IProjectAPI {
+  getOverview: (category?: string) => Promise<Array<ProjectOverview>>;
+  getSlugs: () => Promise<Array<string>>;
+  getProject: (slug: string) => Promise<Project>;
+  getProjectMetaData: (slug: string) => Promise<ProjectMetaData>;
+}
+
+const ProjectAPI: IProjectAPI = {
+  getOverview: async (): Promise<Array<ProjectOverview>> => {
     const query = `
-              *[_type == "project" && !(_id in path('drafts.**'))] | order(title) {
-                _id,
-                _updatedAt,
-                "slug": slug.current,
-                title,
-                description,
-              }
-              `;
+      *[_type == "project" && !(_id in path('drafts.**'))] | order(_updateAt desc) {
+        _id,
+        _updatedAt,
+        "slug": slug.current,
+        title,
+        description,
+        categories[] -> {
+          _id,
+          "color": color.hex,
+          emoji,
+          title,
+          "slug": slug.current,
+        },
+      }
+    `;
 
     const resp = await SanityAPI.fetch(query);
 
     return array(projectOverviewDecoder)(resp);
   },
-  getProjectSlugs: async (): Promise<Array<string>> => {
+  getSlugs: async (): Promise<Array<string>> => {
     const query = `
-              *[_type == "project"] {
-                "slug": slug.current,
-              }
-              `;
+      *[_type == "project"] {
+        "slug": slug.current,
+      }
+    `;
 
     const resp = await SanityAPI.fetch(query);
 
-    const projectSlugs = array(projectSlugDecoder)(resp);
+    const projectSlugs = array(slugDecoder)(resp);
 
     return projectSlugs.map((project) => project.slug);
   },
-  getProjectBySlug: async (slug: string): Promise<Project> => {
+  getProject: async (slug: string): Promise<Project> => {
     const query = `
-              *[
-                  _type == "project" &&
-                  !(_id in path('drafts.**')) &&
-                  slug.current == "${slug}"
-              ] {
-                _id,
-                _updatedAt,
-                "slug": slug.current,
-                title,
-                body,
-                description,
-                "author": author -> {
-                    _id,
-                    name,
-                    email,
-                    "slug": slug.current,
-                    "imageUrl": image.asset -> url
-                },
-                categories[] -> {
-                    _id,
-                    "color": color.hex,
-                    emoji,
-                    title,
-                    "slug": slug.current,
-                },
-                externalLinks[] {
-                    _key,
-                    title,
-                    link
-                },
-              }
-              `;
+      *[
+        _type == "project" &&
+        !(_id in path('drafts.**')) &&
+        slug.current == "${slug}"
+      ] {
+        _id,
+        _updatedAt,
+        "slug": slug.current,
+        title,
+        body,
+        description,
+        "author": author -> {
+          _id,
+          name,
+          email,
+          "slug": slug.current,
+          "imageUrl": image.asset -> url
+        },
+        categories[] -> {
+          _id,
+          "color": color.hex,
+          emoji,
+          title,
+          "slug": slug.current,
+        },
+        externalLinks[] {
+          _key,
+          title,
+          link
+        },
+      }
+    `;
 
     const resp = await SanityAPI.fetch(query);
 
     return projectDecoder(resp[0]);
   },
+  getProjectMetaData: async (slug: string): Promise<ProjectMetaData> => {
+    const query = `
+      *[
+        _type == "project" &&
+        !(_id in path('drafts.**')) &&
+        slug.current == "${slug}"
+      ] {
+        _id,
+        _updatedAt,
+        "slug": slug.current,
+        title,
+        description,
+        "author": author -> {
+          _id,
+          name,
+          email,
+          "slug": slug.current,
+          "imageUrl": image.asset -> url
+        },
+      }
+    `;
+
+    const resp = await SanityAPI.fetch(query);
+
+    return projectMetaDataDecoder(resp[0]);
+  },
 };
 
 export default ProjectAPI;
 export { projectDecoder, projectOverviewDecoder };
-export type { Project, ProjectOverview };
+export type { Project, ProjectOverview, PageProps };

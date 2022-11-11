@@ -1,5 +1,6 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { MdClose, MdMenu } from 'react-icons/md';
@@ -57,9 +58,11 @@ const Header = () => {
 
       {/* Mobile menu */}
       {isMenuOpen && (
-        <nav
+        <motion.nav
           id="menu-modal"
           className="w-scren z-50 mb-5 flex h-screen flex-col gap-4 py-4 px-5 md:px-10 lg:hidden"
+          initial={{ opacity: 0, x: 100 }}
+          animate={{ opacity: 1, x: 0 }}
         >
           <div className="flex flex-row items-center">
             <h1 className="text-4xl md:text-5xl">omfj.no</h1>
@@ -86,8 +89,8 @@ const Header = () => {
             ))}
           </ul>
           <div className="flex flex-grow" />
-          <p className="text-center">Made with 🍺</p>
-        </nav>
+          <p className="text-center text-faded">Foooooter</p>
+        </motion.nav>
       )}
     </>
   );

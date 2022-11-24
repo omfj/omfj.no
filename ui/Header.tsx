@@ -1,17 +1,19 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { MdClose, MdMenu } from 'react-icons/md';
 
 const routes = [
   { path: '/', name: 'Home' },
-  { path: '/projects', name: 'Projects' },
-  { path: '/contact', name: 'Contact' },
+  { path: '/projects/', name: 'Projects' },
+  { path: '/contact/', name: 'Contact' },
 ];
 
 const Header = () => {
+  const path = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -26,6 +28,8 @@ const Header = () => {
     };
   }, [isMenuOpen]);
 
+  console.log(path);
+
   return (
     <>
       {!isMenuOpen && (
@@ -37,16 +41,25 @@ const Header = () => {
           <div className="flex flex-grow" />
 
           {/* Desktop menu */}
-          <nav className="hidden flex-row gap-4 lg:flex">
-            {routes.map((route) => (
-              <Link
-                className="text-faded transition-colors duration-200 hover:text-secondary"
-                key={route.path}
-                href={route.path}
-              >
-                {route.name}
-              </Link>
-            ))}
+          <nav>
+            <ul className="hidden flex-row gap-4 lg:flex">
+              {routes.map((route) => (
+                <li key={route.path}>
+                  <Link
+                    className="relative text-faded transition-colors duration-200 hover:text-secondary"
+                    href={route.path}
+                  >
+                    {route.name}
+                    {path === route.path && (
+                      <motion.span
+                        layoutId="underline"
+                        className="absolute left-0 top-full block h-[2px] w-full bg-faded"
+                      />
+                    )}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </nav>
 
           {/* Mobile menu button */}

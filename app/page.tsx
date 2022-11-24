@@ -11,7 +11,6 @@ const Page = () => {
           the University of Bergen. I am interested in web development, and I
           have a passion for learning new things.
         </p>
-
         <p>
           I am also a member of echo Webkom at the University of Bergen. Here I
           help develop and maintain the website of echo.

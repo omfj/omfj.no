@@ -24,4 +24,4 @@ Currently working on a 2.0, since I have learned a lot of Rust since when I firs
 
 ---
 
-[Rust version](https://ggithub.com/omfj/appwash-rs) [Python version](https://github.com/omfj/appwash-cli)
+[Rust version](https://github.com/omfj/appwash-rs) [Python version](https://github.com/omfj/appwash-cli)

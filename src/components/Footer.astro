@@ -1,0 +1,35 @@
+---
+import { Icon } from "astro-icon";
+
+const links = [
+	{
+		icon: "mdi:linkedin",
+		url: "https://www.linkedin.com/in/omfj",
+	},
+	{
+		icon: "mdi:github",
+		url: "https://github.com/omfj",
+	},
+	{
+		icon: "mdi:twitter",
+		url: "https://twitter.com/omfj_",
+	},
+	{
+		icon: "mdi:email",
+		url: "mailto:me@omfj.no",
+	}
+]
+---
+
+<footer class="flex flex-col sm:flex-row gap-3 mt-5 py-5 items-center justify-between">
+	<a class="hover:underline" href="https://github.com/omfj/omfj.no">
+		Made with ❤️ by omfj
+	</a>
+	<div class="flex gap-3">
+		{links.map((link) => (
+			<a class="w-7 h-7 hover:text-gray-300" href={link.url} target="_blank" rel="noopener noreferrer">
+				<Icon name={link.icon} />
+			</a>
+		))}
+	</div>
+</footer>

@@ -1,0 +1,27 @@
+---
+import HeaderLink from './HeaderLink.astro';
+import { Icon } from 'astro-icon';
+
+const links = [
+	{
+		href: '/',
+		text: 'Home',
+	},
+	{
+		href: '/projects',
+		text: 'Projects',
+	},
+];
+---
+
+<header class="flex pt-5 pb-10 items-center">
+	<a class="text-4xl font-bold" href="/">
+		omfj
+	</a>
+	<div class="flex-grow" />
+	<nav id="desktop" class="gap-3 flex">
+		{links.map((link) => (
+			<HeaderLink href={link.href}>{link.text}</HeaderLink>
+		))}
+	</nav>
+</header>

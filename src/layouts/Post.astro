@@ -1,0 +1,25 @@
+---
+import { format } from 'date-fns';
+import type { Frontmatter } from '../types';
+import Page from './Page.astro';
+
+export interface Props {
+	content: Frontmatter;
+}
+
+const {
+	content: { title, description, lastUpdated },
+} = Astro.props;
+---
+
+<Page>
+	<article>
+		<div class="py-2 flex flex-col gap-2">
+			<h1 class="text-3xl font-medium">{title}</h1>
+			<p>Last updated: <time>{format(new Date(lastUpdated), "LLL do yyyy")}</time></p>
+		</div>
+		<div class="markdown">
+			<slot />
+		</div>
+	</article>
+</Page>

@@ -1,0 +1,27 @@
+---
+import Page from '../layouts/Page.astro';
+import type { MarkdownInstance } from "astro";
+import type { Frontmatter } from '../types';
+import PostCard from '../components/PostCard.astro';
+
+const posts = (await Astro.glob<MarkdownInstance<Frontmatter>>('./project/*.{md,mdx}')).sort(
+	(a, b) => new Date(b.frontmatter.lastUpdated).valueOf() - new Date(a.frontmatter.lastUpdated).valueOf()
+);
+---
+
+<Page>
+	<section>
+		<ul class="flex flex-col gap-5">
+			{
+				posts.map((post) => (
+					<li>
+						<PostCard
+							url={post.url ?? "/404"}
+							frontmatter={post.frontmatter}
+						/>
+					</li>
+				))
+			}
+		</ul>
+	</section>
+</Page>

@@ -1,8 +1,11 @@
 ---
 layout: "../../layouts/Post.astro"
 title: "echo Webkom"
-description: "Studentgroup"
+description: "Voluntary work for echo UiB"
 lastUpdated: "Jan 01 2023"
+links:
+  Webkom on Github: https://github.com/echo-webkom
+  echo.uib.no: https://echo.uib.no
 ---
 
 echo Webkom is a subgroup of the student association, echo. Members of Webkom helps with maintaining and developing the website [echo.uib.no](https://echo.uib.no/).
@@ -12,7 +15,3 @@ It is here I have learned most of what I know of JavaScript and web development.
 Volunteering for Webkom is probably on the top 3 smartest decisions I have ever made. Not only am I learning a lot, but it has also given me a head start into what I will be doing for the rest of my life after university.
 
 I also get to meet smarter people with the same interests as me.
-
----
-
-[Webkom on Github](https://github.com/echo-webkom)

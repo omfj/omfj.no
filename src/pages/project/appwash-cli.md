@@ -3,6 +3,9 @@ layout: "../../layouts/Post.astro"
 title: "appWash CLI"
 description: "Websites are slow, use your terminal"
 lastUpdated: "Jan 01 2023"
+links:
+  Rust version: https://github.com/omfj/appwash-rs
+  Python version: https://github.com/omfj/appwash-cli
 ---
 
 This me trying to cli-ify the website I use for washing my clothes at my student housing.
@@ -21,7 +24,3 @@ So far the rust version supports these features:
 And some a few other minor features
 
 Currently working on a 2.0, since I have learned a lot of Rust since when I first published this code.
-
----
-
-[Rust version](https://github.com/omfj/appwash-rs) [Python version](https://github.com/omfj/appwash-cli)

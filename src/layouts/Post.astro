@@ -1,25 +1,45 @@
 ---
-import { format } from 'date-fns';
-import type { Frontmatter } from '../types';
-import Page from './Page.astro';
+import { Icon } from "astro-icon";
+import { format } from "date-fns";
+import type { Frontmatter } from "../types";
+import Page from "./Page.astro";
 
 export interface Props {
-	content: Frontmatter;
+  content: Frontmatter;
 }
 
 const {
-	content: { title, description, lastUpdated },
+  content: { title, links, lastUpdated },
 } = Astro.props;
 ---
 
 <Page>
-	<article>
-		<div class="py-2 flex flex-col gap-2">
-			<h1 class="text-3xl font-medium">{title}</h1>
-			<p>Last updated: <time>{format(new Date(lastUpdated), "LLL do yyyy")}</time></p>
-		</div>
-		<div class="markdown">
-			<slot />
-		</div>
-	</article>
+  <p>
+    Last updated: <time>{format(new Date(lastUpdated), "LLLL do yyyy")}</time>
+  </p>
+  <article class="markdown mb-10">
+    <h1>{title}</h1>
+
+    <slot />
+  </article>
+  {
+    links && (
+      <>
+        <h2 class="text-2xl font-bold mb-2">Links:</h2>
+        <div class="flex flex-col gap-2">
+          {Object.entries(links).map(([name, link], i) => (
+            <a
+              class="flex underline gap-1 items-center w-fit"
+              href={link}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {name}
+              <Icon class="h-4 w-4" name="mdi:external-link" />
+            </a>
+          ))}
+        </div>
+      </>
+    )
+  }
 </Page>

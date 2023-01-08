@@ -9,10 +9,14 @@
 
   html,
   body {
-    @apply bg-bg text-fg max-w-2xl mx-auto px-2;
+    @apply bg-bg text-fg min-h-screen flex flex-col;
+  }
+
+  body {
+    @apply max-w-2xl mx-auto w-full px-2;
   }
 
   .markdown {
-    @apply text-base leading-5 prose prose-invert;
+    @apply leading-5 prose prose-invert;
   }
 }

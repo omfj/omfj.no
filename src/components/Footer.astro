@@ -5,18 +5,22 @@ const links = [
 	{
 		icon: "mdi:linkedin",
 		url: "https://www.linkedin.com/in/omfj",
+		alt: "LinkedIn"
 	},
 	{
 		icon: "mdi:github",
 		url: "https://github.com/omfj",
+		alt: "Github"
 	},
 	{
 		icon: "mdi:twitter",
 		url: "https://twitter.com/omfj_",
+		alt: "Twitter"
 	},
 	{
 		icon: "mdi:email",
 		url: "mailto:me@omfj.no",
+		alt: "Email"
 	}
 ]
 ---
@@ -28,6 +32,7 @@ const links = [
 	<div class="flex gap-3">
 		{links.map((link) => (
 			<a class="w-7 h-7 hover:text-gray-300" href={link.url} target="_blank" rel="noopener noreferrer">
+				<span class="sr-only">{link.alt}</span>
 				<Icon name={link.icon} />
 			</a>
 		))}

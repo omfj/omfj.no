@@ -4,3 +4,10 @@ export interface Frontmatter {
   lastUpdated: string;
   links?: Record<string, string>;
 }
+
+export interface ThoughtFrontmatter {
+  title: string;
+  description: string;
+  pubDate: string;
+  links?: Record<string, string>;
+}

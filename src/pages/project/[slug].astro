@@ -27,9 +27,8 @@ const { Content } = await project.render();
     Last updated: <time>{format(project.data.lastUpdated, "LLLL do yyyy")}</time
     >
   </p>
-  <article class="markdown mb-10">
+  <article class="markdown">
     <h1>{project.data.title}</h1>
-
     <Content />
   </article>
 </Page>

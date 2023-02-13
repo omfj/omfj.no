@@ -1,16 +1,9 @@
 ---
 import Page from "../layouts/Page.astro";
-import type { MarkdownInstance } from "astro";
-import type { Frontmatter } from "../types";
 import PostCard from "../components/PostCard.astro";
+import { getCollection } from "astro:content";
 
-const posts = (
-  await Astro.glob<MarkdownInstance<Frontmatter>>("./project/*.{md,mdx}")
-).sort(
-  (a, b) =>
-    new Date(b.frontmatter.lastUpdated).valueOf() -
-    new Date(a.frontmatter.lastUpdated).valueOf()
-);
+const projects = await getCollection("project");
 ---
 
 <Page>
@@ -18,9 +11,12 @@ const posts = (
     <h1 class="text-4xl font-semibold">Projects</h1>
     <ul class="flex flex-col gap-5">
       {
-        posts.map((post) => (
+        projects.map((project) => (
           <li>
-            <PostCard url={post.url ?? "/404"} frontmatter={post.frontmatter} />
+            <PostCard
+              url={`/project/${project.slug}`}
+              frontmatter={project.data}
+            />
           </li>
         ))
       }

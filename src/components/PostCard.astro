@@ -1,13 +1,13 @@
 ---
 import { format } from "date-fns";
-import type { Frontmatter } from "../types";
+import type { ProjectFromatter } from "../content/_schemas";
 
 export interface Props {
   url: string;
-  frontmatter: Frontmatter;
+  frontmatter: ProjectFromatter;
 }
 
-const { url, frontmatter } = Astro.props as Props;
+const { url, frontmatter } = Astro.props satisfies Props;
 ---
 
 <a

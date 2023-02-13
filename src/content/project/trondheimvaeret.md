@@ -1,10 +1,7 @@
 ---
-layout: "../../layouts/Post.astro"
 title: "@trondheimvaeret"
 description: "Bot for tweeting the weather"
 lastUpdated: "Jan 01 2023"
-links:
-  Github repo: https://github.com/omfj/trondheimvaeret
 ---
 
 This was one of the first programming projects. It first started in 2017, when me and some friends were attending "Lær kidsa koding". Since me and my friends had done most of the recommended projects, we decided to do something ourselves. We decided on a twitter bot that uses the [yr.no](https://www.yr.no/) API, and tweets the weather. We did not know how make the script run on a server, so it mostly ran on my PC when I was at school. After a few days this got annoying. And the project got abandoned.

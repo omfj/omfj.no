@@ -1,10 +1,7 @@
 ---
-layout: "../../layouts/Post.astro"
 title: "Team Local Tactics"
 description: "Rock paper scissors, with a twist"
 lastUpdated: "Jan 01 2023"
-links:
-  Github repo: https://github.com/omfj/team-local-tactics
 ---
 
 For the mandatory assignment in INF142 (Computer Networks) we had to create a game called Team Local Tactics. The task was to make a client, server and database. The client should connect to the server and the server should wait for two clients, before it starts a game. Then when the game is over, the server could then upload the match to the database.

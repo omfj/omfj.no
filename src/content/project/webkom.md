@@ -1,11 +1,7 @@
 ---
-layout: "../../layouts/Post.astro"
 title: "echo Webkom"
 description: "Voluntary work for echo UiB"
 lastUpdated: "Jan 01 2023"
-links:
-  Webkom on Github: https://github.com/echo-webkom
-  echo.uib.no: https://echo.uib.no
 ---
 
 echo Webkom is a subgroup of the student association, echo. Members of Webkom helps with maintaining and developing the website [echo.uib.no](https://echo.uib.no/).

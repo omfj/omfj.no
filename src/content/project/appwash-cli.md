@@ -1,11 +1,7 @@
 ---
-layout: "../../layouts/Post.astro"
 title: "appWash CLI"
 description: "Websites are slow, use your terminal"
 lastUpdated: "Jan 01 2023"
-links:
-  Rust version: https://github.com/omfj/appwash-rs
-  Python version: https://github.com/omfj/appwash-cli
 ---
 
 This me trying to cli-ify the website I use for washing my clothes at my student housing.

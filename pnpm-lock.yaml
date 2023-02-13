@@ -5,7 +5,7 @@ specifiers:
   '@astrojs/rss': 2.0.0
   '@astrojs/sitemap': 1.0.0
   '@astrojs/tailwind': 3.0.1
-  '@tailwindcss/typography': 0.5.8
+  '@tailwindcss/typography': 0.5.9
   astro: 2.0.10
   astro-icon: 0.8.0
   date-fns: 2.29.3
@@ -24,7 +24,7 @@ dependencies:
   tailwindcss: 3.0.24
 
 devDependencies:
-  '@tailwindcss/typography': 0.5.8_tailwindcss@3.0.24
+  '@tailwindcss/typography': 0.5.9_tailwindcss@3.0.24
   prettier: 2.8.2
   prettier-plugin-astro: 0.8.0
 
@@ -749,8 +749,8 @@ packages:
       picomatch: 2.3.1
     dev: false
 
-  /@tailwindcss/typography/0.5.8_tailwindcss@3.0.24:
-    resolution: {integrity: sha512-xGQEp8KXN8Sd8m6R4xYmwxghmswrd0cPnNI2Lc6fmrC3OojysTBJJGSIVwPV56q4t6THFUK3HJ0EaWwpglSxWw==}
+  /@tailwindcss/typography/0.5.9_tailwindcss@3.0.24:
+    resolution: {integrity: sha512-t8Sg3DyynFysV9f4JDOVISGsjazNb48AeIYQwcL+Bsq5uf4RYL75C1giZ43KISjeDGBaTN3Kxh7Xj/vRSMJUUg==}
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders'
     dependencies:

@@ -1,0 +1,25 @@
+---
+import Page from "../layouts/Page.astro";
+import ThoughtCard from "../components/ThoughtCard.astro";
+import { getCollection } from "astro:content";
+
+const thoughts = await getCollection("thought");
+---
+
+<Page>
+  <section class="flex flex-col gap-3">
+    <h1 class="text-4xl font-semibold">Thoughts</h1>
+    <ul class="flex flex-col gap-5">
+      {
+        thoughts.map((thought) => (
+          <li>
+            <ThoughtCard
+              url={`/thought/${thought.slug}`}
+              frontmatter={thought.data}
+            />
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Page>

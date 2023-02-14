@@ -1,13 +1,13 @@
 ---
 import { format } from "date-fns";
-import type { ThoughtFrontmatter } from "../types";
+import type { ThoughtFrontmatter } from "../content/_schemas";
 
 export interface Props {
   url: string;
   frontmatter: ThoughtFrontmatter;
 }
 
-const { url, frontmatter } = Astro.props as Props;
+const { url, frontmatter } = Astro.props satisfies Props;
 ---
 
 <a
@@ -17,6 +17,7 @@ const { url, frontmatter } = Astro.props as Props;
   <time class="text-sm text-fg/60"
     >Published: {format(new Date(frontmatter.pubDate), "MMM do yyyy")}</time
   >
+
   <div class="flex flex-col gap-2">
     <p class="text-xl font-semibold">{frontmatter.title}</p>
     <p>{frontmatter.description}</p>

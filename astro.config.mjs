@@ -4,7 +4,7 @@ import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 
 export default defineConfig({
-  site: "https://omfj.no",
+  site: "https://omfj.no/",
   integrations: [mdx(), sitemap(), tailwind()],
   markdown: {
     shikiConfig: {

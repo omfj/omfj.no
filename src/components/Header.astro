@@ -10,14 +10,24 @@ const links = [
     href: "/projects",
     text: "Projects",
   },
+  // {
+  //   href: "/thoughts",
+  //   text: "Thoughts",
+  // },
 ];
 ---
 
-<header class="flex gap-2 mt-5 mb-10 border-b border-b-fg/30 py-3 items-center">
-  <div class="flex-1">
-    <a class="text-4xl font-bold" href="/"> omfj</a>
+<header class="mt-5 mb-10 border-b border-b-fg/30">
+  <div class="flex gap-2 py-3 items-center px-3">
+    <div class="flex-1">
+      <a class="text-4xl font-bold" href="/"> omfj</a>
+    </div>
+    <nav class="flex flex-0 gap-1">
+      {
+        links.map((link) => (
+          <HeaderLink href={link.href}>{link.text}</HeaderLink>
+        ))
+      }
+    </nav>
   </div>
-  <nav class="flex flex-0 gap-3">
-    {links.map((link) => <HeaderLink href={link.href}>{link.text}</HeaderLink>)}
-  </nav>
 </header>

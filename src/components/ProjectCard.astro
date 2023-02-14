@@ -1,10 +1,10 @@
 ---
 import { format } from "date-fns";
-import type { ProjectFromatter } from "../content/_schemas";
+import type { ProjectFrontmatter } from "../content/_schemas";
 
 export interface Props {
   url: string;
-  frontmatter: ProjectFromatter;
+  frontmatter: ProjectFrontmatter;
 }
 
 const { url, frontmatter } = Astro.props satisfies Props;
@@ -19,6 +19,7 @@ const { url, frontmatter } = Astro.props satisfies Props;
       format(new Date(frontmatter.lastUpdated), "MMM do yyyy")
     }</time
   >
+
   <div class="flex flex-col gap-2">
     <p class="text-xl font-semibold">{frontmatter.title}</p>
     <p>{frontmatter.description}</p>

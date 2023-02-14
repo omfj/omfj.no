@@ -8,5 +8,14 @@ export const projectSchema = z
     lastUpdated: z.string().transform((s) => new Date(s)),
   })
   .strict();
+export type ProjectFrontmatter = z.infer<typeof projectSchema>;
 
-export type ProjectFromatter = z.infer<typeof projectSchema>;
+export const thoughtSchema = z
+  .object({
+    title: z.string(),
+    description: z.string(),
+    tags: z.array(z.string()).optional(),
+    pubDate: z.string().transform((s) => new Date(s)),
+  })
+  .strict();
+export type ThoughtFrontmatter = z.infer<typeof thoughtSchema>;

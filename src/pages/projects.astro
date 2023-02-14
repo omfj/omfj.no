@@ -1,6 +1,6 @@
 ---
 import Page from "../layouts/Page.astro";
-import PostCard from "../components/PostCard.astro";
+import ProjectCard from "../components/ProjectCard.astro";
 import { getCollection } from "astro:content";
 
 const projects = await getCollection("project");
@@ -13,7 +13,7 @@ const projects = await getCollection("project");
       {
         projects.map((project) => (
           <li>
-            <PostCard
+            <ProjectCard
               url={`/project/${project.slug}`}
               frontmatter={project.data}
             />

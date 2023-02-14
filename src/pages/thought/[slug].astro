@@ -1,0 +1,33 @@
+---
+import { CollectionEntry, getCollection } from "astro:content";
+import { format } from "date-fns";
+import Page from "../../layouts/Page.astro";
+
+export interface Props {
+  thought: CollectionEntry<"thought">;
+}
+
+export const getStaticPaths = async () => {
+  const thoughts = await getCollection("thought");
+
+  const thoughtResults = thoughts.map((thought) => ({
+    params: { slug: thought.slug },
+    props: { thought },
+  }));
+
+  return thoughtResults;
+};
+
+const { thought } = Astro.props;
+const { Content } = await thought.render();
+---
+
+<Page>
+  <p>
+    Published: <time>{format(thought.data.pubDate, "LLLL do yyyy")}</time>
+  </p>
+  <article class="markdown">
+    <h1>{thought.data.title}</h1>
+    <Content />
+  </article>
+</Page>

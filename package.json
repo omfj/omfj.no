@@ -26,7 +26,7 @@
     "lint-staged": "13.2.0",
     "prettier": "latest",
     "prettier-plugin-organize-imports": "3.2.2",
-    "prettier-plugin-tailwindcss": "0.2.6",
+    "prettier-plugin-tailwindcss": "0.2.7",
     "turbo": "latest",
     "typescript": "^5.0.3"
   },

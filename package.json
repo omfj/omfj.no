@@ -1,30 +1,48 @@
 {
   "name": "omfj.no",
-  "type": "module",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "private": true,
+  "license": "MIT",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro",
-    "prettier": "prettier --write --plugin-search-dir=. .",
-    "sync": "astro sync"
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "lint": "turbo run lint && manypkg check",
+    "lint:fix": "turbo lint -- --fix && manypkg fix",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,md,mdx}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,md,mdx}\"",
+    "prepare": "husky install"
   },
   "dependencies": {
-    "@astrojs/mdx": "0.16.0",
-    "@astrojs/rss": "2.0.0",
-    "@astrojs/sitemap": "1.0.1",
-    "@astrojs/tailwind": "3.0.1",
-    "astro": "2.0.10",
-    "astro-icon": "0.8.0",
-    "date-fns": "2.29.3",
-    "tailwindcss": "3.0.24"
+    "@ianvs/prettier-plugin-sort-imports": "^3.7.2",
+    "@manypkg/cli": "0.20.0",
+    "@types/node": "18.14.6",
+    "eslint": "^8.37.0",
+    "eslint-config-custom": "0.0.0",
+    "husky": "8.0.3",
+    "lint-staged": "13.2.0",
+    "prettier": "latest",
+    "prettier-plugin-organize-imports": "3.2.2",
+    "prettier-plugin-tailwindcss": "0.2.6",
+    "turbo": "latest",
+    "typescript": "^5.0.3"
   },
-  "devDependencies": {
-    "@tailwindcss/typography": "0.5.9",
-    "prettier": "2.8.2",
-    "prettier-plugin-astro": "0.8.0"
-  }
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,md,mjs,cjs}": [
+      "pnpm lint --fix",
+      "pnpm format"
+    ]
+  },
+  "pnpm": {
+    "overrides": {
+      "next@latest": "13.0.6"
+    }
+  },
+  "packageManager": "pnpm@8.1.0"
 }

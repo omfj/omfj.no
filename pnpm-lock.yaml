@@ -139,8 +139,8 @@ importers:
         specifier: 18.0.33
         version: 18.0.33
       '@types/react-dom':
-        specifier: ^18.0.7
-        version: 18.0.7
+        specifier: ^18.0.11
+        version: 18.0.11
       autoprefixer:
         specifier: ^10.4.14
         version: 10.4.14(postcss@8.4.21)
@@ -2745,8 +2745,8 @@ packages:
       '@types/react': 18.0.33
     dev: false
 
-  /@types/react-dom@18.0.7:
-    resolution: {integrity: sha512-HaXc+BbqAZE1RdsK3tC8SbkFy6UL2xF76lT9rQs5JkPrJg3rWA3Ou/Lhw3YJQzEDkBpmJ79nBsfnd05WrBd2QQ==}
+  /@types/react-dom@18.0.11:
+    resolution: {integrity: sha512-O38bPbI2CWtgw/OoQoY+BRelw7uysmXbWvw3nLWO21H1HSh+GOlqPuXshJfjmpNlKiiSDG9cc1JZAaMmVdcTlw==}
     dependencies:
       '@types/react': 18.0.33
     dev: true

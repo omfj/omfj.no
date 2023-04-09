@@ -129,6 +129,9 @@ importers:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
     devDependencies:
+      '@portabletext/types':
+        specifier: ^2.0.2
+        version: 2.0.2
       '@types/node':
         specifier: 18.14.6
         version: 18.14.6
@@ -2070,7 +2073,6 @@ packages:
   /@portabletext/types@2.0.2:
     resolution: {integrity: sha512-3xTbSa80G1nODyACY0ilrmPo1PmU1xuoPvfcpzpqSEL0kX01fSW+21PKgS9BcG+GqdG9HK/VxciKWa+nFA7mqg==}
     engines: {node: ^14.13.1 || >=16.0.0 || >=18.0.0}
-    dev: false
 
   /@reduxjs/toolkit@1.9.3(react-redux@7.2.9)(react@18.2.0):
     resolution: {integrity: sha512-GU2TNBQVofL09VGmuSioNPQIu6Ml0YLf4EJhgj0AvBadRlCGzUWet8372LjvO4fqKZF2vH1xU0htAa7BrK9pZg==}

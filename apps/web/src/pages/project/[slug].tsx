@@ -4,7 +4,7 @@ import {PortableText} from "@portabletext/react";
 import {format} from "date-fns";
 
 import ErrorBox from "@/components/error";
-import Title from "@/components/title";
+import Heading from "@/components/ui/heading";
 import MainLayout from "@/layouts/main-layout";
 import {fetchProjectBySlug} from "@/lib/sanity/project";
 import {fetchSlugsByType} from "@/lib/sanity/slug";
@@ -21,7 +21,7 @@ export default function ProjectsOverviewPage({project}: Props) {
         <ErrorBox message={project.message} />
       ) : (
         <>
-          <Title>{project.title}</Title>
+          <Heading as="h2">{project.title}</Heading>
 
           <ul className="mt-2 flex">
             {project.categories.map((category) => (

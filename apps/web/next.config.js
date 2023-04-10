@@ -5,6 +5,8 @@ const nextConfig = {
   images: {
     domains: ["cdn.sanity.io"],
   },
+
+  // transpilePackages: ["@omfj.no/ui"],
 };
 
 module.exports = nextConfig;

@@ -10,8 +10,10 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
+    "start": "turbo run start",
     "lint": "turbo run lint && manypkg check",
     "lint:fix": "turbo lint -- --fix && manypkg fix",
+    "clean": "turbo run clean && rm -rf node_modules",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,md,mdx}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,md,mdx}\"",
     "prepare": "husky install"

@@ -7,7 +7,7 @@ type MainLayoutProps = {
 
 export default function MainLayout({children}: MainLayoutProps) {
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-white">
       <Header />
       <main className="mx-auto w-full max-w-3xl flex-1 px-5 py-10">{children}</main>
       <Footer />

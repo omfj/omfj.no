@@ -1,10 +1,9 @@
 import {GetStaticProps} from "next";
 import Link from "next/link";
-import clsx from "clsx";
 import {format} from "date-fns";
 
 import ErrorBox from "@/components/error";
-import Title from "@/components/title";
+import Heading from "@/components/ui/heading";
 import MainLayout from "@/layouts/main-layout";
 import {fetchProjectsByCategory} from "@/lib/sanity/project";
 import {fetchSlugsByType} from "@/lib/sanity/slug";
@@ -22,7 +21,7 @@ export default function ProjectsOverviewPage({projects, slug}: Props) {
         <ErrorBox title="Something has gone wrong!" message={projects.message} />
       ) : (
         <>
-          <Title>Category - {slug}</Title>
+          <Heading as="h2">Category - {slug}</Heading>
           <ul className="divide-y">
             {projects.map((project) => {
               return (

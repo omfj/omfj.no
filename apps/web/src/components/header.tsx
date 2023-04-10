@@ -1,5 +1,10 @@
 import {useState} from "react";
 import Link from "next/link";
+import {Bars3Icon, MoonIcon, SunIcon, XMarkIcon} from "@heroicons/react/24/outline";
+import clsx from "clsx";
+import {useTheme} from "next-themes";
+
+import Button from "./ui/button";
 
 const routes = [
   {
@@ -17,23 +22,29 @@ export default function Header() {
 
   const toggle = () => setIsOpen((prev) => !prev);
 
+  const {theme, setTheme} = useTheme();
+
   return (
-    <div className="sticky top-0 z-30 w-full bg-white">
-      <header className="flex items-baseline border-b p-5">
+    <div className="sticky top-0 z-30 w-full">
+      <header
+        className={clsx("flex items-baseline border-b p-5 backdrop-blur", {
+          "backdrop-blur-0": isOpen,
+        })}
+      >
         <div>
           <Link href="/">
             <h1 className="text-3xl font-bold">omfj</h1>
           </Link>
         </div>
 
-        <div className="ml-auto mt-auto">
+        <div className="ml-auto mt-auto flex items-center gap-2">
           <nav className="hidden md:block">
-            <ul className="flex gap-2">
+            <ul className="flex gap-1">
               {routes.map(({label, to}) => {
                 return (
                   <li key={`${label}${to}`}>
                     <Link
-                      className="rounded border-2 border-transparent px-2 py-1 transition-colors hover:text-blue-400"
+                      className="rounded border-2 border-transparent px-2 py-1 text-sm font-semibold transition-colors hover:text-blue-400"
                       href={to}
                     >
                       {label}
@@ -43,48 +54,20 @@ export default function Header() {
               })}
             </ul>
           </nav>
-          <div className="flex md:hidden">
-            {isOpen ? (
-              <button onClick={toggle}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="h-6 w-6"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            ) : (
-              <button onClick={toggle}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="h-6 w-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                  />
-                </svg>
-              </button>
-            )}
+          <div className="flex items-center gap-4">
+            <button className="h-6 w-6 md:hidden" onClick={toggle}>
+              {isOpen ? <XMarkIcon /> : <Bars3Icon />}
+            </button>
           </div>
         </div>
       </header>
       {isOpen && (
         <div className="absolute z-10 mx-auto w-full bg-inherit px-2 py-3 sm:px-3">
-          <div className="rounded-lg border p-5">
+          <div className="flex flex-col gap-3 rounded-lg border bg-white p-5 shadow-xl">
             <ul className="flex flex-col divide-y text-xl">
               {routes.map(({label, to}) => {
                 return (
-                  <li key={`${label}${to}`} className="py-2">
+                  <li key={`${label}${to}`} className="py-3">
                     <Link className="flex hover:text-blue-500" href={to}>
                       {label}
                     </Link>
@@ -92,9 +75,7 @@ export default function Header() {
                 );
               })}
             </ul>
-            <button onClick={toggle} className="mt-2 w-full rounded border py-2">
-              Close
-            </button>
+            <Button onClick={toggle}>Close</Button>
           </div>
         </div>
       )}

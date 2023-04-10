@@ -1,9 +1,8 @@
 import Link from "next/link";
-import clsx from "clsx";
 import {format} from "date-fns";
 
 import ErrorBox from "@/components/error";
-import Title from "@/components/title";
+import Heading from "@/components/ui/heading";
 import MainLayout from "@/layouts/main-layout";
 import {fetchProjectOverviews} from "@/lib/sanity/project";
 import {isErrorMessage} from "@/utils/error";
@@ -19,7 +18,7 @@ export default function ProjectsOverviewPage({projects}: Props) {
         <ErrorBox title="Something has gone wrong!" message={projects.message} />
       ) : (
         <>
-          <Title>Projects</Title>
+          <Heading as="h2">Projects</Heading>
           <ul className="divide-y">
             {projects.map((project) => {
               return (

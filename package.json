@@ -36,7 +36,7 @@
     "node": ">=v14.21.3"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,md,mjs,cjs}": [
+    "**/*.{js,jsx,ts,tsx,md,mjs,cjs}": [
       "pnpm lint:fix",
       "pnpm format"
     ]

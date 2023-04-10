@@ -1,8 +1,7 @@
 import {useState} from "react";
 import Link from "next/link";
-import {Bars3Icon, MoonIcon, SunIcon, XMarkIcon} from "@heroicons/react/24/outline";
+import {Bars3Icon, XMarkIcon} from "@heroicons/react/24/outline";
 import clsx from "clsx";
-import {useTheme} from "next-themes";
 
 import Button from "./ui/button";
 
@@ -22,13 +21,11 @@ export default function Header() {
 
   const toggle = () => setIsOpen((prev) => !prev);
 
-  const {theme, setTheme} = useTheme();
-
   return (
     <div className="sticky top-0 z-30 w-full">
       <header
         className={clsx("flex items-baseline border-b p-5 backdrop-blur", {
-          "backdrop-blur-0": isOpen,
+          "bg-white backdrop-blur-0": isOpen,
         })}
       >
         <div>

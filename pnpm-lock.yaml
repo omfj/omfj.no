@@ -184,8 +184,8 @@ importers:
         specifier: latest
         version: 1.8.8(eslint@8.37.0)
       eslint-plugin-react:
-        specifier: 7.31.8
-        version: 7.31.8(eslint@8.37.0)
+        specifier: 7.32.2
+        version: 7.32.2(eslint@8.37.0)
     devDependencies:
       typescript:
         specifier: ^5.0.3
@@ -3236,7 +3236,6 @@ packages:
       es-abstract: 1.21.2
       es-shim-unscopables: 1.0.0
       get-intrinsic: 1.2.0
-    dev: true
 
   /arrify@1.0.1:
     resolution: {integrity: sha512-3CYzex9M9FGQjCGMGyi6/31c8GJbgb0qGyrx5HWxPd0aCwh4cB2YjMb2Xf9UuoogrMrlO9cTqnB5rI5GHZTcUA==}
@@ -4848,7 +4847,6 @@ packages:
       resolve: 2.0.0-next.4
       semver: 6.3.0
       string.prototype.matchall: 4.0.8
-    dev: true
 
   /eslint-plugin-turbo@1.8.8(eslint@8.37.0):
     resolution: {integrity: sha512-zqyTIvveOY4YU5jviDWw9GXHd4RiKmfEgwsjBrV/a965w0PpDwJgEUoSMB/C/dU310Sv9mF3DSdEjxjJLaw6rA==}

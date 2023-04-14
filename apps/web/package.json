@@ -14,7 +14,7 @@
     "@heroicons/react": "^2.0.17",
     "@omfj.no/tailwind-config": "0.1.0",
     "@portabletext/react": "^2.0.2",
-    "class-variance-authority": "^0.5.1",
+    "class-variance-authority": "^0.5.2",
     "clsx": "^1.2.1",
     "date-fns": "^2.29.3",
     "next": "^13.3.0",

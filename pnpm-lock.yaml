@@ -111,8 +111,8 @@ importers:
         specifier: ^2.0.2
         version: 2.0.2(react@18.2.0)
       class-variance-authority:
-        specifier: ^0.5.1
-        version: 0.5.1(typescript@5.0.4)
+        specifier: ^0.5.2
+        version: 0.5.2(typescript@5.0.4)
       clsx:
         specifier: ^1.2.1
         version: 1.2.1
@@ -3537,8 +3537,8 @@ packages:
     resolution: {integrity: sha512-jJ0bqzaylmJtVnNgzTeSOs8DPavpbYgEr/b0YL8/2GO3xJEhInFmhKMUnEJQjZumK7KXGFhUy89PrsJWlakBVg==}
     dev: false
 
-  /class-variance-authority@0.5.1(typescript@5.0.4):
-    resolution: {integrity: sha512-J3tAiPbmBhPffsZ6Le3cR4o5hN78XBTst5NwCJJF7hAkZYIDuHQKV03Tb89zMDAxIONmM+DFRooMUCK5nTWpvQ==}
+  /class-variance-authority@0.5.2(typescript@5.0.4):
+    resolution: {integrity: sha512-j7Qqw3NPbs4IpO80gvdACWmVvHiLLo5MECacUBLnJG17CrLpWaQ7/4OaWX6P0IO1j2nvZ7AuSfBS/ImtEUZJGA==}
     peerDependencies:
       typescript: '>= 4.5.5 < 6'
     peerDependenciesMeta:

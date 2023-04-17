@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@sanity/color-input": "^3.0.2",
-    "@sanity/icons": "^2.2.2",
+    "@sanity/icons": "^2.3.0",
     "@sanity/vision": "^3.8.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",

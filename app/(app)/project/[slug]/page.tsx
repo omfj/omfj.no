@@ -1,3 +1,4 @@
+import {previewData} from "next/dist/client/components/headers";
 import Link from "next/link";
 import {notFound} from "next/navigation";
 import {PortableText} from "@portabletext/react";

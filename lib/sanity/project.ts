@@ -1,7 +1,6 @@
 import type {PortableTextBlock} from "@portabletext/types";
 
-import {ErrorMessage} from "@/utils/error";
-import {sanityClient} from "./client";
+import {serverFetch} from "./client";
 
 type ProjectOverview = {
   _id: string;
@@ -17,9 +16,8 @@ type ProjectOverview = {
   }>;
 };
 
-export const fetchProjectOverviews = async (): Promise<Array<ProjectOverview> | ErrorMessage> => {
-  try {
-    const query = `
+export const fetchProjectOverviews = async () => {
+  const query = `
     *[_type == "project" && !(_id in path('drafts.**'))] | order(_updatedAt asc) {
       _id,
       _createdAt,
@@ -35,12 +33,7 @@ export const fetchProjectOverviews = async (): Promise<Array<ProjectOverview> | 
     }
     `;
 
-    return await sanityClient.fetch(query);
-  } catch {
-    return {
-      message: "Failed to fetch overview of projects.",
-    };
-  }
+  return await serverFetch<Array<ProjectOverview>>(query);
 };
 
 type Project = {
@@ -51,9 +44,8 @@ type Project = {
   body: Array<PortableTextBlock>;
 };
 
-export const fetchProjectBySlug = async (slug: string): Promise<Project | ErrorMessage> => {
-  try {
-    const query = `
+export const fetchProjectBySlug = async (slug: string) => {
+  const query = `
     *[_type == "project" && slug.current == $slug && !(_id in path('drafts.**'))][0] {
       _createdAt,
       _updatedAt,
@@ -67,23 +59,15 @@ export const fetchProjectBySlug = async (slug: string): Promise<Project | ErrorM
     }
     `;
 
-    const params = {
-      slug,
-    };
+  const params = {
+    slug,
+  };
 
-    return await sanityClient.fetch(query, params);
-  } catch {
-    return {
-      message: "Failed to fetch project.",
-    };
-  }
+  return await serverFetch<Project>(query, params);
 };
 
-export const fetchProjectsByCategory = async (
-  category: string,
-): Promise<Array<ProjectOverview> | ErrorMessage> => {
-  try {
-    const query = `
+export const fetchProjectsByCategory = async (category: string) => {
+  const query = `
     *[_type == "project" && references(*[_type == "category" && slug.current == $category]._id) && !(_id in path('drafts.**'))] | order(_updatedAt asc) {
       _id,
       _createdAt,
@@ -99,14 +83,9 @@ export const fetchProjectsByCategory = async (
     }
     `;
 
-    const params = {
-      category,
-    };
+  const params = {
+    category,
+  };
 
-    return await sanityClient.fetch(query, params);
-  } catch {
-    return {
-      message: "Failed to fetch projects.",
-    };
-  }
+  return await serverFetch<Array<ProjectOverview>>(query, params);
 };

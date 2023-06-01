@@ -1,43 +1,30 @@
-import {previewData} from "next/dist/client/components/headers";
 import Link from "next/link";
-import {notFound} from "next/navigation";
 import {PortableText} from "@portabletext/react";
 
 import {formatDate} from "@/lib/date";
 import {fetchProjectBySlug} from "@/lib/sanity/project";
 import {fetchSlugsByType} from "@/lib/sanity/slug";
-import {isErrorMessage} from "@/utils/error";
 
-export const generateStaticParams = async () => {
+export const dyanmicParams = false;
+
+export async function generateStaticParams() {
   const slugs = await fetchSlugsByType("project");
-
-  if (isErrorMessage(slugs)) {
-    return [];
-  }
 
   return slugs.map((slug) => ({
     slug,
   }));
-};
+}
 
-export const generateMetadata = async ({params}: {params: {slug: string}}) => {
+export async function generateMetadata({params}: {params: {slug: string}}) {
   const project = await fetchProjectBySlug(params.slug);
-
-  if (isErrorMessage(project)) {
-    notFound();
-  }
 
   return {
-    title: `${project.title} | omfj.no`,
+    title: project.title,
   };
-};
+}
 
-const Project = async ({params}: {params: {slug: string}}) => {
+export default async function Project({params}: {params: {slug: string}}) {
   const project = await fetchProjectBySlug(params.slug);
-
-  if (isErrorMessage(project)) {
-    notFound();
-  }
 
   return (
     <main>
@@ -66,6 +53,4 @@ const Project = async ({params}: {params: {slug: string}}) => {
       </div>
     </main>
   );
-};
-
-export default Project;
+}

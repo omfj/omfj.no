@@ -1,15 +1,9 @@
-import {notFound} from "next/navigation";
 import {PortableText} from "@portabletext/react";
 
 import {fetchSiteSettings} from "@/lib/sanity/settings";
-import {isErrorMessage} from "@/utils/error";
 
-const Home = async () => {
+export default async function HomePage() {
   const settings = await fetchSiteSettings();
-
-  if (isErrorMessage(settings)) {
-    notFound();
-  }
 
   return (
     <main className="text-center">
@@ -17,6 +11,4 @@ const Home = async () => {
       <PortableText value={settings.description} />
     </main>
   );
-};
-
-export default Home;
+}

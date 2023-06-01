@@ -1,12 +1,21 @@
 import SiteFooter from "@/components/site-footer";
 import SiteHeader from "@/components/site-header";
 import "@/styles/globals.css";
+import {Metadata} from "next";
 import {IBM_Plex_Mono, Inter} from "next/font/google";
 
 import {cn} from "@/utils/cn";
 
-export const metadata = {
-  title: "omfj.no",
+export const metadata: Metadata = {
+  title: {
+    default: "omfj.no",
+    template: "%s | omfj.no",
+  },
+  description: "My (omfj) personal website",
+  themeColor: "#ffffff",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export const inter = Inter({
@@ -24,7 +33,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-const RootLayout = ({children}: Props) => {
+export default function RootLayout({children}: Props) {
   return (
     <html
       lang="en"
@@ -41,6 +50,4 @@ const RootLayout = ({children}: Props) => {
       </body>
     </html>
   );
-};
-
-export default RootLayout;
+}

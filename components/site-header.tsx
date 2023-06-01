@@ -81,7 +81,6 @@ const Header = () => {
                 );
               })}
             </ul>
-            <Button onClick={toggle}>Close</Button>
           </div>
         </div>
       )}

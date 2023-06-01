@@ -33,7 +33,7 @@ export default async function Category({params}: {params: {slug: string}}) {
                   <h2 className="text-xl transition-all group-hover:text-blue-500 group-hover:underline">
                     {project.title}
                   </h2>
-                  <p className="duration-50 hidden scale-0 text-sm text-gray-400 transition-all group-hover:scale-100 sm:block">
+                  <p className="hidden scale-0 text-sm text-gray-400 transition-all group-hover:scale-100 sm:block">
                     Last updated: <time>{formatDate(project._updatedAt)}</time>
                   </p>
                 </div>

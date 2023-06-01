@@ -5,7 +5,7 @@ import {formatDate} from "@/lib/date";
 import {fetchProjectBySlug} from "@/lib/sanity/project";
 import {fetchSlugsByType} from "@/lib/sanity/slug";
 
-export const dyanmicParams = false;
+export const dynamicParams = false;
 
 export async function generateStaticParams() {
   const slugs = await fetchSlugsByType("project");

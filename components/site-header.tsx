@@ -50,7 +50,7 @@ const Header = () => {
                 return (
                   <li key={`${label}${to}`}>
                     <Link
-                      className="text-md rounded border-2 border-transparent px-2 py-1 font-semibold transition-colors hover:text-blue-400"
+                      className="rounded border-2 border-transparent px-2 py-1 font-semibold transition-colors hover:text-blue-400"
                       href={to}
                     >
                       {label}

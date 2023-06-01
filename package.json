@@ -39,7 +39,6 @@
     "next": "13.3.1",
     "next-sanity": "^4.1.7",
     "postcss": "8.4.23",
-    "prettier": "latest",
     "prettier-plugin-organize-imports": "3.2.2",
     "prettier-plugin-tailwindcss": "0.2.7",
     "react": "18.2.0",
@@ -66,5 +65,10 @@
       "next@latest": "13.0.6"
     }
   },
-  "packageManager": "pnpm@8.3.1"
+  "packageManager": "pnpm@8.3.1",
+  "devDependencies": {
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-tailwindcss": "^3.12.1",
+    "prettier": "^2.8.8"
+  }
 }

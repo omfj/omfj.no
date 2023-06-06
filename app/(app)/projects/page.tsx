@@ -1,10 +1,8 @@
 import {Metadata} from "next";
 import Link from "next/link";
-import {notFound} from "next/navigation";
 
 import {formatDate} from "@/lib/date";
 import {fetchProjectOverviews} from "@/lib/sanity/project";
-import {isErrorMessage} from "@/utils/error";
 
 export const metadata: Metadata = {
   title: "Projects",
@@ -17,6 +15,7 @@ export default async function ProjectsPage() {
   return (
     <main>
       <h1 className="mb-3 text-3xl font-bold">Projects</h1>
+
       <ul className="divide-y">
         {projects.map((project) => (
           <li key={project._id}>

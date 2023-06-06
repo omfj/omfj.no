@@ -1,16 +1,13 @@
 module.exports = {
   arrowParens: "always",
-  printWidth: 100,
+  printWidth: 80,
   singleQuote: false,
   jsxSingleQuote: false,
-  bracketSpacing: false,
+  bracketSpacing: true,
   semi: true,
   trailingComma: "all",
   tabWidth: 2,
-  plugins: [
-    "@ianvs/prettier-plugin-sort-imports",
-    "prettier-plugin-tailwindcss",
-  ],
+  plugins: ["@ianvs/prettier-plugin-sort-imports", "prettier-plugin-tailwindcss"],
   importOrder: [
     "^(react/(.*)$)|^(react$)",
     "^(next/(.*)$)|^(next$)",

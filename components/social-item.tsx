@@ -1,6 +1,6 @@
 "use client";
 
-import {motion, useAnimation} from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 
 export function SocialItem({
   platform,

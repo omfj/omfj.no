@@ -1,5 +1,5 @@
-import {cache} from "react";
-import {createClient} from "next-sanity";
+import { cache } from "react";
+import { createClient } from "next-sanity";
 
 export const projectId = "28zlbntv";
 export const dataset = "production";

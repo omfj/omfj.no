@@ -1,8 +1,11 @@
-import {Config} from "tailwindcss";
-import {fontFamily} from "tailwindcss/defaultTheme";
+import { Config } from "tailwindcss";
+import { fontFamily } from "tailwindcss/defaultTheme";
 
 module.exports = {
-  content: ["./components/**/*.{js,ts,jsx,tsx,mdx}", "./app/**/*.{js,ts,jsx,tsx,mdx}"],
+  content: [
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
   theme: {
     container: {
       center: true,
@@ -62,12 +65,12 @@ module.exports = {
       },
       keyframes: {
         "accordion-down": {
-          from: {height: "0"},
-          to: {height: "var(--radix-accordion-content-height)"},
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {height: "var(--radix-accordion-content-height)"},
-          to: {height: "0"},
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
       },
       animation: {

@@ -1,55 +1,53 @@
-import Link from "next/link";
+import { cache } from "react";
 
-import {formatDate} from "@/lib/date";
-import {fetchProjectsByCategory} from "@/lib/sanity/project";
-import {fetchSlugsByType} from "@/lib/sanity/slug";
+import { ProjectPreview } from "@/components/project-preview";
+import { fetchProjectsByCategory } from "@/lib/sanity/project";
+import { fetchSlugsByType } from "@/lib/sanity/slug";
+
+export const dynamicParams = false;
+
+const getData = cache(async (categorySlug: string) => {
+  return await fetchProjectsByCategory(categorySlug);
+});
 
 export async function generateStaticParams() {
-  const slugs = await fetchSlugsByType("category");
-
-  return slugs.map((slug) => ({
-    slug,
-  }));
+  return await fetchSlugsByType("category");
 }
 
-export async function generateMetadata({params}: {params: {slug: string}}) {
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const data = await getData(params.slug);
+
   return {
-    title: params.slug,
+    title: data.title,
   };
 }
 
-export default async function Category({params}: {params: {slug: string}}) {
-  const projects = await fetchProjectsByCategory(params.slug);
+export default async function Category({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const data = await getData(params.slug);
 
   return (
     <main>
-      <h2 className="mb-3 text-4xl font-bold">Category - {params.slug}</h2>
+      <h2 className="mb-3 px-3 py-2 text-4xl font-bold">
+        Category - {data.title}
+      </h2>
+      <div
+        className="mb-3 h-[1px]"
+        style={{
+          backgroundColor: data.color + "80",
+        }}
+      />
       <ul className="divide-y">
-        {projects.map((project) => (
+        {data.projects.map((project) => (
           <li key={project._id}>
-            <Link href={`/project/${project.slug}`}>
-              <div className="group flex flex-col gap-2 p-3 hover:bg-gray-100/10">
-                <div className="flex items-center justify-between">
-                  <h2 className="text-xl transition-all group-hover:text-blue-500 group-hover:underline">
-                    {project.title}
-                  </h2>
-                  <p className="hidden scale-0 text-sm text-gray-400 transition-all group-hover:scale-100 sm:block">
-                    Last updated: <time>{formatDate(project._updatedAt)}</time>
-                  </p>
-                </div>
-
-                <div>
-                  {project.categories.map((category) => (
-                    <span
-                      key={category._id}
-                      className="mr-2 inline-block rounded border px-2 py-1 text-xs text-slate-600"
-                    >
-                      {category.title}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </Link>
+            <ProjectPreview project={project} />
           </li>
         ))}
       </ul>

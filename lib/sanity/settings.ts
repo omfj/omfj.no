@@ -1,6 +1,6 @@
-import type {PortableTextBlock} from "@portabletext/types";
+import type { PortableTextBlock } from "@portabletext/types";
 
-import {serverFetch} from "./client";
+import { serverFetch } from "./client";
 
 export type SiteSettings = {
   title: string;

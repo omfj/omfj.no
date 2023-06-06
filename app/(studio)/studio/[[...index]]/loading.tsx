@@ -1,6 +1,6 @@
 "use client";
 
-import {NextStudioLoading} from "next-sanity/studio/loading";
+import { NextStudioLoading } from "next-sanity/studio/loading";
 
 import config from "../../../../sanity.config";
 

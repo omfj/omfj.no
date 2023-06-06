@@ -1,7 +1,10 @@
-import {DefaultDocumentNodeResolver} from "sanity/desk";
+import { DefaultDocumentNodeResolver } from "sanity/desk";
 import Iframe from "sanity-plugin-iframe-pane";
 
-export const defaultDocumentNode: DefaultDocumentNodeResolver = (S, {schemaType}) => {
+export const defaultDocumentNode: DefaultDocumentNodeResolver = (
+  S,
+  { schemaType },
+) => {
   switch (schemaType) {
     case "project":
       return S.document().views([

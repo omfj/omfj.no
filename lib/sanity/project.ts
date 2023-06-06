@@ -1,23 +1,35 @@
-import type {PortableTextBlock} from "@portabletext/types";
+import { groq } from "next-sanity";
+import { z } from "zod";
 
-import {serverFetch} from "./client";
+import { serverFetch } from "./client";
 
-type ProjectOverview = {
-  _id: string;
-  _createdAt: string;
-  _updatedAt: string;
-  title: string;
-  slug: string;
-  categories: Array<{
-    _id: string;
-    slug: string;
-    title: string;
-    color: string;
-  }>;
-};
+export const categorySchema = z.object({
+  _id: z.string(),
+  title: z.string(),
+  slug: z.string(),
+  color: z.string(),
+});
+
+export const projectSchema = z.object({
+  _id: z.string(),
+  _createdAt: z.string(),
+  _updatedAt: z.string(),
+  title: z.string(),
+  slug: z.string(),
+  body: z.array(z.any()),
+  categories: z.array(categorySchema),
+});
+
+export const projectOverviewSchema = projectSchema.omit({
+  body: true,
+});
+
+export const categoryWithProjectsSchema = categorySchema.extend({
+  projects: z.array(projectOverviewSchema),
+});
 
 export const fetchProjectOverviews = async () => {
-  const query = `
+  const query = groq`
     *[_type == "project" && !(_id in path('drafts.**'))] | order(_updatedAt asc) {
       _id,
       _createdAt,
@@ -26,34 +38,29 @@ export const fetchProjectOverviews = async () => {
       "slug": slug.current,
       "categories": categories[]->{
         _id,
-        slug,
+        "slug": slug.current,
         title,
         "color": color.hex,
       },
     }
     `;
 
-  return await serverFetch<Array<ProjectOverview>>(query);
-};
-
-type Project = {
-  _createdAt: string;
-  _updatedAt: string;
-  title: string;
-  categories: Array<{_id: string; slug: string; title: string}>;
-  body: Array<PortableTextBlock>;
+  return projectOverviewSchema.array().parse(await serverFetch(query));
 };
 
 export const fetchProjectBySlug = async (slug: string) => {
-  const query = `
+  const query = groq`
     *[_type == "project" && slug.current == $slug && !(_id in path('drafts.**'))][0] {
+      _id,
       _createdAt,
       _updatedAt,
       title,
+      "slug": slug.current,
       "categories": categories[]->{
         _id,
         "slug": slug.current,
         title,
+        "color": color.hex,
       },
       body
     }
@@ -63,29 +70,35 @@ export const fetchProjectBySlug = async (slug: string) => {
     slug,
   };
 
-  return await serverFetch<Project>(query, params);
+  return projectSchema.parse(await serverFetch(query, params));
 };
 
-export const fetchProjectsByCategory = async (category: string) => {
-  const query = `
-    *[_type == "project" && references(*[_type == "category" && slug.current == $category]._id) && !(_id in path('drafts.**'))] | order(_updatedAt asc) {
+export const fetchProjectsByCategory = async (categorySlug: string) => {
+  const query = groq`
+    *[_type == "category" && slug.current == $categorySlug && !(_id in path('drafts.**'))] {
       _id,
-      _createdAt,
-      _updatedAt,
       title,
       "slug": slug.current,
-      "categories": categories[]->{
-        _id,
-        slug,
-        title,
-        "color": color.hex,
-      },
-    }
+      "color": color.hex,
+      "projects": *[_type == "project" && references(^._id) && !(_id in path('drafts.**'))] {
+          _id,
+          _createdAt,
+          _updatedAt,
+          title,
+          "slug": slug.current,
+          "categories": categories[]->{
+            _id,
+            "slug": slug.current,
+            title,
+            "color": color.hex,
+          }
+        }
+    }[0]
     `;
 
   const params = {
-    category,
+    categorySlug,
   };
 
-  return await serverFetch<Array<ProjectOverview>>(query, params);
+  return categoryWithProjectsSchema.parse(await serverFetch(query, params));
 };

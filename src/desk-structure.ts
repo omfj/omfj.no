@@ -1,4 +1,4 @@
-import {StructureBuilder} from "sanity/desk";
+import { StructureBuilder } from "sanity/desk";
 
 export const deskStructure = (S: StructureBuilder) =>
   S.list()
@@ -6,7 +6,9 @@ export const deskStructure = (S: StructureBuilder) =>
     .items([
       S.listItem()
         .title("Settings")
-        .child(S.document().schemaType("siteSettings").documentId("siteSettings")),
+        .child(
+          S.document().schemaType("siteSettings").documentId("siteSettings"),
+        ),
       S.divider(),
       ...S.documentTypeListItems().filter(
         (listItem) => !["siteSettings"].includes(listItem.getId() ?? ""),

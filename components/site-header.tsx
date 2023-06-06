@@ -1,9 +1,9 @@
 "use client";
 
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import {usePathname} from "next/navigation";
-import {Bars3Icon, XMarkIcon} from "@heroicons/react/24/outline";
+import { usePathname } from "next/navigation";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 
 const routes = [
@@ -45,7 +45,7 @@ const Header = () => {
           <div className="ml-auto flex items-center gap-2">
             <nav className="hidden md:block">
               <ul className="flex gap-1">
-                {routes.map(({label, to}) => (
+                {routes.map(({ label, to }) => (
                   <li key={`${label}${to}`}>
                     <Link
                       className="rounded border-2 border-transparent px-2 py-1 transition-colors hover:text-blue-400"
@@ -81,9 +81,12 @@ const Header = () => {
           {/* MobileNav Content */}
           <div className="flex flex-col gap-3 p-5">
             <ul className="flex flex-col text-4xl">
-              {routes.map(({label, to}) => (
+              {routes.map(({ label, to }) => (
                 <li key={`${label}${to}`} className="py-3">
-                  <Link className="flex transition-colors hover:text-blue-500" href={to}>
+                  <Link
+                    className="flex transition-colors hover:text-blue-500"
+                    href={to}
+                  >
                     {label}
                   </Link>
                 </li>

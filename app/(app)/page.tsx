@@ -1,4 +1,4 @@
-import {PortableText} from "@portabletext/react";
+import { PortableText } from "@portabletext/react";
 import {
   GitHubLogoIcon,
   InstagramLogoIcon,
@@ -6,8 +6,8 @@ import {
   TwitterLogoIcon,
 } from "@radix-ui/react-icons";
 
-import {SocialItem} from "@/components/social-item";
-import {fetchSiteSettings} from "@/lib/sanity/settings";
+import { SocialItem } from "@/components/social-item";
+import { fetchSiteSettings } from "@/lib/sanity/settings";
 
 export default async function HomePage() {
   const settings = await fetchSiteSettings();

@@ -1,11 +1,11 @@
-import {defineConfig} from "sanity";
-import {deskTool} from "sanity/desk";
-import {colorInput} from "@sanity/color-input";
-import {visionTool} from "@sanity/vision";
+import { defineConfig } from "sanity";
+import { deskTool } from "sanity/desk";
+import { colorInput } from "@sanity/color-input";
+import { visionTool } from "@sanity/vision";
 
-import {schemaTypes} from "./schemas";
-import {defaultDocumentNode} from "./src/default-document-node";
-import {deskStructure} from "./src/desk-structure";
+import { schemaTypes } from "./schemas";
+import { defaultDocumentNode } from "./src/default-document-node";
+import { deskStructure } from "./src/desk-structure";
 
 export default defineConfig({
   name: "default",

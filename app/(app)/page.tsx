@@ -15,7 +15,7 @@ export default async function HomePage() {
   const iconClasses = "h-8 w-8 text-slate-800";
 
   return (
-    <main className="mx-auto max-w-xl text-center">
+    <main className="mx-auto max-w-xl">
       <h1 className="mb-5 text-4xl font-bold">{settings.title}</h1>
       <div className="mb-10">
         <PortableText value={settings.description} />

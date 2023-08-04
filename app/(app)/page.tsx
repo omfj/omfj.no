@@ -6,6 +6,7 @@ import {
   TwitterLogoIcon,
 } from "@radix-ui/react-icons";
 
+import { XIcon } from "@/components/icons/x";
 import { SocialItem } from "@/components/social-item";
 import { fetchSiteSettings } from "@/lib/sanity/settings";
 
@@ -42,12 +43,12 @@ export default async function HomePage() {
           url="https://instagram.com/lordolem"
           logo={<InstagramLogoIcon className={iconClasses} />}
         />
-        {/* Twitter */}
+        {/* X */}
         <SocialItem
-          platform="Twitter"
+          platform="X"
           username="@omfj_"
-          url="https://twitter.com/omfj_"
-          logo={<TwitterLogoIcon className={iconClasses} />}
+          url="https://x.com/omfj_"
+          logo={<XIcon className={iconClasses} />}
         />
       </ul>
     </main>

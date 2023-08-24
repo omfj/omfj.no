@@ -1,14 +1,13 @@
 import Link from "next/link";
-import { z } from "zod";
 
 import { formatDate } from "@/lib/date";
-import { projectOverviewSchema } from "@/lib/sanity/project";
+import { ProjectOverview } from "@/lib/sanity/project/types";
 
-export function ProjectPreview({
-  project,
-}: {
-  project: z.infer<typeof projectOverviewSchema>;
-}) {
+type ProjectPreviewProps = {
+  project: ProjectOverview;
+};
+
+export const ProjectPreview = ({ project }: ProjectPreviewProps) => {
   return (
     <Link href={`/project/${project.slug}`}>
       <div className="group flex flex-col gap-2 p-3 hover:bg-gray-100/10">
@@ -34,4 +33,4 @@ export function ProjectPreview({
       </div>
     </Link>
   );
-}
+};

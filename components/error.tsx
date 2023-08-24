@@ -3,7 +3,7 @@ type ErrorBoxProps = {
   message: string;
 };
 
-const ErrorBox = ({
+export const ErrorBox = ({
   title = "Something went wrong!",
   message,
 }: ErrorBoxProps) => {
@@ -14,5 +14,3 @@ const ErrorBox = ({
     </div>
   );
 };
-
-export default ErrorBox;

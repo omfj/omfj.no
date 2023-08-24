@@ -2,20 +2,22 @@
 
 import { motion, useAnimation } from "framer-motion";
 
-export function SocialItem({
-  platform,
-  username,
-  url,
-  logo,
-}: {
+const wiggleStrength = 10;
+
+type SocialItemProps = {
   platform: string;
   username: string;
   url: string;
   logo: React.ReactNode;
-}) {
-  const controls = useAnimation();
+};
 
-  const wiggleStrength = 10;
+export const SocialItem = ({
+  platform,
+  username,
+  url,
+  logo,
+}: SocialItemProps) => {
+  const controls = useAnimation();
 
   const handleHover = () => {
     controls.start({
@@ -23,7 +25,6 @@ export function SocialItem({
       rotate: [0, -wiggleStrength, wiggleStrength, 0],
       transition: {
         duration: 0.6,
-        repeat: 1,
         repeatType: "reverse",
       },
     });
@@ -52,4 +53,4 @@ export function SocialItem({
       </a>
     </li>
   );
-}
+};

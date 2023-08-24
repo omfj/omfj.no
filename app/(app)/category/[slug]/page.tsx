@@ -6,25 +6,25 @@ import { fetchSlugsByType } from "@/lib/sanity/slug";
 
 export const dynamicParams = false;
 
-const getData = cache(async (categorySlug: string) => {
+const getData = async (categorySlug: string) => {
   return await fetchProjectsByCategory(categorySlug);
-});
+};
 
-export async function generateStaticParams() {
+export const generateStaticParams = async () => {
   return await fetchSlugsByType("category");
-}
+};
 
-export async function generateMetadata({
+export const generateMetadata = async ({
   params,
 }: {
   params: { slug: string };
-}) {
+}) => {
   const data = await getData(params.slug);
 
   return {
     title: data.title,
   };
-}
+};
 
 export default async function Category({
   params,

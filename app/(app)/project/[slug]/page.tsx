@@ -6,29 +6,27 @@ import { formatDate } from "@/lib/date";
 import { fetchProjectBySlug } from "@/lib/sanity/project";
 import { fetchSlugsByType } from "@/lib/sanity/slug";
 
-export const dynamicParams = false;
-
 type Props = {
   params: {
     slug: string;
   };
 };
 
-const getData = cache(async (slug: string) => {
+const getData = async (slug: string) => {
   return await fetchProjectBySlug(slug);
-});
+};
 
-export async function generateStaticParams() {
+export const generateStaticParams = async () => {
   return await fetchSlugsByType("project");
-}
+};
 
-export async function generateMetadata({ params }: Props) {
+export const generateMetadata = async ({ params }: Props) => {
   const data = await getData(params.slug);
 
   return {
     title: data.title,
   };
-}
+};
 
 export default async function Project({ params }: Props) {
   const data = await getData(params.slug);

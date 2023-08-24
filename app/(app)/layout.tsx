@@ -2,8 +2,8 @@ import "@/styles/globals.css";
 import { Metadata } from "next";
 import { IBM_Plex_Mono, Inter } from "next/font/google";
 
-import SiteFooter from "@/components/site-footer";
-import SiteHeader from "@/components/site-header";
+import { Footer } from "@/components/site-footer";
+import { Header } from "@/components/site-header";
 import { cn } from "@/utils/cn";
 
 export const metadata: Metadata = {
@@ -45,11 +45,11 @@ export default function RootLayout({ children }: Props) {
       )}
     >
       <body className="flex min-h-screen flex-col">
-        <SiteHeader />
+        <Header />
         <div className="mx-auto w-full max-w-3xl flex-1 px-5 py-10">
           {children}
         </div>
-        <SiteFooter />
+        <Footer />
       </body>
     </html>
   );

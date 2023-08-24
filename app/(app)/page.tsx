@@ -3,12 +3,11 @@ import {
   GitHubLogoIcon,
   InstagramLogoIcon,
   LinkedInLogoIcon,
-  TwitterLogoIcon,
 } from "@radix-ui/react-icons";
 
 import { XIcon } from "@/components/icons/x";
 import { SocialItem } from "@/components/social-item";
-import { fetchSiteSettings } from "@/lib/sanity/settings";
+import { fetchSiteSettings } from "@/lib/sanity/settings/settings";
 
 export default async function HomePage() {
   const settings = await fetchSiteSettings();

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL(baseUrl),
   description: "My (omfj) personal website",
-  themeColor: "#ffffff",
+  themeColor: "#ffffee",
   icons: {
     icon: "/favicon.ico",
   },

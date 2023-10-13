@@ -16,5 +16,11 @@ export default defineType({
       title: "Description",
       type: "blockContent",
     }),
+    defineField({
+      name: "socialMedia",
+      title: "Social Media",
+      type: "array",
+      of: [{ type: "socialMedia" }],
+    }),
   ],
 });

@@ -67,7 +67,7 @@ export const Header = () => {
         // MobileNav
         <div className="absolute z-50 h-screen w-full bg-background">
           {/* MobileNav Header */}
-          <div className="flex items-center justify-between border-b p-4">
+          <div className="flex items-center justify-between p-4">
             <div>
               <h2 className="text-4xl font-light">Menu</h2>
             </div>

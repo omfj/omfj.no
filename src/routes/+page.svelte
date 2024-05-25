@@ -43,16 +43,4 @@
 			</ListItem>
 		</List>
 	</div>
-
-	<!-- <div>
-		<ListTitle>Projects</ListTitle>
-		<ListDescription>Some of the things I have worked on.</ListDescription>
-		<List>
-			<ListItem href="/">echo Webkom</ListItem>
-			<ListItem href="/">echo Verv</ListItem>
-			<ListItem href="/">@trondheimvaeret</ListItem>
-			<ListItem href="/">appWash CLI</ListItem>
-			<ListItem href="/">Team Local Tactics</ListItem>
-		</List>
-	</div> -->
 </div>

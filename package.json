@@ -32,5 +32,9 @@
 		"typescript": "5.4.5",
 		"vite": "5.2.11",
 		"wrangler": "^3.57.2"
+	},
+	"dependencies": {
+		"clsx": "^2.1.1",
+		"tailwind-merge": "^2.3.0"
 	}
 }

@@ -10,6 +10,6 @@
 	let { children, class: className, ...props }: Props = $props();
 </script>
 
-<div class={cn('flex flex-col gap-10 max-w-screen-a4 w-full h-a4 font-sans', className)} {...props}>
+<div class={cn('my-10 rounded bg-white shadow mx-auto border p-10 md:p-20', className)} {...props}>
 	{@render children()}
 </div>

@@ -1,8 +1,5 @@
 <script lang="ts">
-	import List from '$lib/components/List.svelte';
-	import ListTitle from '$lib/components/ListTitle.svelte';
-	import ListDescription from '$lib/components/ListDescription.svelte';
-	import ListItem from '$lib/components/ListItem.svelte';
+	import { List, ListDescription, ListItem, ListTitle } from '$lib/components/list';
 
 	const yearsOld = (
 		(Date.now() - new Date(2002, 12, 17).getTime()) /

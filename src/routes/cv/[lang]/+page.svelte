@@ -5,6 +5,10 @@
 	import { cvEn } from '$lib/data';
 </script>
 
+<svelte:head>
+	<title>CV</title>
+</svelte:head>
+
 <Gradients />
 <Download />
 <CV cv={cvEn} />

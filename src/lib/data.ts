@@ -3,14 +3,6 @@ export type CV = typeof cvEn;
 export const cvEn = {
 	metadata: [
 		{
-			label: 'Address',
-			value: 'Blusuvollsbakken 6A, 7052 Trondheim'
-		},
-		{
-			label: 'Mobile',
-			value: '+47 479 04 470'
-		},
-		{
 			label: 'E-mail',
 			value: 'me@omfj.no'
 		},
@@ -43,6 +35,11 @@ export const cvEn = {
 		}
 	],
 	education: [
+		{
+			year: '08.2024 - 2026',
+			title: "Master's degree in Software Engineering",
+			institution: 'University of Bergen'
+		},
 		{
 			year: '08.2021 - 06.2024',
 			title: 'Bachelor in Computer Technology',

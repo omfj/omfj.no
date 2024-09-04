@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { CV } from '$lib/data';
+	import type { CV } from '$lib/cv';
 	import Avatar from '$lib/assets/avatar.png?url';
 	import { Page, PageWrapper, Text, Metadata, Section, Table } from './internals';
 
@@ -22,7 +22,7 @@
 				<h1 class="text-3xl font-semibold mb-6">Ole Magnus Fon Johnsen</h1>
 
 				<Metadata.Root>
-					{#each metadata as { label, value, link }}
+					{#each metadata.data as { label, value, link }}
 						<Metadata.Item>
 							<Metadata.Label>{label}:</Metadata.Label>{' '}
 							{#if link}
@@ -37,20 +37,18 @@
 		</div>
 
 		<Section.Root>
-			<Section.Title>About me</Section.Title>
+			<Section.Title>{cv.about.title}</Section.Title>
 
-			<Text>
-				I am an outgoing and curious person who loves to learn. Ever since I was young, I have had a
-				great interest in everything related to computers and technology. When I am not studying, I
-				enjoy playing video games, or tennis with friends if the weather is nice.
-			</Text>
+			{#each cv.about.data as { paragraph }}
+				<Text>{paragraph}</Text>
+			{/each}
 		</Section.Root>
 
 		<Section.Root>
-			<Section.Title>Education</Section.Title>
+			<Section.Title>{education.title}</Section.Title>
 
 			<Table.Root>
-				{#each education as { year, title, institution }}
+				{#each education.data as { year, title, institution }}
 					<Table.Item>
 						<Table.Label>{year}</Table.Label>
 						<Table.Content>
@@ -64,10 +62,10 @@
 		</Section.Root>
 
 		<Section.Root>
-			<Section.Title>Work experience</Section.Title>
+			<Section.Title>{education.title}</Section.Title>
 
 			<Table.Root>
-				{#each workExperience as { year, title, company, description }}
+				{#each workExperience.data as { year, title, company, description }}
 					<Table.Item>
 						<Table.Label>{year}</Table.Label>
 						<Table.Content>
@@ -82,10 +80,10 @@
 		</Section.Root>
 
 		<Section.Root>
-			<Section.Title>Volunteer experience</Section.Title>
+			<Section.Title>{volunteerExperience.title}</Section.Title>
 
 			<Table.Root>
-				{#each volunteerExperience as { year, title, company, description }}
+				{#each volunteerExperience.data as { year, title, company, description }}
 					<Table.Item>
 						<Table.Label>{year}</Table.Label>
 						<Table.Content>
@@ -100,10 +98,10 @@
 		</Section.Root>
 
 		<Section.Root>
-			<Section.Title>Skills</Section.Title>
+			<Section.Title>{skills.title}</Section.Title>
 
 			<Table.Root>
-				{#each skills as { title, description }}
+				{#each skills.data as { title, description }}
 					<Table.Item>
 						<Table.Label>{title}</Table.Label>
 						<Table.Content>
@@ -115,12 +113,11 @@
 		</Section.Root>
 
 		<Section.Root>
-			<Section.Title>Other</Section.Title>
+			<Section.Title>{cv.other.title}</Section.Title>
 
-			<Text>See some of my other projects on my GitHub, @omfj. (https://www.github.com/omfj)</Text>
-			<Text>
-				I also have some certificates on Codecademy. (https://www.codecademy.com/profiles/omfj)
-			</Text>
+			{#each cv.other.data as { paragraph }}
+				<Text>{paragraph}</Text>
+			{/each}
 		</Section.Root>
 	</Page>
 </PageWrapper>

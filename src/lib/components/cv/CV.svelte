@@ -62,7 +62,7 @@
 		</Section.Root>
 
 		<Section.Root>
-			<Section.Title>{education.title}</Section.Title>
+			<Section.Title>{workExperience.title}</Section.Title>
 
 			<Table.Root>
 				{#each workExperience.data as { year, title, company, description }}

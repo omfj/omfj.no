@@ -12,6 +12,7 @@ export const load: PageLoad = async ({ params }) => {
 	const cvContent = cv[params.lang];
 
 	return {
-		cv: cvContent
+		cv: cvContent,
+		lang: params.lang
 	};
 };

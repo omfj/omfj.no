@@ -5,15 +5,16 @@
 
 	type Props = {
 		cv: CV;
+		lang: 'no' | 'en';
 	};
 
-	let { cv }: Props = $props();
+	let { cv, lang }: Props = $props();
 	let { metadata, education, workExperience, volunteerExperience, skills } = cv;
 </script>
 
 <PageWrapper>
 	<Page class="z-30" id="cv">
-		<div class="flex flex-col md:flex-row gap-10">
+		<div class="flex flex-col sm:flex-row gap-10">
 			<div class="block">
 				<img src={Avatar} alt="Ole Magnus" class="h-36 max-w-36 flex rounded-full border shadow" />
 			</div>
@@ -53,7 +54,9 @@
 						<Table.Label>{year}</Table.Label>
 						<Table.Content>
 							<Table.Description>
-								{title} at {institution}
+								{title}
+								{lang === 'no' ? ' ved ' : ' at '}
+								{institution}
 							</Table.Description>
 						</Table.Content>
 					</Table.Item>
@@ -70,7 +73,9 @@
 						<Table.Label>{year}</Table.Label>
 						<Table.Content>
 							<Table.Title>
-								{title} at {company}
+								{title}
+								{lang === 'no' ? ' hos ' : ' at '}
+								{company}
 							</Table.Title>
 							<Table.Description>{description}</Table.Description>
 						</Table.Content>
@@ -88,7 +93,9 @@
 						<Table.Label>{year}</Table.Label>
 						<Table.Content>
 							<Table.Title>
-								{title} at {company}
+								{title}
+								{lang === 'no' ? ' hos ' : ' at '}
+								{company}
 							</Table.Title>
 							<Table.Description>{description}</Table.Description>
 						</Table.Content>

@@ -12,4 +12,4 @@
 
 <Gradients />
 <Download />
-<CV cv={data.cv} />
+<CV cv={data.cv} lang={data.lang} />

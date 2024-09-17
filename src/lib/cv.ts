@@ -288,7 +288,7 @@ const no: CV = {
 		data: [
 			{
 				year: '09.2021 - Nå',
-				title: 'Medlem av stedet',
+				title: 'Teknologisjef',
 				company: 'echo Webkom',
 				description:
 					'Jeg har vært involvert i å styre echo sine webløsninger. Her har vi brukt mange moderne teknologier som TailwindCSS, Next.js, Vercel, Kotlin, Ktor.'

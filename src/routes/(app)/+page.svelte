@@ -23,7 +23,7 @@
 				</p>
 			</div>
 
-			<div>Current interests include web development, SQLite and Hono.</div>
+			<div>Current interests include Deno and Cloudflare Workers.</div>
 
 			<div>
 				<h2 class="font-medium">Want to have a look at my resumè?</h2>

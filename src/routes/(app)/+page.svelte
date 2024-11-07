@@ -51,9 +51,9 @@
 						<span>LinkedIn</span>
 						<span class="text-sm">(in/omfj)</span>
 					</ListItem>
-					<ListItem href="https://www.twitter.com/omfj_">
-						<span>X</span>
-						<span class="text-sm">(@omfj_)</span>
+					<ListItem href="https://bsky.app/profile/omfj.no">
+						<span>Bluesky</span>
+						<span class="text-sm">(@omfj.no)</span>
 					</ListItem>
 				</List>
 			</div>

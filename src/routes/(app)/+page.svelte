@@ -4,7 +4,7 @@
 	const yearsOld = (
 		(Date.now() - new Date(2002, 12, 17).getTime()) /
 		(1000 * 60 * 60 * 24 * 365)
-	).toFixed(1);
+	).toFixed(3);
 </script>
 
 <div class="gradient-1"></div>

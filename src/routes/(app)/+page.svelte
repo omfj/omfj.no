@@ -1,10 +1,5 @@
 <script lang="ts">
 	import { List, ListDescription, ListItem, ListTitle } from '$lib/components/list';
-
-	const yearsOld = (
-		(Date.now() - new Date(2002, 12, 17).getTime()) /
-		(1000 * 60 * 60 * 24 * 365)
-	).toFixed(3);
 </script>
 
 <div class="gradient-1"></div>
@@ -18,7 +13,7 @@
 		<div class="space-y-10 z-50">
 			<div>
 				<p>
-					My name is Ole Magnus. I am {yearsOld} year old software developer from Norway. Currently residing
+					My name is Ole Magnus. I am 22 year old software developer from Norway. Currently residing
 					in Bergen, and studying Computer Technology at the University of Bergen.
 				</p>
 			</div>

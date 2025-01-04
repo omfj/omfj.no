@@ -14,18 +14,19 @@
 			<div>
 				<p>
 					My name is Ole Magnus. I am 22 year old software developer from Norway. Currently residing
-					in Bergen, and studying Computer Technology at the University of Bergen.
+					in Bergen, and taking a masters in Software Development at the University of Bergen and
+					Western Norway University of Applied Sciences.
 				</p>
 			</div>
 
-			<div>Current interests include Signals, Deno and Cloudflare Workers.</div>
+			<div>Current interests include Rust, Signals, Deno and Cloudflare Workers.</div>
 
 			<div>
 				<h2 class="font-medium">Want to have a look at my resumè?</h2>
 
 				<p>
-					You can find it <a class="underline hover:text-blue-500 transition-colors" href="/cv/en"
-						>here</a
+					You can find the <a class="underline hover:text-blue-500 transition-colors" href="/cv/en"
+						>web version here</a
 					>.
 				</p>
 			</div>

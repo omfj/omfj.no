@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { cn } from '$lib/cn';
 	import type { Snippet } from 'svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
 

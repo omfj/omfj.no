@@ -45,3 +45,15 @@ export const sessionsRelations = relations(sessions, ({ one }) => ({
 
 export type Session = InferSelectModel<typeof sessions>;
 export type SessionInsert = InferInsertModel<typeof sessions>;
+
+/**
+ * Movies and series
+ */
+export const films = sqliteTable('film', {
+	id: text().primaryKey(),
+	title: text().notNull(),
+	rating: integer().notNull()
+});
+
+export type Film = InferSelectModel<typeof films>;
+export type FilmInsert = InferInsertModel<typeof films>;

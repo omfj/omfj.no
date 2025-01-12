@@ -6,7 +6,8 @@ type GithubUser = {
 export const getGithubUser = async (accessToken: string) => {
 	const response = await fetch('https://api.github.com/user', {
 		headers: {
-			Authorization: `Bearer ${accessToken}`
+			Authorization: `Bearer ${accessToken}`,
+			'User-Agent': 'omfj.no'
 		}
 	});
 

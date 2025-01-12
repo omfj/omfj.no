@@ -1,5 +1,5 @@
 <button
 	onclick={() => window.print()}
-	class="text-center bg-white hover:bg-gray-100 z-50 w-fit mx-auto text-gray-700 text-sm h-8 flex items-center justify-center mt-6 hover:text-blue-500 shadow-inner rounded-xl px-4 transition-all"
+	class="z-50 mx-auto mt-6 flex h-8 w-fit items-center justify-center rounded-xl bg-white px-4 text-center text-sm text-gray-700 shadow-inner transition-all hover:bg-gray-100 hover:text-blue-500"
 	>Download as PDF</button
 >

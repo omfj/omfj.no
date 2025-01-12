@@ -1,18 +1,22 @@
 <script lang="ts">
+	import { cn } from '$lib/cn';
 	import type { Snippet } from 'svelte';
 
 	type Props = {
-		href: string;
+		class?: string;
 		children: Snippet;
 	};
 
-	let { href, children }: Props = $props();
+	let { class: className, children }: Props = $props();
 </script>
 
 <li class="py-1">
-	<a
-		{href}
-		class="flex items-center gap-2 p-2 hover:bg-black-soft hover:text-white transition-colors duration-150"
-		>{@render children()}</a
+	<span
+		class={cn(
+			'flex transition-colors duration-150 hover:bg-black-soft hover:text-white',
+			className
+		)}
 	>
+		{@render children()}
+	</span>
 </li>

@@ -12,7 +12,7 @@
 
 <a
 	target="_blank"
-	class={cn('underline hover:text-blue-500 transition-colors', className)}
+	class={cn('underline transition-colors hover:text-blue-500', className)}
 	{...props}
 >
 	{@render children()}

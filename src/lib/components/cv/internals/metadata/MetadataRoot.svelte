@@ -10,6 +10,6 @@
 	let { children, class: className, ...props }: Props = $props();
 </script>
 
-<ul class={cn('text-xs flex flex-wrap gap-2', className)} {...props}>
+<ul class={cn('flex flex-wrap gap-2 text-xs', className)} {...props}>
 	{@render children()}
 </ul>

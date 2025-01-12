@@ -10,6 +10,6 @@
 	let { children, class: className, ...props }: Props = $props();
 </script>
 
-<p class={cn('max-w-[150px] w-full font-semibold', className)} {...props}>
+<p class={cn('w-full max-w-[150px] font-semibold', className)} {...props}>
 	{@render children()}
 </p>

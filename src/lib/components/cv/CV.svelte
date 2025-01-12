@@ -14,13 +14,13 @@
 
 <PageWrapper>
 	<Page class="z-30" id="cv">
-		<div class="flex flex-col sm:flex-row gap-10">
+		<div class="flex flex-col gap-10 sm:flex-row">
 			<div class="block">
-				<img src={Avatar} alt="Ole Magnus" class="h-36 max-w-36 flex rounded-full border shadow" />
+				<img src={Avatar} alt="Ole Magnus" class="flex h-36 max-w-36 rounded-full border shadow" />
 			</div>
 
 			<div>
-				<h1 class="text-3xl font-semibold mb-6">Ole Magnus Fon Johnsen</h1>
+				<h1 class="mb-6 text-3xl font-semibold">Ole Magnus Fon Johnsen</h1>
 
 				<Metadata.Root>
 					{#each metadata.data as { label, value, link }}

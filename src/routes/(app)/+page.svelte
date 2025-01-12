@@ -1,5 +1,9 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
 	import { List, ListItem } from '$lib/components/list';
+	import { getUser } from '$lib/contexts/user';
+
+	let user = getUser();
 </script>
 
 <svelte:head>
@@ -7,8 +11,16 @@
 </svelte:head>
 
 <div class="py-12 transition-all md:py-24">
-	<header class="mx-auto max-w-xl p-8">
+	<header class="mx-auto flex max-w-xl items-center justify-between p-8">
 		<h1 class="text-3xl">omfj.no</h1>
+
+		{#if $user}
+			<form method="post" action="/auth/sign-out" use:enhance>
+				<button class="text-gray-700 hover:underline">Sign out</button>
+			</form>
+		{:else}
+			<a class="text-gray-700 hover:underline" href="/auth/github">Sign in</a>
+		{/if}
 	</header>
 
 	<main class="mx-auto mb-10 max-w-xl space-y-10 px-8 py-2">
@@ -66,9 +78,13 @@
 		<section>
 			<h2 class="mb-3 text-lg font-medium">Pages</h2>
 
-			<ul class="flex gap-x-2 gap-y-4">
+			<ul class="flex gap-x-6 gap-y-4">
 				<li>
-					<a class="underline transition-colors hover:text-blue-500" href="/habits">Habits</a>
+					<a class="underline transition-colors hover:text-blue-500" href="/habits">Habit Tracker</a
+					>
+				</li>
+				<li>
+					<a class="underline transition-colors hover:text-blue-500" href="/omdb">OMDb</a>
 				</li>
 			</ul>
 		</section>

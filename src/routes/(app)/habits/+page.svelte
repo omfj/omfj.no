@@ -6,6 +6,10 @@
 	let habitsState = new HabitsState();
 </script>
 
+<svelte:head>
+	<title>Daily Habits</title>
+</svelte:head>
+
 <div class="mx-auto w-full max-w-xl py-12 transition-all md:py-24">
 	<header class="p-8">
 		<h1 class="mb-3 text-3xl">Daily Habits</h1>

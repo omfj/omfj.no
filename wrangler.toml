@@ -1,6 +1,12 @@
 name = "omfj"
 compatibility_date = "2024-05-01"
-
 compatibility_flags = [ "nodejs_compat" ]
-
 pages_build_output_dir = "./build"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "omfj-db"
+database_id = "33713bed-f8e9-4bc8-ba66-4809a5174af5"
+migrations_dir = "./migrations"
+migrations_table = "__drizzle_migrations"
+

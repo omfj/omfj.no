@@ -25,16 +25,12 @@ export type UserInsert = InferInsertModel<typeof users>;
 /**
  * Sessions
  */
-export const sessions = sqliteTable(
-	'session',
-	{
-		id: text().primaryKey().$defaultFn(nanoid),
-		userId: text().notNull(),
-		expiresAt: integer({ mode: 'timestamp' }).notNull(),
-		createdAt: integer({ mode: 'timestamp' }).notNull()
-	},
-	(t) => [uniqueIndex('user_id_idx').on(t.userId)]
-);
+export const sessions = sqliteTable('session', {
+	id: text().primaryKey().$defaultFn(nanoid),
+	userId: text().notNull(),
+	expiresAt: integer({ mode: 'timestamp' }).notNull(),
+	createdAt: integer({ mode: 'timestamp' }).notNull()
+});
 
 export const sessionsRelations = relations(sessions, ({ one }) => ({
 	user: one(users, {

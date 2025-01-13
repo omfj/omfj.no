@@ -36,9 +36,9 @@ export const GET: RequestHandler = async ({ cookies, locals, url }) => {
 			githubUser.id.toString()
 		);
 
-		session = await locals.authService.createSession(tokens.accessToken(), user.id);
+		session = await locals.authService.createSession(nanoid(), user.id);
 	} else {
-		session = await locals.authService.createSession(tokens.accessToken(), existingUser.id);
+		session = await locals.authService.createSession(nanoid(), existingUser.id);
 	}
 
 	cookies.set(SESSION_COOKIE_NAME, session.id, {

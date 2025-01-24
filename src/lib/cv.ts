@@ -118,11 +118,11 @@ const en = {
 		data: [
 			{
 				title: 'Programming languages',
-				description: 'Java, Kotlin, TypeScript, JavaScript, Python, SQL'
+				description: 'TypeScript, JavaScript, SQL, Go, Kotlin, Java, Python'
 			},
 			{
 				title: 'Frameworks',
-				description: 'React, Next.js, Quarkus, Ktor, Hono'
+				description: 'React, React Router, Next.js, Svelte, Quarkus, Ktor, Hono'
 			},
 			{
 				title: 'Tools',
@@ -130,7 +130,7 @@ const en = {
 			},
 			{
 				title: 'Other',
-				description: 'TailwindCSS, Cloudflare, Vercel, GitHub Actions'
+				description: 'SQLite, PostgreSQL, Redis, TailwindCSS, Cloudflare, Vercel, GitHub Actions'
 			}
 		]
 	},
@@ -249,11 +249,11 @@ const no: CV = {
 		data: [
 			{
 				title: 'Programmeringsspråk',
-				description: 'Java, Kotlin, TypeScript, JavaScript, Python, SQL'
+				description: 'TypeScript, JavaScript, SQL, Go, Kotlin, Java, Python'
 			},
 			{
 				title: 'Rammeverk',
-				description: 'React, Next.js, Quarkus, Ktor, Hono'
+				description: 'React, React Router, Next.js, Svelte, Quarkus, Ktor, Hono'
 			},
 			{
 				title: 'Verktøy',
@@ -261,7 +261,7 @@ const no: CV = {
 			},
 			{
 				title: 'Andre',
-				description: 'TailwindCSS, Cloudflare, Vercel, GitHub Actions'
+				description: 'SQLite, PostgreSQL, Redis, TailwindCSS, Cloudflare, Vercel, GitHub Actions'
 			}
 		]
 	},

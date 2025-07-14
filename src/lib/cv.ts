@@ -138,7 +138,14 @@ const en = {
 		title: 'Work experience',
 		data: [
 			{
-				year: '09.2023 - Present',
+				year: '06.2025 - 08.2025',
+				title: 'Software Developer Intern',
+				company: 'Bekk',
+				description:
+					'Worked as a full-stack developer intern at Bekk. Worked on a ordering system for a genetic laboratory, using Django, React and PostgreSQL.'
+			},
+			{
+				year: '09.2023 - 06.2025',
 				title: 'Software Developer',
 				company: 'Sportradar AS',
 				description: 'Worked part-time with the same project from my summer internship'
@@ -155,6 +162,12 @@ const en = {
 	volunteerExperience: {
 		title: 'Volunteer experience',
 		data: [
+			{
+				year: '04.2025 - 04.2026',
+				title: 'Board member',
+				company: 'echo – Linjeforeningen for informatikk',
+				description: "Was a board member of echo's main board."
+			},
 			{
 				year: '09.2021 - Present',
 				title: 'Board member',
@@ -269,7 +282,14 @@ const no: CV = {
 		title: 'Arbeidserfaring',
 		data: [
 			{
-				year: '09.2023 - Nå',
+				year: '06.2025 - 08.2025',
+				title: 'Software Developer Intern',
+				company: 'Bekk',
+				description:
+					'Jobbet som full-stack utvikler intern hos Bekk. Jobbet med et bestillingssystem for et genetisk laboratorium, ved bruk av Django, React og PostgreSQL.'
+			},
+			{
+				year: '09.2023 - 06.2025',
 				title: 'Software Developer',
 				company: 'Sportradar AS',
 				description: 'Jobber deltid på samme prosjektet jeg hadde som summer-intern.'
@@ -286,6 +306,12 @@ const no: CV = {
 	volunteerExperience: {
 		title: 'Verv',
 		data: [
+			{
+				year: '04.2025 - 04.2026',
+				title: 'Styremedlem',
+				company: 'echo – Linjeforeningen for informatikk',
+				description: 'Var styremedlem i hovedstyret til echo.'
+			},
 			{
 				year: '09.2021 - Nå',
 				title: 'Teknologisjef',

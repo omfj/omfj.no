@@ -11,6 +11,12 @@
 	"observability": {
 		"enabled": true
 	},
+	"routes": [
+		{
+			"custom_domain": true,
+			"pattern": "omfj.no"
+		}
+	],
 	"d1_databases": [
 		{
 			"binding": "DB",

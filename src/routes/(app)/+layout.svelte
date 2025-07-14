@@ -23,6 +23,6 @@
 		width: 100%;
 		height: 100%;
 		overflow: hidden;
-		background: linear-gradient(140deg, #a2cffe 0%, rgba(255, 255, 255, 0) 35%);
+		background: linear-gradient(140deg, var(--color-gradient) 0%, rgba(255, 255, 255, 0) 35%);
 	}
 </style>

@@ -10,6 +10,9 @@
 	let { children, class: className, ...props }: Props = $props();
 </script>
 
-<div class={cn('mx-auto my-10 rounded border bg-white p-10 shadow md:p-20', className)} {...props}>
+<div
+	class={cn('bg-paper text-ink mx-auto my-10 rounded border p-10 shadow md:p-20', className)}
+	{...props}
+>
 	{@render children()}
 </div>

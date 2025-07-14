@@ -25,7 +25,7 @@
 						<input
 							name="title"
 							placeholder="The film title..."
-							class="w-full rounded border bg-white px-2 py-1 placeholder:text-sm"
+							class="bg-input w-full rounded border px-2 py-1 placeholder:text-sm"
 							type="text"
 						/>
 					</label>
@@ -36,7 +36,7 @@
 						<input
 							name="id"
 							placeholder="IMDb ID"
-							class="w-full rounded border bg-white p-1 px-2 py-1 placeholder:text-sm"
+							class="bg-input w-full rounded border p-1 px-2 py-1 placeholder:text-sm"
 							type="text"
 						/>
 					</label>
@@ -45,7 +45,7 @@
 						<input
 							name="rating"
 							placeholder="1-100"
-							class="w-full rounded border bg-white p-1 px-2 py-1 placeholder:text-sm"
+							class="bg-input w-full rounded border p-1 px-2 py-1 placeholder:text-sm"
 							type="number"
 							min="1"
 							max="100"
@@ -54,7 +54,7 @@
 				</div>
 				<button
 					type="submit"
-					class="flex h-8 w-full items-center justify-center rounded bg-blue-500 px-4 py-2 text-sm text-white transition hover:bg-blue-600"
+					class="bg-primary hover:bg-primary-hover flex h-8 w-full items-center justify-center rounded px-4 py-2 text-sm text-white transition"
 				>
 					Add film
 				</button>
@@ -64,8 +64,8 @@
 
 	<main class="space-y-10 px-8 py-2">
 		<table class="w-full">
-			<thead class="border-b border-black-soft">
-				<tr class="grid grid-cols-8 text-sm font-medium uppercase text-gray-800">
+			<thead class="border-divide-soft border-b">
+				<tr class="text-foreground-muted grid grid-cols-8 text-sm font-medium uppercase">
 					<th class="col-span-6 p-1 text-left">Title</th>
 					<th class="col-span-2 p-1 text-left">Rating</th>
 				</tr>

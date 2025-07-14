@@ -10,10 +10,6 @@
 	let { children, class: className, ...props }: Props = $props();
 </script>
 
-<a
-	target="_blank"
-	class={cn('underline transition-colors hover:text-blue-500', className)}
-	{...props}
->
+<a target="_blank" class={cn('hover:text-link underline transition-colors', className)} {...props}>
 	{@render children()}
 </a>

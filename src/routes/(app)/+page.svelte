@@ -2,8 +2,10 @@
 	import { enhance } from '$app/forms';
 	import { List, ListItem } from '$lib/components/list';
 	import { getUser } from '$lib/contexts/user';
+	import { ThemeState } from '$lib/states/theme.svelte';
 
 	let user = getUser();
+	let theme = new ThemeState();
 </script>
 
 <svelte:head>
@@ -14,13 +16,20 @@
 	<header class="mx-auto flex max-w-xl items-center justify-between p-8">
 		<h1 class="text-3xl">omfj.no</h1>
 
-		{#if $user}
-			<form method="post" action="/auth/sign-out" use:enhance>
-				<button class="text-gray-700 hover:underline">Sign out</button>
-			</form>
-		{:else}
-			<a class="text-gray-700 hover:underline" href="/auth/github">Sign in</a>
-		{/if}
+		<div class="flex items-center gap-5">
+			<button onclick={() => theme.next()} class="text-foreground-muted hover:underline">
+				<span class="dark:hidden">Light</span>
+				<span class="hidden dark:block">Dark</span>
+			</button>
+
+			{#if $user}
+				<form class="contents" method="post" action="/auth/sign-out" use:enhance>
+					<button class="text-foreground-muted hover:underline">Sign out</button>
+				</form>
+			{:else}
+				<a class="text-foreground-muted hover:underline" href="/auth/github">Sign in</a>
+			{/if}
+		</div>
 	</header>
 
 	<main class="mx-auto mb-10 max-w-xl space-y-10 px-8 py-2">

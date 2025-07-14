@@ -1,3 +1,77 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+@import 'tailwindcss';
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+:root {
+	--font-mono: 'JetBrains Mono', monospace;
+	--font-sans: 'Inter', sans-serif;
+
+	--a4: 640px;
+
+	--background: #ffffff;
+	--background-muted: #f5f5f5;
+	--foreground: #000000;
+	--foreground-muted: #666666;
+	--primary: #1a73e8;
+	--primary-hover: #155ab6;
+	--input: #ffffff;
+	--divide-soft: #e0e0e0;
+	--gradient: #a2cffe;
+	--border: #d0d0d0;
+	--link: #1a73e8;
+	--list-hover-background: #f0f4ff;
+	--list-hover-foreground: #000000;
+	--paper: #ffffff;
+	--ink: #000000;
+}
+
+[data-theme='dark'] {
+	--background: #0c0c0c;
+	--background-muted: #1a1a1a;
+	--foreground: #d7d7d7;
+	--foreground-muted: #a0a0a0;
+	--primary: #4286f4;
+	--primary-hover: #2a77f3;
+	--input: #1a1a1a;
+	--divide-soft: #333333;
+	--gradient: #152142;
+	--border: #1a1a1a;
+	--link: #8ab4f8;
+	--list-hover-background: #1a1a1a;
+	--list-hover-foreground: #ffffff;
+	--paper: #0e0e0e;
+	--ink: #bababa;
+}
+
+@theme inline {
+	--font-sans: var(--font-sans);
+	--font-mono: var(--font-mono);
+
+	--breakpoint-a4: var(--a4);
+
+	--color-background: var(--background);
+	--color-background-muted: var(--background-muted);
+	--color-foreground: var(--foreground);
+	--color-foreground-muted: var(--foreground-muted);
+	--color-primary: var(--primary);
+	--color-primary-hover: var(--primary-hover);
+	--color-divide-soft: var(--divide-soft);
+	--color-gradient: var(--gradient);
+	--color-link: var(--link);
+	--color-list-hover-background: var(--list-hover-background);
+	--color-list-hover-foreground: var(--list-hover-foreground);
+	--color-paper: var(--paper);
+	--color-ink: var(--ink);
+}
+
+* {
+	box-sizing: border-box;
+	border-color: var(--border);
+}
+
+body {
+	background-color: var(--color-background);
+	color: var(--color-foreground);
+}

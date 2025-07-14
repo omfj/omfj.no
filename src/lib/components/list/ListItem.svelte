@@ -13,7 +13,7 @@
 <li class="py-1">
 	<span
 		class={cn(
-			'flex transition-colors duration-150 hover:bg-black-soft hover:text-white',
+			'hover:bg-list-hover-background hover:text-list-hover-foreground flex transition-colors duration-150',
 			className
 		)}
 	>

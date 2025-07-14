@@ -8,6 +8,6 @@
 	let { children }: Props = $props();
 </script>
 
-<ul class="divide-y divide-dashed divide-black-soft">
+<ul class="divide-divide-soft divide-y divide-dashed">
 	{@render children()}
 </ul>

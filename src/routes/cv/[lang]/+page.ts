@@ -6,7 +6,7 @@ const isCVLanguage = (lang: string): lang is keyof typeof cv => Object.keys(cv).
 
 export const load: PageLoad = async ({ params }) => {
 	if (!isCVLanguage(params.lang)) {
-		throw error(404, 'Not found');
+		error(404, 'Not found');
 	}
 
 	const cvContent = cv[params.lang];

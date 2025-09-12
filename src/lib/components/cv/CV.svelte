@@ -23,9 +23,9 @@
 				<h1 class="mb-6 text-3xl font-semibold">Ole Magnus Fon Johnsen</h1>
 
 				<Metadata.Root>
-					{#each metadata.data as { label, value, link }}
+					{#each metadata.data as { label, value, link } (label)}
 						<Metadata.Item>
-							<Metadata.Label>{label}:</Metadata.Label>{' '}
+							<Metadata.Label>{label}:</Metadata.Label>
 							{#if link}
 								<Metadata.Link href={link}>{value}</Metadata.Link>
 							{:else}
@@ -40,7 +40,7 @@
 		<Section.Root>
 			<Section.Title>{cv.about.title}</Section.Title>
 
-			{#each cv.about.data as { paragraph }}
+			{#each cv.about.data as { paragraph } (paragraph)}
 				<Text>{paragraph}</Text>
 			{/each}
 		</Section.Root>
@@ -49,7 +49,7 @@
 			<Section.Title>{education.title}</Section.Title>
 
 			<Table.Root>
-				{#each education.data as { year, title, institution }}
+				{#each education.data as { year, title, institution } (title)}
 					<Table.Item>
 						<Table.Label>{year}</Table.Label>
 						<Table.Content>
@@ -68,7 +68,7 @@
 			<Section.Title>{workExperience.title}</Section.Title>
 
 			<Table.Root>
-				{#each workExperience.data as { year, title, company, description }}
+				{#each workExperience.data as { year, title, company, description } (title)}
 					<Table.Item>
 						<Table.Label>{year}</Table.Label>
 						<Table.Content>
@@ -88,7 +88,7 @@
 			<Section.Title>{volunteerExperience.title}</Section.Title>
 
 			<Table.Root>
-				{#each volunteerExperience.data as { year, title, company, description }}
+				{#each volunteerExperience.data as { year, title, company, description } (title)}
 					<Table.Item>
 						<Table.Label>{year}</Table.Label>
 						<Table.Content>
@@ -108,7 +108,7 @@
 			<Section.Title>{skills.title}</Section.Title>
 
 			<Table.Root>
-				{#each skills.data as { title, description }}
+				{#each skills.data as { title, description } (title)}
 					<Table.Item>
 						<Table.Label>{title}</Table.Label>
 						<Table.Content>
@@ -122,7 +122,7 @@
 		<Section.Root>
 			<Section.Title>{cv.other.title}</Section.Title>
 
-			{#each cv.other.data as { paragraph }}
+			{#each cv.other.data as { paragraph } (paragraph)}
 				<Text>{paragraph}</Text>
 			{/each}
 		</Section.Root>

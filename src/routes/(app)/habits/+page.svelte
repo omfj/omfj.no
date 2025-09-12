@@ -18,7 +18,7 @@
 
 	<main class="space-y-10 px-8 py-2">
 		<List>
-			{#each habitsState.habits as habit, i}
+			{#each habitsState.habits as habit, i (habit.title)}
 				{@const isChecked = !!habit.checkedAt}
 				<ListItem>
 					<button

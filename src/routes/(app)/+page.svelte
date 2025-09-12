@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import { enhance } from '$app/forms';
 	import { List, ListItem } from '$lib/components/list';
 	import { getUser } from '$lib/contexts/user';
@@ -23,11 +24,11 @@
 			</button>
 
 			{#if $user}
-				<form class="contents" method="post" action="/auth/sign-out" use:enhance>
+				<form class="contents" method="post" action={resolve('/auth/sign-out')} use:enhance>
 					<button class="text-foreground-muted hover:underline">Sign out</button>
 				</form>
 			{:else}
-				<a class="text-foreground-muted hover:underline" href="/auth/github">Sign in</a>
+				<a class="text-foreground-muted hover:underline" href={resolve('/auth/github')}>Sign in</a>
 			{/if}
 		</div>
 	</header>
@@ -47,8 +48,9 @@
 			<h2 class="mb-3 text-lg font-medium">Want to have a look at my resumè?</h2>
 
 			<p>
-				You can find the <a class="underline transition-colors hover:text-blue-500" href="/cv/en"
-					>web version here</a
+				You can find the <a
+					class="underline transition-colors hover:text-blue-500"
+					href={resolve('/cv/en')}>web version here</a
 				>.
 			</p>
 		</section>
@@ -89,11 +91,13 @@
 
 			<ul class="flex gap-x-6 gap-y-4">
 				<li>
-					<a class="underline transition-colors hover:text-blue-500" href="/habits">Habit Tracker</a
+					<a class="underline transition-colors hover:text-blue-500" href={resolve('/habits')}
+						>Habit Tracker</a
 					>
 				</li>
 				<li>
-					<a class="underline transition-colors hover:text-blue-500" href="/omdb">OMDb</a>
+					<a class="underline transition-colors hover:text-blue-500" href={resolve('/omdb')}>OMDb</a
+					>
 				</li>
 			</ul>
 		</section>

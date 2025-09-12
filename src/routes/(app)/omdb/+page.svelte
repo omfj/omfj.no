@@ -71,7 +71,7 @@
 				</tr>
 			</thead>
 			<tbody class="flex flex-col divide-y">
-				{#each data.films as film}
+				{#each data.films as film (film.id)}
 					<tr class="grid grid-cols-8">
 						<td class="col-span-6 p-1 text-left">
 							<a class="hover:underline" href="https://www.imdb.com/title/{film.id}/"

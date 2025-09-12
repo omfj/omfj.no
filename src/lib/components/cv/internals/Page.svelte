@@ -10,6 +10,6 @@
 	let { children, class: className, ...props }: Props = $props();
 </script>
 
-<div class={cn('flex w-full max-w-screen-a4 flex-col gap-10 font-sans', className)} {...props}>
+<div class={cn('max-w-screen-a4 flex w-full flex-col gap-10 font-sans', className)} {...props}>
 	{@render children()}
 </div>

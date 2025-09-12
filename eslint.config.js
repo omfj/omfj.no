@@ -28,6 +28,20 @@ export default ts.config(
 		}
 	},
 	{
+		files: ['**/*.svelte.ts'],
+		languageOptions: {
+			parserOptions: {
+				parser: ts.parser
+			}
+		}
+	},
+	{
+		files: ['**/*.svelte'],
+		rules: {
+			'svelte/no-at-html-tags': 'off'
+		}
+	},
+	{
 		ignores: ['build/', '.svelte-kit/', 'dist/']
 	}
 );

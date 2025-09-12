@@ -1,6 +1,7 @@
 import { browser } from '$app/environment';
-import { type Habit, DEFAULT_HABITS } from '$lib/habits';
+import { DEFAULT_HABITS, type Habit } from '$lib/habits';
 import { isToday } from 'date-fns';
+import { SvelteDate } from 'svelte/reactivity';
 
 const HABITS_LOCAL_STORAGE_KEY = 'habits';
 
@@ -16,8 +17,8 @@ export class HabitsState {
 
 					let checkedAt = null;
 
-					if (habit.checkedAt && isToday(new Date(habit.checkedAt))) {
-						checkedAt = new Date(habit.checkedAt);
+					if (habit.checkedAt && isToday(new SvelteDate(habit.checkedAt))) {
+						checkedAt = new SvelteDate(habit.checkedAt);
 					}
 
 					return {
@@ -32,7 +33,7 @@ export class HabitsState {
 	}
 
 	toggleHabit(index: number) {
-		this.habits[index].checkedAt = this.habits[index].checkedAt ? null : new Date();
+		this.habits[index].checkedAt = this.habits[index].checkedAt ? null : new SvelteDate();
 		this.save();
 	}
 

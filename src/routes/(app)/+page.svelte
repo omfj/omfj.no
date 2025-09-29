@@ -85,21 +85,5 @@
 				</ListItem>
 			</List>
 		</section>
-
-		<section>
-			<h2 class="mb-3 text-lg font-medium">Pages</h2>
-
-			<ul class="flex gap-x-6 gap-y-4">
-				<li>
-					<a class="underline transition-colors hover:text-blue-500" href={resolve('/habits')}
-						>Habit Tracker</a
-					>
-				</li>
-				<li>
-					<a class="underline transition-colors hover:text-blue-500" href={resolve('/omdb')}>OMDb</a
-					>
-				</li>
-			</ul>
-		</section>
 	</main>
 </div>

@@ -15,23 +15,39 @@ export const DEFAULT_HABITS = [
 		checkedAt: null
 	},
 	{
-		title: 'Meditate for 10 minutes',
+		title: 'Take creatine',
 		checkedAt: null
 	},
 	{
-		title: 'Read for 30 minutes',
+		title: 'Read the news',
 		checkedAt: null
 	},
 	{
-		title: 'Drink 2 liters of water',
+		title: 'Read for 20 minutes',
 		checkedAt: null
 	},
 	{
-		title: 'Do daily Leetcode question',
+		title: 'Go for a walk',
 		checkedAt: null
 	},
 	{
-		title: 'Journal the day',
+		title: 'Drink glass of water (1)',
+		checkedAt: null
+	},
+	{
+		title: 'Drink glass of water (2)',
+		checkedAt: null
+	},
+	{
+		title: 'Drink glass of water (3)',
+		checkedAt: null
+	},
+	{
+		title: 'Drink glass of water (4)',
+		checkedAt: null
+	},
+	{
+		title: 'Take magnesium',
 		checkedAt: null
 	}
 ] satisfies Array<Habit>;

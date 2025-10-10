@@ -19,10 +19,13 @@ jobs:
       - name: 📦 Setup PNPM
         uses: pnpm/action-setup@v3
         with:
-          version: 9
+          version: 10
 
       - name: 📦 Install dependencies
         run: pnpm install
+
+      - name: 🗃️ Run migrations
+        run: pnpm run db:migrate --remote
 
       - name: ⚙️ Deploy
         run: |

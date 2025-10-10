@@ -4,6 +4,16 @@
 
 	let user = getUser();
 	let { data } = $props();
+	let isPending = $state(false);
+	let title = $state('');
+	let imdbId = $state('');
+	let rating = $state('');
+
+	function resetForm() {
+		title = '';
+		imdbId = '';
+		rating = '';
+	}
 </script>
 
 <svelte:head>
@@ -13,53 +23,74 @@
 <div class="mx-auto w-full max-w-xl py-12 transition-all md:py-24">
 	<header class="p-8">
 		<h1 class="mb-3 text-3xl">OMDb</h1>
-		<p>A list of moveis and series I have watched and my ratings.</p>
+		<p>A list of movies and series I have watched and my ratings.</p>
 	</header>
 
 	{#if $user}
-		<div class="p-8">
-			<form method="post" use:enhance class="flex flex-col gap-2">
-				<div>
-					<label>
-						<span class="mb-1 block text-sm">Title</span>
-						<input
-							name="title"
-							placeholder="The film title..."
-							class="bg-input w-full rounded border px-2 py-1 placeholder:text-sm"
-							type="text"
-						/>
-					</label>
-				</div>
-				<div class="flex items-center gap-2">
-					<label class="w-full">
-						<span class="mb-1 block text-sm">IMDb ID</span>
-						<input
-							name="id"
-							placeholder="IMDb ID"
-							class="bg-input w-full rounded border p-1 px-2 py-1 placeholder:text-sm"
-							type="text"
-						/>
-					</label>
-					<label class="w-full max-w-[100px]">
-						<span class="mb-1 block text-sm">Rating</span>
-						<input
-							name="rating"
-							placeholder="1-100"
-							class="bg-input w-full rounded border p-1 px-2 py-1 placeholder:text-sm"
-							type="number"
-							min="1"
-							max="100"
-						/>
-					</label>
-				</div>
-				<button
-					type="submit"
-					class="bg-primary hover:bg-primary-hover flex h-8 w-full items-center justify-center rounded px-4 py-2 text-sm text-white transition"
-				>
-					Add film
-				</button>
-			</form>
-		</div>
+		<form
+			method="post"
+			class="m-8 flex flex-col gap-4 border-2 p-4"
+			use:enhance={() => {
+				isPending = true;
+
+				return async ({ update, result }) => {
+					isPending = false;
+
+					if (result.type === 'success') {
+						resetForm();
+					}
+
+					await update();
+				};
+			}}
+		>
+			<label>
+				<h3 class="text-base font-semibold">Tittel</h3>
+				<input
+					bind:value={title}
+					name="title"
+					placeholder="Tittel på filmen"
+					class="focus:border-link w-full border-b-2 p-1 outline-0"
+					type="text"
+				/>
+			</label>
+
+			<label>
+				<h3 class="text-base font-semibold">IMDb-ID</h3>
+				<input
+					bind:value={imdbId}
+					name="id"
+					placeholder="tt1234567"
+					class="focus:border-link w-full border-b-2 p-1 outline-0"
+					type="text"
+				/>
+			</label>
+
+			<label>
+				<h3 class="text-base font-semibold">Vurdering</h3>
+				<input
+					bind:value={rating}
+					name="rating"
+					placeholder="1-100"
+					class="focus:border-link w-full border-b-2 p-1 outline-0"
+					type="number"
+					min="1"
+					max="100"
+				/>
+			</label>
+
+			<button
+				class="mr-auto w-fit px-1 text-left hover:cursor-pointer hover:underline"
+				type="submit"
+				disabled={isPending}
+			>
+				{#if isPending}
+					Lagrer...
+				{:else}
+					Legg til film
+				{/if}
+			</button>
+		</form>
 	{/if}
 
 	<main class="space-y-10 px-8 py-2">

@@ -53,3 +53,15 @@ export const films = sqliteTable('film', {
 
 export type Film = InferSelectModel<typeof films>;
 export type FilmInsert = InferInsertModel<typeof films>;
+
+/**
+ * Wishlist for christmas or birthdays
+ */
+export const wishlists = sqliteTable('wishlist', {
+	id: text().primaryKey().$defaultFn(nanoid),
+	title: text().notNull(),
+	link: text()
+});
+
+export type Wishlist = InferSelectModel<typeof wishlists>;
+export type WishlistInsert = InferInsertModel<typeof wishlists>;

@@ -22,6 +22,13 @@
 			"when": 1736744710483,
 			"tag": "0002_puzzling_jetstream",
 			"breakpoints": true
+		},
+		{
+			"idx": 3,
+			"version": "6",
+			"when": 1760132407705,
+			"tag": "0003_bitter_zaladane",
+			"breakpoints": true
 		}
 	]
 }

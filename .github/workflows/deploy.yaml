@@ -24,8 +24,8 @@ jobs:
       - name: 📦 Install dependencies
         run: pnpm install
 
-      - name: 🗃️ Run migrations
-        run: pnpm run db:migrate --remote
+      # - name: 🗃️ Run migrations
+      #   run: pnpm run db:migrate --remote # TODO: Need to update token
 
       - name: ⚙️ Deploy
         run: |

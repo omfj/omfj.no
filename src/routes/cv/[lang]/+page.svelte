@@ -1,6 +1,6 @@
 <script lang="ts">
-	import CV from '$lib/components/cv/CV.svelte';
-	import Download from '$lib/components/cv/internals/Download.svelte';
+	import CV from './_components/CV.svelte';
+	import Download from './_components/Download.svelte';
 
 	let { data } = $props();
 </script>

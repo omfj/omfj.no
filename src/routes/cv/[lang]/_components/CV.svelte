@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { CV } from '$lib/cv';
 	import Avatar from '$lib/assets/avatar.png';
-	import { Page, PageWrapper, Text, Metadata, Section, Table } from './internals';
+	import { Page, PageWrapper, Text, Metadata, Section, Table } from '.';
 
 	type Props = {
 		cv: CV;

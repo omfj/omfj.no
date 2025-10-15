@@ -58,7 +58,7 @@
 						</td>
 						{#if user.current}
 							<td class="p-1 text-right">
-								<form {...deleteItem} class="inline">
+								<form {...deleteItem.for(item.id)} class="inline">
 									<input {...deleteItem.fields.id.as('hidden', item.id)} />
 									<button type="submit" class="text-red-600 hover:underline">[Slett]</button>
 								</form>

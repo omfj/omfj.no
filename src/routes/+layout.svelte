@@ -2,13 +2,12 @@
 	import '../app.css';
 	import '../fonts.css';
 	import { setUserContext } from '$lib/contexts/user';
-	import { writable } from 'svelte/store';
 
 	const { data, children } = $props();
 
-	const user = writable(data.user);
+	let user = $state({ current: data.user });
 	$effect.pre(() => {
-		user.set(data.user);
+		user.current = data.user;
 	});
 	setUserContext(user);
 </script>

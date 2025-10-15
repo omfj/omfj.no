@@ -26,7 +26,7 @@
 		<p>A list of movies and series I have watched and my ratings.</p>
 	</header>
 
-	{#if $user}
+	{#if user.current}
 		<form
 			method="post"
 			class="m-8 flex flex-col gap-4 border-2 p-4"

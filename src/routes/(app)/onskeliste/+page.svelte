@@ -7,7 +7,7 @@
 	let { data } = $props();
 
 	let rowGridClasses = $derived(
-		$user ? 'grid grid-cols-[5.5rem_1fr_auto]' : 'grid grid-cols-[5.5rem_1fr]'
+		user.current ? 'grid grid-cols-[5.5rem_1fr_auto]' : 'grid grid-cols-[5.5rem_1fr]'
 	);
 </script>
 
@@ -21,7 +21,7 @@
 		<p>Ting jeg ønsker meg til bursdag, jul og andre anledninger.</p>
 	</header>
 
-	{#if $user}
+	{#if user.current}
 		<CreateNewItemForm />
 	{/if}
 
@@ -31,7 +31,7 @@
 				<tr class={`text-foreground-muted text-sm font-medium uppercase ${rowGridClasses}`}>
 					<th class="p-1 text-left">Lenke</th>
 					<th class="p-1 text-left">Tittel</th>
-					{#if $user}
+					{#if user.current}
 						<th class="p-1 text-right">Handling</th>
 					{/if}
 				</tr>
@@ -55,7 +55,7 @@
 						>
 							{item.title}
 						</td>
-						{#if $user}
+						{#if user.current}
 							<td class="p-1 text-right">
 								<form {...deleteItem} class="inline">
 									<input {...deleteItem.fields.id.as('hidden', item.id)} />

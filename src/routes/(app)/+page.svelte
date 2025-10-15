@@ -23,7 +23,7 @@
 				<span class="hidden dark:block">Dark</span>
 			</button>
 
-			{#if $user}
+			{#if user.current}
 				<form class="contents" method="post" action={resolve('/auth/sign-out')} use:enhance>
 					<button class="text-foreground-muted hover:underline">Sign out</button>
 				</form>

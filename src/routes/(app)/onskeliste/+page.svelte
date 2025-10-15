@@ -38,13 +38,14 @@
 			</thead>
 			<tbody class="flex flex-col divide-y">
 				{#each data.whislist as item (item.id)}
+					{@const href = item.link ?? undefined}
 					<tr class={rowGridClasses}>
 						<td class="p-1 text-left">
 							{#if item.link}
 								<a
-									href={item.link}
+									{href}
 									target="_blank"
-									rel="noopener noreferrer"
+									rel="noopener noreferrer external"
 									class="text-link hover:underline">[Lenke]</a
 								>
 							{/if}

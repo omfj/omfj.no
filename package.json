@@ -31,6 +31,7 @@
 	},
 	"devDependencies": {
 		"@cloudflare/workers-types": "4.20251008.0",
+		"@eslint/js": "^9.37.0",
 		"@sveltejs/adapter-cloudflare": "7.2.4",
 		"@sveltejs/kit": "2.46.4",
 		"@sveltejs/vite-plugin-svelte": "6.2.1",

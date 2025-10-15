@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
 	import { getUser } from '$lib/contexts/user';
 	import CreateNewItemForm from './_components/CreateNewItemForm.svelte';
+	import { deleteItem } from './data.remote';
 
 	let user = getUser();
 	let { data } = $props();
@@ -57,9 +57,9 @@
 						</td>
 						{#if $user}
 							<td class="p-1 text-right">
-								<form method="post" action="/onskeliste?/delete" class="inline" use:enhance>
-									<input type="hidden" name="id" value={item.id} />
-									<button type="submit" class="text-red-600 hover:underline"> [Slett] </button>
+								<form {...deleteItem} class="inline">
+									<input {...deleteItem.fields.id.as('hidden', item.id)} />
+									<button type="submit" class="text-red-600 hover:underline">[Slett]</button>
 								</form>
 							</td>
 						{/if}

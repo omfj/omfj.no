@@ -1,37 +1,25 @@
 <script>
-	import { enhance } from '$app/forms';
+	import { createItem } from '../data.remote';
 
 	let isPending = $state(false);
-	let title = $state('');
-	let link = $state('');
-
-	function reset() {
-		title = '';
-		link = '';
-	}
 </script>
 
 <form
-	method="post"
-	action="/onskeliste?/create"
-	class="m-8 flex flex-col gap-4 border-2 p-4"
-	use:enhance={() => {
+	{...createItem.enhance(async ({ form, submit }) => {
 		isPending = true;
-
-		return async ({ update, result }) => {
+		try {
+			await submit();
+			form.reset();
+		} finally {
 			isPending = false;
-			if (result.type === 'success') {
-				reset();
-			}
-			await update();
-		};
-	}}
+		}
+	})}
+	class="m-8 flex flex-col gap-4 border-2 p-4"
 >
 	<label>
 		<h3>Tittel</h3>
 		<input
-			bind:value={title}
-			name="title"
+			{...createItem.fields.title.as('text')}
 			class="focus:border-link w-full border-b-2 p-1 outline-0"
 			placeholder="Tittel på ønsket vare"
 		/>
@@ -40,8 +28,7 @@
 	<label>
 		<h3>Lenke</h3>
 		<input
-			bind:value={link}
-			name="link"
+			{...createItem.fields.link.as('url')}
 			class="focus:border-link w-full border-b-2 p-1 outline-0"
 			placeholder="https://..."
 		/>

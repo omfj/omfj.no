@@ -11,8 +11,10 @@
 		"deploy": "pnpm run build && wrangler deploy",
 		"cf-typegen": "wrangler types ./src/worker-configuration.d.ts",
 		"typegen": "wrangler types && mv worker-configuration.d.ts src/",
-		"lint": "prettier --check . && eslint .",
+		"lint": "eslint .",
+		"lint:fix": "eslint . --fix",
 		"format": "prettier --write .",
+		"format:check": "prettier --check .",
 		"db:generate": "drizzle-kit generate",
 		"db:migrate": "wrangler d1 migrations apply omfj-db",
 		"db:studio": "drizzle-kit studio"

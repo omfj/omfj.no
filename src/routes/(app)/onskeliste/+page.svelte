@@ -5,10 +5,6 @@
 
 	let user = getUser();
 	let { data } = $props();
-
-	let rowGridClasses = $derived(
-		user.current ? 'grid grid-cols-[5.5rem_1fr_auto]' : 'grid grid-cols-[5.5rem_1fr]'
-	);
 </script>
 
 <svelte:head>
@@ -25,48 +21,36 @@
 		<CreateNewItemForm />
 	{/if}
 
-	<main class="space-y-10 px-8 py-2">
-		<table class="w-full">
-			<thead class="border-divide-soft border-b">
-				<tr class={`text-foreground-muted text-sm font-medium uppercase ${rowGridClasses}`}>
-					<th class="p-1 text-left">Lenke</th>
-					<th class="p-1 text-left">Tittel</th>
-					{#if user.current}
-						<th class="p-1 text-right">Handling</th>
-					{/if}
-				</tr>
-			</thead>
-			<tbody class="flex flex-col divide-y">
-				{#each data.whislist as item (item.id)}
-					{@const href = item.link ?? undefined}
-					<tr class={rowGridClasses}>
-						<td class="p-1 text-left">
-							{#if item.link}
-								<a
-									{href}
-									target="_blank"
-									rel="noopener noreferrer external"
-									class="text-link hover:underline">[Lenke]</a
-								>
-							{/if}
-						</td>
-						<td
-							class="overflow-hidden p-1 text-left text-ellipsis whitespace-nowrap"
-							title={item.title}
-						>
-							{item.title}
-						</td>
-						{#if user.current}
-							<td class="p-1 text-right">
-								<form {...deleteItem.for(item.id)} class="inline">
-									<input {...deleteItem.fields.id.as('hidden', item.id)} />
-									<button type="submit" class="text-red-600 hover:underline">[Slett]</button>
-								</form>
-							</td>
+	<main class="space-y-4 px-8 py-2">
+		<div class="flex flex-col gap-4">
+			{#each data.whislist as item (item.id)}
+				{@const href = item.link ?? undefined}
+				<div class="border-divide-soft flex flex-col gap-3 border p-4">
+					<h2 class="text-lg font-medium">{item.title}</h2>
+					<div class="mt-auto flex items-center justify-between gap-2">
+						{#if item.link}
+							<a
+								{href}
+								target="_blank"
+								rel="noopener noreferrer external"
+								class="text-link hover:underline"
+							>
+								[Lenke]
+							</a>
+						{:else}
+							<div></div>
 						{/if}
-					</tr>
-				{/each}
-			</tbody>
-		</table>
+						{#if user.current}
+							<form {...deleteItem.for(item.id)} class="inline">
+								<input {...deleteItem.fields.id.as('hidden', item.id)} />
+								<button type="submit" class="text-red-700 transition-colors hover:text-red-400"
+									>[x]</button
+								>
+							</form>
+						{/if}
+					</div>
+				</div>
+			{/each}
+		</div>
 	</main>
 </div>

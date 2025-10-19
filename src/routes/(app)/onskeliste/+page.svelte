@@ -21,36 +21,37 @@
 		<CreateNewItemForm />
 	{/if}
 
-	<main class="space-y-4 px-8 py-2">
-		<div class="flex flex-col gap-4">
+	<main class="px-8 py-2">
+		<ul class="space-y-2">
 			{#each data.whislist as item (item.id)}
-				{@const href = item.link ?? undefined}
-				<div class="border-divide-soft flex flex-col gap-3 border p-4">
-					<h2 class="text-lg font-medium">{item.title}</h2>
-					<div class="mt-auto flex items-center justify-between gap-2">
+				<li class="flex items-center gap-2">
+					<span class="truncate">
+						->
 						{#if item.link}
 							<a
-								{href}
+								href={item.link}
 								target="_blank"
 								rel="noopener noreferrer external"
-								class="text-link hover:underline"
+								class="text-link truncate hover:underline"
 							>
-								[Lenke]
+								{item.title}
 							</a>
 						{:else}
-							<div></div>
+							{item.title}
 						{/if}
-						{#if user.current}
-							<form {...deleteItem.for(item.id)} class="inline">
-								<input {...deleteItem.fields.id.as('hidden', item.id)} />
-								<button type="submit" class="text-red-700 transition-colors hover:text-red-400"
-									>[x]</button
-								>
-							</form>
-						{/if}
-					</div>
-				</div>
+					</span>
+					{#if user.current}
+						<form {...deleteItem.for(item.id)} class="ml-auto inline shrink-0">
+							<input {...deleteItem.fields.id.as('hidden', item.id)} />
+							<button
+								type="submit"
+								class="text-red-700 transition-colors hover:text-red-400"
+								aria-label="Delete {item.title}">[x]</button
+							>
+						</form>
+					{/if}
+				</li>
 			{/each}
-		</div>
+		</ul>
 	</main>
 </div>

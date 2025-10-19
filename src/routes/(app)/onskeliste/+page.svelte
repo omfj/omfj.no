@@ -5,6 +5,7 @@
 
 	let user = getUser();
 	let { data } = $props();
+	let isFormOpen = $state(false);
 </script>
 
 <svelte:head>
@@ -18,7 +19,14 @@
 	</header>
 
 	{#if user.current}
-		<CreateNewItemForm />
+		<div class="px-8">
+			<button onclick={() => (isFormOpen = !isFormOpen)} class="text-link mb-2 hover:underline">
+				{isFormOpen ? 'Skjul skjema' : 'Legg til nytt ønske'}
+			</button>
+		</div>
+		{#if isFormOpen}
+			<CreateNewItemForm />
+		{/if}
 	{/if}
 
 	<main class="px-8 py-2">

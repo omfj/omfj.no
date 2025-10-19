@@ -5,7 +5,11 @@ import { eq } from 'drizzle-orm';
 import z from 'zod';
 
 export const createItem = form(
-	z.object({ title: z.string(), link: z.url().optional().or(z.literal('')) }),
+	z.object({
+		title: z.string(),
+		description: z.string().optional().or(z.literal('')),
+		link: z.url().optional().or(z.literal(''))
+	}),
 	async (item) => {
 		const { locals } = getRequestEvent();
 

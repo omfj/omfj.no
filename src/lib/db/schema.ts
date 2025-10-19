@@ -60,6 +60,7 @@ export type FilmInsert = InferInsertModel<typeof films>;
 export const wishlists = sqliteTable('wishlist', {
 	id: text().primaryKey().$defaultFn(nanoid),
 	title: text().notNull(),
+	description: text(),
 	link: text()
 });
 

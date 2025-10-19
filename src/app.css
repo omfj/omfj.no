@@ -56,6 +56,7 @@
 	--color-background-muted: var(--background-muted);
 	--color-foreground: var(--foreground);
 	--color-foreground-muted: var(--foreground-muted);
+	--color-muted-foreground: var(--foreground-muted);
 	--color-primary: var(--primary);
 	--color-primary-hover: var(--primary-hover);
 	--color-divide-soft: var(--divide-soft);

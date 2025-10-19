@@ -22,24 +22,35 @@
 	{/if}
 
 	<main class="px-8 py-2">
-		<ul class="space-y-2">
+		<ul class="space-y-3">
 			{#each data.whislist as item (item.id)}
 				<li class="flex items-center gap-2">
-					<span class="truncate">
-						->
-						{#if item.link}
-							<a
-								href={item.link}
-								target="_blank"
-								rel="noopener noreferrer external"
-								class="text-link truncate hover:underline"
-							>
+					<div class="min-w-0 flex-1">
+						<div class="truncate">
+							->
+							{#if item.link}
+								<a
+									href={item.link}
+									target="_blank"
+									rel="noopener noreferrer external"
+									class="text-link hover:underline"
+								>
+									{item.title}
+								</a>
+							{:else}
 								{item.title}
-							</a>
-						{:else}
-							{item.title}
+							{/if}
+						</div>
+
+						{#if item.description}
+							<div class="text-muted-foreground text-sm">
+								{#each item.description.split('\n\n') as paragraph, i (i)}
+									<p>{paragraph}</p>
+								{/each}
+							</div>
 						{/if}
-					</span>
+					</div>
+
 					{#if user.current}
 						<form {...deleteItem.for(item.id)} class="ml-auto inline shrink-0">
 							<input {...deleteItem.fields.id.as('hidden', item.id)} />

@@ -34,6 +34,16 @@
 		/>
 	</label>
 
+	<label>
+		<h3>Beskrivelse</h3>
+		<textarea
+			{...createItem.fields.description.as('text')}
+			class="focus:border-link w-full border-b-2 p-1 outline-0"
+			placeholder="Beskrivelse av ønsket vare"
+			rows="3"
+		></textarea>
+	</label>
+
 	<button
 		class="mr-auto w-fit px-1 hover:cursor-pointer hover:underline"
 		type="submit"

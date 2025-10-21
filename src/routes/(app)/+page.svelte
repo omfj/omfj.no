@@ -66,20 +66,14 @@
 					</a>
 				</ListItem>
 				<ListItem class="gap-2">
-					<a href="https://instagram.com/lordolem" class="h-full w-full p-2">
-						<span>> Instagram</span>
-						<span class="text-sm">(@lordolem)</span>
-					</a>
-				</ListItem>
-				<ListItem class="gap-2">
 					<a href="https://www.linkedin.com/in/omfj" class="h-full w-full p-2">
 						<span>> LinkedIn</span>
 						<span class="text-sm">(in/omfj)</span>
 					</a>
 				</ListItem>
 				<ListItem class="gap-2">
-					<a href="https://bsky.app/profile/omfj.no" class="h-full w-full p-2">
-						<span>> Bluesky</span>
+					<a href="mailto:me@omfj.no" class="h-full w-full p-2">
+						<span>> E-mail</span>
 						<span class="text-sm">(@omfj.no)</span>
 					</a>
 				</ListItem>

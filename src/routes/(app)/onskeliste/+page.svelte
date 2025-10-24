@@ -6,6 +6,11 @@
 	let user = getUser();
 	let { data } = $props();
 	let isFormOpen = $state(false);
+	let wishlist = $state(data.whislist);
+
+	$effect(() => {
+		wishlist = data.whislist;
+	});
 </script>
 
 <svelte:head>
@@ -31,7 +36,7 @@
 
 	<main class="px-8 py-2">
 		<ul class="space-y-3">
-			{#each data.whislist as item (item.id)}
+			{#each wishlist as item (item.id)}
 				<li class="flex items-center gap-2">
 					<div class="min-w-0 flex-1">
 						<div class="truncate">
@@ -60,7 +65,13 @@
 					</div>
 
 					{#if user.current}
-						<form {...deleteItem.for(item.id)} class="ml-auto inline shrink-0">
+						<form
+							{...deleteItem.for(item.id).enhance(async ({ submit }) => {
+								wishlist = wishlist.filter((i) => i.id !== item.id);
+								await submit();
+							})}
+							class="ml-auto inline shrink-0"
+						>
 							<input {...deleteItem.fields.id.as('hidden', item.id)} />
 							<button
 								type="submit"

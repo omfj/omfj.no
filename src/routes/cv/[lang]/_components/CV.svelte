@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { CV } from '$lib/cv';
-	import Avatar from '$lib/assets/avatar.png';
+	import Avatar from '$lib/assets/avatar-optimized.png';
 	import { Page, PageWrapper, Text, Metadata, Section, Table } from '.';
 
 	type Props = {
@@ -40,7 +40,7 @@
 		<Section.Root>
 			<Section.Title>{cv.about.title}</Section.Title>
 
-			{#each cv.about.data as { paragraph } (paragraph)}
+			{#each cv.about.data as { paragraph }, i (i)}
 				<Text>{paragraph}</Text>
 			{/each}
 		</Section.Root>
@@ -49,7 +49,7 @@
 			<Section.Title>{education.title}</Section.Title>
 
 			<Table.Root>
-				{#each education.data as { year, title, institution } (title)}
+				{#each education.data as { year, title, institution }, i (i)}
 					<Table.Item>
 						<Table.Label>{year}</Table.Label>
 						<Table.Content>
@@ -68,7 +68,7 @@
 			<Section.Title>{workExperience.title}</Section.Title>
 
 			<Table.Root>
-				{#each workExperience.data as { year, title, company, description } (title)}
+				{#each workExperience.data as { year, title, company, description }, i (i)}
 					<Table.Item>
 						<Table.Label>{year}</Table.Label>
 						<Table.Content>
@@ -88,7 +88,7 @@
 			<Section.Title>{volunteerExperience.title}</Section.Title>
 
 			<Table.Root>
-				{#each volunteerExperience.data as { year, title, company, description } (title)}
+				{#each volunteerExperience.data as { year, title, company, description }, i (i)}
 					<Table.Item>
 						<Table.Label>{year}</Table.Label>
 						<Table.Content>

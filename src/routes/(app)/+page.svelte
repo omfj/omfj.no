@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { resolve } from '$app/paths';
+	import { resolve, asset } from '$app/paths';
 	import { enhance } from '$app/forms';
 	import { List, ListItem } from '$lib/components/list';
 	import { getUser } from '$lib/contexts/user';
@@ -48,9 +48,9 @@
 			<h2 class="mb-3 text-lg font-medium">Want to have a look at my resumè?</h2>
 
 			<p>
-				You can find the <a
-					class="underline transition-colors hover:text-blue-500"
-					href={resolve('/cv/en')}>web version here</a
+				You can download the PDF version <a
+					href={asset('/assets/cv.pdf')}
+					class="underline transition-colors hover:text-blue-500">here</a
 				>.
 			</p>
 		</section>

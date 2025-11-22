@@ -2,12 +2,12 @@ import { browser } from '$app/environment';
 import { isToday } from 'date-fns';
 import { SvelteDate } from 'svelte/reactivity';
 
-export interface Habit {
+type Habit = {
 	title: string;
 	checkedAt: SvelteDate | null;
-}
+};
 
-export const DEFAULT_HABITS = [
+const DEFAULT_HABITS = [
 	{
 		title: 'Plan the day',
 		checkedAt: null

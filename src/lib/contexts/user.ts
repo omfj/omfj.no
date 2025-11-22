@@ -3,7 +3,7 @@ import type { ValidatedSession } from '$lib/services/auth';
 
 type User = Exclude<ValidatedSession['user'], null>;
 
-export type UserContext = {
+type UserContext = {
 	current: User | null;
 };
 
@@ -15,14 +15,4 @@ export function setUserContext(value: UserContext) {
 
 export function getUser() {
 	return getContext<UserContext>(AUTH_CONTEXT_KEY);
-}
-
-export function getAuthenticatedUser() {
-	const userContext = getUser();
-
-	if (!userContext.current) {
-		throw new Error('User context not found');
-	}
-
-	return userContext as { current: User }; // We know for sure that user is authenticated here
 }

@@ -1,12 +1,12 @@
 import { browser } from '$app/environment';
 
-export const AVAILABLE_THEMES = ['light', 'dark'] as const;
-export const THEME_LS_KEY = 'theme';
-export const DEFAULT_THEME = 'light';
+const AVAILABLE_THEMES = ['light', 'dark'] as const;
+const THEME_LS_KEY = 'theme';
+const DEFAULT_THEME = 'light';
 
-export type Theme = (typeof AVAILABLE_THEMES)[number];
+type Theme = (typeof AVAILABLE_THEMES)[number];
 
-export function isValidTheme(theme: string): theme is Theme {
+function isValidTheme(theme: string): theme is Theme {
 	return AVAILABLE_THEMES.includes(theme as (typeof AVAILABLE_THEMES)[number]);
 }
 

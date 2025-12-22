@@ -36,13 +36,14 @@
 	<main class="mx-auto mb-10 max-w-xl space-y-10 px-8 py-2">
 		<section>
 			<p>
-				My name is Ole Magnus. I am 22 year old software developer from Norway. Currently residing
-				in Bergen, and taking a masters in Software Development at the University of Bergen and
-				Western Norway University of Applied Sciences.
+				<img src="https://github.com/omfj.png" alt="Ole Magnus" class="float-left mr-6 mb-4 h-40 w-40" />
+				My name is Ole Magnus. I am 22 year old software developer from Norway. Currently residing in
+				Bergen, and taking a masters in Software Development at the University of Bergen and Western
+				Norway University of Applied Sciences.
 			</p>
 		</section>
 
-		<div>Current interests include Rust, Signals, Deno and Cloudflare Workers.</div>
+		<div>Current interests include Rust, reactive programming, Deno and Cloudflare Workers.</div>
 
 		<section>
 			<h2 class="mb-3 text-lg font-medium">Want to have a look at my resumè?</h2>

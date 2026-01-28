@@ -7,6 +7,18 @@
 
 	let user = getUser();
 	let theme = new ThemeState();
+
+	const birthday = new Date("2002-12-17");
+
+	function calculateAge() {
+		const now = new Date();
+		const ageInMilliseconds = now.getTime() - birthday.getTime();
+		const millisecondsInYear = 1000 * 60 * 60 * 24 * 365.25;
+		const age = ageInMilliseconds / millisecondsInYear;
+		return age.toFixed(1);
+	}
+
+	const age = calculateAge();
 </script>
 
 <svelte:head>
@@ -37,7 +49,7 @@
 		<section>
 			<p>
 				<img src="https://github.com/omfj.png" alt="Ole Magnus" class="float-left mr-6 mb-4 h-40 w-40" />
-				My name is Ole Magnus. I am 22 year old software developer from Norway. Currently residing in
+				My name is Ole Magnus. I am {age} year old software developer from Norway. Currently residing in
 				Bergen, and taking a masters in Software Development at the University of Bergen and Western
 				Norway University of Applied Sciences.
 			</p>

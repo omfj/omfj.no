@@ -4,11 +4,14 @@
 	import { List, ListItem } from '$lib/components/list';
 	import { getUser } from '$lib/contexts/user';
 	import { ThemeState } from '$lib/states/theme.svelte';
+	import tuxcomputer from '$lib/assets/tuxcomputer.gif';
+	import firefoxuser from '$lib/assets/firefoxuser.gif';
+	import rbk from '$lib/assets/rbk.gif';
 
 	let user = getUser();
 	let theme = new ThemeState();
 
-	const birthday = new Date("2002-12-17");
+	const birthday = new Date('2002-12-17');
 
 	function calculateAge() {
 		const now = new Date();
@@ -27,20 +30,22 @@
 
 <div class="py-12 transition-all md:py-24">
 	<header class="mx-auto flex max-w-xl items-center justify-between p-8">
-		<h1 class="text-3xl">omfj.no</h1>
+		<h1 class="text-2xl">omfj.no</h1>
 
 		<div class="flex items-center gap-5">
 			<button onclick={() => theme.next()} class="text-foreground-muted hover:underline">
-				<span class="dark:hidden">Light</span>
-				<span class="hidden dark:block">Dark</span>
+				<span class="dark:hidden">[ Light ]</span>
+				<span class="hidden dark:block">[ Dark ]</span>
 			</button>
 
 			{#if user.current}
 				<form class="contents" method="post" action={resolve('/auth/sign-out')} use:enhance>
-					<button class="text-foreground-muted hover:underline">Sign out</button>
+					<button class="text-foreground-muted hover:underline">[ Sign out ]</button>
 				</form>
 			{:else}
-				<a class="text-foreground-muted hover:underline" href={resolve('/auth/github')}>Sign in</a>
+				<a class="text-foreground-muted hover:underline" href={resolve('/auth/github')}
+					>[ Sign in ]</a
+				>
 			{/if}
 		</div>
 	</header>
@@ -48,24 +53,35 @@
 	<main class="mx-auto mb-10 max-w-xl space-y-10 px-8 py-2">
 		<section>
 			<p>
-				<img src="https://github.com/omfj.png" alt="Ole Magnus" class="float-left mr-6 mb-4 h-40 w-40" />
-				My name is Ole Magnus. I am {age} year old software developer from Norway. Currently residing in
-				Bergen, and taking a masters in Software Development at the University of Bergen and Western
+				My name is Ole Magnus. I am {age} year old software developer from Norway. Currently residing
+				in Bergen, and taking a masters in Software Development at the University of Bergen and Western
 				Norway University of Applied Sciences.
 			</p>
 		</section>
 
-		<div>Current interests include Rust, reactive programming, Deno and Cloudflare Workers.</div>
+		<img src={firefoxuser} alt="" class="w-full" />
 
-		<section>
-			<h2 class="mb-3 text-lg font-medium">Want to have a look at my resumè?</h2>
+		<div class="flex items-center gap-4">
+			<img src={tuxcomputer} alt="tux on computer" class="h-12" />
+			<span>Current interests include Rust, reactive programming, Deno and Cloudflare Workers.</span
+			>
+		</div>
 
+		<section class="flex items-center gap-3">
 			<p>
-				You can download the PDF version <a
+				You can have a look at my resumè <a
 					href={asset('/assets/cv.pdf')}
 					class="underline transition-colors hover:text-blue-500">here</a
 				>.
 			</p>
+		</section>
+
+		<section>
+			<ul class="flex items-center justify-center gap-3">
+				<li>
+					<img src={rbk} alt="rbk" />
+				</li>
+			</ul>
 		</section>
 
 		<section>

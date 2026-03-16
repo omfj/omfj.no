@@ -6,11 +6,7 @@
 	let user = getUser();
 	let { data } = $props();
 	let isFormOpen = $state(false);
-	let wishlist = $state(data.whislist);
-
-	$effect(() => {
-		wishlist = data.whislist;
-	});
+	let wishlist = $derived(data.whislist);
 </script>
 
 <svelte:head>

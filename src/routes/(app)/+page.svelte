@@ -4,7 +4,6 @@
 	import { List, ListItem } from '$lib/components/list';
 	import { getUser } from '$lib/contexts/user';
 	import { ThemeState } from '$lib/states/theme.svelte';
-	import tuxcomputer from '$lib/assets/tuxcomputer.gif';
 	import firefoxuser from '$lib/assets/firefoxuser.gif';
 	import rbk from '$lib/assets/rbk.gif';
 
@@ -34,8 +33,8 @@
 
 		<div class="flex items-center gap-5">
 			<button onclick={() => theme.next()} class="text-foreground-muted hover:underline">
-				<span class="dark:hidden">[ Light ]</span>
-				<span class="hidden dark:block">[ Dark ]</span>
+				<span class="dark:hidden">Light</span>
+				<span class="hidden dark:block">Dark</span>
 			</button>
 
 			{#if user.current}
@@ -43,9 +42,7 @@
 					<button class="text-foreground-muted hover:underline">[ Sign out ]</button>
 				</form>
 			{:else}
-				<a class="text-foreground-muted hover:underline" href={resolve('/auth/github')}
-					>[ Sign in ]</a
-				>
+				<a class="text-foreground-muted hover:underline" href={resolve('/auth/github')}>Sign in</a>
 			{/if}
 		</div>
 	</header>
@@ -60,12 +57,6 @@
 		</section>
 
 		<img src={firefoxuser} alt="" class="w-full" />
-
-		<div class="flex items-center gap-4">
-			<img src={tuxcomputer} alt="tux on computer" class="h-12" />
-			<span>Current interests include Rust, reactive programming, Deno and Cloudflare Workers.</span
-			>
-		</div>
 
 		<section class="flex items-center gap-3">
 			<p>

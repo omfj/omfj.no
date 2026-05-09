@@ -4,7 +4,6 @@
 	import { List, ListItem } from '$lib/components/list';
 	import { getUser } from '$lib/contexts/user';
 	import { ThemeState } from '$lib/states/theme.svelte';
-	import firefoxuser from '$lib/assets/firefoxuser.gif';
 	import rbk from '$lib/assets/rbk.gif';
 
 	let user = getUser();
@@ -55,8 +54,6 @@
 				Norway University of Applied Sciences.
 			</p>
 		</section>
-
-		<img src={firefoxuser} alt="" class="w-full" />
 
 		<section class="flex items-center gap-3">
 			<p>

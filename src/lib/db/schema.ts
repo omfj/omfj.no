@@ -55,6 +55,21 @@ export type Film = InferSelectModel<typeof films>;
 export type FilmInsert = InferInsertModel<typeof films>;
 
 /**
+ * Uploaded files hosted on R2
+ */
+export const uploadedFiles = sqliteTable('uploaded_file', {
+	id: text().primaryKey(), // user-provided slug
+	originalName: text().notNull(),
+	contentType: text().notNull(),
+	size: integer().notNull(),
+	isPublic: integer({ mode: 'boolean' }).notNull().default(true),
+	uploadedAt: integer({ mode: 'timestamp' }).notNull()
+});
+
+export type UploadedFile = InferSelectModel<typeof uploadedFiles>;
+export type UploadedFileInsert = InferInsertModel<typeof uploadedFiles>;
+
+/**
  * Wishlist for christmas or birthdays
  */
 export const wishlists = sqliteTable('wishlist', {

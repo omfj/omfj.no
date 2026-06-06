@@ -25,5 +25,11 @@
 			"migrations_dir": "./migrations",
 			"migrations_table": "__drizzle_migrations"
 		}
+	],
+	"r2_buckets": [
+		{
+			"binding": "FILES",
+			"bucket_name": "omfj-files"
+		}
 	]
 }

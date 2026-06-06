@@ -13,6 +13,9 @@
 		<li>
 			<a class="hover:text-primary" href={resolve('/omdb')}>[@ OMDb]</a>
 		</li>
+		<li>
+			<a class="hover:text-primary" href={resolve('/files')}>[^ Files]</a>
+		</li>
 	</ul>
 </footer>
 

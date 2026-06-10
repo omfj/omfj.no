@@ -38,7 +38,7 @@
 
 			{#if user.current}
 				<form class="contents" method="post" action={resolve('/auth/sign-out')} use:enhance>
-					<button class="text-foreground-muted hover:underline">[ Sign out ]</button>
+					<button class="text-foreground-muted hover:underline">Sign out</button>
 				</form>
 			{:else}
 				<a class="text-foreground-muted hover:underline" href={resolve('/auth/github')}>Sign in</a>

@@ -22,6 +22,7 @@
 			{...createLink.fields.title.as('text')}
 			class="focus:border-link w-full border-b-2 p-1 outline-0"
 			placeholder="Article title"
+			autocomplete="off"
 		/>
 	</label>
 
@@ -31,6 +32,7 @@
 			{...createLink.fields.url.as('url')}
 			class="focus:border-link w-full border-b-2 p-1 outline-0"
 			placeholder="https://..."
+			autocomplete="off"
 		/>
 	</label>
 

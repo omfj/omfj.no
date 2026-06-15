@@ -26,7 +26,7 @@
 	<title>omfj.no</title>
 </svelte:head>
 
-<div class="py-12 transition-all md:py-24">
+<div class="pt-12 pb-12 transition-all md:pt-24">
 	<header class="mx-auto flex max-w-xl items-center justify-between p-8">
 		<h1 class="text-2xl">omfj.no</h1>
 
@@ -49,17 +49,16 @@
 	<main class="mx-auto mb-10 max-w-xl space-y-10 px-8 py-2">
 		<section>
 			<p>
-				My name is Ole Magnus. I am {age} year old software developer from Norway. Currently residing
-				in Bergen, and taking a masters in Software Development at the University of Bergen and Western
-				Norway University of Applied Sciences.
+				My name is Ole Magnus. I am {age} year old software engineer from Norway. Current intrests include
+				Rust, C++ and generally how to write fast and "bulletproof" code.
 			</p>
 		</section>
 
 		<section class="flex items-center gap-3">
 			<p>
-				You can have a look at my resumè <a
+				If you are interested, you can find <a
 					href={asset('/assets/cv.pdf')}
-					class="underline transition-colors hover:text-blue-500">here</a
+					class="underline transition-colors hover:text-blue-500">my resumè here</a
 				>.
 			</p>
 		</section>

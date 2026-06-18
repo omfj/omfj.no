@@ -47,6 +47,7 @@
 							target="_blank"
 							rel="noopener noreferrer external"
 							class="text-link visited:text-foreground-muted hover:underline"
+							title={link.title}
 						>
 							{link.title} <span class="text-foreground-muted">({new URL(link.url).hostname})</span>
 						</a>

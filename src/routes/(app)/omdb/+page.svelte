@@ -4,42 +4,57 @@
 
 	let user = getUser();
 	let { data } = $props();
+	let isFormOpen = $state(false);
 </script>
 
 <svelte:head>
 	<title>OMDb</title>
 </svelte:head>
 
-<div class="mx-auto w-full max-w-xl py-12 transition-all md:py-24">
-	<header class="p-8">
-		<h1 class="mb-3 text-3xl">OMDb</h1>
-		<p>A list of movies and series I have watched and my ratings.</p>
-	</header>
+<main>
+	<h1># OMDb</h1>
+
+	<br />
+
+	<p class="max-w-lg">A list of movies and series I have watched and my ratings.</p>
+
+	<br />
 
 	{#if user.current}
-		<CreateMovieForm />
+		<button
+			onclick={() => (isFormOpen = !isFormOpen)}
+			aria-expanded={isFormOpen}
+			class="text-foreground-muted hover:underline"
+		>
+			{isFormOpen ? 'Hide form' : 'Add a movie'}
+		</button>
+
+		{#if isFormOpen}
+			<CreateMovieForm />
+		{/if}
+
+		<br />
+		<br />
 	{/if}
 
-	<main class="space-y-10 px-8 py-2">
-		<table class="w-full">
-			<thead class="border-divide-soft border-b">
-				<tr class="text-foreground-muted grid grid-cols-8 text-sm font-medium uppercase">
-					<th class="col-span-6 p-1 text-left">Title</th>
-					<th class="col-span-2 p-1 text-left">Rating</th>
+	<table class="w-full max-w-md">
+		<thead>
+			<tr class="border-divide-soft text-foreground-muted border-b text-left">
+				<th scope="col" class="py-1 pr-4 font-normal">Title</th>
+				<th scope="col" class="w-24 py-1 font-normal">Rating</th>
+			</tr>
+		</thead>
+		<tbody>
+			{#each data.films as film (film.id)}
+				<tr class="align-top">
+					<td class="py-1 pr-4">
+						<a class="text-link underline" href="https://www.imdb.com/title/{film.id}/"
+							>{film.title}</a
+						>
+					</td>
+					<td class="py-1">{film.rating}</td>
 				</tr>
-			</thead>
-			<tbody class="flex flex-col divide-y">
-				{#each data.films as film (film.id)}
-					<tr class="grid grid-cols-8">
-						<td class="col-span-6 p-1 text-left">
-							<a class="hover:underline" href="https://www.imdb.com/title/{film.id}/"
-								>{film.title}</a
-							>
-						</td>
-						<td class="col-span-2 p-1 text-left">{film.rating}</td>
-					</tr>
-				{/each}
-			</tbody>
-		</table>
-	</main>
-</div>
+			{/each}
+		</tbody>
+	</table>
+</main>

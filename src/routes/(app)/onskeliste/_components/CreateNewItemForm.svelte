@@ -14,38 +14,35 @@
 			isPending = false;
 		}
 	})}
-	class="m-8 flex flex-col gap-4 border-2 p-4"
+	class="mt-2 flex max-w-md flex-col gap-2"
 >
-	<label>
-		<h3>Tittel</h3>
+	<label class="flex items-baseline gap-2">
+		<span class="shrink-0">Tittel:</span>
 		<input
 			{...createItem.fields.title.as('text')}
-			class="focus:border-link w-full border-b-2 p-1 outline-0"
-			placeholder="Tittel på ønsket vare"
+			class="border-divide-soft focus:border-link w-full border-b bg-transparent outline-0"
 		/>
 	</label>
 
-	<label>
-		<h3>Lenke</h3>
+	<label class="flex items-baseline gap-2">
+		<span class="shrink-0">Lenke:</span>
 		<input
 			{...createItem.fields.link.as('url')}
-			class="focus:border-link w-full border-b-2 p-1 outline-0"
-			placeholder="https://..."
+			class="border-divide-soft focus:border-link w-full border-b bg-transparent outline-0"
 		/>
 	</label>
 
-	<label>
-		<h3>Beskrivelse</h3>
+	<label class="flex items-baseline gap-2">
+		<span class="shrink-0">Beskrivelse:</span>
 		<textarea
 			{...createItem.fields.description.as('text')}
-			class="focus:border-link w-full border-b-2 p-1 outline-0"
-			placeholder="Beskrivelse av ønsket vare"
-			rows="3"
+			class="border-divide-soft focus:border-link w-full border-b bg-transparent outline-0"
+			rows="2"
 		></textarea>
 	</label>
 
 	<button
-		class="mr-auto w-fit px-1 hover:cursor-pointer hover:underline"
+		class="text-foreground-muted mr-auto w-fit hover:cursor-pointer hover:underline"
 		type="submit"
 		disabled={isPending}
 	>

@@ -1,13 +1,5 @@
 <script lang="ts">
-	import { resolve, asset } from '$app/paths';
-	import { enhance } from '$app/forms';
-	import { List, ListItem } from '$lib/components/list';
-	import { getUser } from '$lib/contexts/user';
-	import { ThemeState } from '$lib/states/theme.svelte';
-	import rbk from '$lib/assets/rbk.gif';
-
-	let user = getUser();
-	let theme = new ThemeState();
+	import { asset } from '$app/paths';
 
 	const birthday = new Date('2002-12-17');
 
@@ -16,7 +8,7 @@
 		const ageInMilliseconds = now.getTime() - birthday.getTime();
 		const millisecondsInYear = 1000 * 60 * 60 * 24 * 365.25;
 		const age = ageInMilliseconds / millisecondsInYear;
-		return age.toFixed(1);
+		return Math.floor(age);
 	}
 
 	const age = calculateAge();
@@ -26,74 +18,47 @@
 	<title>omfj.no</title>
 </svelte:head>
 
-<div class="pt-12 pb-12 transition-all md:pt-24">
-	<header class="mx-auto flex max-w-xl items-center justify-between p-8">
-		<h1 class="text-2xl">omfj.no</h1>
+<main>
+	<h1 class="sr-only">omfj.no</h1>
 
-		<div class="flex items-center gap-5">
-			<button onclick={() => theme.next()} class="text-foreground-muted hover:underline">
-				<span class="dark:hidden">Light</span>
-				<span class="hidden dark:block">Dark</span>
-			</button>
+	<h2>## About me</h2>
 
-			{#if user.current}
-				<form class="contents" method="post" action={resolve('/auth/sign-out')} use:enhance>
-					<button class="text-foreground-muted hover:underline">Sign out</button>
-				</form>
-			{:else}
-				<a class="text-foreground-muted hover:underline" href={resolve('/auth/github')}>Sign in</a>
-			{/if}
-		</div>
-	</header>
+	<br />
 
-	<main class="mx-auto mb-10 max-w-xl space-y-10 px-8 py-2">
-		<section>
-			<p>
-				My name is Ole Magnus. I am {age} year old software engineer from Norway. Current intrests include
-				Rust, C++ and generally how to write fast and "bulletproof" code.
-			</p>
-		</section>
+	<p>
+		My name is Ole Magnus. I am {age} year old software engineer from Norway.
+	</p>
 
-		<section class="flex items-center gap-3">
-			<p>
-				If you are interested, you can find <a
-					href={asset('/assets/cv.pdf')}
-					class="underline transition-colors hover:text-blue-500">my resumè here</a
-				>.
-			</p>
-		</section>
+	<br />
 
-		<section>
-			<ul class="flex items-center justify-center gap-3">
-				<li>
-					<img src={rbk} alt="rbk" />
-				</li>
-			</ul>
-		</section>
+	<p>
+		If you are interested, you can find <a
+			href={asset('/assets/cv.pdf')}
+			class="text-link underline transition-colors">my resumè here</a
+		>.
+	</p>
 
-		<section>
-			<h2 class="mb-3 text-lg font-medium">Socials</h2>
+	<br />
 
-			<List>
-				<ListItem class="gap-2">
-					<a href="https://github.com/omfj" class="h-full w-full p-2">
-						<span>> GitHub</span>
-						<span class="text-sm">(@omfj)</span>
-					</a>
-				</ListItem>
-				<ListItem class="gap-2">
-					<a href="https://www.linkedin.com/in/omfj" class="h-full w-full p-2">
-						<span>> LinkedIn</span>
-						<span class="text-sm">(in/omfj)</span>
-					</a>
-				</ListItem>
-				<ListItem class="gap-2">
-					<a href="mailto:me@omfj.no" class="h-full w-full p-2">
-						<span>> E-mail</span>
-						<span class="text-sm">(@omfj.no)</span>
-					</a>
-				</ListItem>
-			</List>
-		</section>
-	</main>
-</div>
+	<h2>## Socials</h2>
+
+	<br />
+
+	<ul>
+		<li>
+			-
+			<a href="https://github.com/omfj" class="text-link underline">GitHub</a>
+			<span class="text-foreground-muted text-sm">(@omfj)</span>
+		</li>
+		<li>
+			-
+			<a href="https://www.linkedin.com/in/omfj" class="text-link underline">LinkedIn</a>
+			<span class="text-foreground-muted text-sm">(in/omfj)</span>
+		</li>
+		<li>
+			-
+			<a href="mailto:me@omfj.no" class="text-link underline">E-mail</a>
+			<span class="text-foreground-muted text-sm">(me@omfj.no)</span>
+		</li>
+	</ul>
+</main>

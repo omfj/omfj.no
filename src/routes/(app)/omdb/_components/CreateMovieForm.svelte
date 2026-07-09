@@ -14,39 +14,38 @@
 			isPending = false;
 		}
 	})}
-	class="m-8 flex flex-col gap-4 border-2 p-4"
+	class="mt-2 flex max-w-md flex-col gap-2"
 >
-	<label>
-		<h3 class="text-base font-semibold">Tittel</h3>
+	<label class="flex items-baseline gap-2">
+		<span class="shrink-0">Tittel:</span>
 		<input
 			{...createMovie.fields.title.as('text')}
-			placeholder="Tittel på filmen"
-			class="focus:border-link w-full border-b-2 p-1 outline-0"
+			class="border-divide-soft focus:border-link w-full border-b bg-transparent outline-0"
 		/>
 	</label>
 
-	<label>
-		<h3 class="text-base font-semibold">IMDb-ID</h3>
+	<label class="flex items-baseline gap-2">
+		<span class="shrink-0">IMDb-ID:</span>
 		<input
 			{...createMovie.fields.id.as('text')}
 			placeholder="tt1234567"
-			class="focus:border-link w-full border-b-2 p-1 outline-0"
+			class="border-divide-soft focus:border-link placeholder:text-foreground-muted/50 w-full border-b bg-transparent outline-0"
 		/>
 	</label>
 
-	<label>
-		<h3 class="text-base font-semibold">Vurdering</h3>
+	<label class="flex items-baseline gap-2">
+		<span class="shrink-0">Vurdering:</span>
 		<input
 			{...createMovie.fields.rating.as('number')}
 			min={1}
 			max={100}
 			placeholder="1-100"
-			class="focus:border-link w-full border-b-2 p-1 outline-0"
+			class="border-divide-soft focus:border-link placeholder:text-foreground-muted/50 w-full border-b bg-transparent outline-0"
 		/>
 	</label>
 
 	<button
-		class="mr-auto w-fit px-1 text-left hover:cursor-pointer hover:underline"
+		class="text-foreground-muted mr-auto w-fit text-left hover:cursor-pointer hover:underline"
 		type="submit"
 		disabled={isPending}
 	>

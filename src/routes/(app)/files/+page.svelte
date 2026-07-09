@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
-	import { List, ListItem } from '$lib/components/list';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
@@ -17,38 +16,36 @@
 	<title>Files — omfj.no</title>
 </svelte:head>
 
-<div class="py-12 md:py-24">
-	<div class="mx-auto max-w-xl px-8">
-		<div class="mb-6 flex items-center justify-between">
-			<h1 class="text-2xl">Files</h1>
-			{#if data.isLoggedIn}
-				<a href={resolve('/files/upload')} class="text-foreground-muted hover:underline"
-					>[ Upload ]</a
-				>
-			{/if}
-		</div>
+<main>
+	<h1># Files</h1>
 
-		{#if data.files.length === 0}
-			<p class="text-foreground-muted">No files yet.</p>
-		{:else}
-			<List>
-				{#each data.files as file (file.id)}
-					<ListItem>
-						<a
-							href={resolve(`/files/${file.id}`)}
-							class="flex h-full w-full items-center justify-between p-2"
-						>
-							<span class="flex items-center gap-2">
-								<span>> {file.id}</span>
-								{#if !file.isPublic}
-									<span class="text-foreground-muted text-xs">[private]</span>
-								{/if}
-							</span>
-							<span class="text-foreground-muted text-sm">{formatBytes(file.size)}</span>
-						</a>
-					</ListItem>
-				{/each}
-			</List>
-		{/if}
-	</div>
-</div>
+	<br />
+
+	<p>Files I have uploaded.</p>
+
+	<br />
+
+	{#if data.isLoggedIn}
+		<a href={resolve('/files/upload')} class="text-foreground-muted hover:underline">Upload</a>
+
+		<br />
+		<br />
+	{/if}
+
+	{#if data.files.length === 0}
+		<p class="text-foreground-muted">No files yet.</p>
+	{:else}
+		<ul class="space-y-2">
+			{#each data.files as file (file.id)}
+				<li>
+					-
+					<a href={resolve(`/files/${file.id}`)} class="text-link underline">{file.id}</a>
+					{#if !file.isPublic}
+						<span class="text-foreground-muted text-xs">[private]</span>
+					{/if}
+					<span class="text-foreground-muted text-sm">({formatBytes(file.size)})</span>
+				</li>
+			{/each}
+		</ul>
+	{/if}
+</main>

@@ -15,9 +15,14 @@
 	<title>{page.status} – {title}</title>
 </svelte:head>
 
-<main class="flex flex-1 flex-col items-center justify-center px-6 py-24 text-center">
-	<p class="text-foreground-muted text-sm font-medium tracking-wide uppercase">{page.status}</p>
-	<h1 class="mt-3 text-3xl font-semibold">{title}</h1>
-	<p class="text-foreground-muted mt-2 max-w-md">{description}</p>
-	<a class="text-link mt-8 hover:underline" href={resolve('/')}>Til forsiden</a>
+<main>
+	<h1># {page.status} – {title}</h1>
+
+	<br />
+
+	<p class="text-foreground-muted max-w-lg">{description}</p>
+
+	<br />
+
+	<a class="text-link underline" href={resolve('/')}>&lt;- Back to home</a>
 </main>

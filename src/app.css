@@ -31,7 +31,7 @@
 }
 
 [data-theme='dark'] {
-	--background: #0c0c0c;
+	--background: #0a0a0a;
 	--background-muted: #1a1a1a;
 	--foreground: #d7d7d7;
 	--foreground-muted: #a0a0a0;
@@ -41,8 +41,8 @@
 	--divide-soft: #333333;
 	--gradient: #1a1a1a;
 	--border: #1a1a1a;
-	--link: #d7d7d7;
-	--link-visited: #888888;
+	--link: #2c7fff;
+	--link-visited: #59168b;
 	--list-hover-background: #222222;
 	--list-hover-foreground: #ffffff;
 	--paper: #0e0e0e;

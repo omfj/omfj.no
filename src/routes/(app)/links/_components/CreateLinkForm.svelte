@@ -14,30 +14,28 @@
 			isPending = false;
 		}
 	})}
-	class="m-8 flex flex-col gap-4 border-2 p-4"
+	class="mt-2 flex max-w-md flex-col gap-2"
 >
-	<label>
-		<h3>Title</h3>
+	<label class="flex items-baseline gap-2">
+		<span class="shrink-0">Title:</span>
 		<input
 			{...createLink.fields.title.as('text')}
-			class="focus:border-link w-full border-b-2 p-1 outline-0"
-			placeholder="Article title"
+			class="border-divide-soft focus:border-link w-full border-b bg-transparent outline-0"
 			autocomplete="off"
 		/>
 	</label>
 
-	<label>
-		<h3>URL</h3>
+	<label class="flex items-baseline gap-2">
+		<span class="shrink-0">URL:</span>
 		<input
 			{...createLink.fields.url.as('url')}
-			class="focus:border-link w-full border-b-2 p-1 outline-0"
-			placeholder="https://..."
+			class="border-divide-soft focus:border-link w-full border-b bg-transparent outline-0"
 			autocomplete="off"
 		/>
 	</label>
 
 	<button
-		class="mr-auto w-fit px-1 hover:cursor-pointer hover:underline"
+		class="text-foreground-muted mr-auto w-fit hover:cursor-pointer hover:underline"
 		type="submit"
 		disabled={isPending}
 	>

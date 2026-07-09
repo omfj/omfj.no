@@ -18,16 +18,90 @@
 	<title>{meta.title}</title>
 </svelte:head>
 
-<article class="prose prose-sm dark:prose-invert mx-auto my-10 max-w-3xl p-5">
-	<a
-		href={resolve('/thoughts')}
-		class="text-foreground-muted mb-5 inline-block text-sm hover:underline"
-	>
-		&lt;- Back
-	</a>
-	<h1 class="font-plex mb-2 text-3xl font-bold">{meta.title}</h1>
-	<p class="text-foreground-muted mb-5 text-sm">{formattedDate}</p>
-	<div class="font-plex text-lg">
-		{@html content}
-	</div>
-</article>
+<main class="max-w-2xl">
+	<a href={resolve('/thoughts')} class="text-foreground-muted hover:underline">&lt;- Back</a>
+
+	<br />
+	<br />
+
+	<article>
+		<h1># {meta.title}</h1>
+
+		<p class="text-foreground-muted text-sm">
+			<time datetime={meta.date}>{formattedDate}</time>
+		</p>
+
+		<br />
+
+		<div class="markdown">
+			{@html content}
+		</div>
+	</article>
+</main>
+
+<style>
+	.markdown :global(> * + *) {
+		margin-top: 1rem;
+	}
+
+	.markdown :global(h1)::before {
+		content: '# ';
+	}
+
+	.markdown :global(h2)::before {
+		content: '## ';
+	}
+
+	.markdown :global(h3)::before {
+		content: '### ';
+	}
+
+	.markdown :global(a) {
+		color: var(--link);
+		text-decoration: underline;
+	}
+
+	.markdown :global(ul li)::before {
+		content: '- ';
+	}
+
+	.markdown :global(ol) {
+		list-style: decimal inside;
+	}
+
+	.markdown :global(blockquote) {
+		color: var(--foreground-muted);
+	}
+
+	.markdown :global(blockquote p)::before {
+		content: '> ';
+	}
+
+	.markdown :global(pre) {
+		background-color: var(--background-muted);
+		padding: 1rem;
+		overflow-x: auto;
+	}
+
+	.markdown :global(code)::before,
+	.markdown :global(code)::after {
+		content: '`';
+	}
+
+	.markdown :global(pre code)::before,
+	.markdown :global(pre code)::after {
+		content: none;
+	}
+
+	.markdown :global(strong) {
+		font-weight: 700;
+	}
+
+	.markdown :global(hr) {
+		border: none;
+	}
+
+	.markdown :global(hr)::before {
+		content: '---';
+	}
+</style>

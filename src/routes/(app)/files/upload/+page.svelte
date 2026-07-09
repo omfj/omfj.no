@@ -13,6 +13,11 @@
 	let fileInput: HTMLInputElement;
 	let dragging = $state(false);
 
+	const progressBar = $derived.by(() => {
+		const filled = Math.round(progress / 5);
+		return `[${'#'.repeat(filled)}${'-'.repeat(20 - filled)}]`;
+	});
+
 	function onFileChange(e: Event) {
 		const input = e.target as HTMLInputElement;
 		file = input.files?.[0] ?? null;
@@ -123,96 +128,87 @@
 	<title>Upload — omfj.no</title>
 </svelte:head>
 
-<div class="py-12 md:py-24">
-	<div class="mx-auto max-w-xl px-8">
-		<div class="mb-6 flex items-center justify-between">
-			<h1 class="text-2xl">Upload file</h1>
-			<a href={resolve('/files')} class="text-foreground-muted hover:underline">[ Back ]</a>
-		</div>
+<main>
+	<a href={resolve('/files')} class="text-foreground-muted hover:underline">&lt;- Back</a>
 
-		<form onsubmit={upload} class="space-y-5">
-			<div class="space-y-1">
-				<label for="file-id" class="block text-sm">ID (slug)</label>
+	<br />
+	<br />
+
+	<h1># Upload file</h1>
+
+	<br />
+
+	<form onsubmit={upload} class="max-w-md space-y-5">
+		<div class="space-y-1">
+			<label class="flex items-baseline gap-2">
+				<span class="shrink-0">ID:</span>
 				<input
-					id="file-id"
 					type="text"
 					bind:value={fileId}
 					placeholder="my-file-name"
 					pattern="[a-z0-9]+(-[a-z0-9]+)*"
 					required
 					disabled={uploading}
-					class="border-foreground-muted w-full border bg-transparent px-3 py-2 text-sm focus:outline-none disabled:opacity-50"
+					class="border-divide-soft focus:border-link placeholder:text-foreground-muted/50 w-full border-b bg-transparent outline-0 disabled:opacity-50"
 				/>
-				<p class="text-foreground-muted text-xs">Lowercase letters, numbers, and hyphens only.</p>
-			</div>
+			</label>
+			<p class="text-foreground-muted text-xs">Lowercase letters, numbers, and hyphens only.</p>
+		</div>
 
-			<div class="space-y-1">
-				<label for="file-input" class="block text-sm">File</label>
-				<button
-					type="button"
-					onclick={() => fileInput.click()}
-					ondragover={(e) => {
-						e.preventDefault();
-						dragging = true;
-					}}
-					ondragleave={() => (dragging = false)}
-					ondrop={onDrop}
-					disabled={uploading}
-					class="border-foreground-muted flex w-full cursor-pointer flex-col items-center gap-2 border px-4 py-8 text-sm transition-colors disabled:cursor-not-allowed disabled:opacity-50 {dragging
-						? 'bg-foreground/5'
-						: 'hover:bg-foreground/5'}"
-				>
-					{#if file}
-						<span class="font-medium">{file.name}</span>
-						<span class="text-foreground-muted text-xs">{formatBytes(file.size)}</span>
-						<span class="text-foreground-muted text-xs">Click or drop to replace</span>
-					{:else}
-						<span>Click to choose a file</span>
-						<span class="text-foreground-muted text-xs">or drag and drop here</span>
-					{/if}
-				</button>
-				<input
-					bind:this={fileInput}
-					id="file-input"
-					type="file"
-					onchange={onFileChange}
-					required
-					disabled={uploading}
-					class="sr-only"
-				/>
-			</div>
-
-			<div class="flex items-center gap-2">
-				<input
-					id="is-public"
-					type="checkbox"
-					bind:checked={isPublic}
-					disabled={uploading}
-					class="disabled:opacity-50"
-				/>
-				<label for="is-public" class="text-sm">Public (visible to everyone)</label>
-			</div>
-
-			{#if errorMsg}
-				<p class="text-sm text-red-500">{errorMsg}</p>
-			{/if}
-
-			{#if uploading}
-				<div class="space-y-1">
-					<div class="bg-foreground-muted/20 h-2 w-full">
-						<div class="bg-foreground h-2 transition-all" style="width: {progress}%"></div>
-					</div>
-					<p class="text-foreground-muted text-xs">{progress}%</p>
-				</div>
-			{/if}
-
+		<div class="space-y-1">
 			<button
-				type="submit"
-				disabled={uploading || !file || !fileId}
-				class="border-foreground-muted border px-4 py-2 text-sm hover:underline disabled:cursor-not-allowed disabled:opacity-50"
+				type="button"
+				onclick={() => fileInput.click()}
+				ondragover={(e) => {
+					e.preventDefault();
+					dragging = true;
+				}}
+				ondragleave={() => (dragging = false)}
+				ondrop={onDrop}
+				disabled={uploading}
+				class="border-divide-soft flex w-full cursor-pointer flex-col items-center gap-2 border border-dashed px-4 py-6 text-sm transition-colors disabled:cursor-not-allowed disabled:opacity-50 {dragging
+					? 'bg-foreground/5'
+					: 'hover:bg-foreground/5'}"
 			>
-				{uploading ? 'Uploading…' : 'Upload'}
+				{#if file}
+					<span>{file.name}</span>
+					<span class="text-foreground-muted text-xs">{formatBytes(file.size)}</span>
+					<span class="text-foreground-muted text-xs">Click or drop to replace</span>
+				{:else}
+					<span>Click to choose a file</span>
+					<span class="text-foreground-muted text-xs">or drag and drop here</span>
+				{/if}
 			</button>
-		</form>
-	</div>
-</div>
+			<input
+				bind:this={fileInput}
+				id="file-input"
+				type="file"
+				onchange={onFileChange}
+				required
+				disabled={uploading}
+				class="sr-only"
+			/>
+		</div>
+
+		<label class="flex items-center gap-2">
+			<input type="checkbox" bind:checked={isPublic} disabled={uploading} class="sr-only" />
+			<span>[{isPublic ? 'x' : ' '}] Public (visible to everyone)</span>
+		</label>
+
+		{#if errorMsg}
+			<p class="text-sm text-red-500">{errorMsg}</p>
+		{/if}
+
+		{#if uploading}
+			<p class="text-foreground-muted text-sm">{progressBar} {progress}%</p>
+		{/if}
+
+		<button
+			type="submit"
+			disabled={uploading || !file || !fileId}
+			class="hover:underline disabled:cursor-not-allowed disabled:opacity-50"
+		>
+			{uploading ? 'Uploading…' : 'Upload'}
+		</button>
+	</form>
+</main>

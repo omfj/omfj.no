@@ -27,73 +27,86 @@
 	<title>{data.file.id} — omfj.no</title>
 </svelte:head>
 
-<div class="py-12 md:py-24">
-	<div class="mx-auto max-w-xl px-8">
-		<div class="mb-6 flex items-center justify-between">
-			<h1 class="truncate text-2xl">{data.file.id}</h1>
-			<a href={resolve('/files')} class="text-foreground-muted ml-4 shrink-0 hover:underline"
-				>[ Back ]</a
-			>
+<main>
+	<a href={resolve('/files')} class="text-foreground-muted hover:underline">&lt;- Back</a>
+
+	<br />
+	<br />
+
+	<h1 class="truncate"># {data.file.id}</h1>
+
+	<br />
+
+	<dl class="text-foreground-muted text-sm">
+		<div class="flex gap-1">
+			<dt>- Name:</dt>
+			<dd>{data.file.originalName}</dd>
 		</div>
-
-		<div class="text-foreground-muted mb-6 space-y-1 text-sm">
-			<p>Name: {data.file.originalName}</p>
-			<p>Type: {data.file.contentType}</p>
-			<p>Size: {formatBytes(data.file.size)}</p>
-			<p>Visibility: {data.file.isPublic ? 'Public' : 'Private'}</p>
-			<p>Uploaded: {new Date(data.file.uploadedAt).toLocaleDateString()}</p>
+		<div class="flex gap-1">
+			<dt>- Type:</dt>
+			<dd>{data.file.contentType}</dd>
 		</div>
-
-		<div class="mb-8 flex gap-3">
-			<a
-				href={resolve(`/files/${data.file.id}/raw?download=1`)}
-				class="border-foreground-muted inline-block border px-4 py-2 text-sm hover:underline"
-			>
-				Download
-			</a>
-
-			{#if data.isLoggedIn}
-				<form method="post" action="?/delete" use:enhance>
-					<button
-						type="submit"
-						onclick={(e) => {
-							if (!confirm('Delete this file?')) e.preventDefault();
-						}}
-						class="border-foreground-muted border px-4 py-2 text-sm hover:underline"
-					>
-						Delete
-					</button>
-				</form>
-			{/if}
+		<div class="flex gap-1">
+			<dt>- Size:</dt>
+			<dd>{formatBytes(data.file.size)}</dd>
 		</div>
+		<div class="flex gap-1">
+			<dt>- Visibility:</dt>
+			<dd>{data.file.isPublic ? 'Public' : 'Private'}</dd>
+		</div>
+		<div class="flex gap-1">
+			<dt>- Uploaded:</dt>
+			<dd>
+				<time datetime={new Date(data.file.uploadedAt).toISOString()}>
+					{new Date(data.file.uploadedAt).toLocaleDateString()}
+				</time>
+			</dd>
+		</div>
+	</dl>
 
-		{#if isImage}
-			<div class="mt-6">
-				<img src={rawUrl} alt={data.file.originalName} class="max-w-full" />
-			</div>
-		{:else if isVideo}
-			<div class="mt-6">
-				<!-- svelte-ignore a11y_media_has_caption -->
-				<video src={rawUrl} controls class="max-w-full"></video>
-			</div>
-		{:else if isAudio}
-			<div class="mt-6">
-				<audio src={rawUrl} controls class="w-full"></audio>
-			</div>
-		{:else if isPdf}
-			<div class="mt-6">
-				<iframe src={rawUrl} title={data.file.originalName} class="h-150 w-full border-0"></iframe>
-			</div>
-		{:else if isText}
-			<div class="mt-6">
-				{#await fetch(rawUrl).then((r) => r.text())}
-					<p class="text-foreground-muted text-sm">Loading preview…</p>
-				{:then content}
-					<pre class="border-foreground-muted overflow-auto border p-4 text-sm">{content}</pre>
-				{:catch}
-					<p class="text-foreground-muted text-sm">Could not load preview.</p>
-				{/await}
-			</div>
+	<br />
+
+	<div class="flex gap-4">
+		<a href={resolve(`/files/${data.file.id}/raw?download=1`)} class="text-link underline">
+			Download
+		</a>
+
+		{#if data.isLoggedIn}
+			<form method="post" action="?/delete" use:enhance>
+				<button
+					type="submit"
+					onclick={(e) => {
+						if (!confirm('Delete this file?')) e.preventDefault();
+					}}
+					class="text-red-700 transition-colors hover:text-red-400 hover:underline"
+				>
+					Delete
+				</button>
+			</form>
 		{/if}
 	</div>
-</div>
+
+	{#if isImage}
+		<br />
+		<img src={rawUrl} alt={data.file.originalName} class="max-w-full" />
+	{:else if isVideo}
+		<br />
+		<!-- svelte-ignore a11y_media_has_caption -->
+		<video src={rawUrl} controls class="max-w-full"></video>
+	{:else if isAudio}
+		<br />
+		<audio src={rawUrl} controls class="w-full max-w-md"></audio>
+	{:else if isPdf}
+		<br />
+		<iframe src={rawUrl} title={data.file.originalName} class="h-150 w-full border-0"></iframe>
+	{:else if isText}
+		<br />
+		{#await fetch(rawUrl).then((r) => r.text())}
+			<p class="text-foreground-muted text-sm">Loading preview…</p>
+		{:then content}
+			<pre class="bg-background-muted overflow-auto p-4 text-sm">{content}</pre>
+		{:catch}
+			<p class="text-foreground-muted text-sm">Could not load preview.</p>
+		{/await}
+	{/if}
+</main>

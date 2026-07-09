@@ -1,6 +1,4 @@
 ---
 title: Algorithmic feeds
-date: 12-09-2025
+date: 27-06-2026
 ---
-
-Algorithmic feeds are the evil of the current internet.

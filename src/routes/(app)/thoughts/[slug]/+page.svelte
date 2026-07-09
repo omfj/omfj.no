@@ -19,11 +19,15 @@
 </svelte:head>
 
 <article class="prose prose-sm dark:prose-invert mx-auto my-10 max-w-3xl p-5">
-	<a href={resolve('/')} class="text-foreground-muted mb-5 inline-block text-sm hover:underline">
-		← Back to home
+	<a
+		href={resolve('/thoughts')}
+		class="text-foreground-muted mb-5 inline-block text-sm hover:underline"
+	>
+		&lt;- Back
 	</a>
-	<h1 class="mb-2 text-3xl font-bold">{meta.title}</h1>
+	<h1 class="font-plex mb-2 text-3xl font-bold">{meta.title}</h1>
 	<p class="text-foreground-muted mb-5 text-sm">{formattedDate}</p>
-
-	{@html content}
+	<div class="font-plex text-lg">
+		{@html content}
+	</div>
 </article>

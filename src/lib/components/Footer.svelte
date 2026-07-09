@@ -19,6 +19,9 @@
 		<li>
 			<a class="hover:text-primary" href={resolve('/links')}>[~ Links]</a>
 		</li>
+		<li>
+			<a class="hover:text-primary" href={resolve('/thoughts')}>[% Thoughts]</a>
+		</li>
 	</ul>
 </footer>
 

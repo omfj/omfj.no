@@ -26,7 +26,7 @@
 	<br />
 
 	<p>
-		My name is Ole Magnus. I am {age} year old software engineer from Norway.
+		My name is Ole Magnus. I am {age} year old software engineer from Norway. Loves Pyrda and Rosenborg.
 	</p>
 
 	<br />

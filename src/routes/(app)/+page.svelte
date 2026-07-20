@@ -21,7 +21,7 @@
 <main>
 	<h1 class="sr-only">omfj.no</h1>
 
-	<h2>## About me</h2>
+	<h2><span class="text-foreground-muted">##</span> About me</h2>
 
 	<br />
 
@@ -40,7 +40,7 @@
 
 	<br />
 
-	<h2>## Socials</h2>
+	<h2><span class="text-foreground-muted">##</span> Socials</h2>
 
 	<br />
 

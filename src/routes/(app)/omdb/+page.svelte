@@ -12,7 +12,7 @@
 </svelte:head>
 
 <main>
-	<h1># OMDb</h1>
+	<h1><span class="text-foreground-muted">#</span> OMDb</h1>
 
 	<br />
 

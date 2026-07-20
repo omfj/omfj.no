@@ -10,7 +10,7 @@
 </svelte:head>
 
 <main>
-	<h1># Daily Habits</h1>
+	<h1><span class="text-foreground-muted">#</span> Daily Habits</h1>
 
 	<br />
 

@@ -18,7 +18,7 @@
 </svelte:head>
 
 <main>
-	<h1># Thoughts</h1>
+	<h1><span class="text-foreground-muted">#</span> Thoughts</h1>
 
 	<br />
 

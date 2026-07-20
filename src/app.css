@@ -82,3 +82,9 @@ body {
 	background-color: var(--color-background);
 	color: var(--color-foreground);
 }
+
+h1,
+h2,
+h3 {
+	font-weight: 700;
+}

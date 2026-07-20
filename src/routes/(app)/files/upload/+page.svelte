@@ -134,7 +134,7 @@
 	<br />
 	<br />
 
-	<h1># Upload file</h1>
+	<h1><span class="text-foreground-muted">#</span> Upload file</h1>
 
 	<br />
 

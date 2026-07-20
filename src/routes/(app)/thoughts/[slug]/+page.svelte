@@ -25,7 +25,7 @@
 	<br />
 
 	<article>
-		<h1># {meta.title}</h1>
+		<h1><span class="text-foreground-muted">#</span> {meta.title}</h1>
 
 		<p class="text-foreground-muted text-sm">
 			<time datetime={meta.date}>{formattedDate}</time>
@@ -44,16 +44,25 @@
 		margin-top: 1rem;
 	}
 
+	.markdown :global(h1),
+	.markdown :global(h2),
+	.markdown :global(h3) {
+		font-weight: 700;
+	}
+
 	.markdown :global(h1)::before {
 		content: '# ';
+		color: var(--foreground-muted);
 	}
 
 	.markdown :global(h2)::before {
 		content: '## ';
+		color: var(--foreground-muted);
 	}
 
 	.markdown :global(h3)::before {
 		content: '### ';
+		color: var(--foreground-muted);
 	}
 
 	.markdown :global(a) {

@@ -33,7 +33,7 @@
 	<br />
 	<br />
 
-	<h1 class="truncate"># {data.file.id}</h1>
+	<h1 class="truncate"><span class="text-foreground-muted">#</span> {data.file.id}</h1>
 
 	<br />
 

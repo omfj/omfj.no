@@ -16,7 +16,7 @@
 </svelte:head>
 
 <main>
-	<h1># {page.status} – {title}</h1>
+	<h1><span class="text-foreground-muted">#</span> {page.status} – {title}</h1>
 
 	<br />
 

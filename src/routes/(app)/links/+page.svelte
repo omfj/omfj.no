@@ -17,7 +17,7 @@
 </svelte:head>
 
 <main>
-	<h1># Links</h1>
+	<h1><span class="text-foreground-muted">#</span> Links</h1>
 
 	<br />
 

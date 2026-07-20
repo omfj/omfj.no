@@ -89,7 +89,9 @@ export const links = sqliteTable('link', {
 	id: text().primaryKey().$defaultFn(nanoid),
 	title: text().notNull(),
 	url: text().notNull(),
-	createdAt: integer({ mode: 'timestamp' }).notNull().$defaultFn(() => new Date())
+	createdAt: integer({ mode: 'timestamp' })
+		.notNull()
+		.$defaultFn(() => new Date())
 });
 
 export type Link = InferSelectModel<typeof links>;

@@ -17,7 +17,7 @@
 </svelte:head>
 
 <main>
-	<h1># Files</h1>
+	<h1><span class="text-foreground-muted">#</span> Files</h1>
 
 	<br />
 

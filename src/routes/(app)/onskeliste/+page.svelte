@@ -14,7 +14,7 @@
 </svelte:head>
 
 <main>
-	<h1># Ønskeliste</h1>
+	<h1><span class="text-foreground-muted">#</span> Ønskeliste</h1>
 
 	<br />
 

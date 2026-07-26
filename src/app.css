@@ -88,3 +88,14 @@ h2,
 h3 {
 	font-weight: 700;
 }
+
+.link {
+	color: var(--color-link);
+	text-decoration: underline;
+}
+
+.link:hover {
+	background-color: var(--color-link);
+	color: var(--color-background);
+	text-decoration: none;
+}

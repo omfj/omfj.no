@@ -17,7 +17,7 @@
 	setUserContext(user);
 </script>
 
-<header class="fixed flex w-full items-center justify-between p-8">
+<header class="fixed w-full items-center justify-between p-8">
 	<a href={resolve('/')} class="text-2xl">omfj</a>
 
 	<div class="flex items-center gap-5">
@@ -36,7 +36,7 @@
 	</div>
 </header>
 
-<div class="mx-auto flex min-h-screen max-w-4xl flex-col px-8 pt-32 pb-8">
+<div class="flex min-h-screen max-w-xl flex-col px-8 pt-32 pb-8">
 	{@render children()}
 </div>
 

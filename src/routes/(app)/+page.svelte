@@ -26,15 +26,14 @@
 	<br />
 
 	<p>
-		My name is Ole Magnus. I am {age} year old software engineer from Norway. Loves Pyrda and Rosenborg.
+		My name is Ole Magnus. I am {age} year old software engineer from Norway. Big fan of Pryda and RBK.
 	</p>
 
 	<br />
 
 	<p>
-		If you are interested, you can find <a
-			href={asset('/assets/cv.pdf')}
-			class="text-link underline transition-colors">my resumè here</a
+		If you are interested, you can find <a href={asset('/assets/cv.pdf')} class="link"
+			>my resumè here</a
 		>.
 	</p>
 
@@ -47,17 +46,17 @@
 	<ul>
 		<li>
 			-
-			<a href="https://github.com/omfj" class="text-link underline">GitHub</a>
+			<a href="https://github.com/omfj" class="link">GitHub</a>
 			<span class="text-foreground-muted text-sm">(@omfj)</span>
 		</li>
 		<li>
 			-
-			<a href="https://www.linkedin.com/in/omfj" class="text-link underline">LinkedIn</a>
+			<a href="https://www.linkedin.com/in/omfj" class="link">LinkedIn</a>
 			<span class="text-foreground-muted text-sm">(in/omfj)</span>
 		</li>
 		<li>
 			-
-			<a href="mailto:me@omfj.no" class="text-link underline">E-mail</a>
+			<a href="mailto:me@omfj.no" class="link">E-mail</a>
 			<span class="text-foreground-muted text-sm">(me@omfj.no)</span>
 		</li>
 	</ul>

@@ -28,7 +28,7 @@
 
 	<br />
 
-	{#if user.current}
+	{#if user()}
 		<button
 			onclick={() => (isFormOpen = !isFormOpen)}
 			aria-expanded={isFormOpen}
@@ -62,7 +62,7 @@
 					<span class="text-foreground-muted text-sm">({new URL(link.url).hostname})</span>
 				</div>
 
-				{#if user.current}
+				{#if user()}
 					<form
 						{...deleteLink.for(link.id).enhance(async ({ submit }) => {
 							links = links.filter((l) => l.id !== link.id);

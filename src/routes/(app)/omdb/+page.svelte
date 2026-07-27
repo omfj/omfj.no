@@ -20,7 +20,7 @@
 
 	<br />
 
-	{#if user.current}
+	{#if user()}
 		<button
 			onclick={() => (isFormOpen = !isFormOpen)}
 			aria-expanded={isFormOpen}

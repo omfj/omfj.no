@@ -22,7 +22,7 @@
 
 	<br />
 
-	{#if user.current}
+	{#if user()}
 		<button
 			onclick={() => (isFormOpen = !isFormOpen)}
 			aria-expanded={isFormOpen}
@@ -68,7 +68,7 @@
 					{/if}
 				</div>
 
-				{#if user.current}
+				{#if user()}
 					<form
 						{...deleteItem.for(item.id).enhance(async ({ submit }) => {
 							wishlist = wishlist.filter((i) => i.id !== item.id);

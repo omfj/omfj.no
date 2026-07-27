@@ -10,11 +10,7 @@
 
 	const { data, children } = $props();
 
-	let user = $state({ current: data.user });
-	$effect.pre(() => {
-		user.current = data.user;
-	});
-	setUserContext(user);
+	setUserContext(() => data.user);
 </script>
 
 <header class="fixed w-full items-center justify-between p-8">
@@ -26,7 +22,7 @@
 			<span class="hidden dark:block">Dark</span>
 		</button>
 
-		{#if user.current}
+		{#if data.user}
 			<form class="contents" method="post" action={resolve('/auth/sign-out')} use:enhance>
 				<button class="text-foreground-muted hover:underline">Sign out</button>
 			</form>

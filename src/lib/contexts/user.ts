@@ -3,9 +3,7 @@ import type { ValidatedSession } from '$lib/services/auth';
 
 type User = Exclude<ValidatedSession['user'], null>;
 
-type UserContext = {
-	current: User | null;
-};
+type UserContext = () => User | null;
 
 const AUTH_CONTEXT_KEY = Symbol('auth');
 

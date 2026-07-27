@@ -49,9 +49,6 @@
 				<a class="link link-muted" href={resolve('/omdb')}>OMDb</a>
 			</li>
 			<li>
-				<a class="link link-muted" href={resolve('/files')}>Files</a>
-			</li>
-			<li>
 				<a class="link link-muted" href={resolve('/links')}>Links</a>
 			</li>
 			<li>

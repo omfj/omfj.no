@@ -3,7 +3,10 @@
 	"name": "omfj",
 	"main": ".svelte-kit/cloudflare/_worker.js",
 	"compatibility_date": "2025-11-20",
-	"compatibility_flags": ["nodejs_compat", "nodejs_als"],
+	"compatibility_flags": [
+		"nodejs_compat",
+		"nodejs_als"
+	],
 	"assets": {
 		"binding": "ASSETS",
 		"directory": ".svelte-kit/cloudflare"
@@ -26,10 +29,4 @@
 			"migrations_table": "__drizzle_migrations"
 		}
 	],
-	"r2_buckets": [
-		{
-			"binding": "FILES",
-			"bucket_name": "omfj-files"
-		}
-	]
 }

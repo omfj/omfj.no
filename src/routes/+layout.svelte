@@ -32,7 +32,7 @@
 	</div>
 </header>
 
-<div class="flex min-h-screen max-w-xl flex-col px-8 pt-32 pb-8">
+<div class="flex min-h-screen max-w-xl flex-col px-8 pt-16 pb-8">
 	{@render children()}
 </div>
 

@@ -13,8 +13,8 @@
 	setUserContext(() => data.user);
 </script>
 
-<header class="fixed w-full items-center justify-between p-8">
-	<a href={resolve('/')} class="text-2xl">omfj</a>
+<header class="bg-background-muted fixed flex w-full items-center justify-between p-1">
+	<a href={resolve('/')}>omfj</a>
 
 	<div class="flex items-center gap-5">
 		<button onclick={() => theme.next()} class="text-foreground-muted hover:underline">
@@ -40,22 +40,22 @@
 	<nav aria-label="Pages">
 		<ul class="flex flex-wrap justify-center gap-x-4 gap-y-1 text-center">
 			<li>
-				<a class="hover:text-primary" href="https://start.omfj.no">start.omfj.no</a>
+				<a class="link link-muted" href="https://start.omfj.no">start.omfj.no</a>
 			</li>
 			<li>
-				<a class="hover:text-primary" href={resolve('/habits')}>Habit Tracker</a>
+				<a class="link link-muted" href={resolve('/habits')}>Habit Tracker</a>
 			</li>
 			<li>
-				<a class="hover:text-primary" href={resolve('/omdb')}>OMDb</a>
+				<a class="link link-muted" href={resolve('/omdb')}>OMDb</a>
 			</li>
 			<li>
-				<a class="hover:text-primary" href={resolve('/files')}>Files</a>
+				<a class="link link-muted" href={resolve('/files')}>Files</a>
 			</li>
 			<li>
-				<a class="hover:text-primary" href={resolve('/links')}>Links</a>
+				<a class="link link-muted" href={resolve('/links')}>Links</a>
 			</li>
 			<li>
-				<a class="hover:text-primary" href={resolve('/thoughts')}>Thoughts</a>
+				<a class="link link-muted" href={resolve('/thoughts')}>Thoughts</a>
 			</li>
 		</ul>
 	</nav>

@@ -37,7 +37,7 @@
 						href={resolve('/(app)/thoughts/[slug]', {
 							slug: thought.slug
 						})}
-						class="text-link underline"
+						class="link"
 					>
 						{thought.meta.title}
 					</a>

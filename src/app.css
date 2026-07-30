@@ -106,12 +106,32 @@ h3 {
 	text-decoration: none;
 }
 
+.link:visited {
+	color: var(--link-visited);
+}
+
+.link:visited:hover {
+	background-color: var(--link-visited);
+	color: var(--background);
+	text-decoration: none;
+}
+
 .link-muted {
 	color: var(--foreground-muted);
 	text-decoration: none;
 }
 
 .link-muted:hover {
+	background-color: var(--foreground-muted);
+	color: var(--background);
+	text-decoration: none;
+}
+
+.link-muted:visited {
+	color: var(--foreground-muted);
+}
+
+.link-muted:visited:hover {
 	background-color: var(--foreground-muted);
 	color: var(--background);
 	text-decoration: none;

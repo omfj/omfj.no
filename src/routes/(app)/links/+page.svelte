@@ -54,7 +54,7 @@
 						href={link.url}
 						target="_blank"
 						rel="noopener noreferrer external"
-						class="text-link visited:text-link-visited underline"
+						class="link"
 						title={link.title}
 					>
 						{link.title}
@@ -87,14 +87,10 @@
 
 		<nav aria-label="Pagination" class="flex gap-4">
 			{#if page > 1}
-				<a href="{resolve('/links')}?page={page - 1}" class="text-foreground-muted hover:underline"
-					>&lt;- Newer</a
-				>
+				<a href="{resolve('/links')}?page={page - 1}" class="link-muted">&lt;- Newer</a>
 			{/if}
 			{#if hasMore}
-				<a href="{resolve('/links')}?page={page + 1}" class="text-foreground-muted hover:underline"
-					>Older -&gt;</a
-				>
+				<a href="{resolve('/links')}?page={page + 1}" class="link-muted">Older -&gt;</a>
 			{/if}
 		</nav>
 	{/if}

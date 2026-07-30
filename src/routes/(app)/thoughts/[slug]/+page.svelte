@@ -19,7 +19,7 @@
 </svelte:head>
 
 <main class="max-w-2xl">
-	<a href={resolve('/thoughts')} class="text-foreground-muted hover:underline">&lt;- Back</a>
+	<a href={resolve('/thoughts')} class="link-muted">&lt;- Back</a>
 
 	<br />
 	<br />

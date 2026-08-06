@@ -24,5 +24,5 @@
 
 	<br />
 
-	<a class="text-link underline" href={resolve('/')}>&lt;- Back to home</a>
+	<a class="link-muted" href={resolve('/')}>&lt;- Back to home</a>
 </main>

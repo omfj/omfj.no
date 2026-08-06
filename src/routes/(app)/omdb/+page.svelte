@@ -48,9 +48,7 @@
 			{#each data.films as film (film.id)}
 				<tr class="align-top">
 					<td class="py-1 pr-4">
-						<a class="text-link underline" href="https://www.imdb.com/title/{film.id}/"
-							>{film.title}</a
-						>
+						<a class="link" href="https://www.imdb.com/title/{film.id}/">{film.title}</a>
 					</td>
 					<td class="py-1">{film.rating}</td>
 				</tr>

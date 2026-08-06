@@ -13,7 +13,7 @@
 	setUserContext(() => data.user);
 </script>
 
-<div class="mx-auto flex min-h-screen max-w-xl flex-col p-1">
+<div class="mx-auto flex min-h-screen max-w-xl flex-col px-6 py-6 md:py-16">
 	<header class="flex items-center justify-between gap-5 pt-4 pb-10">
 		<a class="text-xl" href={resolve('/')}>omfj</a>
 

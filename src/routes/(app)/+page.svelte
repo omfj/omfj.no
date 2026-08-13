@@ -21,10 +21,6 @@
 <main>
 	<h1 class="sr-only">omfj.no</h1>
 
-	<h2><span class="text-foreground-muted">##</span> About me</h2>
-
-	<br />
-
 	<p>
 		My name is Ole Magnus. I am {age} year old software engineer from Norway. Big fan of Pryda and RBK.
 	</p>

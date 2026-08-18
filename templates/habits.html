@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Daily Habits{% endblock %}
+{% block content %}
+  <main>
+    <h1 class="heading-1">Daily Habits</h1>
+    <br>
+    <p>A tracker for my daily habits.</p>
+    <br>
+    <ul id="habits">
+      {% for habit in habits %}
+        <li>
+          <button type="button" data-habit="{{ habit.id }}">
+            <span aria-hidden="true">[ ]</span> {{ habit.title }}
+          </button>
+        </li>
+      {% endfor %}
+    </ul>
+  </main>
+  <script src="/static/habits.js" defer></script>
+{% endblock %}

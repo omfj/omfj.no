@@ -1,0 +1,12 @@
+{
+  "db_name": "SQLite",
+  "query": "INSERT INTO links (title, url, hostname, sort_order) VALUES (?, ?, ?, -1)",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Right": 3
+    },
+    "nullable": []
+  },
+  "hash": "a59e3d8485bbdcc8b446da673ac5a8e19a6b1d714a720e0d0ae4e4b450a480c1"
+}

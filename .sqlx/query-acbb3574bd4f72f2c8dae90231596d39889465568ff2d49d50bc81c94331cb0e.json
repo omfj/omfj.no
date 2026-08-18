@@ -1,0 +1,12 @@
+{
+  "db_name": "SQLite",
+  "query": "INSERT INTO oauth_states (token, provider, expires_at) VALUES (?, ?, unixepoch() + 600)",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Right": 2
+    },
+    "nullable": []
+  },
+  "hash": "acbb3574bd4f72f2c8dae90231596d39889465568ff2d49d50bc81c94331cb0e"
+}

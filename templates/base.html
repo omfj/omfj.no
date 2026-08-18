@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/static/favicon.png">
+    <link rel="apple-touch-icon"
+          sizes="180x180"
+          href="/static/apple-touch-icon.png">
+    <link rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/static/favicon-32x32.png">
+    <link rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/static/favicon-16x16.png">
+    <link rel="manifest" href="/static/site.webmanifest">
+    <link rel="mask-icon" href="/static/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="description" content="Ole Magnus' personal website.">
+    <title>{% block title %}omfj.no{% endblock %}</title>
+
+    <script>
+      // Set the theme before the page is rendered to avoid flash.
+      //
+      // This script will block the execution of the rest of the page until it has run,
+      // meaning that the correct color theme will be applied before the user can see
+      // it.
+      // We currently only have dark and light themes.
+      (() => {
+        const saved = localStorage.getItem("theme");
+        const theme = saved === "dark" || saved === "light"
+          ? saved
+          : (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
+
+    <!-- Load Tailwind CSS from CDN. We don't care to build it ourselves for now as this is a
+      personal website and we want to limit the things we do during build. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              foreground: 'var(--foreground)',
+              muted: 'var(--foreground-muted)',
+              divide: 'var(--divide-soft)',
+              link: 'var(--link)'
+            },
+            fontFamily: { mono: ['IBM Plex Mono', 'monospace'] }
+          }
+        }
+      };
+    </script>
+    <!-- Load the htmx from CDN. -->
+    <script src="https://unpkg.com/htmx.org@2.0.7" defer></script>
+
+    <!-- Load the fonts from Google Fonts, we might want to bundle our own fonts in the future... -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles.css">
+  </head>
+  <body class="font-mono">
+    <div class="mx-auto flex min-h-screen max-w-xl flex-col px-6 py-6 md:py-16">
+      <header class="flex items-center justify-between gap-5 pt-4 pb-10">
+        <a class="text-xl" href="/">omfj</a>
+        <div class="flex items-center gap-5">
+          <button class="text-foreground-muted hover:underline"
+                  type="button"
+                  onclick="toggleTheme()">
+            <span class="light-label">Light</span>
+            <span class="dark-label">Dark</span>
+          </button>
+          {% if signed_in %}
+            <form action="/auth/sign-out" method="post">
+              <button class="text-foreground-muted hover:underline">Sign out</button>
+            </form>
+          {% else %}
+            <a class="text-foreground-muted hover:underline" href="/auth/github">Sign in</a>
+          {% endif %}
+        </div>
+      </header>
+
+      <div class="flex-1">
+        {% block content %}{% endblock %}
+      </div>
+
+      <footer class="mt-auto p-4 text-[10px]">
+        <nav aria-label="Pages">
+          <ul class="flex flex-wrap justify-center gap-x-4 gap-y-1 text-center">
+            <li><a class="link link-muted" href="https://start.omfj.no">start.omfj.no</a></li>
+            <li><a class="link link-muted" href="/habits">Habit Tracker</a></li>
+            <li><a class="link link-muted" href="/omdb">OMDb</a></li>
+            <li><a class="link link-muted" href="/links">Links</a></li>
+            <li><a class="link link-muted" href="/thoughts">Thoughts</a></li>
+          </ul>
+        </nav>
+      </footer>
+    </div>
+    <script>
+      function toggleTheme() {
+        const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        document.documentElement.dataset.theme = next;
+        localStorage.setItem('theme', next);
+      }
+    </script>
+  </body>
+</html>

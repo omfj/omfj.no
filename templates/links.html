@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Links{% endblock %}
+{% block content %}
+  <main>
+    <h1 class="heading-1">Links</h1>
+    <br>
+    <p class="max-w-lg">
+      Articles and reads I recommend. Most of them are related to software development and
+      programming, and come from Hacker News.
+    </p>
+    <br>
+    {% if signed_in %}
+      <details class="mb-4">
+        <summary class="text-foreground-muted cursor-pointer hover:underline">Add a link</summary>
+        <form class="mt-2 flex max-w-md flex-col gap-2"
+              hx-post="/links"
+              hx-target="#link-list"
+              hx-swap="afterbegin"
+              hx-on::after-request="if(event.detail.successful) this.reset()"
+              method="post">
+          <label class="flex items-baseline gap-2">
+            <span class="shrink-0">Title:</span>
+            <input class="border-divide-soft w-full border-b bg-transparent outline-none focus:border-link"
+                   name="title"
+                   required>
+          </label>
+          <label class="flex items-baseline gap-2">
+            <span class="shrink-0">URL:</span>
+            <input class="border-divide-soft w-full border-b bg-transparent outline-none focus:border-link"
+                   name="url"
+                   type="url"
+                   required>
+          </label>
+          <button class="text-foreground-muted mr-auto hover:underline" type="submit">
+            <span class="idle-label">Add link</span>
+            <span class="loading-label">Saving...</span>
+          </button>
+        </form>
+      </details>
+    {% endif %}
+    <ul id="link-list" class="space-y-2">
+      {% for link in links %}
+        {% include "partials/link.html" %}
+      {% endfor %}
+    </ul>
+  </main>
+{% endblock %}

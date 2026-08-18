@@ -1,0 +1,38 @@
+{
+  "db_name": "SQLite",
+  "query": "SELECT slug AS `slug!`, title, published_iso, published_display FROM thoughts ORDER BY published_iso DESC",
+  "describe": {
+    "columns": [
+      {
+        "name": "slug!",
+        "ordinal": 0,
+        "type_info": "Text"
+      },
+      {
+        "name": "title",
+        "ordinal": 1,
+        "type_info": "Text"
+      },
+      {
+        "name": "published_iso",
+        "ordinal": 2,
+        "type_info": "Text"
+      },
+      {
+        "name": "published_display",
+        "ordinal": 3,
+        "type_info": "Text"
+      }
+    ],
+    "parameters": {
+      "Right": 0
+    },
+    "nullable": [
+      true,
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "74c1bf97b7d6bf582bf46ccf96b6ffdede814fb0404b2e693bc25febc61c0932"
+}

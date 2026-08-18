@@ -1,0 +1,20 @@
+{
+  "db_name": "SQLite",
+  "query": "SELECT EXISTS(SELECT 1 FROM sessions WHERE token = ? AND expires_at > unixepoch())",
+  "describe": {
+    "columns": [
+      {
+        "name": "EXISTS(SELECT 1 FROM sessions WHERE token = ? AND expires_at > unixepoch())",
+        "ordinal": 0,
+        "type_info": "Integer"
+      }
+    ],
+    "parameters": {
+      "Right": 1
+    },
+    "nullable": [
+      false
+    ]
+  },
+  "hash": "e377cce218c34b0bc0cad339738fb212a310f8258f944dddea7f7943d7b342fe"
+}

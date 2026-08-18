@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Thoughts{% endblock %}
+{% block content %}
+  <main>
+    <h1 class="heading-1">Thoughts</h1>
+    <br>
+    <p>Things I have been thinking about.</p>
+    <br>
+    {% if thoughts.is_empty() %}
+      <p class="text-foreground-muted">No thoughts yet.</p>
+    {% else %}
+      <ul>
+        {% for thought in thoughts %}
+          <li>
+            - <a href="/thoughts/{{ thought.slug }}" class="link">{{ thought.title }}</a>
+            <time datetime="{{ thought.published_iso }}"
+                  class="text-foreground-muted text-sm">
+              ({{ thought.published_display }})
+            </time>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </main>
+{% endblock %}

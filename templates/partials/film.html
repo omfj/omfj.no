@@ -1,0 +1,15 @@
+<tr class="align-top">
+  <td class="py-1 pr-4">
+    <a class="link" href="https://www.imdb.com/title/{{ film.id }}/">{{ film.title }}</a>
+  </td>
+  <td class="py-1">{{ film.rating }}</td>
+  {% if signed_in %}
+    <td class="py-1">
+      <button class="text-foreground-muted hover:text-red-400"
+              aria-label="Delete {{ film.title }}"
+              hx-delete="/omdb/{{ film.id }}"
+              hx-target="closest tr"
+              hx-swap="outerHTML">[x]</button>
+    </td>
+  {% endif %}
+</tr>

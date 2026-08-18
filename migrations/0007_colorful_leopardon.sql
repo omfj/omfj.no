@@ -1,1 +1,0 @@
-DROP TABLE `uploaded_file`;

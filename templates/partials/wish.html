@@ -1,0 +1,30 @@
+<li class="flex items-start gap-2">
+  <div class="min-w-0 flex-1">
+    <div class="truncate">
+      -
+      {% match wish.url %}
+      {% when Some with (url) %}
+      <a href="{{ url }}"
+         target="_blank"
+         rel="noopener noreferrer external"
+         class="text-link underline">{{ wish.title }}</a>
+      {% when None %}
+      {{ wish.title }}
+    {% endmatch %}
+  </div>
+  {% match wish.notes %}
+  {% when Some with (notes) %}
+  <div class="text-foreground-muted pl-4 text-sm">
+    <p>{{ notes }}</p>
+  </div>
+  {% when None %}
+{% endmatch %}
+</div>
+{% if signed_in %}
+  <button class="shrink-0 text-foreground-muted hover:text-red-400"
+          aria-label="Slett {{ wish.title }}"
+          hx-delete="/onskeliste/{{ wish.id }}"
+          hx-target="closest li"
+          hx-swap="outerHTML">[x]</button>
+{% endif %}
+</li>

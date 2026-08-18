@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}OMDb{% endblock %}
+{% block content %}
+  <main>
+    <h1 class="heading-1">OMDb</h1>
+    <br>
+    <p class="max-w-lg">A list of movies and series I have watched and my ratings.</p>
+    <br>
+    {% if signed_in %}
+      <details class="mb-4">
+        <summary class="text-foreground-muted cursor-pointer hover:underline">Add a film</summary>
+        <form class="mt-2 flex w-full flex-col gap-2"
+              hx-post="/omdb"
+              hx-target="#film-list"
+              hx-swap="afterbegin"
+              hx-on::after-request="if(event.detail.successful) this.reset()"
+              method="post">
+          <label class="flex items-baseline gap-2">
+            <span class="w-20 shrink-0">Title:</span>
+            <input class="border-divide-soft w-full border-b bg-transparent outline-none focus:border-link"
+                   name="title"
+                   required>
+          </label>
+          <label class="flex items-baseline gap-2">
+            <span class="w-20 shrink-0">IMDb ID:</span>
+            <input class="border-divide-soft w-full border-b bg-transparent outline-none focus:border-link"
+                   name="id"
+                   placeholder="tt1234567"
+                   required
+                   pattern="tt[0-9]+">
+          </label>
+          <label class="flex items-baseline gap-2">
+            <span class="w-20 shrink-0">Rating:</span>
+            <input class="border-divide-soft w-full border-b bg-transparent outline-none focus:border-link"
+                   name="rating"
+                   type="number"
+                   min="1"
+                   max="100"
+                   placeholder="1-100"
+                   required>
+          </label>
+          <button class="text-foreground-muted mr-auto hover:underline" type="submit">
+            <span class="idle-label">Add film</span>
+            <span class="loading-label">Saving...</span>
+          </button>
+        </form>
+      </details>
+    {% endif %}
+    <table class="w-full">
+      <thead>
+        <tr class="border-divide-soft text-foreground-muted border-b text-left">
+          <th class="py-1 pr-4 font-normal">Title</th>
+          <th class="w-24 py-1 font-normal">Rating</th>
+          {% if signed_in %}
+            <th>
+              <span class="sr-only">Actions</span>
+            </th>
+          {% endif %}
+        </tr>
+      </thead>
+      <tbody id="film-list">
+        {% for film in films %}
+          {% include "partials/film.html" %}
+        {% endfor %}
+      </tbody>
+    </table>
+  </main>
+{% endblock %}

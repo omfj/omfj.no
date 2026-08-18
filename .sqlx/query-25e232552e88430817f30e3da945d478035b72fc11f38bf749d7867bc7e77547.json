@@ -1,0 +1,20 @@
+{
+  "db_name": "SQLite",
+  "query": "DELETE FROM oauth_states WHERE token = ? AND provider = ? AND expires_at > unixepoch() RETURNING 1 AS `valid!: i64`",
+  "describe": {
+    "columns": [
+      {
+        "name": "valid!: i64",
+        "ordinal": 0,
+        "type_info": "Null"
+      }
+    ],
+    "parameters": {
+      "Right": 2
+    },
+    "nullable": [
+      null
+    ]
+  },
+  "hash": "25e232552e88430817f30e3da945d478035b72fc11f38bf749d7867bc7e77547"
+}

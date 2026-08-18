@@ -1,0 +1,17 @@
+<li class="flex items-center gap-2">
+  <div class="min-w-0 flex-1 truncate">
+    - <a href="{{ link.url }}"
+    target="_blank"
+    rel="noopener noreferrer external"
+    class="link"
+    title="{{ link.title }}">{{ link.title }}</a>
+    <span class="text-foreground-muted text-sm">({{ link.hostname }})</span>
+  </div>
+  {% if signed_in %}
+    <button class="ml-auto shrink-0 text-foreground-muted hover:text-red-400"
+            aria-label="Delete {{ link.title }}"
+            hx-delete="/links/{{ link.id }}"
+            hx-target="closest li"
+            hx-swap="outerHTML">[x]</button>
+  {% endif %}
+</li>

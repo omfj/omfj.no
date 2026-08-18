@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}{{ thought.title }}{% endblock %}
+{% block content %}
+  <main class="max-w-2xl">
+    <a href="/thoughts" class="link-muted">&lt;- Back</a>
+    <br>
+    <br>
+    <article>
+      <h1 class="heading-1">{{ thought.title }}</h1>
+      <p class="text-foreground-muted text-sm">
+        <time datetime="{{ thought.published_iso }}">
+          {{ thought.published_display }}
+        </time>
+      </p>
+      <br>
+      <div class="markdown">{{ thought.body_html|safe }}</div>
+    </article>
+  </main>
+{% endblock %}

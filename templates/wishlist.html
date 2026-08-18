@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Ønskeliste{% endblock %}
+{% block content %}
+  <main>
+    <h1 class="heading-1">Ønskeliste</h1>
+    <br>
+    <p>Ting jeg ønsker meg til bursdag, jul og andre anledninger.</p>
+    <br>
+    {% if signed_in %}
+      <details class="mb-4">
+        <summary class="text-foreground-muted cursor-pointer hover:underline">Legg til ønske</summary>
+        <form class="mt-2 flex max-w-md flex-col gap-2"
+              hx-post="/onskeliste"
+              hx-target="#wish-list"
+              hx-swap="afterbegin"
+              hx-on::after-request="if(event.detail.successful) this.reset()"
+              method="post">
+          <label class="flex items-baseline gap-2">
+            <span class="w-24 shrink-0">Tittel:</span>
+            <input class="border-divide-soft w-full border-b bg-transparent outline-none"
+                   name="title"
+                   required>
+          </label>
+          <label class="flex items-baseline gap-2">
+            <span class="w-24 shrink-0">URL:</span>
+            <input class="border-divide-soft w-full border-b bg-transparent outline-none"
+                   name="url"
+                   type="url">
+          </label>
+          <label class="flex items-baseline gap-2">
+            <span class="w-24 shrink-0">Notat:</span>
+            <input class="border-divide-soft w-full border-b bg-transparent outline-none"
+                   name="notes">
+          </label>
+          <button class="text-foreground-muted mr-auto hover:underline" type="submit">Legg til</button>
+        </form>
+      </details>
+    {% endif %}
+    <ul id="wish-list" class="space-y-2">
+      {% for wish in wishes %}
+        {% include "partials/wish.html" %}
+      {% endfor %}
+    </ul>
+  </main>
+{% endblock %}

@@ -22,7 +22,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let state = AppState { pool, auth };
     let app = web::router(state);
 
-    let address = SocketAddr::from(([127, 0, 0, 1], config.port));
+    let address = SocketAddr::from(([0, 0, 0, 0], config.port));
     let listener = tokio::net::TcpListener::bind(address).await?;
 
     tracing::info!(%address, "listening");

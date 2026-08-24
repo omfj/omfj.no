@@ -10,7 +10,9 @@ COPY src src
 
 ENV SQLX_OFFLINE=true
 
-RUN cargo build --release --locked
+ARG DATABASE_URL
+
+RUN DATABASE_URL="$DATABASE_URL" cargo build --release --locked
 
 FROM docker.io/library/debian:bookworm-slim
 

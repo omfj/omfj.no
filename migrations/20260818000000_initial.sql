@@ -33,7 +33,7 @@ CREATE TABLE sessions (
 
 CREATE TABLE oauth_states (
     token TEXT PRIMARY KEY,
-    expires_at INTEGER NOT NULL
+    expires_at INTEGER NOT NULL,
     provider TEXT NOT NULL DEFAULT 'github'
 );
 

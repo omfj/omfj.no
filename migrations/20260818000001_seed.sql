@@ -47,18 +47,3 @@ INSERT INTO wishes (title, url, notes, sort_order) VALUES
     ('Ramverk Carry On', 'https://dbjourney.com/products/ramverk-carry-on-black-out', NULL, 8),
     ('Nature papir abonnement ', 'https://www.nature.com/nature/subscribe', NULL, 9);
 
-INSERT INTO thoughts (slug, title, published_iso, published_display, body_html) VALUES
-    ('algorithmic-feeds', 'Algorithmic feeds', '2026-06-27T00:00:00.000Z', '27 June 2026', '');
-
-INSERT INTO habits (title, sort_order) VALUES
-    ('Plan the day', 1),
-    ('Take vitamins', 2),
-    ('Take creatine', 3),
-    ('Read the news', 4),
-    ('Read for 20 minutes', 5),
-    ('Go for a walk', 6),
-    ('Drink glass of water (1)', 7),
-    ('Drink glass of water (2)', 8),
-    ('Drink glass of water (3)', 9),
-    ('Drink glass of water (4)', 10),
-    ('Take magnesium', 11);

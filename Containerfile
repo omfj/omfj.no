@@ -12,7 +12,11 @@ ENV SQLX_OFFLINE=true
 
 ARG DATABASE_URL
 
-RUN DATABASE_URL="$DATABASE_URL" cargo build --release --locked
+RUN --mount=type=cache,target=/usr/local/cargo/registry \
+    --mount=type=cache,target=/build/target \
+    DATABASE_URL="$DATABASE_URL" \
+    cargo build --release --locked && \
+    cp /build/target/release/omfj-no-rs /tmp/omfj-no-rs
 
 FROM docker.io/library/debian:bookworm-slim
 
@@ -22,7 +26,7 @@ RUN apt-get update \
 
 WORKDIR /app
 
-COPY --from=builder /build/target/release/omfj-no-rs /usr/local/bin/omfj-no-rs
+COPY --from=builder /tmp/omfj-no-rs /usr/local/bin/omfj-no-rs
 COPY static static
 COPY thoughts thoughts
 

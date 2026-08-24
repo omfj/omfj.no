@@ -1,7 +1,7 @@
 use sqlx::{
     SqlitePool,
     migrate::MigrateError,
-    sqlite::{SqliteConnectOptions, SqlitePoolOptions},
+    sqlite::{SqliteConnectOptions, SqliteJournalMode, SqlitePoolOptions},
 };
 use thiserror::Error;
 
@@ -23,7 +23,11 @@ pub async fn connect(config: &Config) -> Result<SqlitePool, DbError> {
     // so I am just leaving it at 5 for now.
     let pool = SqlitePoolOptions::new()
         .max_connections(5)
-        .connect_with(options.create_if_missing(true))
+        .connect_with(
+            options
+                .create_if_missing(true)
+                .journal_mode(SqliteJournalMode::Wal),
+        )
         .await?;
 
     // Run the migrations to ensure the database schema is up to date.

@@ -26,8 +26,6 @@ pub(crate) enum AppError {
     Http(#[from] reqwest::Error),
     #[error(transparent)]
     OAuth(#[from] crate::auth::OAuthError),
-    #[error(transparent)]
-    Content(#[from] crate::web::thoughts::ThoughtError),
 }
 
 #[derive(Template)]
@@ -73,11 +71,7 @@ impl AppError {
                 "That request did not work",
                 (*message).into(),
             ),
-            Self::Database(_)
-            | Self::Template(_)
-            | Self::Http(_)
-            | Self::OAuth(_)
-            | Self::Content(_) => {
+            Self::Database(_) | Self::Template(_) | Self::Http(_) | Self::OAuth(_) => {
                 tracing::error!(error = ?self, "request failed");
                 (
                     StatusCode::INTERNAL_SERVER_ERROR,

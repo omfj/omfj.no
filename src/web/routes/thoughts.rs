@@ -23,22 +23,21 @@ pub(crate) fn router() -> Router<Arc<AppState>> {
 #[template(path = "thoughts.html")]
 struct ThoughtsTemplate {
     signed_in: bool,
-    thoughts: Vec<ThoughtSummary>,
+    thoughts: &'static [ThoughtSummary<'static>],
 }
 
 #[derive(Template)]
 #[template(path = "thought.html")]
 struct ThoughtTemplate {
     signed_in: bool,
-    thought: ThoughtArticle,
+    thought: &'static ThoughtArticle<'static>,
 }
 
 /// Loads and renders thoughts in reverse publication order.
 async fn thoughts(state: SharedState, jar: CookieJar) -> Result<Html<String>, AppError> {
-    let thoughts = thought_files::load_all()?;
     render_html(ThoughtsTemplate {
         signed_in: is_signed_in(&state, &jar).await?,
-        thoughts,
+        thoughts: thought_files::all(),
     })
 }
 
@@ -48,7 +47,7 @@ async fn thought(
     jar: CookieJar,
     Path(slug): Path<String>,
 ) -> Result<Html<String>, AppError> {
-    let thought = thought_files::load(&slug)?.ok_or(AppError::NotFound)?;
+    let thought = thought_files::get(&slug).ok_or(AppError::NotFound)?;
     render_html(ThoughtTemplate {
         signed_in: is_signed_in(&state, &jar).await?,
         thought,

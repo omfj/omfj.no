@@ -6,6 +6,7 @@ COPY Cargo.toml Cargo.lock ./
 COPY .sqlx .sqlx
 COPY migrations migrations
 COPY templates templates
+COPY thoughts thoughts
 COPY src src
 
 ENV SQLX_OFFLINE=true
@@ -28,7 +29,6 @@ WORKDIR /app
 
 COPY --from=builder /tmp/omfj-no-rs /usr/local/bin/omfj-no-rs
 COPY static static
-COPY thoughts thoughts
 
 ENV PORT=3000
 

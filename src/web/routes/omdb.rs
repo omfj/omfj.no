@@ -46,11 +46,11 @@ struct FilmForm {
     rating: i64,
 }
 
-/// Loads and renders the ordered film list.
+/// Loads and renders the film list.
 async fn omdb(state: SharedState, jar: CookieJar) -> Result<Html<String>, AppError> {
     let films = sqlx::query_as!(
         Film,
-        "SELECT id AS `id!`, title, rating FROM films ORDER BY sort_order, rowid"
+        "SELECT id AS `id!`, title, rating FROM films ORDER BY rowid"
     )
     .fetch_all(&state.pool)
     .await?;
@@ -80,7 +80,7 @@ async fn create_film(
     let title = form.title.trim();
 
     sqlx::query!(
-        "INSERT INTO films (id, title, rating, sort_order) VALUES (?, ?, ?, -1) ON CONFLICT(id) DO UPDATE SET title = excluded.title, rating = excluded.rating",
+        "INSERT INTO films (id, title, rating) VALUES (?, ?, ?) ON CONFLICT(id) DO UPDATE SET title = excluded.title, rating = excluded.rating",
         film_id,
         title,
         form.rating,

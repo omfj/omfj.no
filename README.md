@@ -1,16 +1,16 @@
-# omfj.no (Rust)
+# omfj.no
 
-A server-rendered recreation of `omfj.no` using Axum, Askama HTML templates, HTMX, SQLite, and SQLx. Tailwind and HTMX load from CDNs, so there is no frontend package manager or asset build step.
+A website using Axum, Askama HTML templates, HTMX, SQLite, and SQLx.
 
 ## Run locally
+
+Copy `.env.example` to `.env` to configure local development. Environment variables already set by the shell take precedence over values in `.env`.
 
 ```sh
 cargo run
 ```
 
-Open <http://127.0.0.1:3000>. The SQLite database is created and seeded automatically as `omfj.db`.
-
-Copy `.env.example` to `.env` to configure local development. Environment variables already set by the shell take precedence over values in `.env`.
+Open <http://127.0.0.1:3000>.
 
 Optional settings:
 

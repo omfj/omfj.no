@@ -71,7 +71,7 @@ impl Config {
             github_client_secret: env::var(ENV_GITHUB_CLIENT_SECRET).ok(),
             github_callback_url: env::var(ENV_GITHUB_CALLBACK_URL).unwrap_or_default(),
             github_allowed_login: env::var(ENV_GITHUB_ALLOWED_LOGIN).unwrap_or_default(),
-            secure_cookies: env::var(ENV_SECURE_COOKIES).is_ok_and(|value| value == "true"),
+            secure_cookies: env::var(ENV_SECURE_COOKIES).map_or(true, |value| value != "false"),
         }
     }
 }

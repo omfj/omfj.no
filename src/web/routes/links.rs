@@ -48,12 +48,12 @@ struct LinkForm {
 
 /// Loads and renders the ordered collection of recommended links.
 async fn links(state: SharedState, jar: CookieJar) -> Result<Html<String>, AppError> {
-    let links = sqlx::query_as!(
-        RecommendedLink,
-        "SELECT id, title, url, hostname FROM links ORDER BY sort_order, id DESC",
-    )
-    .fetch_all(&state.pool)
-    .await?;
+    let links = sqlx::query!("SELECT id, title, url FROM links ORDER BY id DESC")
+        .fetch_all(&state.pool)
+        .await?
+        .into_iter()
+        .map(|link| RecommendedLink::new(link.id, link.title, link.url))
+        .collect();
 
     render_html(LinksTemplate {
         signed_in: is_signed_in(&state, &jar).await?,
@@ -73,27 +73,16 @@ async fn create_link(
     if !matches!(parsed.scheme(), "http" | "https") || form.title.trim().is_empty() {
         return Err(AppError::BadRequest("Enter a title and an http(s) URL."));
     }
-    let hostname = parsed
-        .host_str()
-        .ok_or(AppError::BadRequest("The URL needs a host."))?
-        .to_owned();
+    if parsed.host_str().is_none() {
+        return Err(AppError::BadRequest("The URL needs a host."));
+    }
     let title = form.title.trim();
     let url = parsed.as_str();
 
-    let result = sqlx::query!(
-        "INSERT INTO links (title, url, hostname, sort_order) VALUES (?, ?, ?, -1)",
-        title,
-        url,
-        hostname
-    )
-    .execute(&state.pool)
-    .await?;
-    let link = RecommendedLink {
-        id: result.last_insert_rowid(),
-        title: title.into(),
-        url: parsed.into(),
-        hostname,
-    };
+    let result = sqlx::query!("INSERT INTO links (title, url) VALUES (?, ?)", title, url)
+        .execute(&state.pool)
+        .await?;
+    let link = RecommendedLink::new(result.last_insert_rowid(), title.into(), parsed.into());
     mutation_response(
         &headers,
         LinkPartial {

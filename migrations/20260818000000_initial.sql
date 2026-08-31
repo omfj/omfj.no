@@ -10,17 +10,14 @@ CREATE TABLE films (
 CREATE TABLE links (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL,
-    url TEXT NOT NULL,
-    hostname TEXT NOT NULL,
-    sort_order INTEGER NOT NULL DEFAULT 0
+    url TEXT NOT NULL
 );
 
 CREATE TABLE wishes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL,
     url TEXT,
-    notes TEXT,
-    sort_order INTEGER NOT NULL DEFAULT 0
+    notes TEXT
 );
 
 CREATE TABLE sessions (

@@ -1,4 +1,5 @@
 use serde::Serialize;
+use url::Url;
 
 #[derive(Debug, Serialize)]
 pub(crate) struct Film {
@@ -13,6 +14,22 @@ pub(crate) struct RecommendedLink {
     pub title: String,
     pub url: String,
     pub hostname: String,
+}
+
+impl RecommendedLink {
+    pub(crate) fn new(id: i64, title: String, url: String) -> Self {
+        let hostname = Url::parse(&url)
+            .ok()
+            .and_then(|parsed| parsed.host_str().map(str::to_owned))
+            .unwrap_or_default();
+
+        Self {
+            id,
+            title,
+            url,
+            hostname,
+        }
+    }
 }
 
 #[derive(Debug, Serialize)]

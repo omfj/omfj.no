@@ -47,11 +47,11 @@ struct WishForm {
     notes: Option<String>,
 }
 
-/// Loads and renders the ordered wishlist.
+/// Loads and renders the wishlist.
 async fn wishlist(state: SharedState, jar: CookieJar) -> Result<Html<String>, AppError> {
     let wishes = sqlx::query_as!(
         Wish,
-        "SELECT id, title, url, notes FROM wishes ORDER BY sort_order, id DESC",
+        "SELECT id, title, url, notes FROM wishes ORDER BY id DESC",
     )
     .fetch_all(&state.pool)
     .await?;
@@ -81,7 +81,7 @@ async fn create_wish(
     let clean_notes = form.notes.filter(|value| !value.trim().is_empty());
     let title = form.title.trim();
     let result = sqlx::query!(
-        "INSERT INTO wishes (title, url, notes, sort_order) VALUES (?, ?, ?, -1)",
+        "INSERT INTO wishes (title, url, notes) VALUES (?, ?, ?)",
         title,
         clean_url,
         clean_notes

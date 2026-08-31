@@ -2,7 +2,7 @@ FROM docker.io/library/rust:1.97-bookworm AS builder
 
 WORKDIR /build
 
-COPY Cargo.toml Cargo.lock ./
+COPY Cargo.toml Cargo.lock build.rs ./
 COPY .sqlx .sqlx
 COPY migrations migrations
 COPY templates templates

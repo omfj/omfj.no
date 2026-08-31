@@ -16,7 +16,7 @@
               hx-post="/links"
               hx-target="#link-list"
               hx-swap="afterbegin"
-              hx-on::after-request="if(event.detail.successful) this.reset()"
+              hx-on::after-request="if(ctx.response.status < 400) this.reset()"
               method="post">
           <label class="flex items-baseline gap-2">
             <span class="shrink-0">Title:</span>

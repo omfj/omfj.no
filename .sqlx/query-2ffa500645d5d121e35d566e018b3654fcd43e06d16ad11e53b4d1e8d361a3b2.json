@@ -1,0 +1,12 @@
+{
+  "db_name": "SQLite",
+  "query": "INSERT INTO wishes (title, url, notes) VALUES (?, ?, ?)",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Right": 3
+    },
+    "nullable": []
+  },
+  "hash": "2ffa500645d5d121e35d566e018b3654fcd43e06d16ad11e53b4d1e8d361a3b2"
+}

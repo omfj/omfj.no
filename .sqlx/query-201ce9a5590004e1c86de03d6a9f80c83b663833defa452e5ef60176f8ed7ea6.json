@@ -1,0 +1,12 @@
+{
+  "db_name": "SQLite",
+  "query": "INSERT INTO films (id, title, rating) VALUES (?, ?, ?) ON CONFLICT(id) DO UPDATE SET title = excluded.title, rating = excluded.rating",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Right": 3
+    },
+    "nullable": []
+  },
+  "hash": "201ce9a5590004e1c86de03d6a9f80c83b663833defa452e5ef60176f8ed7ea6"
+}

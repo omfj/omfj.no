@@ -13,17 +13,21 @@ use axum::{
     http::HeaderMap,
     response::{Html, IntoResponse, Redirect, Response},
 };
-use sqlx::SqlitePool;
 use tower_http::{services::ServeDir, trace::TraceLayer};
 
-use crate::auth::AuthService;
+use crate::{
+    auth::AuthService,
+    repository::{FilmRepository, LinkRepository, WishRepository},
+};
 
 pub(crate) use error::AppError;
 
 #[derive(Clone)]
 pub struct AppState {
-    pub pool: SqlitePool,
     pub auth: AuthService,
+    pub films: FilmRepository,
+    pub links: LinkRepository,
+    pub wishes: WishRepository,
 }
 
 pub(crate) type SharedState = State<Arc<AppState>>;

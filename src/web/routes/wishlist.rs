@@ -12,10 +12,9 @@ use axum_extra::extract::cookie::CookieJar;
 use serde::Deserialize;
 use url::Url;
 
+use crate::repository::Wish;
 use crate::web::{
-    AppError, AppState, SharedState,
-    models::Wish,
-    mutation_response, render_html,
+    AppError, AppState, SharedState, mutation_response, render_html,
     session::{RequireAuth, is_signed_in},
 };
 
@@ -49,12 +48,7 @@ struct WishForm {
 
 /// Loads and renders the wishlist.
 async fn wishlist(state: SharedState, jar: CookieJar) -> Result<Html<String>, AppError> {
-    let wishes = sqlx::query_as!(
-        Wish,
-        "SELECT id, title, url, notes FROM wishes ORDER BY id DESC",
-    )
-    .fetch_all(&state.pool)
-    .await?;
+    let wishes = state.wishes.list().await?;
     render_html(WishlistTemplate {
         signed_in: is_signed_in(&state, &jar).await?,
         wishes,
@@ -80,20 +74,10 @@ async fn create_wish(
     }
     let clean_notes = form.notes.filter(|value| !value.trim().is_empty());
     let title = form.title.trim();
-    let result = sqlx::query!(
-        "INSERT INTO wishes (title, url, notes) VALUES (?, ?, ?)",
-        title,
-        clean_url,
-        clean_notes
-    )
-    .execute(&state.pool)
-    .await?;
-    let wish = Wish {
-        id: result.last_insert_rowid(),
-        title: title.into(),
-        url: clean_url,
-        notes: clean_notes,
-    };
+    let wish = state
+        .wishes
+        .create(title, clean_url.as_deref(), clean_notes.as_deref())
+        .await?;
     mutation_response(
         &headers,
         WishPartial {
@@ -110,8 +94,6 @@ async fn delete_wish(
     _auth: RequireAuth,
     Path(id): Path<i64>,
 ) -> Result<StatusCode, AppError> {
-    sqlx::query!("DELETE FROM wishes WHERE id = ?", id)
-        .execute(&state.pool)
-        .await?;
+    state.wishes.delete(id).await?;
     Ok(StatusCode::OK)
 }

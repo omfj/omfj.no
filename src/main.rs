@@ -8,7 +8,12 @@ use std::net::SocketAddr;
 
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
-use crate::{auth::AuthService, config::Config, web::AppState};
+use crate::{
+    auth::AuthService,
+    config::Config,
+    repository::{FilmRepository, LinkRepository, WishRepository},
+    web::AppState,
+};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -19,7 +24,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let pool = db::connect(&config).await?;
     let auth = AuthService::new(&config, pool.clone())?;
 
-    let state = AppState { pool, auth };
+    let state = AppState {
+        auth,
+        films: FilmRepository::new(pool.clone()),
+        links: LinkRepository::new(pool.clone()),
+        wishes: WishRepository::new(pool),
+    };
     let app = web::router(state);
 
     let address = SocketAddr::from(([0, 0, 0, 0], config.port));

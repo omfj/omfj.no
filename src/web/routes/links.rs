@@ -12,10 +12,9 @@ use axum_extra::extract::cookie::CookieJar;
 use serde::Deserialize;
 use url::Url;
 
+use crate::repository::RecommendedLink;
 use crate::web::{
-    AppError, AppState, SharedState,
-    models::RecommendedLink,
-    mutation_response, render_html,
+    AppError, AppState, SharedState, mutation_response, render_html,
     session::{RequireAuth, is_signed_in},
 };
 
@@ -48,12 +47,7 @@ struct LinkForm {
 
 /// Loads and renders the ordered collection of recommended links.
 async fn links(state: SharedState, jar: CookieJar) -> Result<Html<String>, AppError> {
-    let links = sqlx::query!("SELECT id, title, url FROM links ORDER BY id DESC")
-        .fetch_all(&state.pool)
-        .await?
-        .into_iter()
-        .map(|link| RecommendedLink::new(link.id, link.title, link.url))
-        .collect();
+    let links = state.links.list().await?;
 
     render_html(LinksTemplate {
         signed_in: is_signed_in(&state, &jar).await?,
@@ -79,10 +73,7 @@ async fn create_link(
     let title = form.title.trim();
     let url = parsed.as_str();
 
-    let result = sqlx::query!("INSERT INTO links (title, url) VALUES (?, ?)", title, url)
-        .execute(&state.pool)
-        .await?;
-    let link = RecommendedLink::new(result.last_insert_rowid(), title.into(), parsed.into());
+    let link = state.links.create(title, url).await?;
     mutation_response(
         &headers,
         LinkPartial {
@@ -99,8 +90,6 @@ async fn delete_link(
     _auth: RequireAuth,
     Path(id): Path<i64>,
 ) -> Result<StatusCode, AppError> {
-    sqlx::query!("DELETE FROM links WHERE id = ?", id)
-        .execute(&state.pool)
-        .await?;
+    state.links.delete(id).await?;
     Ok(StatusCode::OK)
 }

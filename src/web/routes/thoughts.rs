@@ -5,11 +5,9 @@ use axum::{Router, extract::Path, response::Html, routing::get};
 use axum_extra::extract::cookie::CookieJar;
 
 use crate::web::{
-    AppError, AppState, SharedState,
-    models::{ThoughtArticle, ThoughtSummary},
-    render_html,
+    AppError, AppState, SharedState, render_html,
     session::is_signed_in,
-    thoughts as thought_files,
+    thoughts::{self as thought_files, ThoughtArticle, ThoughtSummary},
 };
 
 /// Registers the thought index and article routes.

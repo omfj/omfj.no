@@ -1,5 +1,4 @@
 mod error;
-mod models;
 mod routes;
 mod session;
 mod thoughts;

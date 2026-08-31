@@ -37,7 +37,7 @@ pub fn router(state: AppState) -> Router {
     Router::new()
         .merge(routes::home::router())
         .merge(routes::habits::router())
-        .merge(routes::omdb::router())
+        .merge(routes::films::router())
         .merge(routes::links::router())
         .merge(routes::wishlist::router())
         .merge(routes::thoughts::router())

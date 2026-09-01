@@ -1,0 +1,51 @@
+[tools]
+rust = "1.98.0"
+node = "24.20.0"
+"npm:@tailwindcss/cli" = "4.1.17"
+"cargo:cargo-watch" = "8.5.3"
+"pipx:djlint" = "1.44.2"
+
+[tasks.css]
+description = "Build the Tailwind stylesheet"
+run = "tailwindcss --input static/tailwind.input.css --output static/tailwind.css --minify"
+
+[tasks.format]
+description = "Format Rust and Askama templates"
+run = '''
+cargo fmt
+djlint templates --reformat
+'''
+
+[tasks.lint]
+description = "Lint Rust and Askama templates"
+run = '''
+cargo clippy --all-targets --all-features -- -D warnings
+djlint templates --lint
+'''
+
+[tasks.test]
+description = "Run the test suite"
+run = "cargo test --all-features"
+
+[tasks.check]
+description = "Run all CI checks"
+run = '''
+cargo fmt --check
+djlint templates --check
+cargo clippy --all-targets --all-features -- -D warnings
+cargo check --all-targets --all-features
+cargo test --all-features
+'''
+
+[tasks.dev]
+description = "Start the app and rebuild CSS on changes"
+run = '''
+tailwindcss --input static/tailwind.input.css --output static/tailwind.css --watch &
+css_watch_pid=$!
+trap 'kill "$css_watch_pid"' EXIT INT TERM
+cargo watch -x run
+'''
+
+[tasks.container]
+description = "Build the production container image with Podman"
+run = "podman build --tag omfj.no ."

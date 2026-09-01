@@ -27,7 +27,7 @@ COPY src src
 
 RUN tailwindcss --input static/tailwind.input.css --output static/tailwind.css --minify
 
-FROM docker.io/library/rust:1.97-bookworm AS builder
+FROM docker.io/library/rust:1.98-bookworm AS builder
 
 WORKDIR /build
 

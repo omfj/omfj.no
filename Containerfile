@@ -56,6 +56,11 @@ apt-get install --yes --no-install-recommends ca-certificates
 rm -rf /var/lib/apt/lists/*
 EOF
 
+RUN groupadd --gid 10001 app && \
+    useradd --uid 10001 --gid app --create-home --shell /usr/sbin/nologin app && \
+    mkdir /data && \
+    chown app:app /data
+
 WORKDIR /app
 
 COPY --from=builder /tmp/omfj-no-rs /usr/local/bin/omfj-no-rs
@@ -63,6 +68,8 @@ COPY static static
 COPY --from=assets /build/static/tailwind.css static/tailwind.css
 
 ENV PORT=3000
+
+USER app
 
 EXPOSE 3000
 

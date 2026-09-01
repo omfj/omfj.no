@@ -1,7 +1,7 @@
-use std::{env, error::Error, fs, path::Path};
+use std::{collections::HashMap, env, error::Error, fmt::Write as _, fs, path::Path};
 
 use chrono::NaiveDate;
-use pulldown_cmark::{Options, Parser, html};
+use pulldown_cmark::{Event, Options, Parser, Tag, TagEnd, html};
 use quote::quote;
 use serde::Deserialize;
 
@@ -113,12 +113,11 @@ fn parse(slug: &str, source: &str) -> Result<Thought, String> {
         return Err("title cannot be empty".to_owned());
     }
 
-    let mut body_html = String::new();
     let options = Options::ENABLE_TABLES
         | Options::ENABLE_FOOTNOTES
         | Options::ENABLE_STRIKETHROUGH
         | Options::ENABLE_TASKLISTS;
-    html::push_html(&mut body_html, Parser::new_ext(markdown.trim(), options));
+    let body_html = render_markdown(markdown.trim(), options);
 
     Ok(Thought {
         slug: slug.to_owned(),
@@ -127,6 +126,86 @@ fn parse(slug: &str, source: &str) -> Result<Thought, String> {
         published_display: front_matter.published.format("%-d %B %Y").to_string(),
         body_html,
     })
+}
+
+fn render_markdown(markdown: &str, options: Options) -> String {
+    let mut footnotes = Vec::new();
+    let mut current_footnote = None;
+    let mut footnote_numbers: HashMap<String, (usize, usize)> = HashMap::new();
+
+    let main_content = Parser::new_ext(markdown, options).filter_map(|event| match event {
+        Event::Start(Tag::FootnoteDefinition(name)) => {
+            current_footnote = Some((name.to_string(), Vec::new()));
+            None
+        }
+        Event::End(TagEnd::FootnoteDefinition) => {
+            if let Some(footnote) = current_footnote.take() {
+                footnotes.push(footnote);
+            }
+            None
+        }
+        Event::FootnoteReference(name) => {
+            let next_number = footnote_numbers.len() + 1;
+            let (number, usage_count) = footnote_numbers
+                .entry(name.to_string())
+                .or_insert((next_number, 0));
+            *usage_count += 1;
+            let reference = Event::Html(
+                format!(
+                    r##"<sup class="footnote-reference" id="fnref-{number}-{usage_count}"><a href="#fn-{number}" aria-label="Footnote {number}">{number}</a></sup>"##
+                )
+                .into(),
+            );
+            if let Some((_, events)) = &mut current_footnote {
+                events.push(reference);
+                None
+            } else {
+                Some(reference)
+            }
+        }
+        event => {
+            if let Some((_, events)) = &mut current_footnote {
+                events.push(event);
+                None
+            } else {
+                Some(event)
+            }
+        }
+    });
+
+    let mut output = String::new();
+    html::push_html(&mut output, main_content);
+
+    footnotes.retain(|(name, _)| footnote_numbers.contains_key(name));
+    footnotes.sort_by_key(|(name, _)| footnote_numbers[name].0);
+    if footnotes.is_empty() {
+        return output;
+    }
+
+    output.push_str(
+        "<section class=\"footnotes\" aria-label=\"Footnotes\"><hr><ol class=\"footnotes-list\">\n",
+    );
+    for (name, events) in footnotes {
+        let (number, usage_count) = footnote_numbers[&name];
+        write!(&mut output, "<li id=\"fn-{number}\">").unwrap();
+        html::push_html(&mut output, events.into_iter());
+        output.push_str("<span class=\"footnote-backrefs\">");
+        for usage in 1..=usage_count {
+            let suffix = if usage == 1 {
+                String::new()
+            } else {
+                usage.to_string()
+            };
+            write!(
+                &mut output,
+                r##"<a class="footnote-backref" href="#fnref-{number}-{usage}" aria-label="Back to footnote {number} reference {usage}">↩{suffix}</a>"##
+            )
+            .unwrap();
+        }
+        output.push_str("</span></li>\n");
+    }
+    output.push_str("</ol></section>\n");
+    output
 }
 
 fn is_valid_slug(slug: &str) -> bool {

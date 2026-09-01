@@ -135,6 +135,91 @@ textarea {
   margin-top: 1rem;
 }
 
+.markdown .footnote-reference a,
+.markdown .footnote-backref {
+  color: var(--link);
+  text-decoration: none;
+}
+
+.markdown .footnote-reference a:visited,
+.markdown .footnote-backref:visited {
+  color: var(--link-visited);
+}
+
+.markdown .footnote-reference a {
+  padding: 0.1em;
+}
+
+.markdown .footnotes {
+  margin-top: 3rem;
+  color: var(--foreground-muted);
+  font-size: 0.75rem;
+  line-height: 1.55;
+}
+
+.markdown .footnotes a {
+  color: var(--link);
+}
+
+.markdown .footnotes a:visited {
+  color: var(--link-visited);
+}
+
+.markdown .footnotes hr {
+  width: 5rem;
+  margin: 0 0 1.25rem;
+  border: 0;
+  border-top: 2px solid var(--divide-soft);
+}
+
+.markdown .footnotes-list {
+  margin: 0;
+  padding-left: 1.75rem;
+  list-style: decimal;
+}
+
+.markdown .footnotes-list li::marker {
+  color: var(--foreground-muted);
+  font-weight: 700;
+}
+
+.markdown .footnotes-list li {
+  padding-left: 0.25rem;
+}
+
+.markdown .footnotes-list li + li {
+  margin-top: 0.75rem;
+}
+
+.markdown .footnotes-list p {
+  display: inline;
+}
+
+.markdown .footnote-backrefs {
+  display: inline-flex;
+  gap: 0.25rem;
+  margin-left: 0.25rem;
+  white-space: nowrap;
+}
+
+.markdown .footnote-reference a:hover,
+.markdown .footnote-reference a:focus-visible,
+.markdown .footnote-backref:hover,
+.markdown .footnote-backref:focus-visible {
+  color: var(--link);
+}
+
+.markdown .footnote-reference a:visited:hover,
+.markdown .footnote-reference a:visited:focus-visible,
+.markdown .footnote-backref:visited:hover,
+.markdown .footnote-backref:visited:focus-visible {
+  color: var(--link-visited);
+}
+
+.markdown :target {
+  scroll-margin-top: 2rem;
+}
+
 .htmx-request .loading-label {
   display: inline;
 }

@@ -6,6 +6,14 @@ djlint := "uvx --from djlint==1.44.2 djlint"
 default:
     @just --list
 
+# Generate the locally served Tailwind CSS asset.
+css-build:
+    tailwindcss --input static/tailwind.input.css --output static/tailwind.css --minify
+
+# Rebuild Tailwind CSS whenever its source or templates change.
+css-watch:
+    tailwindcss --input static/tailwind.input.css --output static/tailwind.css --watch
+
 # Format Rust source files.
 rust-fmt:
     cargo fmt

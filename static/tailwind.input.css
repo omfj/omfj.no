@@ -1,0 +1,12 @@
+@import "tailwindcss" source(none);
+
+@source "../templates";
+@source "../src";
+
+@theme inline {
+    --color-foreground: var(--foreground);
+    --color-muted: var(--foreground-muted);
+    --color-divide-soft: var(--divide-soft);
+    --color-link: var(--link);
+    --font-mono: "IBM Plex Mono", monospace;
+}

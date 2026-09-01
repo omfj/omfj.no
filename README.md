@@ -2,6 +2,18 @@
 
 A website using Axum, Askama HTML templates, HTMX, SQLite, and SQLx.
 
+## Prerequisites
+
+- A current [Rust toolchain](https://rustup.rs/)
+- [just](https://github.com/casey/just) (to run project tasks)
+- Tailwind CSS v4.1.17 as a [standalone executable](https://tailwindcss.com/docs/installation/tailwind-cli)
+
+Install the Tailwind executable and make it available as `tailwindcss`. Then build the stylesheet:
+
+```sh
+just css-build
+```
+
 ## Run locally
 
 Copy `.env.example` to `.env` to configure local development. Environment variables already set by the shell take precedence over values in `.env`.
@@ -11,6 +23,15 @@ cargo run
 ```
 
 Open <http://127.0.0.1:3000>.
+
+After changing Tailwind classes or [`static/tailwind.input.css`](static/tailwind.input.css),
+rebuild the locally generated stylesheet with:
+
+```sh
+just css-build
+```
+
+For automatic rebuilds while working on styles, run `just css-watch` in a separate terminal.
 
 Optional settings:
 
@@ -37,3 +58,6 @@ SECURE_COOKIES=false
 ## Production
 
 Use `SECURE_COOKIES=true` in HTTPS production.
+
+The Containerfile rebuilds the Tailwind stylesheet from its pinned dependencies during every image
+build, so container deployments do not rely on a locally generated asset.

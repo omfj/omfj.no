@@ -38,24 +38,8 @@
       })();
     </script>
 
-    <!-- Load Tailwind CSS from CDN. We don't care to build it ourselves for now as this is a
-      personal website and we want to limit the things we do during build. -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              foreground: 'var(--foreground)',
-              muted: 'var(--foreground-muted)',
-              divide: 'var(--divide-soft)',
-              link: 'var(--link)'
-            },
-            fontFamily: { mono: ['IBM Plex Mono', 'monospace'] }
-          }
-        }
-      };
-    </script>
+    <!-- Tailwind 4 is compiled locally and served as a static stylesheet. -->
+    <link rel="stylesheet" href="/static/tailwind.css">
     <!-- Vendored htmx 4.0.0, served by this application. -->
     <script src="/static/vendor/htmx-4.0.0.min.js" defer></script>
 

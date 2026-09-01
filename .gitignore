@@ -1,4 +1,6 @@
 /target
+node_modules/
+static/tailwind.css
 *.db
 *.db-shm
 *.db-wal

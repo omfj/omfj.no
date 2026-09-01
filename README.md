@@ -23,17 +23,9 @@ mise run dev
 
 Open <http://127.0.0.1:3000>.
 
-After changing Tailwind classes or [`static/tailwind.input.css`](static/tailwind.input.css),
-rebuild the locally generated stylesheet with:
-
-```sh
-mise run css
-```
-
 `mise run dev` watches both the Rust source and Tailwind inputs. Other project commands are
 available through `mise tasks`; the main ones are `mise run format`, `mise run lint`,
-`mise run test`, and `mise run check`. mise installs djLint directly, so no separate Python or uv
-setup is needed.
+`mise run test`, and `mise run check`.
 
 Optional settings:
 

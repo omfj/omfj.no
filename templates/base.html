@@ -35,12 +35,12 @@
           ? saved
           : (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
         document.documentElement.dataset.theme = theme;
+        document.querySelector('meta[name="theme-color"]').content =
+          theme === "dark" ? "#0a0a0a" : "#ffffff";
       })();
     </script>
 
-    <!-- Tailwind 4 is compiled locally and served as a static stylesheet. -->
     <link rel="stylesheet" href="/static/tailwind.css">
-    <!-- Vendored htmx 4.0.0, served by this application. -->
     <script src="/static/vendor/htmx-4.0.0.min.js" defer></script>
 
     <link rel="stylesheet" href="/static/styles.css">
@@ -86,6 +86,8 @@
       function toggleTheme() {
         const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
         document.documentElement.dataset.theme = next;
+        document.querySelector('meta[name="theme-color"]').content =
+          next === 'dark' ? '#0a0a0a' : '#ffffff';
         localStorage.setItem('theme', next);
       }
     </script>

@@ -13,7 +13,7 @@
               hx-post="/onskeliste"
               hx-target="#wish-list"
               hx-swap="afterbegin"
-              hx-on::after-request="if(ctx.response.status < 400) this.reset()"
+              hx-on:htmx:after:request="this.reset()"
               method="post">
           <label class="flex items-baseline gap-2">
             <span class="w-24 shrink-0">Tittel:</span>

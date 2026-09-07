@@ -1,11 +1,19 @@
 use std::sync::Arc;
 
 use askama::Template;
-use axum::{Router, extract::Path, response::Html, routing::get};
+use axum::{
+    Router,
+    extract::Path,
+    response::{Html, Response},
+    routing::get,
+};
 use axum_extra::extract::cookie::CookieJar;
+use chrono::NaiveDate;
 
 use crate::web::{
-    AppError, AppState, SharedState, render_html,
+    AppError, AppState, SharedState,
+    feed::{self, Channel, Item},
+    render_html,
     session::is_signed_in,
     thoughts::{self as thought_files, ThoughtArticle, ThoughtSummary},
 };
@@ -14,7 +22,38 @@ use crate::web::{
 pub(crate) fn router() -> Router<Arc<AppState>> {
     Router::new()
         .route("/thoughts", get(thoughts))
+        .route("/thoughts/feed", get(feed))
         .route("/thoughts/{slug}", get(thought))
+}
+
+async fn feed(state: SharedState) -> Response {
+    let items = thought_files::all()
+        .iter()
+        .map(|thought| {
+            let article = thought_files::get(thought.slug)
+                .expect("every thought summary has a corresponding article");
+            let published = NaiveDate::parse_from_str(thought.published_iso, "%Y-%m-%d")
+                .expect("validated at build time")
+                .and_hms_opt(0, 0, 0)
+                .expect("midnight is a valid time")
+                .and_utc()
+                .to_rfc2822();
+
+            Item {
+                title: thought.title.into(),
+                link: format!("{}/thoughts/{}", state.site_url, thought.slug),
+                published: Some(published),
+                description: Some(article.body_html.into()),
+            }
+        })
+        .collect();
+
+    feed::response(Channel {
+        title: "omfj.no thoughts",
+        link: format!("{}/thoughts", state.site_url),
+        description: "Things I have been thinking about",
+        items,
+    })
 }
 
 #[derive(Template)]

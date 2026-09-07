@@ -1,4 +1,5 @@
 mod error;
+mod feed;
 mod routes;
 mod session;
 mod thoughts;
@@ -24,6 +25,7 @@ pub(crate) use error::AppError;
 #[derive(Clone)]
 pub struct AppState {
     pub auth: AuthService,
+    pub site_url: String,
     pub films: FilmRepository,
     pub links: LinkRepository,
     pub wishes: WishRepository,

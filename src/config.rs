@@ -4,11 +4,16 @@ use std::env;
 
 const DEFAULT_PORT: u16 = 3000;
 const DEFAULT_DATABASE_URL: &str = "sqlite::memory:";
+#[cfg(debug_assertions)]
+const DEFAULT_SITE_URL: &str = "http://127.0.0.1:3000";
+#[cfg(not(debug_assertions))]
+const DEFAULT_SITE_URL: &str = "https://omfj.no";
 
 // Environment variable names for configuration parameters.
 // To prevent typos and reuse in the future.
 
 const ENV_DATABASE_URL: &str = "DATABASE_URL";
+const ENV_SITE_URL: &str = "SITE_URL";
 const ENV_PORT: &str = "PORT";
 const ENV_GITHUB_CLIENT_ID: &str = "GITHUB_CLIENT_ID";
 const ENV_GITHUB_CLIENT_SECRET: &str = "GITHUB_CLIENT_SECRET";
@@ -22,6 +27,9 @@ pub struct Config {
     ///
     /// If not provided it defaults to an in-memory SQLite database.
     pub database_url: String,
+
+    /// The public origin used for absolute URLs.
+    pub site_url: String,
 
     /// The port on which the application will listen for incoming HTTP requests.
     ///
@@ -63,6 +71,10 @@ impl Config {
 
         Self {
             database_url: env::var(ENV_DATABASE_URL).unwrap_or(DEFAULT_DATABASE_URL.to_string()),
+            site_url: env::var(ENV_SITE_URL)
+                .unwrap_or(DEFAULT_SITE_URL.to_string())
+                .trim_end_matches('/')
+                .to_owned(),
             port: env::var(ENV_PORT)
                 .ok()
                 .and_then(|value| value.parse().ok())

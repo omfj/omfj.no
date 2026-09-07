@@ -32,6 +32,7 @@ Optional settings:
 ```sh
 DATABASE_URL=sqlite://omfj.db
 PORT=3000
+SITE_URL=http://127.0.0.1:3000
 RUST_LOG=omfj_no=debug,tower_http=debug
 ```
 

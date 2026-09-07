@@ -26,6 +26,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let state = AppState {
         auth,
+        site_url: config.site_url,
         films: FilmRepository::new(pool.clone()),
         links: LinkRepository::new(pool.clone()),
         wishes: WishRepository::new(pool),

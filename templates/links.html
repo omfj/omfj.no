@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block title %}Links{% endblock %}
+{% block feeds %}<link rel="alternate" type="application/rss+xml" title="omfj.no links" href="/links/feed">{% endblock %}
 {% block content %}
   <main>
     <h1 class="heading-1">Links</h1>
@@ -43,5 +44,6 @@
         {% include "partials/link.html" %}
       {% endfor %}
     </ul>
+    <p class="pt-4 text-center text-[10px]"><a class="link link-muted" href="/links/feed">RSS</a></p>
   </main>
 {% endblock %}

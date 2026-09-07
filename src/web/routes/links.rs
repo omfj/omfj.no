@@ -14,7 +14,9 @@ use url::Url;
 
 use crate::repository::RecommendedLink;
 use crate::web::{
-    AppError, AppState, SharedState, mutation_response, render_html,
+    AppError, AppState, SharedState,
+    feed::{self, Channel, Item},
+    mutation_response, render_html,
     session::{RequireAuth, is_signed_in},
 };
 
@@ -22,6 +24,7 @@ use crate::web::{
 pub(crate) fn router() -> Router<Arc<AppState>> {
     Router::new()
         .route("/links", get(links).post(create_link))
+        .route("/links/feed", get(feed))
         .route("/links/{id}", delete(delete_link))
 }
 
@@ -53,6 +56,27 @@ async fn links(state: SharedState, jar: CookieJar) -> Result<Html<String>, AppEr
         signed_in: is_signed_in(&state, &jar).await?,
         links,
     })
+}
+
+async fn feed(state: SharedState) -> Result<Response, AppError> {
+    let items = state
+        .links
+        .list()
+        .await?
+        .into_iter()
+        .map(|link| Item {
+            title: link.title,
+            link: link.url,
+            ..Default::default()
+        })
+        .collect();
+
+    Ok(feed::response(Channel {
+        title: "omfj.no links",
+        link: format!("{}/links", state.site_url),
+        description: "Some recommended links from me",
+        items,
+    }))
 }
 
 /// Validates and adds a recommended link for an authenticated visitor.

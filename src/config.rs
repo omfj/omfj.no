@@ -69,6 +69,11 @@ impl Config {
     pub fn load() -> Self {
         dotenvy::dotenv().ok();
 
+        let database_url = env::var(ENV_DATABASE_URL).unwrap_or(DEFAULT_DATABASE_URL.to_string());
+        if database_url == DEFAULT_DATABASE_URL {
+            tracing::warn!("⚠️ Using in-memory database")
+        }
+
         Self {
             database_url: env::var(ENV_DATABASE_URL).unwrap_or(DEFAULT_DATABASE_URL.to_string()),
             site_url: env::var(ENV_SITE_URL)

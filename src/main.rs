@@ -4,7 +4,7 @@ mod db;
 mod repository;
 mod web;
 
-use std::net::SocketAddr;
+use std::net::{Ipv4Addr, SocketAddr};
 
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
@@ -33,7 +33,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     };
     let app = web::router(state);
 
-    let address = SocketAddr::from(([0, 0, 0, 0], config.port));
+    let address = SocketAddr::from((Ipv4Addr::UNSPECIFIED, config.port));
     let listener = tokio::net::TcpListener::bind(address).await?;
 
     tracing::info!(%address, "listening");

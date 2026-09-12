@@ -1,4 +1,11 @@
-use std::{collections::HashMap, env, error::Error, fmt::Write as _, fs, path::Path};
+use std::{
+    collections::HashMap,
+    env,
+    error::Error,
+    fmt::Write as _,
+    fs::{self, DirEntry},
+    path::Path,
+};
 
 use chrono::NaiveDate;
 use pulldown_cmark::{Event, Options, Parser, Tag, TagEnd, html};
@@ -14,6 +21,7 @@ struct FrontMatter {
     published: NaiveDate,
 }
 
+#[derive(Debug, Clone)]
 struct Thought {
     slug: String,
     title: String,
@@ -22,12 +30,23 @@ struct Thought {
     body_html: String,
 }
 
+fn is_markdown(entry: &DirEntry) -> bool {
+    entry.path().extension().is_some_and(|ext| ext == "md")
+}
+
+fn is_template(entry: &DirEntry) -> bool {
+    entry
+        .file_name()
+        .to_str()
+        .is_some_and(|name| name.starts_with(".template"))
+}
+
 fn main() -> Result<(), Box<dyn Error>> {
     println!("cargo::rerun-if-changed={THOUGHTS_DIRECTORY}");
 
     let mut thoughts = fs::read_dir(THOUGHTS_DIRECTORY)?
         .filter_map(|entry| match entry {
-            Ok(entry) if entry.path().extension().is_some_and(|value| value == "md") => {
+            Ok(entry) if is_markdown(&entry) && !is_template(&entry) => {
                 Some(parse_file(&entry.path()))
             }
             Ok(_) => None,

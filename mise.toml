@@ -40,7 +40,8 @@ cargo test --all-features
 [tasks.dev]
 description = "Start the app and rebuild CSS on changes"
 run = '''
-tailwindcss --input static/tailwind.input.css --output static/tailwind.css --watch &
+tailwindcss --input static/tailwind.input.css --output static/tailwind.css || exit $?
+tailwindcss --input static/tailwind.input.css --output static/tailwind.css --watch=always &
 css_watch_pid=$!
 trap 'kill "$css_watch_pid"' EXIT INT TERM
 cargo watch -x run

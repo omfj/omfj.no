@@ -4,6 +4,8 @@ use axum::{
     response::{Html, IntoResponse, Response},
 };
 
+use crate::auth;
+
 #[derive(Debug, thiserror::Error)]
 pub(crate) enum AppError {
     #[error("not found")]
@@ -25,7 +27,7 @@ pub(crate) enum AppError {
     #[error(transparent)]
     Http(#[from] reqwest::Error),
     #[error(transparent)]
-    OAuth(#[from] crate::auth::OAuthError),
+    OAuth(#[from] auth::OAuthError),
 }
 
 #[derive(Template)]

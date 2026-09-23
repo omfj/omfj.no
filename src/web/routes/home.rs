@@ -1,14 +1,23 @@
 use std::sync::Arc;
 
 use askama::Template;
-use axum::{Router, routing::get};
+use axum::{Router, http::header, routing::get};
 use axum_extra::extract::cookie::CookieJar;
 
 use crate::web::{AppError, AppState, SharedState, render_html, session::is_signed_in};
 
 /// Registers the home page route.
 pub(crate) fn router() -> Router<Arc<AppState>> {
-    Router::new().route("/", get(home))
+    Router::new()
+        .route("/", get(home))
+        .route("/static/omfj.asc", get(gpg_key))
+}
+
+async fn gpg_key() -> ([(header::HeaderName, &'static str); 1], &'static str) {
+    (
+        [(header::CONTENT_TYPE, "text/plain; charset=utf-8")],
+        include_str!("../../../static/omfj.asc"),
+    )
 }
 
 #[derive(Template)]

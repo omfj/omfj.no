@@ -37,6 +37,7 @@ COPY migrations migrations
 COPY templates templates
 COPY thoughts thoughts
 COPY src src
+COPY static static
 
 ENV SQLX_OFFLINE=true
 

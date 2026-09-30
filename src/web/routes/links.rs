@@ -1,22 +1,22 @@
 use std::sync::Arc;
 
-use askama::Template;
 use axum::{
     Router,
     extract::{Form, Path},
     http::{HeaderMap, StatusCode},
-    response::{Html, Response},
+    response::Response,
     routing::{delete, get},
 };
 use axum_extra::extract::cookie::CookieJar;
+use maud::{Markup, html};
 use serde::Deserialize;
 use url::Url;
 
 use crate::repository::RecommendedLink;
 use crate::web::{
-    AppError, AppState, SharedState,
+    AppError, AppState, Layout, SharedState,
     feed::{self, Channel, Item},
-    mutation_response, render_html,
+    mutation_response,
     session::{RequireAuth, is_signed_in},
 };
 
@@ -28,20 +28,6 @@ pub(crate) fn router() -> Router<Arc<AppState>> {
         .route("/links/{id}", delete(delete_link))
 }
 
-#[derive(Template)]
-#[template(path = "links.html")]
-struct LinksTemplate {
-    signed_in: bool,
-    links: Vec<RecommendedLink>,
-}
-
-#[derive(Template)]
-#[template(path = "partials/link.html")]
-struct LinkPartial<'a> {
-    link: &'a RecommendedLink,
-    signed_in: bool,
-}
-
 #[derive(Deserialize)]
 struct LinkForm {
     title: String,
@@ -49,13 +35,86 @@ struct LinkForm {
 }
 
 /// Loads and renders the ordered collection of recommended links.
-async fn links(state: SharedState, jar: CookieJar) -> Result<Html<String>, AppError> {
+async fn links(state: SharedState, jar: CookieJar) -> Result<Markup, AppError> {
     let links = state.links.list().await?;
+    let signed_in = is_signed_in(&state, &jar).await?;
 
-    render_html(LinksTemplate {
-        signed_in: is_signed_in(&state, &jar).await?,
-        links,
-    })
+    Ok(Layout::new("Links", signed_in)
+        .feed("omfj.no links", "/links/feed")
+        .render(html! {
+            main {
+                h1 class="heading-1" { "Links" }
+                br;
+                p class="max-w-lg" {
+                    "Articles and reads I recommend. Most of them are related to software development and "
+                    "programming, and come from Hacker News."
+                }
+                br;
+                @if signed_in {
+                    details class="mb-4" {
+                        summary class="text-foreground-muted cursor-pointer hover:underline" { "Add a link" }
+                        form class="mt-2 flex max-w-md flex-col gap-2"
+                            hx-post="/links"
+                            hx-target="#link-list"
+                            hx-swap="afterbegin"
+                            "hx-on:htmx:after:request"="this.reset()"
+                            method="post"
+                        {
+                            label class="flex items-baseline gap-2" {
+                                span class="shrink-0" { "Title:" }
+                                input class=(INPUT_CLASS) name="title" required;
+                            }
+                            label class="flex items-baseline gap-2" {
+                                span class="shrink-0" { "URL:" }
+                                input class=(INPUT_CLASS) name="url" type="url" required;
+                            }
+                            button class="text-foreground-muted mr-auto hover:underline" type="submit" {
+                                span class="idle-label" { "Add link" }
+                                span class="loading-label" { "Saving..." }
+                            }
+                        }
+                    }
+                }
+                ul #link-list class="space-y-2" {
+                    @for link in &links {
+                        (link_item(link, signed_in))
+                    }
+                }
+                p class="pt-4 text-center text-[10px]" {
+                    a class="link link-muted" href="/links/feed" { "RSS" }
+                }
+            }
+        }))
+}
+
+const INPUT_CLASS: &str =
+    "border-divide-soft w-full border-b bg-transparent outline-none focus:border-link";
+
+/// Renders one link row, shared by the page and the HTMX create response.
+fn link_item(link: &RecommendedLink, signed_in: bool) -> Markup {
+    html! {
+        li class="flex items-center gap-2" {
+            div class="min-w-0 flex-1 truncate" {
+                "- "
+                a href=(link.url)
+                    target="_blank"
+                    rel="noopener noreferrer external"
+                    class="link"
+                    title=(link.title)
+                { (link.title) }
+                " "
+                span class="text-foreground-muted text-sm" { "(" (link.hostname) ")" }
+            }
+            @if signed_in {
+                button class="ml-auto shrink-0 text-foreground-muted hover:text-red-400"
+                    aria-label={ "Delete " (link.title) }
+                    hx-delete={ "/links/" (link.id) }
+                    hx-target="closest li"
+                    hx-swap="outerHTML"
+                { "[x]" }
+            }
+        }
+    }
 }
 
 async fn feed(state: SharedState) -> Result<Response, AppError> {
@@ -98,14 +157,11 @@ async fn create_link(
     let url = parsed.as_str();
 
     let link = state.links.create(title, url).await?;
-    mutation_response(
+    Ok(mutation_response(
         &headers,
-        LinkPartial {
-            link: &link,
-            signed_in: true,
-        },
+        link_item(&link, true),
         "/links",
-    )
+    ))
 }
 
 /// Deletes a recommended link by its database identifier for an authenticated visitor.

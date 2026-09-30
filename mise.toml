@@ -3,25 +3,18 @@ rust = "1.98.0"
 node = "24.20.0"
 "npm:@tailwindcss/cli" = "4.1.17"
 "cargo:cargo-watch" = "8.5.3"
-"pipx:djlint" = "1.44.2"
 
 [tasks.css]
 description = "Build the Tailwind stylesheet"
 run = "tailwindcss --input static/tailwind.input.css --output static/tailwind.css --minify"
 
 [tasks.format]
-description = "Format Rust and Askama templates"
-run = '''
-cargo fmt
-djlint templates --reformat
-'''
+description = "Format Rust code"
+run = "cargo fmt"
 
 [tasks.lint]
-description = "Lint Rust and Askama templates"
-run = '''
-cargo clippy --all-targets --all-features -- -D warnings
-djlint templates --lint
-'''
+description = "Lint Rust code"
+run = "cargo clippy --all-targets --all-features -- -D warnings"
 
 [tasks.test]
 description = "Run the test suite"
@@ -31,7 +24,6 @@ run = "cargo test --all-features"
 description = "Run all CI checks"
 run = '''
 cargo fmt --check
-djlint templates --check
 cargo clippy --all-targets --all-features -- -D warnings
 cargo check --all-targets --all-features
 cargo test --all-features

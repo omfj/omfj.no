@@ -1,10 +1,10 @@
-use askama::Template;
 use axum::{
     http::StatusCode,
-    response::{Html, IntoResponse, Response},
+    response::{IntoResponse, Response},
 };
+use maud::{Markup, html};
 
-use crate::auth;
+use crate::{auth, web::Layout};
 
 #[derive(Debug, thiserror::Error)]
 pub(crate) enum AppError {
@@ -23,20 +23,27 @@ pub(crate) enum AppError {
     #[error(transparent)]
     Database(#[from] sqlx::Error),
     #[error(transparent)]
-    Template(#[from] askama::Error),
-    #[error(transparent)]
     Http(#[from] reqwest::Error),
     #[error(transparent)]
     OAuth(#[from] auth::OAuthError),
 }
 
-#[derive(Template)]
-#[template(path = "error.html")]
-struct ErrorTemplate<'a> {
-    signed_in: bool,
-    status: u16,
-    title: &'a str,
-    message: &'a str,
+/// Renders the shared error page. Errors are rendered without a session lookup,
+/// so the header always shows the signed-out state.
+fn error_page(status: StatusCode, title: &str, message: &str) -> Markup {
+    let status = status.as_u16();
+    Layout::new(&format!("{status} — {title}"), false).render(html! {
+        main class="flex min-h-[55vh] items-center" {
+            section class="w-full pl-5" aria-labelledby="error-title" {
+                p class="text-foreground-muted text-sm" { "status " (status) }
+                h1 #error-title class="mt-2 text-xl" { (title) }
+                p class="mt-3 max-w-md text-foreground-muted" { (message) }
+                div class="mt-6 flex flex-wrap gap-4" {
+                    a href="/" class="link" { "<- Home" }
+                }
+            }
+        }
+    })
 }
 
 impl AppError {
@@ -73,7 +80,7 @@ impl AppError {
                 "That request did not work",
                 (*message).into(),
             ),
-            Self::Database(_) | Self::Template(_) | Self::Http(_) | Self::OAuth(_) => {
+            Self::Database(_) | Self::Http(_) | Self::OAuth(_) => {
                 tracing::error!(error = ?self, "request failed");
                 (
                     StatusCode::INTERNAL_SERVER_ERROR,
@@ -89,19 +96,6 @@ impl IntoResponse for AppError {
     /// Renders the shared error page while keeping internal failure details out of the response.
     fn into_response(self) -> Response {
         let (status, title, message) = self.content();
-        let template = ErrorTemplate {
-            signed_in: false,
-            status: status.as_u16(),
-            title,
-            message: &message,
-        };
-
-        match template.render() {
-            Ok(body) => (status, Html(body)).into_response(),
-            Err(error) => {
-                tracing::error!(?error, "failed to render error page");
-                (status, title).into_response()
-            }
-        }
+        (status, error_page(status, title, &message)).into_response()
     }
 }

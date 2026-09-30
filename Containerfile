@@ -22,7 +22,6 @@ EOF
 WORKDIR /build
 
 COPY static/tailwind.input.css static/tailwind.input.css
-COPY templates templates
 COPY src src
 
 RUN tailwindcss --input static/tailwind.input.css --output static/tailwind.css --minify
@@ -34,7 +33,6 @@ WORKDIR /build
 COPY Cargo.toml Cargo.lock build.rs ./
 COPY .sqlx .sqlx
 COPY migrations migrations
-COPY templates templates
 COPY thoughts thoughts
 COPY src src
 COPY static static

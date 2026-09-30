@@ -1,18 +1,19 @@
 mod error;
 mod feed;
+mod layout;
 mod routes;
 mod session;
 mod thoughts;
 
 use std::sync::Arc;
 
-use askama::Template;
 use axum::{
     Router,
     extract::State,
     http::HeaderMap,
-    response::{Html, IntoResponse, Redirect, Response},
+    response::{IntoResponse, Redirect, Response},
 };
+use maud::Markup;
 use tower_http::{services::ServeDir, trace::TraceLayer};
 
 use crate::{
@@ -22,6 +23,7 @@ use crate::{
 };
 
 pub(crate) use error::AppError;
+pub(crate) use layout::Layout;
 
 #[derive(Clone)]
 pub struct AppState {
@@ -72,20 +74,14 @@ pub(crate) fn is_htmx(headers: &HeaderMap) -> bool {
 }
 
 /// Returns an HTML fragment to HTMX clients and a redirect to regular form clients.
-pub(crate) fn mutation_response<T: Template>(
+pub(crate) fn mutation_response(
     headers: &HeaderMap,
-    template: T,
+    fragment: Markup,
     fallback: &'static str,
-) -> Result<Response, AppError> {
+) -> Response {
     if is_htmx(headers) {
-        Ok(Html(template.render()?).into_response())
+        fragment.into_response()
     } else {
-        Ok(Redirect::to(fallback).into_response())
+        Redirect::to(fallback).into_response()
     }
-}
-
-/// Renders a template and returns an `Html<String>` response. If the template
-/// rendering fails, it returns an `AppError`.
-pub(crate) fn render_html(template: impl Template) -> Result<Html<String>, AppError> {
-    Ok(Html(template.render()?))
 }

@@ -1,10 +1,10 @@
 use std::sync::Arc;
 
-use askama::Template;
-use axum::{Router, response::Html, routing::get};
+use axum::{Router, routing::get};
 use axum_extra::extract::cookie::CookieJar;
+use maud::{Markup, html};
 
-use crate::web::{AppError, AppState, SharedState, render_html, session::is_signed_in};
+use crate::web::{AppError, AppState, Layout, SharedState, session::is_signed_in};
 
 struct Habit {
     id: &'static str,
@@ -63,17 +63,28 @@ pub(crate) fn router() -> Router<Arc<AppState>> {
     Router::new().route("/habits", get(habits))
 }
 
-#[derive(Template)]
-#[template(path = "habits.html")]
-struct HabitsTemplate {
-    signed_in: bool,
-    habits: &'static [Habit],
-}
-
 /// Renders the habit tracker whose checked state is managed entirely in the browser.
-async fn habits(state: SharedState, jar: CookieJar) -> Result<Html<String>, AppError> {
-    render_html(HabitsTemplate {
-        signed_in: is_signed_in(&state, &jar).await?,
-        habits: HABITS,
-    })
+async fn habits(state: SharedState, jar: CookieJar) -> Result<Markup, AppError> {
+    let signed_in = is_signed_in(&state, &jar).await?;
+
+    Ok(Layout::new("Daily Habits", signed_in).render(html! {
+        main {
+            h1 class="heading-1" { "Daily Habits" }
+            br;
+            p { "A tracker for my daily habits." }
+            br;
+            ul #habits {
+                @for habit in HABITS {
+                    li {
+                        button type="button" data-habit=(habit.id) {
+                            span aria-hidden="true" { "[ ]" }
+                            " "
+                            (habit.title)
+                        }
+                    }
+                }
+            }
+        }
+        script src="/static/js/habits.js" defer {}
+    }))
 }

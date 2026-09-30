@@ -1,6 +1,6 @@
 # omfj.no
 
-A website using Axum, Askama HTML templates, HTMX, SQLite, and SQLx.
+A website using Axum, Maud HTML templates, HTMX, SQLite, and SQLx.
 
 ## Prerequisites
 

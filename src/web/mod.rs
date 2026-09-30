@@ -17,6 +17,7 @@ use tower_http::{services::ServeDir, trace::TraceLayer};
 
 use crate::{
     auth::AuthService,
+    config::Config,
     repository::{FilmRepository, LinkRepository, WishRepository},
 };
 
@@ -29,6 +30,19 @@ pub struct AppState {
     pub films: FilmRepository,
     pub links: LinkRepository,
     pub wishes: WishRepository,
+}
+
+impl AppState {
+    pub async fn from_config(config: &Config) -> anyhow::Result<Self> {
+        let pool = crate::db::connect(config).await?;
+        Ok(Self {
+            site_url: config.site_url.to_owned(),
+            auth: AuthService::new(config, pool.clone())?,
+            films: FilmRepository::new(pool.clone()),
+            links: LinkRepository::new(pool.clone()),
+            wishes: WishRepository::new(pool),
+        })
+    }
 }
 
 pub(crate) type SharedState = State<Arc<AppState>>;

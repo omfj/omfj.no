@@ -8,37 +8,23 @@ use std::net::{Ipv4Addr, SocketAddr};
 
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
-use crate::{
-    auth::AuthService,
-    config::Config,
-    repository::{FilmRepository, LinkRepository, WishRepository},
-    web::AppState,
-};
+use crate::{config::Config, web::AppState};
 
 #[tokio::main]
-async fn main() -> Result<(), Box<dyn std::error::Error>> {
+async fn main() -> anyhow::Result<()> {
     setup_tracing();
 
     let config = Config::load();
-
-    let pool = db::connect(&config).await?;
-    let auth = AuthService::new(&config, pool.clone())?;
-
-    let state = AppState {
-        auth,
-        site_url: config.site_url,
-        films: FilmRepository::new(pool.clone()),
-        links: LinkRepository::new(pool.clone()),
-        wishes: WishRepository::new(pool),
-    };
+    let state = AppState::from_config(&config).await?;
     let app = web::router(state);
 
     let address = SocketAddr::from((Ipv4Addr::UNSPECIFIED, config.port));
-    let listener = tokio::net::TcpListener::bind(address).await?;
 
     tracing::info!(%address, "listening");
     tracing::info!("Press Ctrl+C to stop the server");
     tracing::info!("Open in your browser: http://localhost:{}", config.port);
+
+    let listener = tokio::net::TcpListener::bind(address).await?;
     axum::serve(listener, app)
         .with_graceful_shutdown(shutdown_signal())
         .await?;

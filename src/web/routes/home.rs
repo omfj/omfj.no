@@ -1,8 +1,10 @@
 use std::sync::Arc;
 
+use axum::response::IntoResponse;
 use axum::{Router, http::header, routing::get};
 use axum_extra::extract::cookie::CookieJar;
 use maud::{Markup, html};
+use tower_http::services::ServeFile;
 
 use crate::web::{AppError, AppState, Layout, SharedState, session::is_signed_in};
 
@@ -10,10 +12,11 @@ use crate::web::{AppError, AppState, Layout, SharedState, session::is_signed_in}
 pub(crate) fn router() -> Router<Arc<AppState>> {
     Router::new()
         .route("/", get(home))
+        .route_service("/dog.png", ServeFile::new("static/dog.png"))
         .route("/static/omfj.asc", get(gpg_key))
 }
 
-async fn gpg_key() -> ([(header::HeaderName, &'static str); 1], &'static str) {
+async fn gpg_key() -> impl IntoResponse {
     (
         [(header::CONTENT_TYPE, "text/plain; charset=utf-8")],
         include_str!("../../../static/omfj.asc"),

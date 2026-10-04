@@ -5,3 +5,4 @@ static/tailwind.css
 *.db-shm
 *.db-wal
 .env
+.DS_Store

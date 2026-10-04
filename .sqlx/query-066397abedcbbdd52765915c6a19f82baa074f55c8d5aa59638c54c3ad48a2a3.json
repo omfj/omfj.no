@@ -1,0 +1,62 @@
+{
+  "db_name": "SQLite",
+  "query": "INSERT INTO films (id, title, rating, created_at) VALUES (?, ?, ?, unixepoch()) ON CONFLICT(id) DO UPDATE SET title = excluded.title, rating = excluded.rating RETURNING id AS `id!`, title, rating, created_at AS `created_at: DateTime<Utc>`",
+  "describe": {
+    "columns": [
+      {
+        "name": "id!",
+        "ordinal": 0,
+        "type_info": "Text",
+        "origin": {
+          "Table": {
+            "table": "films",
+            "name": "id"
+          }
+        }
+      },
+      {
+        "name": "title",
+        "ordinal": 1,
+        "type_info": "Text",
+        "origin": {
+          "Table": {
+            "table": "films",
+            "name": "title"
+          }
+        }
+      },
+      {
+        "name": "rating",
+        "ordinal": 2,
+        "type_info": "Integer",
+        "origin": {
+          "Table": {
+            "table": "films",
+            "name": "rating"
+          }
+        }
+      },
+      {
+        "name": "created_at: DateTime<Utc>",
+        "ordinal": 3,
+        "type_info": "Integer",
+        "origin": {
+          "Table": {
+            "table": "films",
+            "name": "created_at"
+          }
+        }
+      }
+    ],
+    "parameters": {
+      "Right": 3
+    },
+    "nullable": [
+      true,
+      false,
+      false,
+      true
+    ]
+  },
+  "hash": "066397abedcbbdd52765915c6a19f82baa074f55c8d5aa59638c54c3ad48a2a3"
+}

@@ -144,13 +144,7 @@ async fn create_film(
     let film_id = form.id.trim();
     let title = form.title.trim();
 
-    state.films.save(film_id, title, form.rating).await?;
-
-    let film = Film {
-        id: film_id.into(),
-        title: title.into(),
-        rating: form.rating,
-    };
+    let film = state.films.save(film_id, title, form.rating).await?;
     Ok(mutation_response(&headers, film_row(&film, true), "/omdb"))
 }
 

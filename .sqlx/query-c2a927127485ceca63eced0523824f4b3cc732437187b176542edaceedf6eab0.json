@@ -1,6 +1,6 @@
 {
   "db_name": "SQLite",
-  "query": "SELECT id AS `id!`, title, rating FROM films ORDER BY rowid",
+  "query": "SELECT id AS `id!`, title, rating, created_at AS `created_at: DateTime<Utc>` FROM films ORDER BY created_at DESC NULLS LAST, rowid DESC",
   "describe": {
     "columns": [
       {
@@ -35,6 +35,17 @@
             "name": "rating"
           }
         }
+      },
+      {
+        "name": "created_at: DateTime<Utc>",
+        "ordinal": 3,
+        "type_info": "Integer",
+        "origin": {
+          "Table": {
+            "table": "films",
+            "name": "created_at"
+          }
+        }
       }
     ],
     "parameters": {
@@ -43,8 +54,9 @@
     "nullable": [
       true,
       false,
-      false
+      false,
+      true
     ]
   },
-  "hash": "9391fd0f79860c426b826b6ccfef7a18b0dec54d5e8ff752cf75b5cfeaf45a46"
+  "hash": "c2a927127485ceca63eced0523824f4b3cc732437187b176542edaceedf6eab0"
 }

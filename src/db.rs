@@ -15,6 +15,11 @@ pub enum DbError {
     Migration(#[from] MigrateError),
 }
 
+/// A failure in the persistence layer.
+#[derive(Debug, Error)]
+#[error(transparent)]
+pub struct StorageError(#[from] sqlx::Error);
+
 /// Connects to the configured SQLite database and applies pending migrations.
 pub async fn connect(config: &Config) -> Result<SqlitePool, DbError> {
     let options: SqliteConnectOptions = config.database_url.parse()?;
@@ -33,5 +38,13 @@ pub async fn connect(config: &Config) -> Result<SqlitePool, DbError> {
     // Run the migrations to ensure the database schema is up to date.
     sqlx::migrate!().run(&pool).await?;
 
+    Ok(pool)
+}
+
+/// Opens a fresh, migrated in-memory database for tests.
+#[cfg(test)]
+pub async fn connect_in_memory() -> Result<SqlitePool, DbError> {
+    let pool = SqlitePoolOptions::new().connect("sqlite::memory:").await?;
+    sqlx::migrate!().run(&pool).await?;
     Ok(pool)
 }

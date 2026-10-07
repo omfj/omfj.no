@@ -8,6 +8,7 @@ use axum_extra::extract::cookie::{Cookie, CookieJar};
 
 use super::AppState;
 use super::error::AppError;
+use crate::auth::web::SESSION_COOKIE;
 
 /// The visitor's sign-in state, resolved at most once per request.
 ///
@@ -64,7 +65,7 @@ where
 
 /// Check if the user is signed in by verifying the session token in the cookie jar against the database.
 async fn is_signed_in(state: &AppState, jar: &CookieJar) -> Result<bool, AppError> {
-    let Some(token) = jar.get("session").map(Cookie::value) else {
+    let Some(token) = jar.get(SESSION_COOKIE).map(Cookie::value) else {
         return Ok(false);
     };
     Ok(state.auth.is_session_valid(token).await?)

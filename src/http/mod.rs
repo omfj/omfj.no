@@ -1,17 +1,9 @@
-mod auth;
-mod error;
-mod feed;
-mod films;
-mod habits;
-mod home;
-mod htmx;
+pub(crate) mod error;
+pub(crate) mod feed;
+pub(crate) mod htmx;
 mod layout;
-mod links;
-mod reading;
-mod session;
-mod state;
-mod thoughts;
-mod wishlist;
+pub(crate) mod session;
+pub(crate) mod state;
 
 use std::sync::Arc;
 
@@ -25,14 +17,8 @@ pub(crate) type AppRouter = Router<Arc<AppState>>;
 /// Builds the application router and attaches its shared state and middleware.
 pub fn router(state: AppState) -> Router {
     Router::new()
-        .merge(home::router())
-        .merge(habits::router())
-        .merge(films::router())
-        .merge(links::router())
-        .merge(reading::router())
-        .merge(wishlist::router())
-        .merge(thoughts::router())
-        .merge(auth::router())
+        .merge(crate::apps::router())
+        .merge(crate::auth::web::router())
         .nest_service("/static", ServeDir::new("static"))
         .fallback(error::not_found)
         .method_not_allowed_fallback(error::method_not_allowed)

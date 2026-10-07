@@ -1,0 +1,74 @@
+{
+  "db_name": "SQLite",
+  "query": "INSERT INTO reading_items (title, url) VALUES (?, ?) RETURNING id AS `id: ReadingItemId`, title, url, created_at AS `created_at: DateTime<Utc>`, read_at AS `read_at: DateTime<Utc>`",
+  "describe": {
+    "columns": [
+      {
+        "name": "id: ReadingItemId",
+        "ordinal": 0,
+        "type_info": "Integer",
+        "origin": {
+          "Table": {
+            "table": "reading_items",
+            "name": "id"
+          }
+        }
+      },
+      {
+        "name": "title",
+        "ordinal": 1,
+        "type_info": "Text",
+        "origin": {
+          "Table": {
+            "table": "reading_items",
+            "name": "title"
+          }
+        }
+      },
+      {
+        "name": "url",
+        "ordinal": 2,
+        "type_info": "Text",
+        "origin": {
+          "Table": {
+            "table": "reading_items",
+            "name": "url"
+          }
+        }
+      },
+      {
+        "name": "created_at: DateTime<Utc>",
+        "ordinal": 3,
+        "type_info": "Integer",
+        "origin": {
+          "Table": {
+            "table": "reading_items",
+            "name": "created_at"
+          }
+        }
+      },
+      {
+        "name": "read_at: DateTime<Utc>",
+        "ordinal": 4,
+        "type_info": "Integer",
+        "origin": {
+          "Table": {
+            "table": "reading_items",
+            "name": "read_at"
+          }
+        }
+      }
+    ],
+    "parameters": {
+      "Right": 2
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false,
+      true
+    ]
+  },
+  "hash": "eb4b01fb178f914b064f10b71fd90e14c7411c71fc13449b322de4f7d86750bc"
+}

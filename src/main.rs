@@ -1,9 +1,10 @@
+mod apps;
 mod auth;
 mod config;
 mod db;
+mod domain;
 mod http;
-mod repository;
-mod title;
+mod validation;
 
 use std::net::{Ipv4Addr, SocketAddr};
 

@@ -4,7 +4,12 @@ use axum::{
 };
 use maud::{Markup, html};
 
-use crate::{auth, http::Layout};
+use crate::{
+    auth::{self, LoginError},
+    db::StorageError,
+    http::Layout,
+    validation::ValidationError,
+};
 
 #[derive(Debug, thiserror::Error)]
 pub(crate) enum AppError {
@@ -21,9 +26,7 @@ pub(crate) enum AppError {
     #[error("{0}")]
     BadRequest(&'static str),
     #[error(transparent)]
-    Database(#[from] sqlx::Error),
-    #[error(transparent)]
-    Http(#[from] reqwest::Error),
+    Storage(#[from] StorageError),
     #[error(transparent)]
     OAuth(#[from] auth::OAuthError),
 }
@@ -92,7 +95,7 @@ impl AppError {
                 "That request did not work",
                 (*message).into(),
             ),
-            Self::Database(_) | Self::Http(_) | Self::OAuth(_) => {
+            Self::Storage(_) | Self::OAuth(_) => {
                 tracing::error!(error = ?self, "request failed");
                 (
                     StatusCode::INTERNAL_SERVER_ERROR,
@@ -101,6 +104,24 @@ impl AppError {
                 )
             }
         }
+    }
+}
+
+impl From<LoginError> for AppError {
+    fn from(error: LoginError) -> Self {
+        match error {
+            LoginError::ProviderNotConfigured => Self::OAuthProviderNotConfigured,
+            LoginError::InvalidState => Self::Unauthorized,
+            LoginError::NotAllowed => Self::Forbidden,
+            LoginError::OAuth(error) => Self::OAuth(error),
+            LoginError::Storage(error) => Self::Storage(error),
+        }
+    }
+}
+
+impl From<ValidationError> for AppError {
+    fn from(ValidationError(message): ValidationError) -> Self {
+        Self::BadRequest(message)
     }
 }
 

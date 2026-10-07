@@ -1,16 +1,21 @@
 use maud::{Markup, html};
 
+use crate::http::Layout;
+use crate::http::error::AppError;
 use crate::http::session::RequireAuth;
 use crate::http::state::SharedState;
-use crate::http::{AppError, Layout};
 use crate::repository::ReadingItem;
 
 /// Loads and renders the reading list.
-pub(crate) async fn reading(state: SharedState, _auth: RequireAuth) -> Result<Markup, AppError> {
+pub(crate) async fn reading(
+    state: SharedState,
+    _auth: RequireAuth,
+    layout: Layout<'_>,
+) -> Result<Markup, AppError> {
     let items = state.reading.list().await?;
     let unread = items.iter().filter(|item| item.read_at.is_none()).count();
 
-    Ok(Layout::new("Reading list", true).render(html! {
+    Ok(layout.title("Reading list").render(html! {
         main {
             h1 class="heading-1" { "Reading list" }
             p class="text-foreground-muted mt-2 text-sm" {

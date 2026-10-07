@@ -1,9 +1,7 @@
-use axum_extra::extract::CookieJar;
 use maud::{Markup, html};
 
-use crate::http::session::is_signed_in;
-use crate::http::state::SharedState;
-use crate::http::{AppError, Layout};
+use crate::http::Layout;
+use crate::http::error::AppError;
 
 struct Habit {
     id: &'static str,
@@ -58,10 +56,8 @@ static HABITS: &[Habit] = &[
 ];
 
 /// Renders the habit tracker whose checked state is managed entirely in the browser.
-pub(crate) async fn habits(state: SharedState, jar: CookieJar) -> Result<Markup, AppError> {
-    let signed_in = is_signed_in(&state, &jar).await?;
-
-    Ok(Layout::new("Daily Habits", signed_in).render(html! {
+pub(crate) async fn habits(layout: Layout<'_>) -> Result<Markup, AppError> {
+    Ok(layout.title("Daily Habits").render(html! {
         main {
             h1 class="heading-1" { "Daily Habits" }
             br;

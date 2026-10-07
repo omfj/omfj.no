@@ -5,9 +5,10 @@ use axum::response::Response;
 use serde::Deserialize;
 use url::Url;
 
+use crate::http::error::AppError;
+use crate::http::htmx::mutation_response;
 use crate::http::session::RequireAuth;
 use crate::http::state::SharedState;
-use crate::http::{AppError, mutation_response};
 
 use super::view;
 

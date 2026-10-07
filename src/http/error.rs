@@ -42,18 +42,20 @@ pub(crate) async fn method_not_allowed() -> AppError {
 /// so the header always shows the signed-out state.
 fn error_page(status: StatusCode, title: &str, message: &str) -> Markup {
     let status = status.as_u16();
-    Layout::new(&format!("{status} — {title}"), false).render(html! {
-        main class="flex min-h-[55vh] items-center" {
-            section class="w-full pl-5" aria-labelledby="error-title" {
-                p class="text-foreground-muted text-sm" { "status " (status) }
-                h1 #error-title class="mt-2 text-xl" { (title) }
-                p class="mt-3 max-w-md text-foreground-muted" { (message) }
-                div class="mt-6 flex flex-wrap gap-4" {
-                    a href="/" class="link" { "<- Home" }
+    Layout::new()
+        .title(&format!("{status} — {title}"))
+        .render(html! {
+            main class="flex min-h-[55vh] items-center" {
+                section class="w-full pl-5" aria-labelledby="error-title" {
+                    p class="text-foreground-muted text-sm" { "status " (status) }
+                    h1 #error-title class="mt-2 text-xl" { (title) }
+                    p class="mt-3 max-w-md text-foreground-muted" { (message) }
+                    div class="mt-6 flex flex-wrap gap-4" {
+                        a href="/" class="link" { "<- Home" }
+                    }
                 }
             }
-        }
-    })
+        })
 }
 
 impl AppError {

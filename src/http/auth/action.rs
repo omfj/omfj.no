@@ -2,7 +2,7 @@ use axum::response::Redirect;
 use axum_extra::extract::CookieJar;
 use axum_extra::extract::cookie::Cookie;
 
-use crate::http::AppError;
+use crate::http::error::AppError;
 use crate::http::state::SharedState;
 
 /// Deletes the current server session and clears its browser cookie.

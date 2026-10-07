@@ -1,19 +1,23 @@
 use axum::response::Response;
-use axum_extra::extract::cookie::CookieJar;
 use maud::{Markup, html};
 
+use crate::http::Layout;
+use crate::http::error::AppError;
 use crate::http::feed::{self, Channel, Item};
-use crate::http::session::is_signed_in;
+
+use crate::http::session::Session;
 use crate::http::state::SharedState;
-use crate::http::{AppError, Layout};
 use crate::repository::RecommendedLink;
 
 /// Loads and renders the ordered collection of recommended links.
-pub(crate) async fn links(state: SharedState, jar: CookieJar) -> Result<Markup, AppError> {
+pub(crate) async fn links(
+    state: SharedState,
+    Session { signed_in }: Session,
+    layout: Layout<'_>,
+) -> Result<Markup, AppError> {
     let links = state.links.list().await?;
-    let signed_in = is_signed_in(&state, &jar).await?;
 
-    Ok(Layout::new("Links", signed_in)
+    Ok(layout.title("Links")
         .feed("omfj.no links", "/links/feed")
         .render(html! {
             main {

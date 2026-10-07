@@ -1,17 +1,20 @@
-use axum_extra::extract::cookie::CookieJar;
 use maud::{Markup, html};
 
-use crate::http::session::is_signed_in;
+use crate::http::Layout;
+use crate::http::error::AppError;
+use crate::http::session::Session;
 use crate::http::state::SharedState;
-use crate::http::{AppError, Layout};
 use crate::repository::Film;
 
 /// Loads and renders the film list.
-pub(crate) async fn films(state: SharedState, jar: CookieJar) -> Result<Markup, AppError> {
+pub(crate) async fn films(
+    state: SharedState,
+    Session { signed_in }: Session,
+    layout: Layout<'_>,
+) -> Result<Markup, AppError> {
     let films = state.films.list().await?;
-    let signed_in = is_signed_in(&state, &jar).await?;
 
-    Ok(Layout::new("OMDb", signed_in).render(html! {
+    Ok(layout.title("OMDb").render(html! {
         main {
             h1 class="heading-1" { "OMDb" }
             br;

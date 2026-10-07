@@ -1,12 +1,10 @@
-use crate::http::{AppError, Layout, session::is_signed_in, state::SharedState};
-use axum_extra::extract::cookie::CookieJar;
+use crate::http::Layout;
+use crate::http::error::AppError;
 use maud::{Markup, html};
 
 /// Renders the home page with the visitor's current sign-in state.
-pub(crate) async fn home(state: SharedState, jar: CookieJar) -> Result<Markup, AppError> {
-    let signed_in = is_signed_in(&state, &jar).await?;
-
-    Ok(Layout::new("omfj.no", signed_in).render(html! {
+pub(crate) async fn home(layout: Layout<'_>) -> Result<Markup, AppError> {
+    Ok(layout.title("omfj.no").render(html! {
         main {
             h1 class="sr-only" { "omfj.no" }
             p {

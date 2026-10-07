@@ -1,13 +1,12 @@
 use axum::extract::Path;
 use axum::response::Response;
-use axum_extra::extract::cookie::CookieJar;
 use chrono::NaiveDate;
 use maud::{Markup, PreEscaped, html};
 
+use crate::http::Layout;
+use crate::http::error::AppError;
 use crate::http::feed::{self, Channel, Item};
-use crate::http::session::is_signed_in;
 use crate::http::state::SharedState;
-use crate::http::{AppError, Layout};
 
 use super::data;
 
@@ -43,11 +42,11 @@ pub(crate) async fn feed(state: SharedState) -> Response {
 }
 
 /// Loads and renders thoughts in reverse publication order.
-pub(crate) async fn thoughts(state: SharedState, jar: CookieJar) -> Result<Markup, AppError> {
-    let signed_in = is_signed_in(&state, &jar).await?;
+pub(crate) async fn thoughts(layout: Layout<'_>) -> Result<Markup, AppError> {
     let thoughts = data::all();
 
-    Ok(Layout::new("Thoughts", signed_in)
+    Ok(layout
+        .title("Thoughts")
         .feed("omfj.no thoughts", "/thoughts/feed")
         .render(html! {
             main {
@@ -80,14 +79,12 @@ pub(crate) async fn thoughts(state: SharedState, jar: CookieJar) -> Result<Marku
 
 /// Loads and renders one thought or returns a not-found error for an unknown slug.
 pub(crate) async fn thought(
-    state: SharedState,
-    jar: CookieJar,
+    layout: Layout<'_>,
     Path(slug): Path<String>,
 ) -> Result<Markup, AppError> {
     let thought = data::get(&slug).ok_or(AppError::NotFound)?;
-    let signed_in = is_signed_in(&state, &jar).await?;
 
-    Ok(Layout::new(thought.title, signed_in).render(html! {
+    Ok(layout.title(thought.title).render(html! {
         main class="max-w-2xl" {
             a href="/thoughts" class="link-muted" { "<- Back" }
             br;

@@ -18,11 +18,8 @@ use std::sync::Arc;
 use axum::Router;
 use tower_http::{services::ServeDir, trace::TraceLayer};
 
-pub(crate) use error::AppError;
-pub(crate) use layout::Layout;
-
 pub(crate) use self::state::AppState;
-
+pub(crate) use layout::Layout;
 pub(crate) type AppRouter = Router<Arc<AppState>>;
 
 /// Builds the application router and attaches its shared state and middleware.

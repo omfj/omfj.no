@@ -1,4 +1,12 @@
+use std::sync::Arc;
+
+use axum::{
+    extract::{FromRef, FromRequestParts},
+    http::request::Parts,
+};
 use maud::{DOCTYPE, Markup, html};
+
+use super::{AppState, error::AppError, session::Session};
 
 /// An RSS feed advertised in the page head.
 struct Feed<'a> {
@@ -7,19 +15,42 @@ struct Feed<'a> {
 }
 
 /// The shared page shell: head, header with theme and auth controls, and footer navigation.
+///
+/// Handlers extract it directly, so the sign-in state comes from the request's cached [`Session`].
 pub(crate) struct Layout<'a> {
     title: &'a str,
     signed_in: bool,
     feed: Option<Feed<'a>>,
 }
 
+impl<S> FromRequestParts<S> for Layout<'static>
+where
+    Arc<AppState>: FromRef<S>,
+    S: Send + Sync,
+{
+    type Rejection = AppError;
+
+    async fn from_request_parts(parts: &mut Parts, state: &S) -> Result<Self, Self::Rejection> {
+        let session = Session::from_request_parts(parts, state).await?;
+        Ok(Self {
+            signed_in: session.signed_in,
+            ..Self::new()
+        })
+    }
+}
+
 impl<'a> Layout<'a> {
-    pub(crate) fn new(title: &'a str, signed_in: bool) -> Self {
+    pub(crate) fn new() -> Self {
         Self {
-            title,
-            signed_in,
+            title: "omfj.no",
+            signed_in: false,
             feed: None,
         }
+    }
+
+    pub(crate) fn title(mut self, title: &'a str) -> Self {
+        self.title = title;
+        self
     }
 
     pub(crate) fn feed(mut self, title: &'a str, href: &'a str) -> Self {

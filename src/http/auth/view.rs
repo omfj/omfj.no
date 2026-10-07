@@ -4,7 +4,7 @@ use axum_extra::extract::CookieJar;
 use axum_extra::extract::cookie::{Cookie, SameSite};
 use serde::Deserialize;
 
-use crate::http::AppError;
+use crate::http::error::AppError;
 use crate::http::state::SharedState;
 
 /// Starts OAuth with a short-lived state token and matching cookie.

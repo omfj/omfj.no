@@ -65,5 +65,5 @@ sqlx migrate run
 [tasks."db:offline"]
 description = "Generate an offline queries"
 run = '''
-sqlx prepare --check --all-targets --all-features
+cargo sqlx prepare
 '''

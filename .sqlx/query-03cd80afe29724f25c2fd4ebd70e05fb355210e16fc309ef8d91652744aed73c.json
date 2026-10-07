@@ -1,0 +1,74 @@
+{
+  "db_name": "SQLite",
+  "query": "UPDATE reading_items SET read_at = CASE WHEN read_at IS NULL THEN unixepoch() END WHERE id = ? RETURNING id, title, url, created_at AS `created_at: DateTime<Utc>`, read_at AS `read_at: DateTime<Utc>`",
+  "describe": {
+    "columns": [
+      {
+        "name": "id",
+        "ordinal": 0,
+        "type_info": "Integer",
+        "origin": {
+          "Table": {
+            "table": "reading_items",
+            "name": "id"
+          }
+        }
+      },
+      {
+        "name": "title",
+        "ordinal": 1,
+        "type_info": "Text",
+        "origin": {
+          "Table": {
+            "table": "reading_items",
+            "name": "title"
+          }
+        }
+      },
+      {
+        "name": "url",
+        "ordinal": 2,
+        "type_info": "Text",
+        "origin": {
+          "Table": {
+            "table": "reading_items",
+            "name": "url"
+          }
+        }
+      },
+      {
+        "name": "created_at: DateTime<Utc>",
+        "ordinal": 3,
+        "type_info": "Integer",
+        "origin": {
+          "Table": {
+            "table": "reading_items",
+            "name": "created_at"
+          }
+        }
+      },
+      {
+        "name": "read_at: DateTime<Utc>",
+        "ordinal": 4,
+        "type_info": "Integer",
+        "origin": {
+          "Table": {
+            "table": "reading_items",
+            "name": "read_at"
+          }
+        }
+      }
+    ],
+    "parameters": {
+      "Right": 1
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false,
+      true
+    ]
+  },
+  "hash": "03cd80afe29724f25c2fd4ebd70e05fb355210e16fc309ef8d91652744aed73c"
+}

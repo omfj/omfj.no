@@ -89,6 +89,10 @@ impl<'a> Layout<'a> {
                                     li { a class="link link-muted" href="/omdb" { "OMDb" } }
                                     li { a class="link link-muted" href="/links" { "Links" } }
                                     li { a class="link link-muted" href="/thoughts" { "Thoughts" } }
+                                    @if self.signed_in {
+                                        li { a class="link link-muted" href="/reading" { "Reading" } }
+                                        li { a class="link link-muted" href="/wishlist" { "Wishlist" } }
+                                    }
                                 }
                             }
                         }

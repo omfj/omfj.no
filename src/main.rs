@@ -2,6 +2,7 @@ mod auth;
 mod config;
 mod db;
 mod repository;
+mod title;
 mod web;
 
 use std::net::{Ipv4Addr, SocketAddr};

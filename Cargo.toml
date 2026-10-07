@@ -11,10 +11,12 @@ axum = "0.8"
 axum-extra = { version = "0.12.6", features = ["cookie"] }
 chrono = { version = "0.4", features = ["serde"] }
 dotenvy = "0.15"
+html-escape = "0.2"
 maud = { version = "0.27.0", features = ["axum"] }
 reqwest = { version = "0.12", default-features = false, features = [
   "json",
   "rustls-tls",
+  "gzip",
 ] }
 serde = { version = "1", features = ["derive"] }
 sqlx = { version = "0.9", features = [

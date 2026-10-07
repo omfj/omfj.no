@@ -19,7 +19,7 @@ use tower_http::{services::ServeDir, trace::TraceLayer};
 use crate::{
     auth::AuthService,
     config::Config,
-    repository::{FilmRepository, LinkRepository, WishRepository},
+    repository::{FilmRepository, LinkRepository, ReadingRepository, WishRepository},
 };
 
 pub(crate) use error::AppError;
@@ -31,6 +31,7 @@ pub struct AppState {
     pub site_url: String,
     pub films: FilmRepository,
     pub links: LinkRepository,
+    pub reading: ReadingRepository,
     pub wishes: WishRepository,
 }
 
@@ -42,6 +43,7 @@ impl AppState {
             auth: AuthService::new(config, pool.clone())?,
             films: FilmRepository::new(pool.clone()),
             links: LinkRepository::new(pool.clone()),
+            reading: ReadingRepository::new(pool.clone()),
             wishes: WishRepository::new(pool),
         })
     }
@@ -56,6 +58,7 @@ pub fn router(state: AppState) -> Router {
         .merge(routes::habits::router())
         .merge(routes::films::router())
         .merge(routes::links::router())
+        .merge(routes::reading::router())
         .merge(routes::wishlist::router())
         .merge(routes::thoughts::router())
         .merge(routes::auth::router())

@@ -1,38 +1,13 @@
-use std::sync::Arc;
-
-use axum::{
-    Router,
-    extract::{Form, Path},
-    http::{HeaderMap, StatusCode},
-    response::Response,
-    routing::{delete, get},
-};
 use axum_extra::extract::cookie::CookieJar;
 use maud::{Markup, html};
-use serde::Deserialize;
 
+use crate::http::session::is_signed_in;
+use crate::http::state::SharedState;
+use crate::http::{AppError, Layout};
 use crate::repository::Film;
-use crate::web::{
-    AppError, AppState, Layout, SharedState, mutation_response,
-    session::{RequireAuth, is_signed_in},
-};
-
-/// Registers the film list and its protected mutation routes.
-pub(crate) fn router() -> Router<Arc<AppState>> {
-    Router::new()
-        .route("/omdb", get(omdb).post(create_film))
-        .route("/omdb/{id}", delete(delete_film))
-}
-
-#[derive(Deserialize)]
-struct FilmForm {
-    id: String,
-    title: String,
-    rating: i64,
-}
 
 /// Loads and renders the film list.
-async fn omdb(state: SharedState, jar: CookieJar) -> Result<Markup, AppError> {
+pub(crate) async fn films(state: SharedState, jar: CookieJar) -> Result<Markup, AppError> {
     let films = state.films.list().await?;
     let signed_in = is_signed_in(&state, &jar).await?;
 
@@ -105,7 +80,7 @@ const INPUT_CLASS: &str =
     "border-divide-soft w-full border-b bg-transparent outline-none focus:border-link";
 
 /// Renders one film row, shared by the page and the HTMX create response.
-fn film_row(film: &Film, signed_in: bool) -> Markup {
+pub(crate) fn film_row(film: &Film, signed_in: bool) -> Markup {
     html! {
         tr class="align-top" {
             td class="py-1 pr-4" {
@@ -124,36 +99,4 @@ fn film_row(film: &Film, signed_in: bool) -> Markup {
             }
         }
     }
-}
-
-/// Validates and creates or updates a film for an authenticated visitor.
-async fn create_film(
-    state: SharedState,
-    _auth: RequireAuth,
-    headers: HeaderMap,
-    Form(form): Form<FilmForm>,
-) -> Result<Response, AppError> {
-    if !form.id.starts_with("tt")
-        || form.title.trim().is_empty()
-        || !(1..=100).contains(&form.rating)
-    {
-        return Err(AppError::BadRequest(
-            "Enter a title, an IMDb tt-id, and a rating from 1–100.",
-        ));
-    }
-    let film_id = form.id.trim();
-    let title = form.title.trim();
-
-    let film = state.films.save(film_id, title, form.rating).await?;
-    Ok(mutation_response(&headers, film_row(&film, true), "/omdb"))
-}
-
-/// Deletes a film by its IMDb identifier for an authenticated visitor.
-async fn delete_film(
-    state: SharedState,
-    _auth: RequireAuth,
-    Path(id): Path<String>,
-) -> Result<StatusCode, AppError> {
-    state.films.delete(&id).await?;
-    Ok(StatusCode::OK)
 }

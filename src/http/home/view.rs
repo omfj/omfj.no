@@ -1,30 +1,9 @@
-use std::sync::Arc;
-
-use axum::response::IntoResponse;
-use axum::{Router, http::header, routing::get};
+use crate::http::{AppError, Layout, session::is_signed_in, state::SharedState};
 use axum_extra::extract::cookie::CookieJar;
 use maud::{Markup, html};
-use tower_http::services::ServeFile;
-
-use crate::web::{AppError, AppState, Layout, SharedState, session::is_signed_in};
-
-/// Registers the home page route.
-pub(crate) fn router() -> Router<Arc<AppState>> {
-    Router::new()
-        .route("/", get(home))
-        .route_service("/dog.png", ServeFile::new("static/dog.png"))
-        .route("/static/omfj.asc", get(gpg_key))
-}
-
-async fn gpg_key() -> impl IntoResponse {
-    (
-        [(header::CONTENT_TYPE, "text/plain; charset=utf-8")],
-        include_str!("../../../static/omfj.asc"),
-    )
-}
 
 /// Renders the home page with the visitor's current sign-in state.
-async fn home(state: SharedState, jar: CookieJar) -> Result<Markup, AppError> {
+pub(crate) async fn home(state: SharedState, jar: CookieJar) -> Result<Markup, AppError> {
     let signed_in = is_signed_in(&state, &jar).await?;
 
     Ok(Layout::new("omfj.no", signed_in).render(html! {

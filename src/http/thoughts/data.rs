@@ -17,7 +17,7 @@ pub(crate) struct ThoughtArticle<'a> {
     pub body_html: &'a str,
 }
 
-include!(concat!(env!("OUT_DIR"), "/thoughts.rs"));
+include!(concat!(env!("OUT_DIR"), "/http/thoughts/data.rs"));
 
 /// Returns all build-time rendered thoughts in reverse publication order.
 pub(crate) fn all() -> &'static [ThoughtSummary<'static>] {

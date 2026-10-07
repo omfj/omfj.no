@@ -1,10 +1,9 @@
-use std::sync::Arc;
-
-use axum::{Router, routing::get};
-use axum_extra::extract::cookie::CookieJar;
+use axum_extra::extract::CookieJar;
 use maud::{Markup, html};
 
-use crate::web::{AppError, AppState, Layout, SharedState, session::is_signed_in};
+use crate::http::session::is_signed_in;
+use crate::http::state::SharedState;
+use crate::http::{AppError, Layout};
 
 struct Habit {
     id: &'static str,
@@ -58,13 +57,8 @@ static HABITS: &[Habit] = &[
     },
 ];
 
-/// Registers the browser-local habit tracker page.
-pub(crate) fn router() -> Router<Arc<AppState>> {
-    Router::new().route("/habits", get(habits))
-}
-
 /// Renders the habit tracker whose checked state is managed entirely in the browser.
-async fn habits(state: SharedState, jar: CookieJar) -> Result<Markup, AppError> {
+pub(crate) async fn habits(state: SharedState, jar: CookieJar) -> Result<Markup, AppError> {
     let signed_in = is_signed_in(&state, &jar).await?;
 
     Ok(Layout::new("Daily Habits", signed_in).render(html! {

@@ -1,41 +1,15 @@
-use std::sync::Arc;
-
-use axum::{
-    Router,
-    extract::{Form, Path},
-    http::{HeaderMap, StatusCode},
-    response::Response,
-    routing::{delete, get},
-};
+use axum::response::Response;
 use axum_extra::extract::cookie::CookieJar;
 use maud::{Markup, html};
-use serde::Deserialize;
-use url::Url;
 
+use crate::http::feed::{self, Channel, Item};
+use crate::http::session::is_signed_in;
+use crate::http::state::SharedState;
+use crate::http::{AppError, Layout};
 use crate::repository::RecommendedLink;
-use crate::web::{
-    AppError, AppState, Layout, SharedState,
-    feed::{self, Channel, Item},
-    mutation_response,
-    session::{RequireAuth, is_signed_in},
-};
-
-/// Registers the recommended-links page and its protected mutation routes.
-pub(crate) fn router() -> Router<Arc<AppState>> {
-    Router::new()
-        .route("/links", get(links).post(create_link))
-        .route("/links/feed", get(feed))
-        .route("/links/{id}", delete(delete_link))
-}
-
-#[derive(Deserialize)]
-struct LinkForm {
-    title: String,
-    url: String,
-}
 
 /// Loads and renders the ordered collection of recommended links.
-async fn links(state: SharedState, jar: CookieJar) -> Result<Markup, AppError> {
+pub(crate) async fn links(state: SharedState, jar: CookieJar) -> Result<Markup, AppError> {
     let links = state.links.list().await?;
     let signed_in = is_signed_in(&state, &jar).await?;
 
@@ -91,7 +65,7 @@ const INPUT_CLASS: &str =
     "border-divide-soft w-full border-b bg-transparent outline-none focus:border-link";
 
 /// Renders one link row, shared by the page and the HTMX create response.
-fn link_item(link: &RecommendedLink, signed_in: bool) -> Markup {
+pub(crate) fn link_item(link: &RecommendedLink, signed_in: bool) -> Markup {
     html! {
         li class="flex items-center gap-2" {
             div class="min-w-0 flex-1 truncate" {
@@ -117,7 +91,8 @@ fn link_item(link: &RecommendedLink, signed_in: bool) -> Markup {
     }
 }
 
-async fn feed(state: SharedState) -> Result<Response, AppError> {
+/// Renders the recommended links as an RSS feed.
+pub(crate) async fn feed(state: SharedState) -> Result<Response, AppError> {
     let items = state
         .links
         .list()
@@ -136,40 +111,4 @@ async fn feed(state: SharedState) -> Result<Response, AppError> {
         description: "Some recommended links from me",
         items,
     }))
-}
-
-/// Validates and adds a recommended link for an authenticated visitor.
-async fn create_link(
-    state: SharedState,
-    _auth: RequireAuth,
-    headers: HeaderMap,
-    Form(form): Form<LinkForm>,
-) -> Result<Response, AppError> {
-    let parsed =
-        Url::parse(form.url.trim()).map_err(|_| AppError::BadRequest("Enter a valid URL."))?;
-    if !matches!(parsed.scheme(), "http" | "https") || form.title.trim().is_empty() {
-        return Err(AppError::BadRequest("Enter a title and an http(s) URL."));
-    }
-    if parsed.host_str().is_none() {
-        return Err(AppError::BadRequest("The URL needs a host."));
-    }
-    let title = form.title.trim();
-    let url = parsed.as_str();
-
-    let link = state.links.create(title, url).await?;
-    Ok(mutation_response(
-        &headers,
-        link_item(&link, true),
-        "/links",
-    ))
-}
-
-/// Deletes a recommended link by its database identifier for an authenticated visitor.
-async fn delete_link(
-    state: SharedState,
-    _auth: RequireAuth,
-    Path(id): Path<i64>,
-) -> Result<StatusCode, AppError> {
-    state.links.delete(id).await?;
-    Ok(StatusCode::OK)
 }

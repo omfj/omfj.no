@@ -95,10 +95,9 @@ fn main() -> Result<(), Box<dyn Error>> {
         ];
     };
 
-    fs::write(
-        Path::new(&env::var("OUT_DIR")?).join("thoughts.rs"),
-        generated.to_string(),
-    )?;
+    let output = Path::new(&env::var("OUT_DIR")?).join("http/thoughts/data.rs");
+    fs::create_dir_all(output.parent().expect("output path has a parent"))?;
+    fs::write(output, generated.to_string())?;
     Ok(())
 }
 

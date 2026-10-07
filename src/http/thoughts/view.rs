@@ -1,31 +1,23 @@
-use std::sync::Arc;
-
-use axum::{Router, extract::Path, response::Response, routing::get};
+use axum::extract::Path;
+use axum::response::Response;
 use axum_extra::extract::cookie::CookieJar;
 use chrono::NaiveDate;
 use maud::{Markup, PreEscaped, html};
 
-use crate::web::{
-    AppError, AppState, Layout, SharedState,
-    feed::{self, Channel, Item},
-    session::is_signed_in,
-    thoughts as thought_files,
-};
+use crate::http::feed::{self, Channel, Item};
+use crate::http::session::is_signed_in;
+use crate::http::state::SharedState;
+use crate::http::{AppError, Layout};
 
-/// Registers the thought index and article routes.
-pub(crate) fn router() -> Router<Arc<AppState>> {
-    Router::new()
-        .route("/thoughts", get(thoughts))
-        .route("/thoughts/feed", get(feed))
-        .route("/thoughts/{slug}", get(thought))
-}
+use super::data;
 
-async fn feed(state: SharedState) -> Response {
-    let items = thought_files::all()
+/// Renders all thoughts as an RSS feed.
+pub(crate) async fn feed(state: SharedState) -> Response {
+    let items = data::all()
         .iter()
         .map(|thought| {
-            let article = thought_files::get(thought.slug)
-                .expect("every thought summary has a corresponding article");
+            let article =
+                data::get(thought.slug).expect("every thought summary has a corresponding article");
             let published = NaiveDate::parse_from_str(thought.published_iso, "%Y-%m-%d")
                 .expect("validated at build time")
                 .and_hms_opt(0, 0, 0)
@@ -51,9 +43,9 @@ async fn feed(state: SharedState) -> Response {
 }
 
 /// Loads and renders thoughts in reverse publication order.
-async fn thoughts(state: SharedState, jar: CookieJar) -> Result<Markup, AppError> {
+pub(crate) async fn thoughts(state: SharedState, jar: CookieJar) -> Result<Markup, AppError> {
     let signed_in = is_signed_in(&state, &jar).await?;
-    let thoughts = thought_files::all();
+    let thoughts = data::all();
 
     Ok(Layout::new("Thoughts", signed_in)
         .feed("omfj.no thoughts", "/thoughts/feed")
@@ -87,12 +79,12 @@ async fn thoughts(state: SharedState, jar: CookieJar) -> Result<Markup, AppError
 }
 
 /// Loads and renders one thought or returns a not-found error for an unknown slug.
-async fn thought(
+pub(crate) async fn thought(
     state: SharedState,
     jar: CookieJar,
     Path(slug): Path<String>,
 ) -> Result<Markup, AppError> {
-    let thought = thought_files::get(&slug).ok_or(AppError::NotFound)?;
+    let thought = data::get(&slug).ok_or(AppError::NotFound)?;
     let signed_in = is_signed_in(&state, &jar).await?;
 
     Ok(Layout::new(thought.title, signed_in).render(html! {

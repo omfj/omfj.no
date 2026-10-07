@@ -4,7 +4,7 @@ use axum::{
 };
 use maud::{Markup, html};
 
-use crate::{auth, web::Layout};
+use crate::{auth, http::Layout};
 
 #[derive(Debug, thiserror::Error)]
 pub(crate) enum AppError {
@@ -26,6 +26,16 @@ pub(crate) enum AppError {
     Http(#[from] reqwest::Error),
     #[error(transparent)]
     OAuth(#[from] auth::OAuthError),
+}
+
+/// Produces the application's standard response for an unknown route.
+pub(crate) async fn not_found() -> AppError {
+    AppError::NotFound
+}
+
+/// Produces the application's standard response for an unsupported HTTP method.
+pub(crate) async fn method_not_allowed() -> AppError {
+    AppError::MethodNotAllowed
 }
 
 /// Renders the shared error page. Errors are rendered without a session lookup,

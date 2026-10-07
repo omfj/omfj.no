@@ -1,15 +1,15 @@
 mod auth;
 mod config;
 mod db;
+mod http;
 mod repository;
 mod title;
-mod web;
 
 use std::net::{Ipv4Addr, SocketAddr};
 
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
-use crate::{config::Config, web::AppState};
+use crate::{config::Config, http::AppState};
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
@@ -17,8 +17,7 @@ async fn main() -> anyhow::Result<()> {
 
     let config = Config::load();
     let state = AppState::from_config(&config).await?;
-    let app = web::router(state);
-
+    let router = http::router(state);
     let address = SocketAddr::from((Ipv4Addr::UNSPECIFIED, config.port));
 
     tracing::info!(%address, "listening");
@@ -26,7 +25,7 @@ async fn main() -> anyhow::Result<()> {
     tracing::info!("Open in your browser: http://localhost:{}", config.port);
 
     let listener = tokio::net::TcpListener::bind(address).await?;
-    axum::serve(listener, app)
+    axum::serve(listener, router)
         .with_graceful_shutdown(shutdown_signal())
         .await?;
 

@@ -1,37 +1,12 @@
-use std::sync::Arc;
-
-use axum::{
-    Router,
-    extract::{Form, Path},
-    http::{HeaderMap, StatusCode},
-    response::Response,
-    routing::{delete, get, post},
-};
 use maud::{Markup, html};
-use serde::Deserialize;
-use url::Url;
 
+use crate::http::session::RequireAuth;
+use crate::http::state::SharedState;
+use crate::http::{AppError, Layout};
 use crate::repository::ReadingItem;
-use crate::title;
-use crate::web::{
-    AppError, AppState, Layout, SharedState, mutation_response, session::RequireAuth,
-};
-
-/// Registers the reading list page and its protected mutation routes.
-pub(crate) fn router() -> Router<Arc<AppState>> {
-    Router::new()
-        .route("/reading", get(reading).post(create_item))
-        .route("/reading/{id}", delete(delete_item))
-        .route("/reading/{id}/read", post(toggle_read))
-}
-
-#[derive(Deserialize)]
-struct ItemForm {
-    url: String,
-}
 
 /// Loads and renders the reading list.
-async fn reading(state: SharedState, _auth: RequireAuth) -> Result<Markup, AppError> {
+pub(crate) async fn reading(state: SharedState, _auth: RequireAuth) -> Result<Markup, AppError> {
     let items = state.reading.list().await?;
     let unread = items.iter().filter(|item| item.read_at.is_none()).count();
 
@@ -68,7 +43,8 @@ async fn reading(state: SharedState, _auth: RequireAuth) -> Result<Markup, AppEr
 const INPUT_CLASS: &str =
     "border-divide-soft w-full border-b bg-transparent outline-none focus:border-link";
 
-fn item_row(item: &ReadingItem) -> Markup {
+/// Renders one reading list item, shared by the page and the HTMX mutation responses.
+pub(crate) fn item_row(item: &ReadingItem) -> Markup {
     let read = item.read_at.is_some();
     let checkbox = if read { "[x]" } else { "[ ]" };
     html! {
@@ -102,53 +78,4 @@ fn item_row(item: &ReadingItem) -> Markup {
             { "del" }
         }
     }
-}
-
-async fn create_item(
-    state: SharedState,
-    _auth: RequireAuth,
-    headers: HeaderMap,
-    Form(form): Form<ItemForm>,
-) -> Result<Response, AppError> {
-    let parsed =
-        Url::parse(form.url.trim()).map_err(|_| AppError::BadRequest("Enter a valid URL."))?;
-    if !matches!(parsed.scheme(), "http" | "https") || parsed.host_str().is_none() {
-        return Err(AppError::BadRequest("Enter an http(s) URL."));
-    }
-    let url = parsed.as_str();
-    let http = reqwest::Client::builder()
-        .user_agent(concat!("omfj-no-rs/", env!("CARGO_PKG_VERSION")))
-        .build()?;
-
-    let title = title::fetch_from_url(&http, url)
-        .await
-        .unwrap_or_else(|| url.to_owned());
-
-    let item = state.reading.create(&title, url).await?;
-    Ok(mutation_response(&headers, item_row(&item), "/reading"))
-}
-
-/// Toggles an item between read and unread for an authenticated visitor.
-async fn toggle_read(
-    state: SharedState,
-    _auth: RequireAuth,
-    headers: HeaderMap,
-    Path(id): Path<i64>,
-) -> Result<Response, AppError> {
-    let item = state
-        .reading
-        .toggle_read(id)
-        .await?
-        .ok_or(AppError::NotFound)?;
-    Ok(mutation_response(&headers, item_row(&item), "/reading"))
-}
-
-/// Deletes an item by its database identifier for an authenticated visitor.
-async fn delete_item(
-    state: SharedState,
-    _auth: RequireAuth,
-    Path(id): Path<i64>,
-) -> Result<StatusCode, AppError> {
-    state.reading.delete(id).await?;
-    Ok(StatusCode::OK)
 }

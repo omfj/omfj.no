@@ -3,6 +3,7 @@ rust = "1.98.0"
 node = "24.20.0"
 "npm:@tailwindcss/cli" = "4.1.17"
 "cargo:cargo-watch" = "8.5.3"
+"cargo:sqlx-cli" = "0.9.0"
 
 [tasks.css]
 description = "Build the Tailwind stylesheet"
@@ -42,3 +43,27 @@ cargo watch -x run
 [tasks.container]
 description = "Build the production container image with Podman"
 run = "podman build --tag omfj.no ."
+
+[tasks."db:setup"]
+description = "Set up the database"
+run = '''
+sqlx database setup
+'''
+
+[tasks."db:reset"]
+description = "Reset the database"
+run = '''
+sqlx database reset
+'''
+
+[tasks."db:migrate"]
+description = "Run database migrations"
+run = '''
+sqlx migrate run
+'''
+
+[tasks."db:offline"]
+description = "Generate an offline queries"
+run = '''
+sqlx prepare --check --all-targets --all-features
+'''

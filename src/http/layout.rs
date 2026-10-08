@@ -112,8 +112,8 @@ impl<'a> Layout<'a> {
 
                         div class="flex-1" { (content) }
 
-                        footer class="mt-auto p-4 text-[10px]" {
-                            nav aria-label="Pages" {
+                        footer class="mt-auto px-4 pb-4 pt-8 text-[10px]" {
+                            nav {
                                 ul class="flex flex-wrap justify-center gap-x-4 gap-y-1 text-center" {
                                     li { a class="link link-muted" href="https://start.omfj.no" { "start.omfj.no" } }
                                     li { a class="link link-muted" href="/habits" { "Habit Tracker" } }

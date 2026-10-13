@@ -90,43 +90,53 @@ impl<'a> Layout<'a> {
                 }
                 body class="font-mono" {
                     div class="mx-auto flex min-h-screen max-w-xl flex-col px-6 py-6 md:py-16" {
-                        header class="flex items-center justify-between gap-5 pt-4 pb-10" {
-                            a class="text-xl" href="/" { "omfj" }
-                            div class="flex items-center gap-5" {
-                                button class="text-foreground-muted hover:underline"
-                                    type="button"
-                                    onclick="toggleTheme()"
-                                {
-                                    span class="light-label" { "Light" }
-                                    span class="dark-label" { "Dark" }
-                                }
-                                @if self.signed_in {
-                                    form action="/auth/sign-out" method="post" {
-                                        button class="text-foreground-muted hover:underline" { "Sign out" }
-                                    }
-                                } @else {
-                                    a class="text-foreground-muted hover:underline" href="/auth/github" { "Sign in" }
-                                }
-                            }
-                        }
-
+                        (header(self.signed_in))
                         div class="flex-1" { (content) }
+                        (footer(self.signed_in))
+                    }
+                }
+            }
+        }
+    }
+}
 
-                        footer class="mt-auto px-4 pb-4 pt-8 text-[10px]" {
-                            nav {
-                                ul class="flex flex-wrap justify-center gap-x-4 gap-y-1 text-center" {
-                                    li { a class="link link-muted" href="https://start.omfj.no" { "start.omfj.no" } }
-                                    li { a class="link link-muted" href="/habits" { "Habit Tracker" } }
-                                    li { a class="link link-muted" href="/omdb" { "OMDb" } }
-                                    li { a class="link link-muted" href="/links" { "Links" } }
-                                    li { a class="link link-muted" href="/thoughts" { "Thoughts" } }
-                                    @if self.signed_in {
-                                        li { a class="link link-muted" href="/reading" { "Reading" } }
-                                        li { a class="link link-muted" href="/onskeliste" { "Wishlist" } }
-                                    }
-                                }
-                            }
-                        }
+fn header(signed_in: bool) -> Markup {
+    html! {
+        header class="flex items-center justify-between gap-5 pt-4 pb-10" {
+            a class="text-xl" href="/" { "omfj" }
+            div class="flex items-center gap-5" {
+                button class="text-foreground-muted hover:underline"
+                    type="button"
+                    onclick="toggleTheme()"
+                {
+                    span class="light-label" { "Light" }
+                    span class="dark-label" { "Dark" }
+                }
+                @if signed_in {
+                    form action="/auth/sign-out" method="post" {
+                        button class="text-foreground-muted hover:underline" { "Sign out" }
+                    }
+                } @else {
+                    a class="text-foreground-muted hover:underline" href="/auth/github" { "Sign in" }
+                }
+            }
+        }
+    }
+}
+
+fn footer(signed_in: bool) -> Markup {
+    html! {
+        footer class="mt-auto px-4 pb-4 pt-8 text-[10px]" {
+            nav {
+                ul class="flex flex-wrap justify-center gap-x-4 gap-y-1 text-center" {
+                    li { a class="link link-muted" href="https://start.omfj.no" { "start.omfj.no" } }
+                    li { a class="link link-muted" href="/habits" { "Habit Tracker" } }
+                    li { a class="link link-muted" href="/omdb" { "OMDb" } }
+                    li { a class="link link-muted" href="/links" { "Links" } }
+                    li { a class="link link-muted" href="/thoughts" { "Thoughts" } }
+                    @if signed_in {
+                        li { a class="link link-muted" href="/reading" { "Reading" } }
+                        li { a class="link link-muted" href="/onskeliste" { "Wishlist" } }
                     }
                 }
             }

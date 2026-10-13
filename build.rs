@@ -5,6 +5,7 @@ use std::{
     fmt::Write as _,
     fs::{self, DirEntry},
     path::Path,
+    process::Command,
 };
 
 use chrono::NaiveDate;
@@ -13,6 +14,9 @@ use quote::quote;
 use serde::Deserialize;
 
 const THOUGHTS_DIRECTORY: &str = "thoughts";
+const TAILWIND_INPUT: &str = "static/tailwind.input.css";
+const TAILWIND_OUTPUT: &str = "static/tailwind.css";
+const TAILWIND_SOURCES: &str = "src";
 
 #[derive(Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -42,6 +46,31 @@ fn is_template(entry: &DirEntry) -> bool {
 }
 
 fn main() -> Result<(), Box<dyn Error>> {
+    build_css()?;
+    build_thoughts()
+}
+
+fn build_css() -> Result<(), Box<dyn Error>> {
+    println!("cargo::rerun-if-changed={TAILWIND_INPUT}");
+    println!("cargo::rerun-if-changed={TAILWIND_SOURCES}");
+
+    let status = Command::new("tailwindcss")
+        .args([
+            "--input",
+            TAILWIND_INPUT,
+            "--output",
+            TAILWIND_OUTPUT,
+            "--minify",
+        ])
+        .status()
+        .map_err(|error| format!("failed to run 'tailwindcss': {error}"))?;
+    if !status.success() {
+        return Err(format!("'tailwindcss' exited with {status}").into());
+    }
+    Ok(())
+}
+
+fn build_thoughts() -> Result<(), Box<dyn Error>> {
     println!("cargo::rerun-if-changed={THOUGHTS_DIRECTORY}");
 
     let mut thoughts = fs::read_dir(THOUGHTS_DIRECTORY)?

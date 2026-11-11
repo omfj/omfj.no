@@ -90,7 +90,7 @@ impl<'a> Layout<'a> {
                 }
                 body class="font-mono" {
                     div class="mx-auto flex min-h-screen max-w-xl flex-col px-6 py-6 md:py-16" {
-                        (header(self.signed_in))
+                        (header())
                         div class="flex-1" { (content) }
                         (footer(self.signed_in))
                     }
@@ -100,7 +100,7 @@ impl<'a> Layout<'a> {
     }
 }
 
-fn header(signed_in: bool) -> Markup {
+fn header() -> Markup {
     html! {
         header class="flex items-center justify-between gap-5 pt-4 pb-10" {
             a class="text-xl" href="/" { "omfj" }
@@ -111,13 +111,6 @@ fn header(signed_in: bool) -> Markup {
                 {
                     span class="light-label" { "Light" }
                     span class="dark-label" { "Dark" }
-                }
-                @if signed_in {
-                    form action="/auth/sign-out" method="post" {
-                        button class="text-foreground-muted hover:underline" { "Sign out" }
-                    }
-                } @else {
-                    a class="text-foreground-muted hover:underline" href="/auth/github" { "Sign in" }
                 }
             }
         }

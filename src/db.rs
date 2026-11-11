@@ -40,11 +40,3 @@ pub async fn connect(config: &Config) -> Result<SqlitePool, DbError> {
 
     Ok(pool)
 }
-
-/// Opens a fresh, migrated in-memory database for tests.
-#[cfg(test)]
-pub async fn connect_in_memory() -> Result<SqlitePool, DbError> {
-    let pool = SqlitePoolOptions::new().connect("sqlite::memory:").await?;
-    sqlx::migrate!().run(&pool).await?;
-    Ok(pool)
-}

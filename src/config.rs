@@ -1,4 +1,4 @@
-use std::env;
+use std::{env, str::FromStr};
 
 // Default values for configuration parameters.
 
@@ -15,11 +15,7 @@ const DEFAULT_SITE_URL: &str = "https://omfj.no";
 const ENV_DATABASE_URL: &str = "DATABASE_URL";
 const ENV_SITE_URL: &str = "SITE_URL";
 const ENV_PORT: &str = "PORT";
-const ENV_GITHUB_CLIENT_ID: &str = "GITHUB_CLIENT_ID";
-const ENV_GITHUB_CLIENT_SECRET: &str = "GITHUB_CLIENT_SECRET";
-const ENV_GITHUB_CALLBACK_URL: &str = "GITHUB_CALLBACK_URL";
-const ENV_GITHUB_ALLOWED_LOGIN: &str = "GITHUB_ALLOWED_LOGIN";
-const ENV_SECURE_COOKIES: &str = "SECURE_COOKIES";
+const ENV_AUTH: &str = "AUTH";
 
 /// Runtime configuration loaded from the environment and an optional `.env` file.
 pub struct Config {
@@ -36,37 +32,47 @@ pub struct Config {
     /// If not provided it defaults to `3000`.
     pub port: u16,
 
-    /// The GitHub OAuth client ID for authentication.
+    /// How visitors are signed in.
     ///
-    /// This is optional as we may not always need to authenticate with GitHub,
-    /// depending on the application's use case.
-    pub github_client_id: Option<String>,
+    /// If not provided it defaults to [`AuthMode::None`].
+    pub auth: AuthMode,
+}
 
-    /// The GitHub OAuth client secret for authentication.
+/// How the app decides whether a visitor is signed in.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub enum AuthMode {
+    /// Everyone is signed out.
+    #[default]
+    None,
+    /// Requests carrying the `X-Tailnet-User` header are signed in.
     ///
-    /// This is optional as we may not always need to authenticate with GitHub,
-    /// depending on the application's use case.
-    pub github_client_secret: Option<String>,
+    /// Only use this when the app is reachable exclusively through a reverse proxy
+    /// that strips the header from incoming requests and sets it for tailnet clients.
+    Tailnet,
+    /// Everyone is signed in. For local development only.
+    Always,
+}
 
-    /// The callback URL for GitHub OAuth authentication.
-    ///
-    /// If not provided it defaults to an empty string.
-    pub github_callback_url: String,
+impl FromStr for AuthMode {
+    type Err = anyhow::Error;
 
-    /// The allowed GitHub ID login for authentication.
-    ///
-    /// If not provided it defaults to an empty string.
-    pub github_allowed_login: String,
-
-    /// Whether to use secure cookies (HTTPS only).
-    pub secure_cookies: bool,
+    fn from_str(value: &str) -> Result<Self, Self::Err> {
+        match value.trim().to_ascii_lowercase().as_str() {
+            "" | "none" => Ok(Self::None),
+            "tailnet" => Ok(Self::Tailnet),
+            "always" => Ok(Self::Always),
+            other => anyhow::bail!(
+                "invalid {ENV_AUTH}={other:?}, expected one of: none, tailnet, always"
+            ),
+        }
+    }
 }
 
 impl Config {
     /// Loads `.env`, then reads the application's environment variables.
     ///
     /// Values already present in the environment take precedence over `.env`.
-    pub fn load() -> Self {
+    pub fn load() -> anyhow::Result<Self> {
         dotenvy::dotenv().ok();
 
         let database_url = env::var(ENV_DATABASE_URL).unwrap_or(DEFAULT_DATABASE_URL.to_string());
@@ -74,7 +80,16 @@ impl Config {
             tracing::warn!("⚠️ Using in-memory database")
         }
 
-        Self {
+        let auth = env::var(ENV_AUTH)
+            .ok()
+            .map(|value| value.parse())
+            .transpose()?
+            .unwrap_or_default();
+        if auth == AuthMode::Always {
+            tracing::warn!("⚠️ {ENV_AUTH}=always: every visitor is signed in")
+        }
+
+        Ok(Self {
             database_url: env::var(ENV_DATABASE_URL).unwrap_or(DEFAULT_DATABASE_URL.to_string()),
             site_url: env::var(ENV_SITE_URL)
                 .unwrap_or(DEFAULT_SITE_URL.to_string())
@@ -84,11 +99,21 @@ impl Config {
                 .ok()
                 .and_then(|value| value.parse().ok())
                 .unwrap_or(DEFAULT_PORT),
-            github_client_id: env::var(ENV_GITHUB_CLIENT_ID).ok(),
-            github_client_secret: env::var(ENV_GITHUB_CLIENT_SECRET).ok(),
-            github_callback_url: env::var(ENV_GITHUB_CALLBACK_URL).unwrap_or_default(),
-            github_allowed_login: env::var(ENV_GITHUB_ALLOWED_LOGIN).unwrap_or_default(),
-            secure_cookies: env::var(ENV_SECURE_COOKIES).map_or(true, |value| value != "false"),
-        }
+            auth,
+        })
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::AuthMode;
+
+    #[test]
+    fn parses_auth_modes() {
+        assert_eq!("none".parse::<AuthMode>().unwrap(), AuthMode::None);
+        assert_eq!("".parse::<AuthMode>().unwrap(), AuthMode::None);
+        assert_eq!(" Tailnet ".parse::<AuthMode>().unwrap(), AuthMode::Tailnet);
+        assert_eq!("always".parse::<AuthMode>().unwrap(), AuthMode::Always);
+        assert!("true".parse::<AuthMode>().is_err());
     }
 }

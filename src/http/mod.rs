@@ -18,7 +18,6 @@ pub(crate) type AppRouter = Router<Arc<AppState>>;
 pub fn router(state: AppState) -> Router {
     Router::new()
         .merge(crate::apps::router())
-        .merge(crate::auth::web::router())
         .nest_service("/static", ServeDir::new("static"))
         .fallback(error::not_found)
         .method_not_allowed_fallback(error::method_not_allowed)

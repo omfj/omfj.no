@@ -1,5 +1,4 @@
 mod apps;
-mod auth;
 mod config;
 mod db;
 mod domain;
@@ -16,7 +15,7 @@ use crate::{config::Config, http::AppState};
 async fn main() -> anyhow::Result<()> {
     setup_tracing();
 
-    let config = Config::load();
+    let config = Config::load()?;
     let state = AppState::from_config(&config).await?;
     let router = http::router(state);
     let address = SocketAddr::from((Ipv4Addr::UNSPECIFIED, config.port));

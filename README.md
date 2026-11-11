@@ -36,16 +36,27 @@ SITE_URL=http://127.0.0.1:3000
 RUST_LOG=omfj_no=debug,tower_http=debug
 ```
 
-## GitHub Auth
+## Tailnet Auth
 
-Content is public. Film and links editing is restricted to the configured GitHub account. So to edit these you need to add a GitHub OAuth app.
+Content is public. Editing is restricted to requests from the Tailscale tailnet. The
+reverse proxy strips `X-Tailnet-User` from every request and sets it for tailnet IPs:
 
-Create a GitHub OAuth app with callback URL `http://127.0.0.1:3000/auth/github/callback`, then set:
+```caddy
+omfj.no {
+	request_header -X-Tailnet-User
 
-```sh
-GITHUB_CLIENT_ID=...
-GITHUB_CLIENT_SECRET=...
-GITHUB_CALLBACK_URL=http://127.0.0.1:3000/auth/github/callback
-GITHUB_ALLOWED_LOGIN=omfj
-SECURE_COOKIES=false
+	@tailnet remote_ip 100.64.0.0/10 fd7a:115c:a1e0::/48
+	request_header @tailnet X-Tailnet-User "owner"
+
+	reverse_proxy 127.0.0.1:3000
+}
 ```
+
+Then set `AUTH=tailnet`. The app port must only be reachable through the
+proxy (publish it as `-p 127.0.0.1:3000:3000`), or anyone could send the header.
+
+`AUTH` selects how visitors are signed in:
+
+- `none` (default): everyone is signed out.
+- `tailnet`: requests with the `X-Tailnet-User` header are signed in.
+- `always`: everyone is signed in. Use this for local development.

@@ -4,12 +4,7 @@ use axum::{
 };
 use maud::{Markup, html};
 
-use crate::{
-    auth::{self, LoginError},
-    db::StorageError,
-    http::Layout,
-    validation::ValidationError,
-};
+use crate::{db::StorageError, http::Layout, validation::ValidationError};
 
 #[derive(Debug, thiserror::Error)]
 pub(crate) enum AppError {
@@ -19,16 +14,10 @@ pub(crate) enum AppError {
     MethodNotAllowed,
     #[error("authentication required")]
     Unauthorized,
-    #[error("you are not allowed to edit this site")]
-    Forbidden,
-    #[error("the requested OAuth provider is not configured")]
-    OAuthProviderNotConfigured,
     #[error("{0}")]
     BadRequest(&'static str),
     #[error(transparent)]
     Storage(#[from] StorageError),
-    #[error(transparent)]
-    OAuth(#[from] auth::OAuthError),
 }
 
 /// Produces the application's standard response for an unknown route.
@@ -78,24 +67,14 @@ impl AppError {
             Self::Unauthorized => (
                 StatusCode::UNAUTHORIZED,
                 "Sign in required",
-                "You need to sign in before you can make that change.".into(),
-            ),
-            Self::Forbidden => (
-                StatusCode::FORBIDDEN,
-                "Access denied",
-                "Your account does not have permission to make that change.".into(),
-            ),
-            Self::OAuthProviderNotConfigured => (
-                StatusCode::SERVICE_UNAVAILABLE,
-                "Sign-in unavailable",
-                "That sign-in provider has not been configured for this deployment.".into(),
+                "You need to be connected to the tailnet to make that change.".into(),
             ),
             Self::BadRequest(message) => (
                 StatusCode::BAD_REQUEST,
                 "That request did not work",
                 (*message).into(),
             ),
-            Self::Storage(_) | Self::OAuth(_) => {
+            Self::Storage(_) => {
                 tracing::error!(error = ?self, "request failed");
                 (
                     StatusCode::INTERNAL_SERVER_ERROR,
@@ -103,18 +82,6 @@ impl AppError {
                     "The server hit an unexpected problem. Please try again in a moment.".into(),
                 )
             }
-        }
-    }
-}
-
-impl From<LoginError> for AppError {
-    fn from(error: LoginError) -> Self {
-        match error {
-            LoginError::ProviderNotConfigured => Self::OAuthProviderNotConfigured,
-            LoginError::InvalidState => Self::Unauthorized,
-            LoginError::NotAllowed => Self::Forbidden,
-            LoginError::OAuth(error) => Self::OAuth(error),
-            LoginError::Storage(error) => Self::Storage(error),
         }
     }
 }

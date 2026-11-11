@@ -6,14 +6,12 @@ use crate::apps::films::FilmRepository;
 use crate::apps::links::LinkRepository;
 use crate::apps::reading::{HttpTitleFetcher, ReadingRepository, TitleFetcher};
 use crate::apps::wishlist::WishRepository;
-use crate::auth::AuthService;
-use crate::config::Config;
+use crate::config::{AuthMode, Config};
 
 #[derive(Clone)]
 pub struct AppState {
-    pub auth: AuthService,
     pub site_url: String,
-    pub secure_cookies: bool,
+    pub auth: AuthMode,
     pub films: FilmRepository,
     pub links: LinkRepository,
     pub reading: ReadingRepository,
@@ -31,8 +29,7 @@ impl AppState {
 
         Ok(Self {
             site_url: config.site_url.to_owned(),
-            secure_cookies: config.secure_cookies,
-            auth: AuthService::new(config, pool.clone(), http.clone()),
+            auth: config.auth,
             titles: Arc::new(HttpTitleFetcher::new(http)),
             films: FilmRepository::new(pool.clone()),
             links: LinkRepository::new(pool.clone()),

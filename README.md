@@ -44,16 +44,13 @@ reverse proxy strips `X-Tailnet-User` from every request and sets it for tailnet
 ```caddy
 omfj.no {
 	request_header -X-Tailnet-User
-
 	@tailnet remote_ip 100.64.0.0/10 fd7a:115c:a1e0::/48
-	request_header @tailnet X-Tailnet-User "owner"
-
+	route {
+		request_header @tailnet X-Tailnet-User "owner"
+	}
 	reverse_proxy 127.0.0.1:3000
 }
 ```
-
-Then set `AUTH=tailnet`. The app port must only be reachable through the
-proxy (publish it as `-p 127.0.0.1:3000:3000`), or anyone could send the header.
 
 `AUTH` selects how visitors are signed in:
 
